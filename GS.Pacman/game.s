@@ -15,11 +15,17 @@ game start
 
 gameInit entry
         jsr setupScreen
+
+        jsr drawMaze
+
+
         rtl
 
 
 
 runGameTick entry
+
+
 
         rtl
 
