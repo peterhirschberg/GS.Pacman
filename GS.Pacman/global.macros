@@ -1,0 +1,97 @@
+;
+;  global.macros
+;  GS.Pacman
+;
+;  Created by Peter Hirschberg on 8/19/21.
+;Copyright © 2021 Peter Hirschberg. All rights reserved.
+;
+
+
+
+
+
+
+; ORCA/M macros
+
+
+	macro
+&l	long	&a,&b
+	lclb	&i
+	lclb	&m
+&a	amid	&a,1,1
+&m	setb	("&a"="M").or.("&a"="m")
+&i	setb	("&a"="I").or.("&a"="i")
+	aif	c:&b=0,.a
+&b	amid	&b,1,1
+&m	setb	("&b"="M").or.("&b"="m").or.&m
+&i	setb	("&b"="I").or.("&b"="i").or.&i
+.a
+&l	rep	#&m*32+&i*16
+	aif	.not.&m,.b
+	longa on
+.b
+	aif	.not.&i,.c
+	longi on
+.c
+	mend
+
+
+	macro
+&l	short &a,&b
+	lclb	&i
+	lclb	&m
+&a	amid	&a,1,1
+&m	setb	("&a"="M").or.("&a"="m")
+&i	setb	("&a"="I").or.("&a"="i")
+	aif	c:&b=0,.a
+&b	amid	&b,1,1
+&m	setb	("&b"="M").or.("&b"="m").or.&m
+&i	setb	("&b"="I").or.("&b"="i").or.&i
+.a
+&l	sep	#&m*32+&i*16
+	aif	.not.&m,.b
+	longa off
+.b
+	aif	.not.&i,.c
+	longi off
+.c
+	mend
+
+
+;
+; ********************************************
+; Code pulled from Jeremy Rand's "BuGS" game
+; Github: https://github.com/jeremysrand/BuGS
+; ********************************************
+;
+;  Created by Jeremy Rand on 2020-12-16.
+;Copyright © 2020 Jeremy Rand. All rights reserved.
+;
+
+        macro
+        _spriteHeader
+        sei                     ; 2
+        tsc                     ; 2
+        sta >backupStack        ; 5
+        lda >STATE_REGISTER     ; 6 - Direct Page and Stack in Bank 01/
+        ora #$0030              ; 3
+        sta >STATE_REGISTER     ; 6
+        clc                     ; 2
+        tya                     ; 2
+        tcs                     ; 2
+        mend                    ; 30
+
+
+        macro
+        _spriteFooter
+        lda #0
+        tcd
+        lda >STATE_REGISTER     ; 6
+        and #$ffcf              ; 3
+        sta >STATE_REGISTER     ; 6
+        lda >backupStack        ; 5
+        tcs                     ; 2
+        cli                     ; 2
+        mend                    ; 24
+
+
