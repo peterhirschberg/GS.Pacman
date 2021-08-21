@@ -32,7 +32,7 @@ setColorTable entry
 
 ; off white
         ldx #6
-        lda #$0eee
+        lda #$0bbb
         sta >COLOR_TABLE,x
 
 ; orange

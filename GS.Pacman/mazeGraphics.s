@@ -80,7 +80,7 @@ drawMazeRowDone anop
 
         inc mazeRow
         lda mazeRow
-        cmp #2 ; fix this
+        cmp #5 ; fix this
         beq drawMazeDone
 
         brl drawMazeVLoop
@@ -149,7 +149,7 @@ fillHLoop anop
 nextRow anop
         inc rowCounter
         lda rowCounter
-        cmp #7
+        cmp #8
         beq fillDone
         bra fillVLoop
 
@@ -322,7 +322,11 @@ mazeGraphicsDataList anop
 mazeTileList anop
         dc i2'$09,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0B,$0C,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0D'
         dc i2'$12,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$31,$32,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$16'
+        dc i2'$12,$02,$13,$14,$14,$15,$01,$13,$14,$14,$14,$15,$01,$31,$32,$01,$13,$14,$14,$14,$15,$01,$13,$14,$14,$15,$02,$16'
+        dc i2'$12,$01,$1c,$1d,$1d,$1e,$01,$1c,$1d,$1d,$1d,$1e,$01,$1c,$1e,$01,$1c,$1d,$1d,$1d,$1e,$01,$1c,$1d,$1d,$1e,$01,$16'
+        dc i2'$12,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$16'
 
+; 1c 1d 1e
 
 ; 9 tiles wide
 ; 6 tiles high
