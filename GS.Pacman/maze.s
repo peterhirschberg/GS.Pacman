@@ -86,8 +86,6 @@ drawMazeRowDone anop
 
 drawMazeDone anop
 
-
-
         rts
 
 
@@ -122,10 +120,7 @@ fillVLoop anop
         adc tileDstX
         sta screenCounter
 
-        lda #7
-        sta colCounter
-
-fillHLoop anop
+; ----------------------------------------
 
         short m
         ldx dataCounter
@@ -138,19 +133,49 @@ fillHLoop anop
         inc dataCounter
         inc screenCounter
 
-        dec colCounter
-        dec colCounter
 
-        lda colCounter
-        bmi nextRow
-        bra fillHLoop
+        short m
+        ldx dataCounter
+        lda >mazeGraphicsDataList,x
+        ldx screenCounter
+        sta >SCREEN_ADDR,x
+        long m
 
-nextRow anop
+        inc dataCounter
+        inc dataCounter
+        inc screenCounter
+
+
+        short m
+        ldx dataCounter
+        lda >mazeGraphicsDataList,x
+        ldx screenCounter
+        sta >SCREEN_ADDR,x
+        long m
+
+        inc dataCounter
+        inc dataCounter
+        inc screenCounter
+
+
+        short m
+        ldx dataCounter
+        lda >mazeGraphicsDataList,x
+        ldx screenCounter
+        sta >SCREEN_ADDR,x
+        long m
+
+        inc dataCounter
+        inc dataCounter
+        inc screenCounter
+
+; ----------------------------------------
+
         inc rowCounter
         lda rowCounter
         cmp #8
         beq fillDone
-        bra fillVLoop
+        brl fillVLoop
 
 fillDone anop
 
