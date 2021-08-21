@@ -38,11 +38,6 @@ drawMazeHLoop anop
         tax
         lda >mazeTileList,x
 
-;        lda #$9
-
-        sta currentTileIndex ; ???
-
-
         asl a
         tax
 
@@ -56,12 +51,16 @@ drawMazeHLoop anop
         lda mazeCol
         asl a
         asl a
+        clc
+        adc #24 ; REPLACE WITH CONSTANT
         sta tileDstX
 
         lda mazeRow
         asl a
         asl a
         asl a
+        clc
+        adc #8 ; REPLACE WITH CONSTANT
         sta tileDstY
 
 
@@ -157,8 +156,6 @@ fillDone anop
 
         rts
 
-
-currentTileIndex dc i2'0'
 
 mazeRow dc i2'0'
 mazeCol dc i2'0'
