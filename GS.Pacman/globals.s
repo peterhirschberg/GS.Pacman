@@ -25,6 +25,10 @@ VERTICAL_COUNTER        gequ $e0c02e
 READ_VBL                gequ $e0c019
 
 
+MAZE_OFFSET_X           gequ 24
+MAZE_OFFSET_Y           gequ 8
+
+
 ; table of precomputed screen row offsets
 
 screenRowOffsets    dc i2'$0000'

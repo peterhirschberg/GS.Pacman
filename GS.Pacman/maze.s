@@ -1,5 +1,5 @@
 ;
-;  mazeGraphics.s
+;  maze.s
 ;  GS.Pacman
 ;
 ;  Created by Peter Hirschberg on 8/19/21.
@@ -11,9 +11,9 @@
         keep global
 
 
-mazeGraphics start
+maze start
         using globalData
-        using mazeGraphicsData
+        using mazeData
 
 
 drawMaze entry
@@ -52,7 +52,7 @@ drawMazeHLoop anop
         asl a
         asl a
         clc
-        adc #24 ; REPLACE WITH CONSTANT
+        adc #MAZE_OFFSET_X
         sta tileDstX
 
         lda mazeRow
@@ -60,7 +60,7 @@ drawMazeHLoop anop
         asl a
         asl a
         clc
-        adc #8 ; REPLACE WITH CONSTANT
+        adc #MAZE_OFFSET_Y
         sta tileDstY
 
 
@@ -258,7 +258,7 @@ mazeTileRowOffsets anop
         end
 
 
-mazeGraphicsData data mazeGraphicsDataSeg
+mazeData data mazeDataSeg
 
 
 ; Width: $24 bytes  Height: $30 lines
