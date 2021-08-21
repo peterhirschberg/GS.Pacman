@@ -19,50 +19,78 @@ mazeGraphics start
 drawMaze entry
 
         lda #0
+        sta mazeRow
+
+drawMazeVLoop anop
+
+        lda #0
+        sta mazeCol
+
+        lda mazeRow
+        asl a
+        tax
+        lda mazeTileRowOffsets,x
+        sta rowAddress
+
+drawMazeHLoop anop
+
+        lda rowAddress
+        tax
+        lda >mazeTileList,x
+
+;        lda #$9
+
+        sta currentTileIndex ; ???
+
+
+        asl a
+        tax
+
+        lda >mazeGraphicsOffsetXList,x
         sta tileSrcX
 
-        lda #8
+        lda >mazeGraphicsOffsetYList,x
         sta tileSrcY
 
-        lda #80
+
+        lda mazeCol
+        asl a
+        asl a
         sta tileDstX
 
-        lda #100
+        lda mazeRow
+        asl a
+        asl a
+        asl a
         sta tileDstY
+
 
         jsr drawMazeTile
 
+        inc rowAddress
+        inc rowAddress
 
-        lda #8
-        sta tileSrcX
+        inc mazeCol
+        lda mazeCol
+        cmp #28
+        beq drawMazeRowDone
+        brl drawMazeHLoop
 
-        lda #8
-        sta tileSrcY
+drawMazeRowDone anop
 
-        lda #84
-        sta tileDstX
+        inc mazeRow
+        lda mazeRow
+        cmp #2 ; fix this
+        beq drawMazeDone
 
-        lda #100
-        sta tileDstY
+        brl drawMazeVLoop
 
-        jsr drawMazeTile
+drawMazeDone anop
 
 
-        lda #16
-        sta tileSrcX
-
-        lda #8
-        sta tileSrcY
-
-        lda #88
-        sta tileDstX
-
-        lda #100
-        sta tileDstY
-
-        jsr drawMazeTile
 
         rts
+
 
 
 
@@ -79,7 +107,7 @@ fillVLoop anop
         adc tileSrcY
         asl a
         tax
-        lda tileRowOffsets,x
+        lda mazeGraphicsRowOffsets,x
         clc
         adc tileSrcX
         sta dataCounter
@@ -130,6 +158,11 @@ fillDone anop
         rts
 
 
+currentTileIndex dc i2'0'
+
+mazeRow dc i2'0'
+mazeCol dc i2'0'
+
 rowCounter dc i2'0'
 colCounter dc i2'0'
 
@@ -144,8 +177,12 @@ tileSrcY dc i2'0'
 tileDstX dc i2'0'
 tileDstY dc i2'0'
 
+temp dc i2'0'
 
-tileRowOffsets anop
+savex dc i4'0'
+
+
+mazeGraphicsRowOffsets anop
         dc i2'$0'
         dc i2'$48'
         dc i2'$90'
@@ -194,6 +231,32 @@ tileRowOffsets anop
         dc i2'$ca8'
         dc i2'$cf0'
         dc i2'$d38'
+
+
+mazeTileRowOffsets anop
+        dc i2'$0'
+        dc i2'$38'
+        dc i2'$70'
+        dc i2'$a8'
+        dc i2'$e0'
+        dc i2'$118'
+        dc i2'$150'
+        dc i2'$188'
+        dc i2'$1c0'
+        dc i2'$1f8'
+        dc i2'$230'
+        dc i2'$268'
+        dc i2'$2a0'
+        dc i2'$2d8'
+        dc i2'$310'
+        dc i2'$348'
+        dc i2'$380'
+        dc i2'$3b8'
+        dc i2'$3f0'
+        dc i2'$428'
+        dc i2'$460'
+        dc i2'$498'
+        dc i2'$4d0'
 
         end
 
@@ -253,5 +316,30 @@ mazeGraphicsDataList anop
         dc i2'$00,$00,$10,$01,$10,$01,$00,$00,$00,$01,$00,$00,$00,$01,$00,$00,$00,$00,$10,$00,$00,$01,$00,$00,$00,$01,$00,$00,$00,$00,$10,$00,$22,$22,$22,$22'
         dc i2'$00,$00,$10,$01,$10,$01,$00,$00,$00,$00,$10,$00,$00,$01,$00,$00,$00,$00,$10,$00,$00,$01,$00,$00,$00,$00,$10,$00,$00,$01,$00,$00,$22,$22,$22,$22'
 
+
+; 28 tiles wide
+; 23 tiles high
+mazeTileList anop
+        dc i2'$09,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0B,$0C,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0D'
+        dc i2'$12,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$31,$32,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$16'
+
+
+; 9 tiles wide
+; 6 tiles high
+mazeGraphicsOffsetXList anop
+        dc i2'$00,$08,$10,$18,$20,$28,$30,$38,$40'
+        dc i2'$00,$08,$10,$18,$20,$28,$30,$38,$40'
+        dc i2'$00,$08,$10,$18,$20,$28,$30,$38,$40'
+        dc i2'$00,$08,$10,$18,$20,$28,$30,$38,$40'
+        dc i2'$00,$08,$10,$18,$20,$28,$30,$38,$40'
+        dc i2'$00,$08,$10,$18,$20,$28,$30,$38,$40'
+
+mazeGraphicsOffsetYList anop
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$08,$08,$08,$08,$08,$08,$08,$08,$08'
+        dc i2'$10,$10,$10,$10,$10,$10,$10,$10,$10'
+        dc i2'$18,$18,$18,$18,$18,$18,$18,$18,$18'
+        dc i2'$20,$20,$20,$20,$20,$20,$20,$20,$20'
+        dc i2'$28,$28,$28,$28,$28,$28,$28,$28,$28'
 
         end

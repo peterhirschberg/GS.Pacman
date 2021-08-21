@@ -29,6 +29,7 @@
 		D0865CB126CF401E00690A79 /* globals.s in Sources */ = {isa = PBXBuildFile; fileRef = D0865CB026CF401E00690A79 /* globals.s */; };
 		D0865CB326CF40A600690A79 /* hardware.s in Sources */ = {isa = PBXBuildFile; fileRef = D0865CB226CF40A600690A79 /* hardware.s */; };
 		D0865CB526CF435100690A79 /* mazeGraphics.s in Sources */ = {isa = PBXBuildFile; fileRef = D0865CB426CF435100690A79 /* mazeGraphics.s */; };
+		D0865CB726D0847D00690A79 /* color.s in Sources */ = {isa = PBXBuildFile; fileRef = D0865CB626D0847D00690A79 /* color.s */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -85,6 +86,7 @@
 		D0865CB026CF401E00690A79 /* globals.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = globals.s; sourceTree = "<group>"; };
 		D0865CB226CF40A600690A79 /* hardware.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = hardware.s; sourceTree = "<group>"; };
 		D0865CB426CF435100690A79 /* mazeGraphics.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = mazeGraphics.s; sourceTree = "<group>"; };
+		D0865CB626D0847D00690A79 /* color.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = color.s; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				D0865CB026CF401E00690A79 /* globals.s */,
 				D0865CB226CF40A600690A79 /* hardware.s */,
 				D0865CB426CF435100690A79 /* mazeGraphics.s */,
+				D0865CB626D0847D00690A79 /* color.s */,
 			);
 			path = GS.Pacman;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0865CB726D0847D00690A79 /* color.s in Sources */,
 				D0865CB126CF401E00690A79 /* globals.s in Sources */,
 				D0865CAA26CF3D7200690A79 /* game.s in Sources */,
 				D0865CAD26CF3F3B00690A79 /* screen.s in Sources */,
