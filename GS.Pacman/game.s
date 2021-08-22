@@ -29,6 +29,8 @@ runGameTick entry
         jsr waitForVbl
 
         jsr runMaze
+        
+        jsr cleanMaze
 
         jsr drawSprites
         

@@ -55,11 +55,9 @@ setFlashState anop
 
 donePowerPellets anop
 
-
         rts
 
-
-
+        
 drawMaze entry
 
         lda #0
@@ -132,7 +130,126 @@ drawMazeDone anop
 
         rts
 
+        
+        
+setMazeTileDirty entry
 
+        lda >dirtyMazeTileX
+;        sec
+;        sbc #MAZE_OFFSET_X
+        lsr a
+        lsr a
+;        lsr a
+        sta >dirtyMazeTileX
+
+        lda >dirtyMazeTileY
+;        sec
+;        sbc #MAZE_OFFSET_Y
+        lsr a
+        lsr a
+;        lsr a
+        sta >dirtyMazeTileY
+
+; ---------------------------------
+
+;        asl a
+        tax
+        lda mazeTileRowOffsets,x
+        sta rowAddress
+
+        lda >dirtyMazeTileX
+        asl a
+        clc
+        adc rowAddress
+        tax
+        lda #1
+        sta >dirtyMazeTiles,x
+        
+        rts
+        
+
+cleanMaze entry
+
+        lda #0
+        sta mazeRow
+
+cleanMazeVLoop anop
+
+        lda #0
+        sta mazeCol
+
+        lda mazeRow
+        asl a
+        tax
+        lda mazeTileRowOffsets,x
+        sta rowAddress
+
+cleanMazeHLoop anop
+
+        lda rowAddress
+        tax
+        lda >dirtyMazeTiles,x
+        cmp #0
+        beq nextClean
+        
+        lda #0
+        sta >dirtyMazeTiles,x
+        
+        lda >mazeTileList,x
+
+        asl a
+        tax
+
+        lda >mazeGraphicsOffsetXList,x
+        sta tileSrcX
+
+        lda >mazeGraphicsOffsetYList,x
+        sta tileSrcY
+
+
+        lda mazeCol
+        asl a
+        asl a
+        clc
+        adc #MAZE_OFFSET_X
+        sta tileDstX
+
+        lda mazeRow
+        asl a
+        asl a
+        asl a
+        clc
+        adc #MAZE_OFFSET_Y
+        sta tileDstY
+
+        
+
+        jsr drawMazeTile
+        
+nextClean anop
+
+        inc rowAddress
+        inc rowAddress
+
+        inc mazeCol
+        lda mazeCol
+        cmp #28
+        beq cleanMazeRowDone
+        brl cleanMazeHLoop
+
+cleanMazeRowDone anop
+
+        inc mazeRow
+        lda mazeRow
+        cmp #23
+        beq cleanMazeDone
+
+        brl cleanMazeVLoop
+
+cleanMazeDone anop
+
+        rts
+        
 
 
 drawMazeTile entry
@@ -167,46 +284,42 @@ fillVLoop anop
 ; ----------------------------------------
 
         short m
+        
         ldx dataCounter
         lda >mazeGraphicsDataList,x
         ldx screenCounter
         sta >SCREEN_ADDR,x
-        long m
 
         inc dataCounter
         inc dataCounter
         inc screenCounter
 
 
-        short m
         ldx dataCounter
         lda >mazeGraphicsDataList,x
         ldx screenCounter
         sta >SCREEN_ADDR,x
-        long m
 
         inc dataCounter
         inc dataCounter
         inc screenCounter
 
 
-        short m
         ldx dataCounter
         lda >mazeGraphicsDataList,x
         ldx screenCounter
         sta >SCREEN_ADDR,x
-        long m
 
         inc dataCounter
         inc dataCounter
         inc screenCounter
 
 
-        short m
         ldx dataCounter
         lda >mazeGraphicsDataList,x
         ldx screenCounter
         sta >SCREEN_ADDR,x
+        
         long m
 
 ; ----------------------------------------
@@ -324,6 +437,10 @@ mazeTileRowOffsets anop
 
 mazeData data mazeDataSeg
 
+    
+dirtyMazeTileX dc i2'0'
+dirtyMazeTileY dc i2'0'
+
 
 ; Width: $24 bytes  Height: $30 lines
 
@@ -380,6 +497,8 @@ mazeGraphicsDataList anop
 
 ; 28 tiles wide
 ; 23 tiles high
+; width in pixels: 224
+; width in bytes: 112
 mazeTileList anop
         dc i2'$09,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0B,$0C,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0A,$0D'
         dc i2'$12,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$31,$32,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$16'
@@ -406,6 +525,32 @@ mazeTileList anop
         dc i2'$1b,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$1f'
 
 
+dirtyMazeTiles anop
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
+
+        
 future anop
         dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
         dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'

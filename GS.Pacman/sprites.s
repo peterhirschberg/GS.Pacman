@@ -12,8 +12,8 @@
 
 sprites start
         using globalData
+        using mazeData
         using spritesData
-
 
 
 drawSprites entry
@@ -39,14 +39,55 @@ drawSprite entry
         sta tileSrcY
         lda testX
         sta tileDstX
-        lda #14
+        lda #0
         sta tileDstY
 
         jsr drawSpriteTile
+        
+        
+        lda tileDstX
+        sta >dirtyMazeTileX
+        lda tileDstY
+        sta >dirtyMazeTileY
+        jsr setMazeTileDirty
 
+        lda tileDstX
+        sta >dirtyMazeTileX
+        lda tileDstY
+        clc
+        adc #8
+        sta >dirtyMazeTileY
+        jsr setMazeTileDirty
+        
+
+        lda tileDstX
+        clc
+        adc #4 ; ??? WHY???
+        sta tileDstX
+        
+        
+        lda tileDstX
+        sta >dirtyMazeTileX
+        lda tileDstY
+        sta >dirtyMazeTileY
+        jsr setMazeTileDirty
+        
+        lda tileDstX
+        sta >dirtyMazeTileX
+        lda tileDstY
+        clc
+        adc #8
+        sta >dirtyMazeTileY
+        jsr setMazeTileDirty
+
+ 
+        
+
+        
+        
         inc testX
         lda testX
-        cmp #128
+        cmp #100
         bcs wrapX
         rts
         
@@ -96,7 +137,6 @@ fillVLoop anop
         beq nextPixels1
         ldx screenCounter
         sta >SCREEN_ADDR,x
-        long m
 
 nextPixels1 anop
         long m
@@ -106,7 +146,6 @@ nextPixels1 anop
         inc screenCounter
 
 
-        short m
         ldx dataCounter
         lda >spriteSheet,x
         cmp #00
