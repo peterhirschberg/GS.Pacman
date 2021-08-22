@@ -45,6 +45,14 @@ drawSprite entry
         jsr drawSpriteTile
 
         inc testX
+        lda testX
+        cmp #128
+        bcs wrapX
+        rts
+        
+wrapX anop
+        lda #MAZE_OFFSET_X
+        sta testX
 
         rts
 
@@ -84,11 +92,13 @@ fillVLoop anop
         short m
         ldx dataCounter
         lda >spriteSheet,x
-        sta spritePixels
+        cmp #00
+        beq nextPixels1
         ldx screenCounter
-        lda >SCREEN_ADDR,x
-        ora spritePixels
         sta >SCREEN_ADDR,x
+        long m
+
+nextPixels1 anop
         long m
 
         inc dataCounter
@@ -99,11 +109,13 @@ fillVLoop anop
         short m
         ldx dataCounter
         lda >spriteSheet,x
-        sta spritePixels
+        cmp #00
+        beq nextPixels2
         ldx screenCounter
-        lda >SCREEN_ADDR,x
-        ora spritePixels
         sta >SCREEN_ADDR,x
+        long m
+
+nextPixels2 anop
         long m
 
         inc dataCounter
@@ -114,11 +126,14 @@ fillVLoop anop
         short m
         ldx dataCounter
         lda >spriteSheet,x
-        sta spritePixels
+        cmp #00
+        beq nextPixels3
         ldx screenCounter
-        lda >SCREEN_ADDR,x
-        ora spritePixels
         sta >SCREEN_ADDR,x
+        long m
+
+
+nextPixels3 anop
         long m
 
         inc dataCounter
@@ -129,11 +144,13 @@ fillVLoop anop
         short m
         ldx dataCounter
         lda >spriteSheet,x
-        sta spritePixels
+        cmp #00
+        beq nextPixels4
         ldx screenCounter
-        lda >SCREEN_ADDR,x
-        ora spritePixels
         sta >SCREEN_ADDR,x
+        long m
+
+nextPixels4 anop
         long m
 
         inc dataCounter
@@ -144,59 +161,70 @@ fillVLoop anop
         short m
         ldx dataCounter
         lda >spriteSheet,x
-        sta spritePixels
+        cmp #00
+        beq nextPixels5
         ldx screenCounter
-        lda >SCREEN_ADDR,x
-        ora spritePixels
-        sta >SCREEN_ADDR,x
-        long m
-
-        inc dataCounter
-        inc dataCounter
-        inc screenCounter
-
-
-        short m
-        ldx dataCounter
-        lda >spriteSheet,x
-        sta spritePixels
-        ldx screenCounter
-        lda >SCREEN_ADDR,x
-        ora spritePixels
-        sta >SCREEN_ADDR,x
-        long m
-
-        inc dataCounter
-        inc dataCounter
-        inc screenCounter
-
-
-        short m
-        ldx dataCounter
-        lda >spriteSheet,x
-        sta spritePixels
-        ldx screenCounter
-        lda >SCREEN_ADDR,x
-        ora spritePixels
-        sta >SCREEN_ADDR,x
-        long m
-
-        inc dataCounter
-        inc dataCounter
-        inc screenCounter
-
-
-        short m
-        ldx dataCounter
-        lda >spriteSheet,x
-        sta spritePixels
-        ldx screenCounter
-        lda >SCREEN_ADDR,x
-        ora spritePixels
         sta >SCREEN_ADDR,x
         long m
 
         
+nextPixels5 anop
+        long m
+
+        inc dataCounter
+        inc dataCounter
+        inc screenCounter
+
+
+        short m
+        ldx dataCounter
+        lda >spriteSheet,x
+        cmp #00
+        beq nextPixels6
+        ldx screenCounter
+        sta >SCREEN_ADDR,x
+        long m
+
+
+nextPixels6 anop
+        long m
+
+        inc dataCounter
+        inc dataCounter
+        inc screenCounter
+
+
+        short m
+        ldx dataCounter
+        lda >spriteSheet,x
+        cmp #00
+        beq nextPixels7
+        ldx screenCounter
+        sta >SCREEN_ADDR,x
+        long m
+
+
+nextPixels7 anop
+        long m
+
+        inc dataCounter
+        inc dataCounter
+        inc screenCounter
+
+
+        short m
+        ldx dataCounter
+        lda >spriteSheet,x
+        cmp #00
+        beq nextPixels8
+        ldx screenCounter
+        sta >SCREEN_ADDR,x
+        long m
+
+
+nextPixels8 anop
+        long m
+
 ; ----------------------------------------
 
         inc rowCounter
@@ -227,7 +255,7 @@ tileSrcY dc i2'0'
 tileDstX dc i2'0'
 tileDstY dc i2'0'
 
-testX dc i2'0'
+testX dc i2'MAZE_OFFSET_X'
 
 
 spriteSheetRowOffsets anop
