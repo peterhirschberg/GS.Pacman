@@ -13,7 +13,6 @@
 sprites start
         using globalData
         using spritesData
-        using spriteRowOffsets
 
 
 
@@ -38,10 +37,14 @@ drawSprite entry
 
         lda #64
         sta tileSrcY
+        lda testX
+        sta tileDstX
         lda #14
         sta tileDstY
 
         jsr drawSpriteTile
+
+        inc testX
 
         rts
 
@@ -60,10 +63,10 @@ fillVLoop anop
         adc tileSrcY
         asl a
         tax
-        lda >spriteSheetRowOffsets,x
-;        clc
-;        adc tileSrcX
-        sta spriteRowAddress
+        lda spriteSheetRowOffsets,x
+        clc
+        adc tileSrcX
+        sta dataCounter
 
 ; dst
         lda rowCounter
@@ -72,79 +75,130 @@ fillVLoop anop
         asl a
         tax
         lda screenRowOffsets,x
-;        clc
-;        adc tileDstX
-        sta screenRowAddress
-
-        lda #0
-        sta colCounter
-
-fillHLoop anop
-
-        lda colCounter
-        lsr a
-        clc
-        adc tileSrcX
-        clc
-        adc spriteRowAddress
-        tax
-        lda >spriteSheet,x
-        sta spriteByte
-
-
-        lda colCounter
-        and #1
-        cmp #0
-        beq highNibble
-
-; low nibble
-
-        short m
-        lda spriteByte
-        and #$0f
-        sta spriteNibble
-        long m
-        bra writePixel
-
-; high nibble
-highNibble anop
-
-        short m
-        lda spriteByte
-        and #$f0
-;        lsr a
-;        lsr a
-;        lsr a
-;        lsr a
-        sta spriteNibble
-        long m
-
-writePixel anop
-
-        lda colCounter
-        lsr a
-        lsr a
         clc
         adc tileDstX
-        clc
-        adc screenRowAddress
-        tax
+        sta screenCounter
+
+; ----------------------------------------
+
         short m
+        ldx dataCounter
+        lda >spriteSheet,x
+        sta spritePixels
+        ldx screenCounter
         lda >SCREEN_ADDR,x
-        ora spriteNibble
+        ora spritePixels
         sta >SCREEN_ADDR,x
         long m
 
-nextByte anop
+        inc dataCounter
+        inc dataCounter
+        inc screenCounter
 
-        inc colCounter
 
-        lda colCounter
-        cmp #32
-        beq nextRow
-        brl fillHLoop
+        short m
+        ldx dataCounter
+        lda >spriteSheet,x
+        sta spritePixels
+        ldx screenCounter
+        lda >SCREEN_ADDR,x
+        ora spritePixels
+        sta >SCREEN_ADDR,x
+        long m
 
-nextRow anop
+        inc dataCounter
+        inc dataCounter
+        inc screenCounter
+
+
+        short m
+        ldx dataCounter
+        lda >spriteSheet,x
+        sta spritePixels
+        ldx screenCounter
+        lda >SCREEN_ADDR,x
+        ora spritePixels
+        sta >SCREEN_ADDR,x
+        long m
+
+        inc dataCounter
+        inc dataCounter
+        inc screenCounter
+
+
+        short m
+        ldx dataCounter
+        lda >spriteSheet,x
+        sta spritePixels
+        ldx screenCounter
+        lda >SCREEN_ADDR,x
+        ora spritePixels
+        sta >SCREEN_ADDR,x
+        long m
+
+        inc dataCounter
+        inc dataCounter
+        inc screenCounter
+
+
+        short m
+        ldx dataCounter
+        lda >spriteSheet,x
+        sta spritePixels
+        ldx screenCounter
+        lda >SCREEN_ADDR,x
+        ora spritePixels
+        sta >SCREEN_ADDR,x
+        long m
+
+        inc dataCounter
+        inc dataCounter
+        inc screenCounter
+
+
+        short m
+        ldx dataCounter
+        lda >spriteSheet,x
+        sta spritePixels
+        ldx screenCounter
+        lda >SCREEN_ADDR,x
+        ora spritePixels
+        sta >SCREEN_ADDR,x
+        long m
+
+        inc dataCounter
+        inc dataCounter
+        inc screenCounter
+
+
+        short m
+        ldx dataCounter
+        lda >spriteSheet,x
+        sta spritePixels
+        ldx screenCounter
+        lda >SCREEN_ADDR,x
+        ora spritePixels
+        sta >SCREEN_ADDR,x
+        long m
+
+        inc dataCounter
+        inc dataCounter
+        inc screenCounter
+
+
+        short m
+        ldx dataCounter
+        lda >spriteSheet,x
+        sta spritePixels
+        ldx screenCounter
+        lda >SCREEN_ADDR,x
+        ora spritePixels
+        sta >SCREEN_ADDR,x
+        long m
+
+        
+; ----------------------------------------
+
         inc rowCounter
         lda rowCounter
         cmp #16
@@ -156,8 +210,7 @@ fillDone anop
         rts
 
 
-spriteByte dc i2'0'
-spriteNibble dc i2'0'
+spritePixels dc i2'0'
 
 rowCounter dc i2'0'
 colCounter dc i2'0'
@@ -174,11 +227,9 @@ tileSrcY dc i2'0'
 tileDstX dc i2'0'
 tileDstY dc i2'0'
 
+testX dc i2'0'
 
-        end
 
-spriteRowOffsets data spriteRowOffsetsSeg
-    
 spriteSheetRowOffsets anop
         dc i2'$0'
         dc i2'$50'
@@ -421,8 +472,9 @@ spriteSheetRowOffsets anop
         dc i2'$4a60'
         dc i2'$4ab0'
 
-        end
 
+
+        end
 
 spritesData data spritesDataSeg
 

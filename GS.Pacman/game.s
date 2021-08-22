@@ -20,8 +20,6 @@ gameInit entry
 
         jsr drawMaze
 
-        jsr drawSprites
-
         rtl
 
 
@@ -30,10 +28,10 @@ runGameTick entry
 
         jsr waitForVbl
 
-
         jsr runMaze
 
-
+        jsr drawSprites
+        
         rtl
 
 
