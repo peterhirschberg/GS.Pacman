@@ -193,7 +193,7 @@ cleanMazeHLoop anop
         beq nextClean
         
         lda #0
-        sta >dirtyMazeTiles,x
+        sta >dirtyMazeTiles,x ; mark the tile as clean
         
         lda >mazeTileList,x
 
@@ -221,10 +221,9 @@ cleanMazeHLoop anop
         clc
         adc #MAZE_OFFSET_Y
         sta tileDstY
-
         
 
-        jsr drawMazeTile
+        jsr blitBufferMazeTile
         
 nextClean anop
 
@@ -289,6 +288,7 @@ fillVLoop anop
         lda >mazeGraphicsDataList,x
         ldx screenCounter
         sta >SCREEN_ADDR,x
+        sta >MAZE_BUFFER,x
 
         inc dataCounter
         inc dataCounter
@@ -299,6 +299,7 @@ fillVLoop anop
         lda >mazeGraphicsDataList,x
         ldx screenCounter
         sta >SCREEN_ADDR,x
+        sta >MAZE_BUFFER,x
 
         inc dataCounter
         inc dataCounter
@@ -309,6 +310,7 @@ fillVLoop anop
         lda >mazeGraphicsDataList,x
         ldx screenCounter
         sta >SCREEN_ADDR,x
+        sta >MAZE_BUFFER,x
 
         inc dataCounter
         inc dataCounter
@@ -319,7 +321,8 @@ fillVLoop anop
         lda >mazeGraphicsDataList,x
         ldx screenCounter
         sta >SCREEN_ADDR,x
-        
+        sta >MAZE_BUFFER,x
+
         long m
 
 ; ----------------------------------------
@@ -334,6 +337,66 @@ fillDone anop
 
         rts
 
+        
+blitBufferMazeTile entry
+
+        lda #0
+        sta rowCounter
+
+fillVLoop2 anop
+
+        lda rowCounter
+        clc
+        adc tileDstY
+        asl a
+        tax
+        lda screenRowOffsets,x
+        clc
+        adc tileDstX
+        sta screenCounter
+
+; ----------------------------------------
+
+
+        ldx screenCounter
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+
+        inc screenCounter
+        inc screenCounter
+
+        ldx screenCounter
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+
+        inc screenCounter
+        inc screenCounter
+
+        ldx screenCounter
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+
+        inc screenCounter
+        inc screenCounter
+
+        ldx screenCounter
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+
+
+; ----------------------------------------
+
+        inc rowCounter
+        lda rowCounter
+        cmp #8
+        beq fillDone2
+        brl fillVLoop2
+
+fillDone2 anop
+
+        rts
+        
+        
 
 mazeRow dc i2'0'
 mazeCol dc i2'0'

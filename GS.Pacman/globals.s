@@ -28,6 +28,8 @@ READ_VBL                gequ $e0c019
 MAZE_OFFSET_X           gequ 0 ; 24
 MAZE_OFFSET_Y           gequ 0 ; 8
 
+MAZE_BUFFER             gequ $1c0000
+
 
 ; table of precomputed screen row offsets
 

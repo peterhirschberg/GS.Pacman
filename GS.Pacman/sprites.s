@@ -29,7 +29,7 @@ drawSprite entry
         lda #0
         sta tileSrcX
         sta tileSrcY
-        lda #46
+        lda #45
         sta tileDstX
         sta tileDstY
 
@@ -58,8 +58,8 @@ drawSprite entry
         adc #8
         sta >dirtyMazeTileY
         jsr setMazeTileDirty
-        
 
+        
         lda tileDstX
         clc
         adc #4 ; ??? WHY???

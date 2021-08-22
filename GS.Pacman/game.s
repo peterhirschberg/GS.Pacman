@@ -19,6 +19,8 @@ gameInit entry
         jsr setColorTable
 
         jsr drawMaze
+        
+        jsr borderInit
 
         rtl
 
@@ -26,13 +28,23 @@ gameInit entry
 
 runGameTick entry
 
+mainLoop anop
+
         jsr waitForVbl
+        
+        jsr borderStart
 
         jsr runMaze
         
         jsr cleanMaze
+        
+        jsr borderStart
 
         jsr drawSprites
+        
+        jsr borderDone
+        
+        brl mainLoop
         
         rtl
 
