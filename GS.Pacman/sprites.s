@@ -33,7 +33,7 @@ drawSpritePacman entry
         sta tileDstX
         sta tileDstY
 
-        jsr drawSpriteTile
+;        jsr drawSpriteTile
 
         rts
 
@@ -54,7 +54,15 @@ drawSpriteGhost entry
         lda #5
         sta tileDstY
 
-        jsr drawSpriteTile
+        
+        lda tileDstX
+        sta >spriteX
+        lda tileDstY
+        sta >spriteY
+        
+        jsr drawSprite20
+        
+;        jsr drawSpriteTile
         
 
 
@@ -63,7 +71,7 @@ drawSpriteGhost entry
 
         inc testX
         lda testX
-        cmp #100
+        cmp #200
         bcs wrapX
         rts
         
@@ -82,6 +90,7 @@ eraseSprites entry
         sta tileSrcY
 
         lda oldX
+        lsr a ; <<<<<<
         sta tileDstX
         lda #5
         sta tileDstY
@@ -370,7 +379,6 @@ tileDstY dc i2'0'
 testX dc i2'MAZE_OFFSET_X'
 oldX dc i2'MAZE_OFFSET_X'
 
-
 spriteSheetRowOffsets anop
         dc i2'$0'
         dc i2'$50'
@@ -618,6 +626,12 @@ spriteSheetRowOffsets anop
         end
 
 spritesData data spritesDataSeg
+    
+
+spriteX dc i2'0'
+spriteY dc i2'0'
+
+
 
 ; Width: $28 bytes  Height: $F0 lines
 ; Sprite tiles are 16 x 16

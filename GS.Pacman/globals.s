@@ -31,6 +31,9 @@ MAZE_OFFSET_Y           gequ 0 ; 8
 MAZE_BUFFER             gequ $1c0000
 
 
+backupStack dc i4'0'
+
+
 ; table of precomputed screen row offsets
 
 screenRowOffsets    dc i2'$0000'
