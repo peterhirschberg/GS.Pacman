@@ -44,6 +44,7 @@ drawSprite entry
 
         jsr drawSpriteTile
         
+        bra skip
         
         lda tileDstX
         sta >dirtyMazeTileX
@@ -80,11 +81,12 @@ drawSprite entry
         sta >dirtyMazeTileY
         jsr setMazeTileDirty
 
- 
         
+skip anop
 
-        
-        
+        lda testX
+        sta oldX
+
         inc testX
         lda testX
         cmp #100
@@ -97,6 +99,22 @@ wrapX anop
 
         rts
 
+        
+eraseSprites entry
+
+        lda #0
+        sta tileSrcX
+        lda #64
+        sta tileSrcY
+
+        lda oldX
+        sta tileDstX
+        lda #0
+        sta tileDstY
+
+
+        jsr eraseSpriteTile
+        rts
 
 
 drawSpriteTile entry
@@ -275,6 +293,99 @@ nextPixels8 anop
 fillDone anop
 
         rts
+        
+        
+
+eraseSpriteTile entry
+
+        lda #0
+        sta rowCounter
+
+eraseVLoop anop
+
+; src
+        lda rowCounter
+        clc
+        adc tileSrcY
+        asl a
+        tax
+        lda spriteSheetRowOffsets,x
+        clc
+        adc tileSrcX
+        sta dataCounter
+
+; dst
+        lda rowCounter
+        clc
+        adc tileDstY
+        asl a
+        tax
+        lda screenRowOffsets,x
+        clc
+        adc tileDstX
+        sta screenCounter
+
+; ----------------------------------------
+
+        ldx screenCounter
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+
+        inc screenCounter
+
+        ldx screenCounter
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+
+        inc screenCounter
+
+        ldx screenCounter
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+
+        inc screenCounter
+
+        ldx screenCounter
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inc screenCounter
+
+        ldx screenCounter
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+
+        inc screenCounter
+
+        ldx screenCounter
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+
+        inc screenCounter
+
+        ldx screenCounter
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+
+        inc screenCounter
+
+        ldx screenCounter
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+
+
+; ----------------------------------------
+
+        inc rowCounter
+        lda rowCounter
+        cmp #16
+        beq eraseDone
+        brl eraseVLoop
+
+eraseDone anop
+
+        rts
+        
 
 
 spritePixels dc i2'0'
@@ -295,6 +406,7 @@ tileDstX dc i2'0'
 tileDstY dc i2'0'
 
 testX dc i2'MAZE_OFFSET_X'
+oldX dc i2'MAZE_OFFSET_X'
 
 
 spriteSheetRowOffsets anop

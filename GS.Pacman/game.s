@@ -36,7 +36,9 @@ mainLoop anop
 
         jsr runMaze
         
-        jsr cleanMaze
+;        jsr cleanMaze
+
+        jsr eraseSprites
         
         jsr borderStart
 
