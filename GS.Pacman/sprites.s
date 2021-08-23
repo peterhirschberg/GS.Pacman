@@ -18,13 +18,13 @@ sprites start
 
 drawSprites entry
 
-        jsr drawSprite
+;        jsr drawSprite
 
         rts
 
 
 
-drawSprite entry
+drawSpritePacman entry
 
         lda #0
         sta tileSrcX
@@ -35,54 +35,28 @@ drawSprite entry
 
         jsr drawSpriteTile
 
+        rts
+
+drawSpriteGhost entry
+
+        lda #0
+        sta tileSrcX
+        sta tileSrcY
+        lda #45
+        sta tileDstX
+        sta tileDstY
+
+        
         lda #64
         sta tileSrcY
         lda testX
         sta tileDstX
-        lda #0
+        lda #5
         sta tileDstY
 
         jsr drawSpriteTile
         
-        bra skip
-        
-        lda tileDstX
-        sta >dirtyMazeTileX
-        lda tileDstY
-        sta >dirtyMazeTileY
-        jsr setMazeTileDirty
 
-        lda tileDstX
-        sta >dirtyMazeTileX
-        lda tileDstY
-        clc
-        adc #8
-        sta >dirtyMazeTileY
-        jsr setMazeTileDirty
-
-        
-        lda tileDstX
-        clc
-        adc #4 ; ??? WHY???
-        sta tileDstX
-        
-        
-        lda tileDstX
-        sta >dirtyMazeTileX
-        lda tileDstY
-        sta >dirtyMazeTileY
-        jsr setMazeTileDirty
-        
-        lda tileDstX
-        sta >dirtyMazeTileX
-        lda tileDstY
-        clc
-        adc #8
-        sta >dirtyMazeTileY
-        jsr setMazeTileDirty
-
-        
-skip anop
 
         lda testX
         sta oldX
@@ -98,7 +72,7 @@ wrapX anop
         sta testX
 
         rts
-
+        
         
 eraseSprites entry
 
@@ -109,7 +83,7 @@ eraseSprites entry
 
         lda oldX
         sta tileDstX
-        lda #0
+        lda #5
         sta tileDstY
 
 
@@ -303,18 +277,6 @@ eraseSpriteTile entry
 
 eraseVLoop anop
 
-; src
-        lda rowCounter
-        clc
-        adc tileSrcY
-        asl a
-        tax
-        lda spriteSheetRowOffsets,x
-        clc
-        adc tileSrcX
-        sta dataCounter
-
-; dst
         lda rowCounter
         clc
         adc tileDstY
@@ -330,7 +292,7 @@ eraseVLoop anop
         ldx screenCounter
         lda >MAZE_BUFFER,x
         sta >SCREEN_ADDR,x
-
+        
         inc screenCounter
 
         ldx screenCounter
