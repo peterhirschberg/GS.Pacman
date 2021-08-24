@@ -20,9 +20,9 @@ setColorTable entry
         lda #$0000
         sta >COLOR_TABLE,x
 
-; 1 - blue (should be black non-transparent but need to update the blue maze tiles)
+; 1 - black non-transparent
         ldx #2
-        lda #$000f
+        lda #$0000
         sta >COLOR_TABLE,x
 
 ; 2 - white
@@ -35,9 +35,9 @@ setColorTable entry
         lda #$0f00
         sta >COLOR_TABLE,x
 
-; 4
+; 4 - blue
         ldx #8
-        lda #$0fa2
+        lda #$000f
         sta >COLOR_TABLE,x
 
 ; 5
