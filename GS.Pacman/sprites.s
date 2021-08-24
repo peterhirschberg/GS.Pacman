@@ -35,6 +35,15 @@ drawSpritePacman entry
 
 ;        jsr drawSpriteTile
 
+        lda tileDstX
+        sta >spriteX
+        lda tileDstY
+        sta >spriteY
+
+
+        jsl drawSprite0
+
+
         rts
 
 drawSpriteGhost entry
@@ -51,7 +60,7 @@ drawSpriteGhost entry
         sta tileSrcY
         lda testX
         sta tileDstX
-        lda #5
+        lda #4
         sta tileDstY
 
         
@@ -60,7 +69,7 @@ drawSpriteGhost entry
         lda tileDstY
         sta >spriteY
         
-        jsr drawSprite20
+        jsl drawSprite20
         
 ;        jsr drawSpriteTile
         
@@ -69,6 +78,7 @@ drawSpriteGhost entry
         lda testX
         sta oldX
 
+        inc testX
         inc testX
         lda testX
         cmp #200
@@ -90,13 +100,16 @@ eraseSprites entry
         sta tileSrcY
 
         lda oldX
-        lsr a ; <<<<<<
         sta tileDstX
-        lda #5
+        lda #4
         sta tileDstY
 
+        lda tileDstX
+        sta >spriteX
+        lda tileDstY
+        sta >spriteY
 
-        jsr eraseSpriteTile
+        jsr eraseSpriteRect
         rts
 
 
@@ -279,7 +292,11 @@ fillDone anop
         
         
 
-eraseSpriteTile entry
+eraseSpriteRect entry
+
+        lda >spriteX
+        lsr a
+        sta >spriteX
 
         lda #0
         sta rowCounter
@@ -288,12 +305,12 @@ eraseVLoop anop
 
         lda rowCounter
         clc
-        adc tileDstY
+        adc >spriteY
         asl a
         tax
         lda screenRowOffsets,x
         clc
-        adc tileDstX
+        adc >spriteX
         sta screenCounter
 
 ; ----------------------------------------
@@ -343,7 +360,6 @@ eraseVLoop anop
         ldx screenCounter
         lda >MAZE_BUFFER,x
         sta >SCREEN_ADDR,x
-
 
 ; ----------------------------------------
 

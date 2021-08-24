@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D03234D226D38B40009E2D7E /* drawSprites1.s in Sources */ = {isa = PBXBuildFile; fileRef = D03234D126D38B40009E2D7E /* drawSprites1.s */; };
+		D03234D226D38B40009E2D7E /* drawSprite.s in Sources */ = {isa = PBXBuildFile; fileRef = D03234D126D38B40009E2D7E /* drawSprite.s */; };
 		D0865C7626CC890F00690A79 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = D0865C7526CC890F00690A79 /* main.c */; };
 		D0865C7926CC890F00690A79 /* main.rez in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0865C7826CC890F00690A79 /* main.rez */; };
 		D0865C7B26CC890F00690A79 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = D0865C7A26CC890F00690A79 /* Makefile */; };
@@ -61,7 +61,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D03234D126D38B40009E2D7E /* drawSprites1.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = drawSprites1.s; sourceTree = "<group>"; };
+		D03234D126D38B40009E2D7E /* drawSprite.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = drawSprite.s; sourceTree = "<group>"; };
 		D0865C6926CC890F00690A79 /* GS.Pacman */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GS.Pacman; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0865C6C26CC890F00690A79 /* GS.Pacman.2mg */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GS.Pacman.2mg; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0865C6E26CC890F00690A79 /* GS.Pacman.shk */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GS.Pacman.shk; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,7 +140,7 @@
 				D0865CB626D0847D00690A79 /* color.s */,
 				D0865CB426CF435100690A79 /* maze.s */,
 				D0865CB826D1EA6700690A79 /* sprites.s */,
-				D03234D126D38B40009E2D7E /* drawSprites1.s */,
+				D03234D126D38B40009E2D7E /* drawSprite.s */,
 			);
 			path = GS.Pacman;
 			sourceTree = "<group>";
@@ -310,7 +310,7 @@
 				D0865C7B26CC890F00690A79 /* Makefile in Sources */,
 				D0865CAF26CF3F5300690A79 /* global.macros in Sources */,
 				D0865CB526CF435100690A79 /* maze.s in Sources */,
-				D03234D226D38B40009E2D7E /* drawSprites1.s in Sources */,
+				D03234D226D38B40009E2D7E /* drawSprite.s in Sources */,
 				D0865CB326CF40A600690A79 /* hardware.s in Sources */,
 				D0865C7626CC890F00690A79 /* main.c in Sources */,
 			);
