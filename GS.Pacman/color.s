@@ -20,7 +20,7 @@ setColorTable entry
         lda #$0000
         sta >COLOR_TABLE,x
 
-; 1 - blue
+; 1 - blue (should be black non-transparent but need to update the blue maze tiles)
         ldx #2
         lda #$000f
         sta >COLOR_TABLE,x
@@ -85,12 +85,12 @@ setColorTable entry
         lda #$0db4
         sta >COLOR_TABLE,x
 
-; E - black non-transparent
+; E - power pellet "flash" color
         ldx #28
-        lda #$0000
+        lda #$0fff
         sta >COLOR_TABLE,x
 
-; F - power pellet "flash" color
+; F - white
         ldx #30
         lda #$0fff
         sta >COLOR_TABLE,x

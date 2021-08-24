@@ -15,6 +15,22 @@ sprites start
         using mazeData
         using spritesData
 
+        
+translateSpritePosToMazePos entry
+
+        lda #MAZE_OFFSET_X
+        asl a
+        clc
+        adc spriteX
+        sta spriteX
+        
+        lda spriteY
+        clc
+        adc #MAZE_OFFSET_Y
+        sta spriteY
+
+        rts
+        
 
 drawSprites entry
 
@@ -38,6 +54,8 @@ drawSpritePacman entry
         lda tileDstY
         sta spriteY
 
+        jsr translateSpritePosToMazePos
+        
         jsl drawSprite0
 
         rts
@@ -66,6 +84,8 @@ drawSpriteGhost entry
         lda tileDstY
         sta spriteY
         
+        jsr translateSpritePosToMazePos
+
         jsl drawSprite20
         
         lda testX
@@ -79,7 +99,7 @@ drawSpriteGhost entry
         rts
         
 wrapX anop
-        lda #MAZE_OFFSET_X
+        lda #0
         sta testX
 
         rts
@@ -102,7 +122,10 @@ eraseSprites entry
         lda tileDstY
         sta spriteY
 
+        jsr translateSpritePosToMazePos
+
         jsr eraseSpriteRect
+        
         rts
 
 
@@ -207,8 +230,8 @@ tileSrcY dc i2'0'
 tileDstX dc i2'0'
 tileDstY dc i2'0'
 
-testX dc i2'MAZE_OFFSET_X'
-oldX dc i2'MAZE_OFFSET_X'
+testX dc i2'0'
+oldX dc i2'0'
 
 spriteSheetRowOffsets anop
         dc i2'$0'
