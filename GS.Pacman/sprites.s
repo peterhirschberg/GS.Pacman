@@ -22,11 +22,15 @@ translateSpritePosToMazePos entry
         asl a
         clc
         adc spriteX
+        sec
+        sbc #4
         sta spriteX
         
         lda spriteY
         clc
         adc #MAZE_OFFSET_Y
+        sec
+        sbc #8
         sta spriteY
 
         rts
@@ -82,7 +86,7 @@ drawSpriteGhost entry
 
         lda testX
         sta spriteX
-        lda #4
+        lda #12
         sta spriteY
         
         jsr translateSpritePosToMazePos
@@ -114,7 +118,7 @@ eraseSprites entry
 
         lda oldX
         sta tileDstX
-        lda #4
+        lda #12
         sta tileDstY
 
         lda tileDstX
