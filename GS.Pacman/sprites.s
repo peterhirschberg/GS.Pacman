@@ -42,50 +42,50 @@ drawSprites entry
 
 drawSpritePacman entry
 
-        lda #0
-        sta tileSrcX
-        sta tileSrcY
         lda #45
-        sta tileDstX
-        sta tileDstY
-
-        lda tileDstX
         sta spriteX
-        lda tileDstY
+        lda #45
         sta spriteY
 
         jsr translateSpritePosToMazePos
-        
         jsl drawSprite0
+        
+        
+        lda spriteY
+        clc
+        adc #20
+        sta spriteY
+        
+        jsr translateSpritePosToMazePos
+        jsl drawSprite30
 
+        lda spriteY
+        clc
+        adc #30
+        sta spriteY
+        
+        jsr translateSpritePosToMazePos
+        jsl drawSprite40
+
+        lda spriteY
+        clc
+        adc #40
+        sta spriteY
+        
+        jsr translateSpritePosToMazePos
+        jsl drawSprite40
+        
         rts
         
 
 drawSpriteGhost entry
 
-        lda #0
-        sta tileSrcX
-        sta tileSrcY
-        lda #45
-        sta tileDstX
-        sta tileDstY
-
-        
-        lda #64
-        sta tileSrcY
         lda testX
-        sta tileDstX
-        lda #4
-        sta tileDstY
-
-        
-        lda tileDstX
         sta spriteX
-        lda tileDstY
+        lda #4
         sta spriteY
         
         jsr translateSpritePosToMazePos
-
         jsl drawSprite20
         
         lda testX
