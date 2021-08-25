@@ -52,7 +52,52 @@ drawSpritePacman entry
         sta spriteY
 
         jsr translateSpritePosToMazePos
+        
+        lda pacstate
+        cmp #0
+        beq pacstate0
+        cmp #1
+        beq pacstate1
+        cmp #2
+        beq pacstate2
+        cmp #3
+        beq pacstate3
+        bra pacdone
+
+pacstate0 anop
         jsl drawSprite0
+        bra pacdone
+pacstate1 anop
+        jsl drawSprite1
+        bra pacdone
+pacstate2 anop
+        jsl drawSprite2
+        bra pacdone
+pacstate3 anop
+        jsl drawSprite1
+        bra pacdone
+
+pacdone anop
+
+        dec pactimer
+        lda pactimer
+        bmi incpac
+        rts
+        
+incpac anop
+
+        lda #2
+        sta pactimer
+
+        inc pacstate
+        lda pacstate
+        cmp #4
+        beq resetState
+        rts
+        
+resetState anop
+        lda #0
+        sta pacstate
         
         rts
         
@@ -105,7 +150,7 @@ next1 anop
         sta spriteY
 
         jsr translateSpritePosToMazePos
-        jsl drawSprite40
+        jsl drawSprite50
 
         
         lda ghost2Y
@@ -209,6 +254,18 @@ ghost5 anop
         
         
 eraseSprites entry
+
+; pacman
+
+        lda #48
+        sta spriteX
+        lda #45
+        sta spriteY
+
+        jsr translateSpritePosToMazePos
+        jsr eraseSpriteRect
+
+; ghosts
 
         lda oldX
         sta spriteX
@@ -342,6 +399,10 @@ ghost4OldY dc i2'84'
 ghost2Dir dc i2'1'
 ghost3Dir dc i2'-1'
 ghost4Dir dc i2'1'
+
+pacstate dc i2'0'
+pactimer dc i2'0'
+
 
 spriteSheetRowOffsets anop
         dc i2'$0'

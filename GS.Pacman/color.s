@@ -12,6 +12,58 @@
 color start
         using globalData
 
+;ghosts
+
+;red
+
+;pink B
+;fcc4fc
+; 0fcf
+
+;blue 8
+;00e8d8
+; 00fe
+
+;orange 9
+;fc9838
+; 0fa4
+
+;cherry stem
+;fc9838
+; 0fa4
+
+;peach
+;fc9838
+; fa4
+
+;peach leaf / top of strawberry
+;4cdc48
+; 05e5
+
+;bell
+;f0bc3c
+; 0fc4
+
+;key top
+;5c94fc
+; 069f
+
+;ghost house lid B
+;fcc4fc
+; fcf
+
+;galaxian ship
+;outer
+;2038ec
+; 024f
+
+;inner
+;145078
+; 0158
+
+;inside
+;f0bc3c
+; 0fc4
 
 setColorTable entry
 
@@ -20,9 +72,9 @@ setColorTable entry
         lda #$0000
         sta >COLOR_TABLE,x
 
-; 1 - black non-transparent
+; 1 - blue eye color
         ldx #2
-        lda #$0000
+        lda #$0006
         sta >COLOR_TABLE,x
 
 ; 2 - white
@@ -35,7 +87,7 @@ setColorTable entry
         lda #$0f00
         sta >COLOR_TABLE,x
 
-; 4 - blue
+; 4 - blue (maze)
         ldx #8
         lda #$000f
         sta >COLOR_TABLE,x
@@ -55,14 +107,14 @@ setColorTable entry
         lda #$076f
         sta >COLOR_TABLE,x
 
-; 8
+; 8 - light blue
         ldx #16
-        lda #$05bf
+        lda #$00fe
         sta >COLOR_TABLE,x
 
-; 9
+; 9 - orange
         ldx #18
-        lda #$06d7
+        lda #$0fa4
         sta >COLOR_TABLE,x
 
 ; A
@@ -70,9 +122,9 @@ setColorTable entry
         lda #$0ff0
         sta >COLOR_TABLE,x
 
-; B
+; B - pink
         ldx #22
-        lda #$09e2
+        lda #$0fcf
         sta >COLOR_TABLE,x
 
 ; C

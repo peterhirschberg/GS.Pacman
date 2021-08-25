@@ -203,8 +203,8 @@ drawSprite1 entry
         lda #$aa
         sta 2
         sta 3
-        lda #$a0
         sta 4
+        sta 5
         long m
 
         lda drawAddress
@@ -217,6 +217,10 @@ drawSprite1 entry
         sta 1
         sta 2
         sta 3
+        sta 4
+        sta 5
+        lda #$a0
+        sta 6
         long m
 
         lda drawAddress
@@ -228,8 +232,10 @@ drawSprite1 entry
         lda #$aa
         sta 1
         sta 2
-        lda #$a0
         sta 3
+        sta 4
+        lda #$a0
+        sta 5
         long m
 
         lda drawAddress
@@ -243,6 +249,7 @@ drawSprite1 entry
         lda #$aa
         sta 1
         sta 2
+        sta 3
         long m
 
         lda drawAddress
@@ -270,6 +277,7 @@ drawSprite1 entry
         lda #$aa
         sta 1
         sta 2
+        sta 3
         long m
 
         lda drawAddress
@@ -281,8 +289,10 @@ drawSprite1 entry
         lda #$aa
         sta 1
         sta 2
-        lda #$a0
         sta 3
+        sta 4
+        lda #$a0
+        sta 5
         long m
 
         lda drawAddress
@@ -295,6 +305,10 @@ drawSprite1 entry
         sta 1
         sta 2
         sta 3
+        sta 4
+        sta 5
+        lda #$a0
+        sta 6
         long m
 
         lda drawAddress
@@ -308,8 +322,8 @@ drawSprite1 entry
         lda #$aa
         sta 2
         sta 3
-        lda #$a0
         sta 4
+        sta 5
         long m
 
         lda drawAddress
@@ -360,8 +374,8 @@ drawSprite2 entry
         lda #$aa
         sta 2
         sta 3
-        lda #$a0
         sta 4
+        sta 5
         long m
 
         lda drawAddress
@@ -374,6 +388,10 @@ drawSprite2 entry
         sta 1
         sta 2
         sta 3
+        sta 4
+        sta 5
+        lda #$a0
+        sta 6
         long m
 
         lda drawAddress
@@ -385,8 +403,11 @@ drawSprite2 entry
         lda #$aa
         sta 1
         sta 2
-        lda #$a0
         sta 3
+        sta 4
+        sta 5
+        lda #$a0
+        sta 6
         long m
 
         lda drawAddress
@@ -400,6 +421,10 @@ drawSprite2 entry
         lda #$aa
         sta 1
         sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
         long m
 
         lda drawAddress
@@ -412,8 +437,11 @@ drawSprite2 entry
         sta 0
         lda #$aa
         sta 1
-        lda #$a0
         sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
         long m
 
         lda drawAddress
@@ -427,6 +455,10 @@ drawSprite2 entry
         lda #$aa
         sta 1
         sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
         long m
 
         lda drawAddress
@@ -438,8 +470,11 @@ drawSprite2 entry
         lda #$aa
         sta 1
         sta 2
-        lda #$a0
         sta 3
+        sta 4
+        sta 5
+        lda #$a0
+        sta 6
         long m
 
         lda drawAddress
@@ -452,6 +487,10 @@ drawSprite2 entry
         sta 1
         sta 2
         sta 3
+        sta 4
+        sta 5
+        lda #$a0
+        sta 6
         long m
 
         lda drawAddress
@@ -465,8 +504,8 @@ drawSprite2 entry
         lda #$aa
         sta 2
         sta 3
-        lda #$a0
         sta 4
+        sta 5
         long m
 
         lda drawAddress
@@ -517,8 +556,8 @@ drawSprite3 entry
         lda #$aa
         sta 2
         sta 3
-        lda #$a0
         sta 4
+        sta 5
         long m
 
         lda drawAddress
@@ -531,6 +570,10 @@ drawSprite3 entry
         sta 1
         sta 2
         sta 3
+        sta 4
+        sta 5
+        lda #$a0
+        sta 6
         long m
 
         lda drawAddress
@@ -544,6 +587,11 @@ drawSprite3 entry
         sta 2
         lda #$a0
         sta 3
+        lda #$aa
+        sta 4
+        sta 5
+        lda #$a0
+        sta 6
         long m
 
         lda drawAddress
@@ -557,6 +605,11 @@ drawSprite3 entry
         lda #$aa
         sta 1
         sta 2
+        lda #$0a
+        sta 4
+        lda #$aa
+        sta 5
+        sta 6
         long m
 
         lda drawAddress
@@ -571,6 +624,9 @@ drawSprite3 entry
         sta 1
         lda #$a0
         sta 2
+        lda #$aa
+        sta 5
+        sta 6
         long m
 
         lda drawAddress
@@ -583,7 +639,10 @@ drawSprite3 entry
         sta 0
         lda #$aa
         sta 1
-        sta 2
+        lda #$0a
+        sta 5
+        lda #$aa
+        sta 6
         long m
 
         lda drawAddress
@@ -592,51 +651,9 @@ drawSprite3 entry
         tcd
 
         short m
-        lda #$aa
-        sta 1
-        sta 2
         lda #$a0
-        sta 3
-        long m
-
-        lda drawAddress
-        clc
-        adc #1600
-        tcd
-
-        short m
-        lda #$aa
         sta 1
-        sta 2
-        sta 3
-        long m
-
-        lda drawAddress
-        clc
-        adc #1760
-        tcd
-
-        short m
-        lda #$0a
-        sta 1
-        lda #$aa
-        sta 2
-        sta 3
-        lda #$a0
-        sta 4
-        long m
-
-        lda drawAddress
-        clc
-        adc #1920
-        tcd
-
-        short m
-        lda #$0a
-        sta 2
-        lda #$aa
-        sta 3
-        sta 4
+        sta 6
         long m
 
         long m
@@ -674,8 +691,8 @@ drawSprite4 entry
         lda #$aa
         sta 2
         sta 3
-        lda #$a0
         sta 4
+        sta 5
         long m
 
         lda drawAddress
@@ -688,6 +705,10 @@ drawSprite4 entry
         sta 1
         sta 2
         sta 3
+        sta 4
+        sta 5
+        lda #$a0
+        sta 6
         long m
 
         lda drawAddress
@@ -699,8 +720,11 @@ drawSprite4 entry
         lda #$aa
         sta 1
         sta 2
-        lda #$a0
         sta 3
+        sta 4
+        sta 5
+        lda #$a0
+        sta 6
         long m
 
         lda drawAddress
@@ -714,6 +738,12 @@ drawSprite4 entry
         lda #$aa
         sta 1
         sta 2
+        lda #$a0
+        sta 3
+        lda #$aa
+        sta 4
+        sta 5
+        sta 6
         long m
 
         lda drawAddress
@@ -726,8 +756,13 @@ drawSprite4 entry
         sta 0
         lda #$aa
         sta 1
-        lda #$a0
         sta 2
+        lda #$a0
+        sta 3
+        lda #$aa
+        sta 4
+        sta 5
+        sta 6
         long m
 
         lda drawAddress
@@ -741,6 +776,11 @@ drawSprite4 entry
         lda #$aa
         sta 1
         sta 2
+        lda #$0a
+        sta 4
+        lda #$aa
+        sta 5
+        sta 6
         long m
 
         lda drawAddress
@@ -752,8 +792,12 @@ drawSprite4 entry
         lda #$aa
         sta 1
         sta 2
+        lda #$0a
+        sta 4
+        lda #$aa
+        sta 5
         lda #$a0
-        sta 3
+        sta 6
         long m
 
         lda drawAddress
@@ -764,8 +808,12 @@ drawSprite4 entry
         short m
         lda #$aa
         sta 1
+        lda #$a0
         sta 2
-        sta 3
+        lda #$aa
+        sta 5
+        lda #$a0
+        sta 6
         long m
 
         lda drawAddress
@@ -776,24 +824,10 @@ drawSprite4 entry
         short m
         lda #$0a
         sta 1
-        lda #$aa
-        sta 2
-        sta 3
         lda #$a0
-        sta 4
-        long m
-
-        lda drawAddress
-        clc
-        adc #1920
-        tcd
-
-        short m
-        lda #$0a
         sta 2
         lda #$aa
-        sta 3
-        sta 4
+        sta 5
         long m
 
         long m
@@ -983,9 +1017,9 @@ drawSprite6 entry
         tcd
 
         short m
-        lda #$0a
-        sta 3
         lda #$aa
+        sta 2
+        sta 3
         sta 4
         sta 5
         lda #$a0
@@ -998,7 +1032,11 @@ drawSprite6 entry
         tcd
 
         short m
+        lda #$0a
+        sta 1
         lda #$aa
+        sta 2
+        sta 3
         sta 4
         sta 5
         sta 6
@@ -1011,8 +1049,10 @@ drawSprite6 entry
 
         short m
         lda #$0a
-        sta 4
+        sta 2
         lda #$aa
+        sta 3
+        sta 4
         sta 5
         sta 6
         long m
@@ -1024,6 +1064,7 @@ drawSprite6 entry
 
         short m
         lda #$aa
+        sta 4
         sta 5
         sta 6
         lda #$a0
@@ -1051,6 +1092,7 @@ drawSprite6 entry
 
         short m
         lda #$aa
+        sta 4
         sta 5
         sta 6
         lda #$a0
@@ -1064,8 +1106,10 @@ drawSprite6 entry
 
         short m
         lda #$0a
-        sta 4
+        sta 2
         lda #$aa
+        sta 3
+        sta 4
         sta 5
         sta 6
         long m
@@ -1076,7 +1120,11 @@ drawSprite6 entry
         tcd
 
         short m
+        lda #$0a
+        sta 1
         lda #$aa
+        sta 2
+        sta 3
         sta 4
         sta 5
         sta 6
@@ -1088,9 +1136,9 @@ drawSprite6 entry
         tcd
 
         short m
-        lda #$0a
-        sta 3
         lda #$aa
+        sta 2
+        sta 3
         sta 4
         sta 5
         lda #$a0
@@ -1140,9 +1188,9 @@ drawSprite7 entry
         tcd
 
         short m
-        lda #$0a
-        sta 3
         lda #$aa
+        sta 2
+        sta 3
         sta 4
         sta 5
         lda #$a0
@@ -1155,7 +1203,11 @@ drawSprite7 entry
         tcd
 
         short m
+        lda #$0a
+        sta 1
         lda #$aa
+        sta 2
+        sta 3
         sta 4
         sta 5
         sta 6
@@ -1168,8 +1220,11 @@ drawSprite7 entry
 
         short m
         lda #$0a
-        sta 4
+        sta 1
         lda #$aa
+        sta 2
+        sta 3
+        sta 4
         sta 5
         sta 6
         long m
@@ -1181,6 +1236,10 @@ drawSprite7 entry
 
         short m
         lda #$aa
+        sta 1
+        sta 2
+        sta 3
+        sta 4
         sta 5
         sta 6
         lda #$a0
@@ -1193,9 +1252,12 @@ drawSprite7 entry
         tcd
 
         short m
-        lda #$0a
-        sta 5
         lda #$aa
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
         sta 6
         lda #$a0
         sta 7
@@ -1208,6 +1270,10 @@ drawSprite7 entry
 
         short m
         lda #$aa
+        sta 1
+        sta 2
+        sta 3
+        sta 4
         sta 5
         sta 6
         lda #$a0
@@ -1221,8 +1287,11 @@ drawSprite7 entry
 
         short m
         lda #$0a
-        sta 4
+        sta 1
         lda #$aa
+        sta 2
+        sta 3
+        sta 4
         sta 5
         sta 6
         long m
@@ -1233,7 +1302,11 @@ drawSprite7 entry
         tcd
 
         short m
+        lda #$0a
+        sta 1
         lda #$aa
+        sta 2
+        sta 3
         sta 4
         sta 5
         sta 6
@@ -1245,9 +1318,9 @@ drawSprite7 entry
         tcd
 
         short m
-        lda #$0a
-        sta 3
         lda #$aa
+        sta 2
+        sta 3
         sta 4
         sta 5
         lda #$a0
@@ -1280,68 +1353,13 @@ drawSprite8 entry
 
         lda drawAddress
         clc
-        adc #320
-        tcd
-
-        short m
-        lda #$aa
-        sta 3
-        sta 4
-        lda #$a0
-        sta 5
-        long m
-
-        lda drawAddress
-        clc
-        adc #480
-        tcd
-
-        short m
-        lda #$0a
-        sta 3
-        lda #$aa
-        sta 4
-        sta 5
-        lda #$a0
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
-        adc #640
-        tcd
-
-        short m
-        lda #$aa
-        sta 4
-        sta 5
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
-        adc #800
-        tcd
-
-        short m
-        lda #$0a
-        sta 4
-        lda #$aa
-        sta 5
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
         adc #960
         tcd
 
         short m
-        lda #$aa
-        sta 5
-        sta 6
         lda #$a0
-        sta 7
+        sta 1
+        sta 6
         long m
 
         lda drawAddress
@@ -1351,11 +1369,13 @@ drawSprite8 entry
 
         short m
         lda #$0a
+        sta 0
+        lda #$aa
+        sta 1
+        lda #$0a
         sta 5
         lda #$aa
         sta 6
-        lda #$a0
-        sta 7
         long m
 
         lda drawAddress
@@ -1364,11 +1384,15 @@ drawSprite8 entry
         tcd
 
         short m
+        lda #$0a
+        sta 0
+        lda #$aa
+        sta 1
+        lda #$a0
+        sta 2
         lda #$aa
         sta 5
         sta 6
-        lda #$a0
-        sta 7
         long m
 
         lda drawAddress
@@ -1377,6 +1401,11 @@ drawSprite8 entry
         tcd
 
         short m
+        lda #$0a
+        sta 0
+        lda #$aa
+        sta 1
+        sta 2
         lda #$0a
         sta 4
         lda #$aa
@@ -1391,8 +1420,14 @@ drawSprite8 entry
 
         short m
         lda #$aa
+        sta 1
+        sta 2
+        lda #$a0
+        sta 3
+        lda #$aa
         sta 4
         sta 5
+        lda #$a0
         sta 6
         long m
 
@@ -1402,9 +1437,10 @@ drawSprite8 entry
         tcd
 
         short m
-        lda #$0a
-        sta 3
         lda #$aa
+        sta 1
+        sta 2
+        sta 3
         sta 4
         sta 5
         lda #$a0
@@ -1417,11 +1453,26 @@ drawSprite8 entry
         tcd
 
         short m
+        lda #$0a
+        sta 1
+        lda #$aa
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        long m
+
+        lda drawAddress
+        clc
+        adc #2080
+        tcd
+
+        short m
+        lda #$0a
+        sta 2
         lda #$aa
         sta 3
         sta 4
-        lda #$a0
-        sta 5
         long m
 
         long m
@@ -1437,42 +1488,16 @@ drawSprite9 entry
 
         lda drawAddress
         clc
-        adc #320
-        tcd
-
-        short m
-        lda #$aa
-        sta 3
-        sta 4
-        lda #$a0
-        sta 5
-        long m
-
-        lda drawAddress
-        clc
-        adc #480
-        tcd
-
-        short m
-        lda #$0a
-        sta 3
-        lda #$aa
-        sta 4
-        sta 5
-        lda #$a0
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
         adc #640
         tcd
 
         short m
+        lda #$0a
+        sta 1
+        lda #$a0
+        sta 2
         lda #$aa
-        sta 4
         sta 5
-        sta 6
         long m
 
         lda drawAddress
@@ -1481,10 +1506,13 @@ drawSprite9 entry
         tcd
 
         short m
-        lda #$0a
-        sta 4
+        lda #$aa
+        sta 1
+        lda #$a0
+        sta 2
         lda #$aa
         sta 5
+        lda #$a0
         sta 6
         long m
 
@@ -1495,10 +1523,14 @@ drawSprite9 entry
 
         short m
         lda #$aa
+        sta 1
+        sta 2
+        lda #$0a
+        sta 4
+        lda #$aa
         sta 5
-        sta 6
         lda #$a0
-        sta 7
+        sta 6
         long m
 
         lda drawAddress
@@ -1508,11 +1540,15 @@ drawSprite9 entry
 
         short m
         lda #$0a
-        sta 5
+        sta 0
         lda #$aa
+        sta 1
+        sta 2
+        lda #$0a
+        sta 4
+        lda #$aa
+        sta 5
         sta 6
-        lda #$a0
-        sta 7
         long m
 
         lda drawAddress
@@ -1521,11 +1557,17 @@ drawSprite9 entry
         tcd
 
         short m
+        lda #$0a
+        sta 0
         lda #$aa
+        sta 1
+        sta 2
+        lda #$a0
+        sta 3
+        lda #$aa
+        sta 4
         sta 5
         sta 6
-        lda #$a0
-        sta 7
         long m
 
         lda drawAddress
@@ -1535,8 +1577,14 @@ drawSprite9 entry
 
         short m
         lda #$0a
-        sta 4
+        sta 0
         lda #$aa
+        sta 1
+        sta 2
+        lda #$a0
+        sta 3
+        lda #$aa
+        sta 4
         sta 5
         sta 6
         long m
@@ -1548,8 +1596,12 @@ drawSprite9 entry
 
         short m
         lda #$aa
+        sta 1
+        sta 2
+        sta 3
         sta 4
         sta 5
+        lda #$a0
         sta 6
         long m
 
@@ -1559,9 +1611,10 @@ drawSprite9 entry
         tcd
 
         short m
-        lda #$0a
-        sta 3
         lda #$aa
+        sta 1
+        sta 2
+        sta 3
         sta 4
         sta 5
         lda #$a0
@@ -1574,11 +1627,26 @@ drawSprite9 entry
         tcd
 
         short m
+        lda #$0a
+        sta 1
+        lda #$aa
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        long m
+
+        lda drawAddress
+        clc
+        adc #2080
+        tcd
+
+        short m
+        lda #$0a
+        sta 2
         lda #$aa
         sta 3
         sta 4
-        lda #$a0
-        sta 5
         long m
 
         long m
@@ -1729,28 +1797,12 @@ drawSprite11 entry
 
         lda drawAddress
         clc
-        adc #480
-        tcd
-
-        short m
-        lda #$a0
-        sta 1
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
         adc #640
         tcd
 
         short m
         lda #$0a
         sta 0
-        lda #$aa
-        sta 1
-        lda #$0a
-        sta 5
-        lda #$aa
         sta 6
         long m
 
@@ -1760,15 +1812,15 @@ drawSprite11 entry
         tcd
 
         short m
-        lda #$0a
+        lda #$aa
         sta 0
-        lda #$aa
         sta 1
-        lda #$a0
-        sta 2
-        lda #$aa
+        lda #$0a
         sta 5
+        lda #$aa
         sta 6
+        lda #$a0
+        sta 7
         long m
 
         lda drawAddress
@@ -1777,16 +1829,16 @@ drawSprite11 entry
         tcd
 
         short m
-        lda #$0a
-        sta 0
         lda #$aa
+        sta 0
         sta 1
+        lda #$a0
         sta 2
-        lda #$0a
-        sta 4
         lda #$aa
         sta 5
         sta 6
+        lda #$a0
+        sta 7
         long m
 
         lda drawAddress
@@ -1795,6 +1847,8 @@ drawSprite11 entry
         tcd
 
         short m
+        lda #$0a
+        sta 0
         lda #$aa
         sta 1
         sta 2
@@ -1803,7 +1857,6 @@ drawSprite11 entry
         lda #$aa
         sta 4
         sta 5
-        lda #$a0
         sta 6
         long m
 
@@ -1813,6 +1866,23 @@ drawSprite11 entry
         tcd
 
         short m
+        lda #$0a
+        sta 0
+        lda #$aa
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #1440
+        tcd
+
+        short m
         lda #$aa
         sta 1
         sta 2
@@ -1825,30 +1895,18 @@ drawSprite11 entry
 
         lda drawAddress
         clc
-        adc #1440
-        tcd
-
-        short m
-        lda #$0a
-        sta 1
-        lda #$aa
-        sta 2
-        sta 3
-        sta 4
-        sta 5
-        long m
-
-        lda drawAddress
-        clc
         adc #1600
         tcd
 
         short m
-        lda #$0a
-        sta 2
         lda #$aa
+        sta 2
+        lda #$a0
         sta 3
+        lda #$aa
         sta 4
+        lda #$a0
+        sta 5
         long m
 
         long m
@@ -1864,64 +1922,18 @@ drawSprite12 entry
 
         lda drawAddress
         clc
-        adc #480
-        tcd
-
-        short m
-        lda #$a0
-        sta 1
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
-        adc #640
-        tcd
-
-        short m
-        lda #$0a
-        sta 0
-        lda #$aa
-        sta 1
-        lda #$0a
-        sta 5
-        lda #$aa
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
-        adc #800
-        tcd
-
-        short m
-        lda #$0a
-        sta 0
-        lda #$aa
-        sta 1
-        lda #$a0
-        sta 2
-        lda #$aa
-        sta 5
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
         adc #960
         tcd
 
         short m
-        lda #$0a
+        lda #$aa
         sta 0
-        lda #$aa
+        lda #$a0
         sta 1
-        sta 2
-        lda #$0a
-        sta 4
         lda #$aa
-        sta 5
         sta 6
+        lda #$a0
+        sta 7
         long m
 
         lda drawAddress
@@ -1931,15 +1943,16 @@ drawSprite12 entry
 
         short m
         lda #$aa
+        sta 0
         sta 1
         sta 2
-        lda #$a0
-        sta 3
-        lda #$aa
+        lda #$0a
         sta 4
+        lda #$aa
         sta 5
-        lda #$a0
         sta 6
+        lda #$a0
+        sta 7
         long m
 
         lda drawAddress
@@ -1948,13 +1961,14 @@ drawSprite12 entry
         tcd
 
         short m
+        lda #$0a
+        sta 0
         lda #$aa
         sta 1
         sta 2
         sta 3
         sta 4
         sta 5
-        lda #$a0
         sta 6
         long m
 
@@ -1964,13 +1978,14 @@ drawSprite12 entry
         tcd
 
         short m
-        lda #$0a
-        sta 1
         lda #$aa
+        sta 1
         sta 2
         sta 3
         sta 4
         sta 5
+        lda #$a0
+        sta 6
         long m
 
         lda drawAddress
@@ -1979,11 +1994,14 @@ drawSprite12 entry
         tcd
 
         short m
-        lda #$0a
-        sta 2
         lda #$aa
+        sta 2
+        lda #$a0
         sta 3
+        lda #$aa
         sta 4
+        lda #$a0
+        sta 5
         long m
 
         long m
@@ -1999,82 +2017,19 @@ drawSprite13 entry
 
         lda drawAddress
         clc
-        adc #480
-        tcd
-
-        short m
-        lda #$a0
-        sta 1
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
-        adc #640
-        tcd
-
-        short m
-        lda #$0a
-        sta 0
-        lda #$aa
-        sta 1
-        lda #$0a
-        sta 5
-        lda #$aa
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
-        adc #800
-        tcd
-
-        short m
-        lda #$0a
-        sta 0
-        lda #$aa
-        sta 1
-        lda #$a0
-        sta 2
-        lda #$aa
-        sta 5
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
-        adc #960
-        tcd
-
-        short m
-        lda #$0a
-        sta 0
-        lda #$aa
-        sta 1
-        sta 2
-        lda #$0a
-        sta 4
-        lda #$aa
-        sta 5
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
         adc #1120
         tcd
 
         short m
         lda #$aa
+        sta 0
         sta 1
-        sta 2
-        lda #$a0
-        sta 3
-        lda #$aa
-        sta 4
+        lda #$0a
         sta 5
-        lda #$a0
+        lda #$aa
         sta 6
+        lda #$a0
+        sta 7
         long m
 
         lda drawAddress
@@ -2084,13 +2039,15 @@ drawSprite13 entry
 
         short m
         lda #$aa
+        sta 0
         sta 1
         sta 2
         sta 3
         sta 4
         sta 5
-        lda #$a0
         sta 6
+        lda #$a0
+        sta 7
         long m
 
         lda drawAddress
@@ -2100,12 +2057,14 @@ drawSprite13 entry
 
         short m
         lda #$0a
-        sta 1
+        sta 0
         lda #$aa
+        sta 1
         sta 2
         sta 3
         sta 4
         sta 5
+        sta 6
         long m
 
         lda drawAddress
@@ -2115,10 +2074,14 @@ drawSprite13 entry
 
         short m
         lda #$0a
-        sta 2
+        sta 1
         lda #$aa
+        sta 2
+        lda #$a0
         sta 3
+        lda #$aa
         sta 4
+        sta 5
         long m
 
         long m
@@ -2134,98 +2097,16 @@ drawSprite14 entry
 
         lda drawAddress
         clc
-        adc #480
-        tcd
-
-        short m
-        lda #$a0
-        sta 1
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
-        adc #640
-        tcd
-
-        short m
-        lda #$0a
-        sta 0
-        lda #$aa
-        sta 1
-        lda #$0a
-        sta 5
-        lda #$aa
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
-        adc #800
-        tcd
-
-        short m
-        lda #$0a
-        sta 0
-        lda #$aa
-        sta 1
-        lda #$a0
-        sta 2
-        lda #$aa
-        sta 5
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
-        adc #960
-        tcd
-
-        short m
-        lda #$0a
-        sta 0
-        lda #$aa
-        sta 1
-        sta 2
-        lda #$0a
-        sta 4
-        lda #$aa
-        sta 5
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
-        adc #1120
-        tcd
-
-        short m
-        lda #$aa
-        sta 1
-        sta 2
-        lda #$a0
-        sta 3
-        lda #$aa
-        sta 4
-        sta 5
-        lda #$a0
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
         adc #1280
         tcd
 
         short m
         lda #$aa
-        sta 1
         sta 2
         sta 3
         sta 4
-        sta 5
         lda #$a0
-        sta 6
+        sta 5
         long m
 
         lda drawAddress
@@ -2234,13 +2115,16 @@ drawSprite14 entry
         tcd
 
         short m
-        lda #$0a
-        sta 1
         lda #$aa
+        sta 0
+        sta 1
         sta 2
         sta 3
         sta 4
         sta 5
+        sta 6
+        lda #$a0
+        sta 7
         long m
 
         lda drawAddress
@@ -2250,10 +2134,31 @@ drawSprite14 entry
 
         short m
         lda #$0a
-        sta 2
+        sta 0
         lda #$aa
+        sta 1
+        sta 2
         sta 3
         sta 4
+        sta 5
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #1760
+        tcd
+
+        short m
+        lda #$0a
+        sta 1
+        lda #$aa
+        sta 2
+        lda #$a0
+        sta 3
+        lda #$aa
+        sta 4
+        sta 5
         long m
 
         long m
@@ -2363,10 +2268,8 @@ drawSprite16 entry
         tcd
 
         short m
-        lda #$aa
+        lda #$0a
         sta 3
-        lda #$a0
-        sta 4
         long m
 
         lda drawAddress
@@ -2376,11 +2279,9 @@ drawSprite16 entry
 
         short m
         lda #$aa
-        sta 2
         sta 3
-        sta 4
         lda #$a0
-        sta 5
+        sta 4
         long m
 
         lda drawAddress
@@ -2390,15 +2291,11 @@ drawSprite16 entry
 
         short m
         lda #$aa
-        sta 0
-        sta 1
         sta 2
         sta 3
         sta 4
-        sta 5
-        sta 6
         lda #$a0
-        sta 7
+        sta 5
         long m
 
         lda drawAddress
@@ -2407,8 +2304,22 @@ drawSprite16 entry
         tcd
 
         short m
-        lda #$0a
-        sta 0
+        lda #$aa
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        lda #$a0
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #1920
+        tcd
+
+        short m
         lda #$aa
         sta 1
         sta 2
@@ -2417,12 +2328,13 @@ drawSprite16 entry
         lda #$aa
         sta 4
         sta 5
+        lda #$a0
         sta 6
         long m
 
         lda drawAddress
         clc
-        adc #1920
+        adc #2080
         tcd
 
         short m
@@ -2453,10 +2365,8 @@ drawSprite17 entry
         tcd
 
         short m
-        lda #$aa
+        lda #$0a
         sta 3
-        lda #$a0
-        sta 4
         long m
 
         lda drawAddress
@@ -2466,11 +2376,9 @@ drawSprite17 entry
 
         short m
         lda #$aa
-        sta 2
         sta 3
-        sta 4
         lda #$a0
-        sta 5
+        sta 4
         long m
 
         lda drawAddress
@@ -2480,15 +2388,9 @@ drawSprite17 entry
 
         short m
         lda #$aa
-        sta 0
-        sta 1
-        sta 2
         sta 3
-        sta 4
-        sta 5
-        sta 6
         lda #$a0
-        sta 7
+        sta 4
         long m
 
         lda drawAddress
@@ -2498,16 +2400,10 @@ drawSprite17 entry
 
         short m
         lda #$0a
-        sta 0
-        lda #$aa
-        sta 1
         sta 2
-        lda #$a0
-        sta 3
         lda #$aa
+        sta 3
         sta 4
-        sta 5
-        sta 6
         long m
 
         lda drawAddress
@@ -2516,14 +2412,26 @@ drawSprite17 entry
         tcd
 
         short m
-        lda #$0a
-        sta 1
         lda #$aa
         sta 2
-        lda #$0a
+        sta 3
         sta 4
-        lda #$aa
+        lda #$a0
         sta 5
+        long m
+
+        lda drawAddress
+        clc
+        adc #2080
+        tcd
+
+        short m
+        lda #$0a
+        sta 2
+        lda #$a0
+        sta 3
+        lda #$aa
+        sta 4
         long m
 
         long m
@@ -2543,10 +2451,8 @@ drawSprite18 entry
         tcd
 
         short m
-        lda #$aa
+        lda #$0a
         sta 3
-        lda #$a0
-        sta 4
         long m
 
         lda drawAddress
@@ -2555,12 +2461,8 @@ drawSprite18 entry
         tcd
 
         short m
-        lda #$aa
-        sta 2
+        lda #$0a
         sta 3
-        sta 4
-        lda #$a0
-        sta 5
         long m
 
         lda drawAddress
@@ -2570,15 +2472,9 @@ drawSprite18 entry
 
         short m
         lda #$aa
-        sta 0
-        sta 1
-        sta 2
         sta 3
-        sta 4
-        sta 5
-        sta 6
         lda #$a0
-        sta 7
+        sta 4
         long m
 
         lda drawAddress
@@ -2587,17 +2483,10 @@ drawSprite18 entry
         tcd
 
         short m
-        lda #$0a
-        sta 0
         lda #$aa
-        sta 1
-        sta 2
-        lda #$a0
         sta 3
-        lda #$aa
+        lda #$a0
         sta 4
-        sta 5
-        sta 6
         long m
 
         lda drawAddress
@@ -2607,13 +2496,21 @@ drawSprite18 entry
 
         short m
         lda #$0a
-        sta 1
-        lda #$aa
         sta 2
-        lda #$0a
-        sta 4
         lda #$aa
-        sta 5
+        sta 3
+        sta 4
+        long m
+
+        lda drawAddress
+        clc
+        adc #2080
+        tcd
+
+        short m
+        lda #$a0
+        sta 3
+        sta 4
         long m
 
         long m
@@ -2633,10 +2530,8 @@ drawSprite19 entry
         tcd
 
         short m
-        lda #$aa
+        lda #$0a
         sta 3
-        lda #$a0
-        sta 4
         long m
 
         lda drawAddress
@@ -2645,12 +2540,8 @@ drawSprite19 entry
         tcd
 
         short m
-        lda #$aa
-        sta 2
+        lda #$0a
         sta 3
-        sta 4
-        lda #$a0
-        sta 5
         long m
 
         lda drawAddress
@@ -2659,16 +2550,8 @@ drawSprite19 entry
         tcd
 
         short m
-        lda #$aa
-        sta 0
-        sta 1
-        sta 2
+        lda #$0a
         sta 3
-        sta 4
-        sta 5
-        sta 6
-        lda #$a0
-        sta 7
         long m
 
         lda drawAddress
@@ -2678,16 +2561,7 @@ drawSprite19 entry
 
         short m
         lda #$0a
-        sta 0
-        lda #$aa
-        sta 1
-        sta 2
-        lda #$a0
         sta 3
-        lda #$aa
-        sta 4
-        sta 5
-        sta 6
         long m
 
         lda drawAddress
@@ -2697,13 +2571,7 @@ drawSprite19 entry
 
         short m
         lda #$0a
-        sta 1
-        lda #$aa
-        sta 2
-        lda #$0a
-        sta 4
-        lda #$aa
-        sta 5
+        sta 3
         long m
 
         long m
@@ -3112,17 +2980,16 @@ drawSprite21 entry
         short m
         lda #$03
         sta 0
-        lda #$30
+        lda #$33
         sta 1
-        lda #$33
-        sta 2
         lda #$30
-        sta 3
-        lda #$03
-        sta 4
+        sta 2
         lda #$33
-        sta 5
+        sta 3
+        sta 4
         lda #$03
+        sta 5
+        lda #$33
         sta 6
         lda #$30
         sta 7
@@ -3134,16 +3001,14 @@ drawSprite21 entry
         tcd
 
         short m
+        lda #$33
+        sta 1
         lda #$03
-        sta 0
-        sta 2
-        lda #$30
         sta 3
-        lda #$03
-        sta 4
         lda #$30
-        sta 5
-        sta 7
+        sta 4
+        lda #$33
+        sta 6
         long m
 
         long m
@@ -3204,17 +3069,17 @@ drawSprite22 entry
         tcd
 
         short m
-        lda #$33
+        lda #$3f
         sta 1
-        lda #$3f
+        lda #$f3
         sta 2
-        lda #$f3
-        sta 3
         lda #$33
-        sta 4
+        sta 3
         lda #$3f
-        sta 5
+        sta 4
         lda #$f3
+        sta 5
+        lda #$33
         sta 6
         long m
 
@@ -3224,17 +3089,17 @@ drawSprite22 entry
         tcd
 
         short m
-        lda #$33
+        lda #$11
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$33
+        sta 3
+        lda #$11
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$33
         sta 6
         long m
 
@@ -3246,17 +3111,17 @@ drawSprite22 entry
         short m
         lda #$03
         sta 0
-        lda #$33
+        lda #$11
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$33
+        sta 3
+        lda #$11
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$33
         sta 6
         lda #$30
         sta 7
@@ -3270,17 +3135,17 @@ drawSprite22 entry
         short m
         lda #$03
         sta 0
-        lda #$33
+        lda #$3f
         sta 1
-        lda #$3f
+        lda #$f3
         sta 2
-        lda #$f3
-        sta 3
         lda #$33
-        sta 4
+        sta 3
         lda #$3f
-        sta 5
+        sta 4
         lda #$f3
+        sta 5
+        lda #$33
         sta 6
         lda #$30
         sta 7
@@ -3424,17 +3289,17 @@ drawSprite23 entry
         tcd
 
         short m
-        lda #$33
+        lda #$3f
         sta 1
-        lda #$3f
+        lda #$f3
         sta 2
-        lda #$f3
-        sta 3
         lda #$33
-        sta 4
+        sta 3
         lda #$3f
-        sta 5
+        sta 4
         lda #$f3
+        sta 5
+        lda #$33
         sta 6
         long m
 
@@ -3444,17 +3309,17 @@ drawSprite23 entry
         tcd
 
         short m
-        lda #$33
+        lda #$11
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$33
+        sta 3
+        lda #$11
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$33
         sta 6
         long m
 
@@ -3466,17 +3331,17 @@ drawSprite23 entry
         short m
         lda #$03
         sta 0
-        lda #$33
+        lda #$11
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$33
+        sta 3
+        lda #$11
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$33
         sta 6
         lda #$30
         sta 7
@@ -3490,17 +3355,17 @@ drawSprite23 entry
         short m
         lda #$03
         sta 0
-        lda #$33
+        lda #$3f
         sta 1
-        lda #$3f
+        lda #$f3
         sta 2
-        lda #$f3
-        sta 3
         lda #$33
-        sta 4
+        sta 3
         lda #$3f
-        sta 5
+        sta 4
         lda #$f3
+        sta 5
+        lda #$33
         sta 6
         lda #$30
         sta 7
@@ -3552,17 +3417,16 @@ drawSprite23 entry
         short m
         lda #$03
         sta 0
-        lda #$30
+        lda #$33
         sta 1
-        lda #$33
-        sta 2
         lda #$30
-        sta 3
-        lda #$03
-        sta 4
+        sta 2
         lda #$33
-        sta 5
+        sta 3
+        sta 4
         lda #$03
+        sta 5
+        lda #$33
         sta 6
         lda #$30
         sta 7
@@ -3574,16 +3438,14 @@ drawSprite23 entry
         tcd
 
         short m
+        lda #$33
+        sta 1
         lda #$03
-        sta 0
-        sta 2
-        lda #$30
         sta 3
-        lda #$03
-        sta 4
         lda #$30
-        sta 5
-        sta 7
+        sta 4
+        lda #$33
+        sta 6
         long m
 
         long m
@@ -3646,15 +3508,10 @@ drawSprite24 entry
         short m
         lda #$33
         sta 1
-        lda #$3f
         sta 2
-        lda #$f3
         sta 3
-        lda #$33
         sta 4
-        lda #$3f
         sta 5
-        lda #$f3
         sta 6
         long m
 
@@ -3668,13 +3525,12 @@ drawSprite24 entry
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$33
+        sta 3
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$33
         sta 6
         long m
 
@@ -3686,17 +3542,17 @@ drawSprite24 entry
         short m
         lda #$03
         sta 0
-        lda #$33
+        lda #$3f
         sta 1
         lda #$ff
         sta 2
-        lda #$11
+        lda #$f3
         sta 3
-        lda #$33
+        lda #$3f
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$f3
         sta 6
         lda #$30
         sta 7
@@ -3710,15 +3566,15 @@ drawSprite24 entry
         short m
         lda #$03
         sta 0
-        lda #$33
-        sta 1
         lda #$3f
+        sta 1
+        lda #$11
         sta 2
         lda #$f3
         sta 3
-        lda #$33
-        sta 4
         lda #$3f
+        sta 4
+        lda #$11
         sta 5
         lda #$f3
         sta 6
@@ -3736,10 +3592,14 @@ drawSprite24 entry
         sta 0
         lda #$33
         sta 1
+        lda #$11
         sta 2
+        lda #$33
         sta 3
         sta 4
+        lda #$11
         sta 5
+        lda #$33
         sta 6
         lda #$30
         sta 7
@@ -4049,10 +3909,12 @@ drawSprite26 entry
         tcd
 
         short m
-        lda #$33
+        lda #$11
         sta 2
+        lda #$33
         sta 3
         sta 4
+        lda #$11
         sta 5
         long m
 
@@ -4062,14 +3924,17 @@ drawSprite26 entry
         tcd
 
         short m
-        lda #$03
+        lda #$0f
         sta 1
-        lda #$33
+        lda #$11
         sta 2
+        lda #$f3
         sta 3
+        lda #$3f
         sta 4
+        lda #$11
         sta 5
-        lda #$30
+        lda #$f0
         sta 6
         long m
 
@@ -4079,12 +3944,17 @@ drawSprite26 entry
         tcd
 
         short m
-        lda #$33
+        lda #$3f
         sta 1
+        lda #$ff
         sta 2
+        lda #$f3
         sta 3
+        lda #$3f
         sta 4
+        lda #$ff
         sta 5
+        lda #$f3
         sta 6
         long m
 
@@ -4115,17 +3985,12 @@ drawSprite26 entry
         short m
         lda #$03
         sta 0
-        lda #$3f
+        lda #$33
         sta 1
-        lda #$ff
         sta 2
-        lda #$f3
         sta 3
-        lda #$3f
         sta 4
-        lda #$ff
         sta 5
-        lda #$f3
         sta 6
         lda #$30
         sta 7
@@ -4139,17 +4004,12 @@ drawSprite26 entry
         short m
         lda #$03
         sta 0
-        lda #$3f
+        lda #$33
         sta 1
-        lda #$11
         sta 2
-        lda #$f3
         sta 3
-        lda #$3f
         sta 4
-        lda #$11
         sta 5
-        lda #$f3
         sta 6
         lda #$30
         sta 7
@@ -4165,14 +4025,10 @@ drawSprite26 entry
         sta 0
         lda #$33
         sta 1
-        lda #$11
         sta 2
-        lda #$33
         sta 3
         sta 4
-        lda #$11
         sta 5
-        lda #$33
         sta 6
         lda #$30
         sta 7
@@ -4205,16 +4061,17 @@ drawSprite26 entry
         short m
         lda #$03
         sta 0
-        lda #$33
-        sta 1
         lda #$30
+        sta 1
+        lda #$33
         sta 2
-        lda #$33
+        lda #$30
         sta 3
-        sta 4
         lda #$03
-        sta 5
+        sta 4
         lda #$33
+        sta 5
+        lda #$03
         sta 6
         lda #$30
         sta 7
@@ -4226,14 +4083,16 @@ drawSprite26 entry
         tcd
 
         short m
-        lda #$33
-        sta 1
         lda #$03
-        sta 3
+        sta 0
+        sta 2
         lda #$30
+        sta 3
+        lda #$03
         sta 4
-        lda #$33
-        sta 6
+        lda #$30
+        sta 5
+        sta 7
         long m
 
         long m
@@ -4264,10 +4123,12 @@ drawSprite27 entry
         tcd
 
         short m
-        lda #$33
+        lda #$11
         sta 2
+        lda #$33
         sta 3
         sta 4
+        lda #$11
         sta 5
         long m
 
@@ -4277,14 +4138,17 @@ drawSprite27 entry
         tcd
 
         short m
-        lda #$03
+        lda #$0f
         sta 1
-        lda #$33
+        lda #$11
         sta 2
+        lda #$f3
         sta 3
+        lda #$3f
         sta 4
+        lda #$11
         sta 5
-        lda #$30
+        lda #$f0
         sta 6
         long m
 
@@ -4294,12 +4158,17 @@ drawSprite27 entry
         tcd
 
         short m
-        lda #$33
+        lda #$3f
         sta 1
+        lda #$ff
         sta 2
+        lda #$f3
         sta 3
+        lda #$3f
         sta 4
+        lda #$ff
         sta 5
+        lda #$f3
         sta 6
         long m
 
@@ -4330,17 +4199,12 @@ drawSprite27 entry
         short m
         lda #$03
         sta 0
-        lda #$3f
+        lda #$33
         sta 1
-        lda #$ff
         sta 2
-        lda #$f3
         sta 3
-        lda #$3f
         sta 4
-        lda #$ff
         sta 5
-        lda #$f3
         sta 6
         lda #$30
         sta 7
@@ -4354,17 +4218,12 @@ drawSprite27 entry
         short m
         lda #$03
         sta 0
-        lda #$3f
+        lda #$33
         sta 1
-        lda #$11
         sta 2
-        lda #$f3
         sta 3
-        lda #$3f
         sta 4
-        lda #$11
         sta 5
-        lda #$f3
         sta 6
         lda #$30
         sta 7
@@ -4380,14 +4239,10 @@ drawSprite27 entry
         sta 0
         lda #$33
         sta 1
-        lda #$11
         sta 2
-        lda #$33
         sta 3
         sta 4
-        lda #$11
         sta 5
-        lda #$33
         sta 6
         lda #$30
         sta 7
@@ -4468,7 +4323,7 @@ drawSprite28 entry
         tcd
 
         short m
-        lda #$33
+        lda #$22
         sta 3
         sta 4
         long m
@@ -4479,7 +4334,7 @@ drawSprite28 entry
         tcd
 
         short m
-        lda #$33
+        lda #$22
         sta 2
         sta 3
         sta 4
@@ -4492,14 +4347,14 @@ drawSprite28 entry
         tcd
 
         short m
-        lda #$03
+        lda #$02
         sta 1
-        lda #$33
+        lda #$22
         sta 2
         sta 3
         sta 4
         sta 5
-        lda #$30
+        lda #$20
         sta 6
         long m
 
@@ -4509,7 +4364,7 @@ drawSprite28 entry
         tcd
 
         short m
-        lda #$33
+        lda #$22
         sta 1
         sta 2
         sta 3
@@ -4524,16 +4379,17 @@ drawSprite28 entry
         tcd
 
         short m
-        lda #$33
+        lda #$22
         sta 1
-        lda #$ff
+        lda #$2a
         sta 2
-        lda #$33
+        lda #$a2
         sta 3
+        lda #$2a
         sta 4
-        lda #$ff
+        lda #$a2
         sta 5
-        lda #$33
+        lda #$22
         sta 6
         long m
 
@@ -4543,21 +4399,21 @@ drawSprite28 entry
         tcd
 
         short m
-        lda #$03
+        lda #$02
         sta 0
-        lda #$3f
+        lda #$22
         sta 1
-        lda #$ff
+        lda #$2a
         sta 2
-        lda #$f3
+        lda #$a2
         sta 3
-        lda #$3f
+        lda #$2a
         sta 4
-        lda #$ff
+        lda #$a2
         sta 5
-        lda #$f3
+        lda #$22
         sta 6
-        lda #$30
+        lda #$20
         sta 7
         long m
 
@@ -4567,21 +4423,16 @@ drawSprite28 entry
         tcd
 
         short m
-        lda #$03
+        lda #$02
         sta 0
-        lda #$3f
+        lda #$22
         sta 1
-        lda #$11
         sta 2
-        lda #$f3
         sta 3
-        lda #$3f
         sta 4
-        lda #$11
         sta 5
-        lda #$f3
         sta 6
-        lda #$30
+        lda #$20
         sta 7
         long m
 
@@ -4591,20 +4442,21 @@ drawSprite28 entry
         tcd
 
         short m
-        lda #$03
+        lda #$02
         sta 0
-        lda #$33
+        lda #$2a
         sta 1
-        lda #$11
+        lda #$a2
         sta 2
-        lda #$33
+        lda #$2a
         sta 3
+        lda #$a2
         sta 4
-        lda #$11
+        lda #$2a
         sta 5
-        lda #$33
+        lda #$a2
         sta 6
-        lda #$30
+        lda #$20
         sta 7
         long m
 
@@ -4614,16 +4466,21 @@ drawSprite28 entry
         tcd
 
         short m
-        lda #$03
+        lda #$02
         sta 0
-        lda #$33
+        lda #$a2
         sta 1
+        lda #$2a
         sta 2
+        lda #$a2
         sta 3
+        lda #$2a
         sta 4
+        lda #$a2
         sta 5
+        lda #$2a
         sta 6
-        lda #$30
+        lda #$20
         sta 7
         long m
 
@@ -4633,20 +4490,21 @@ drawSprite28 entry
         tcd
 
         short m
-        lda #$03
+        lda #$02
         sta 0
-        lda #$33
+        lda #$20
         sta 1
-        lda #$30
+        lda #$22
         sta 2
-        lda #$33
+        lda #$20
         sta 3
+        lda #$02
         sta 4
-        lda #$03
+        lda #$22
         sta 5
-        lda #$33
+        lda #$02
         sta 6
-        lda #$30
+        lda #$20
         sta 7
         long m
 
@@ -4656,14 +4514,16 @@ drawSprite28 entry
         tcd
 
         short m
-        lda #$33
-        sta 1
-        lda #$03
+        lda #$02
+        sta 0
+        sta 2
+        lda #$20
         sta 3
-        lda #$30
+        lda #$02
         sta 4
-        lda #$33
-        sta 6
+        lda #$20
+        sta 5
+        sta 7
         long m
 
         long m
@@ -4683,7 +4543,7 @@ drawSprite29 entry
         tcd
 
         short m
-        lda #$33
+        lda #$22
         sta 3
         sta 4
         long m
@@ -4694,7 +4554,7 @@ drawSprite29 entry
         tcd
 
         short m
-        lda #$33
+        lda #$22
         sta 2
         sta 3
         sta 4
@@ -4707,14 +4567,14 @@ drawSprite29 entry
         tcd
 
         short m
-        lda #$03
+        lda #$02
         sta 1
-        lda #$33
+        lda #$22
         sta 2
         sta 3
         sta 4
         sta 5
-        lda #$30
+        lda #$20
         sta 6
         long m
 
@@ -4724,7 +4584,7 @@ drawSprite29 entry
         tcd
 
         short m
-        lda #$33
+        lda #$22
         sta 1
         sta 2
         sta 3
@@ -4739,16 +4599,17 @@ drawSprite29 entry
         tcd
 
         short m
-        lda #$33
+        lda #$22
         sta 1
-        lda #$ff
+        lda #$2a
         sta 2
-        lda #$33
+        lda #$a2
         sta 3
+        lda #$2a
         sta 4
-        lda #$ff
+        lda #$a2
         sta 5
-        lda #$33
+        lda #$22
         sta 6
         long m
 
@@ -4758,21 +4619,21 @@ drawSprite29 entry
         tcd
 
         short m
-        lda #$03
+        lda #$02
         sta 0
-        lda #$3f
+        lda #$22
         sta 1
-        lda #$ff
+        lda #$2a
         sta 2
-        lda #$f3
+        lda #$a2
         sta 3
-        lda #$3f
+        lda #$2a
         sta 4
-        lda #$ff
+        lda #$a2
         sta 5
-        lda #$f3
+        lda #$22
         sta 6
-        lda #$30
+        lda #$20
         sta 7
         long m
 
@@ -4782,21 +4643,16 @@ drawSprite29 entry
         tcd
 
         short m
-        lda #$03
+        lda #$02
         sta 0
-        lda #$3f
+        lda #$22
         sta 1
-        lda #$11
         sta 2
-        lda #$f3
         sta 3
-        lda #$3f
         sta 4
-        lda #$11
         sta 5
-        lda #$f3
         sta 6
-        lda #$30
+        lda #$20
         sta 7
         long m
 
@@ -4806,20 +4662,21 @@ drawSprite29 entry
         tcd
 
         short m
-        lda #$03
+        lda #$02
         sta 0
-        lda #$33
+        lda #$2a
         sta 1
-        lda #$11
+        lda #$a2
         sta 2
-        lda #$33
+        lda #$2a
         sta 3
+        lda #$a2
         sta 4
-        lda #$11
+        lda #$2a
         sta 5
-        lda #$33
+        lda #$a2
         sta 6
-        lda #$30
+        lda #$20
         sta 7
         long m
 
@@ -4829,16 +4686,21 @@ drawSprite29 entry
         tcd
 
         short m
-        lda #$03
+        lda #$02
         sta 0
-        lda #$33
+        lda #$a2
         sta 1
+        lda #$2a
         sta 2
+        lda #$a2
         sta 3
+        lda #$2a
         sta 4
+        lda #$a2
         sta 5
+        lda #$2a
         sta 6
-        lda #$30
+        lda #$20
         sta 7
         long m
 
@@ -4848,20 +4710,20 @@ drawSprite29 entry
         tcd
 
         short m
-        lda #$03
+        lda #$02
         sta 0
-        lda #$33
+        lda #$22
         sta 1
-        lda #$30
+        lda #$20
         sta 2
-        lda #$33
+        lda #$22
         sta 3
         sta 4
-        lda #$03
+        lda #$02
         sta 5
-        lda #$33
+        lda #$22
         sta 6
-        lda #$30
+        lda #$20
         sta 7
         long m
 
@@ -4871,13 +4733,13 @@ drawSprite29 entry
         tcd
 
         short m
-        lda #$33
+        lda #$22
         sta 1
-        lda #$03
+        lda #$02
         sta 3
-        lda #$30
+        lda #$20
         sta 4
-        lda #$33
+        lda #$22
         sta 6
         long m
 
@@ -5287,17 +5149,16 @@ drawSprite31 entry
         short m
         lda #$0b
         sta 0
-        lda #$b0
+        lda #$bb
         sta 1
-        lda #$bb
-        sta 2
         lda #$b0
-        sta 3
-        lda #$0b
-        sta 4
+        sta 2
         lda #$bb
-        sta 5
+        sta 3
+        sta 4
         lda #$0b
+        sta 5
+        lda #$bb
         sta 6
         lda #$b0
         sta 7
@@ -5309,16 +5170,14 @@ drawSprite31 entry
         tcd
 
         short m
+        lda #$bb
+        sta 1
         lda #$0b
-        sta 0
-        sta 2
-        lda #$b0
         sta 3
-        lda #$0b
-        sta 4
         lda #$b0
-        sta 5
-        sta 7
+        sta 4
+        lda #$bb
+        sta 6
         long m
 
         long m
@@ -5379,17 +5238,17 @@ drawSprite32 entry
         tcd
 
         short m
-        lda #$bb
+        lda #$bf
         sta 1
-        lda #$bf
+        lda #$fb
         sta 2
-        lda #$fb
-        sta 3
         lda #$bb
-        sta 4
+        sta 3
         lda #$bf
-        sta 5
+        sta 4
         lda #$fb
+        sta 5
+        lda #$bb
         sta 6
         long m
 
@@ -5399,17 +5258,17 @@ drawSprite32 entry
         tcd
 
         short m
-        lda #$bb
+        lda #$11
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$bb
+        sta 3
+        lda #$11
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$bb
         sta 6
         long m
 
@@ -5421,17 +5280,17 @@ drawSprite32 entry
         short m
         lda #$0b
         sta 0
-        lda #$bb
+        lda #$11
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$bb
+        sta 3
+        lda #$11
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$bb
         sta 6
         lda #$b0
         sta 7
@@ -5445,17 +5304,17 @@ drawSprite32 entry
         short m
         lda #$0b
         sta 0
-        lda #$bb
+        lda #$bf
         sta 1
-        lda #$bf
+        lda #$fb
         sta 2
-        lda #$fb
-        sta 3
         lda #$bb
-        sta 4
+        sta 3
         lda #$bf
-        sta 5
+        sta 4
         lda #$fb
+        sta 5
+        lda #$bb
         sta 6
         lda #$b0
         sta 7
@@ -5599,17 +5458,17 @@ drawSprite33 entry
         tcd
 
         short m
-        lda #$bb
+        lda #$bf
         sta 1
-        lda #$bf
+        lda #$fb
         sta 2
-        lda #$fb
-        sta 3
         lda #$bb
-        sta 4
+        sta 3
         lda #$bf
-        sta 5
+        sta 4
         lda #$fb
+        sta 5
+        lda #$bb
         sta 6
         long m
 
@@ -5619,17 +5478,17 @@ drawSprite33 entry
         tcd
 
         short m
-        lda #$bb
+        lda #$11
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$bb
+        sta 3
+        lda #$11
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$bb
         sta 6
         long m
 
@@ -5641,17 +5500,17 @@ drawSprite33 entry
         short m
         lda #$0b
         sta 0
-        lda #$bb
+        lda #$11
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$bb
+        sta 3
+        lda #$11
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$bb
         sta 6
         lda #$b0
         sta 7
@@ -5665,17 +5524,17 @@ drawSprite33 entry
         short m
         lda #$0b
         sta 0
-        lda #$bb
+        lda #$bf
         sta 1
-        lda #$bf
+        lda #$fb
         sta 2
-        lda #$fb
-        sta 3
         lda #$bb
-        sta 4
+        sta 3
         lda #$bf
-        sta 5
+        sta 4
         lda #$fb
+        sta 5
+        lda #$bb
         sta 6
         lda #$b0
         sta 7
@@ -5727,17 +5586,16 @@ drawSprite33 entry
         short m
         lda #$0b
         sta 0
-        lda #$b0
+        lda #$bb
         sta 1
-        lda #$bb
-        sta 2
         lda #$b0
-        sta 3
-        lda #$0b
-        sta 4
+        sta 2
         lda #$bb
-        sta 5
+        sta 3
+        sta 4
         lda #$0b
+        sta 5
+        lda #$bb
         sta 6
         lda #$b0
         sta 7
@@ -5749,16 +5607,14 @@ drawSprite33 entry
         tcd
 
         short m
+        lda #$bb
+        sta 1
         lda #$0b
-        sta 0
-        sta 2
-        lda #$b0
         sta 3
-        lda #$0b
-        sta 4
         lda #$b0
-        sta 5
-        sta 7
+        sta 4
+        lda #$bb
+        sta 6
         long m
 
         long m
@@ -5821,15 +5677,10 @@ drawSprite34 entry
         short m
         lda #$bb
         sta 1
-        lda #$bf
         sta 2
-        lda #$fb
         sta 3
-        lda #$bb
         sta 4
-        lda #$bf
         sta 5
-        lda #$fb
         sta 6
         long m
 
@@ -5843,13 +5694,12 @@ drawSprite34 entry
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$bb
+        sta 3
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$bb
         sta 6
         long m
 
@@ -5861,17 +5711,17 @@ drawSprite34 entry
         short m
         lda #$0b
         sta 0
-        lda #$bb
+        lda #$bf
         sta 1
         lda #$ff
         sta 2
-        lda #$11
+        lda #$fb
         sta 3
-        lda #$bb
+        lda #$bf
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$fb
         sta 6
         lda #$b0
         sta 7
@@ -5885,15 +5735,15 @@ drawSprite34 entry
         short m
         lda #$0b
         sta 0
-        lda #$bb
-        sta 1
         lda #$bf
+        sta 1
+        lda #$11
         sta 2
         lda #$fb
         sta 3
-        lda #$bb
-        sta 4
         lda #$bf
+        sta 4
+        lda #$11
         sta 5
         lda #$fb
         sta 6
@@ -5911,10 +5761,14 @@ drawSprite34 entry
         sta 0
         lda #$bb
         sta 1
+        lda #$11
         sta 2
+        lda #$bb
         sta 3
         sta 4
+        lda #$11
         sta 5
+        lda #$bb
         sta 6
         lda #$b0
         sta 7
@@ -6224,10 +6078,12 @@ drawSprite36 entry
         tcd
 
         short m
-        lda #$bb
+        lda #$11
         sta 2
+        lda #$bb
         sta 3
         sta 4
+        lda #$11
         sta 5
         long m
 
@@ -6237,14 +6093,17 @@ drawSprite36 entry
         tcd
 
         short m
-        lda #$0b
+        lda #$0f
         sta 1
-        lda #$bb
+        lda #$11
         sta 2
+        lda #$fb
         sta 3
+        lda #$bf
         sta 4
+        lda #$11
         sta 5
-        lda #$b0
+        lda #$f0
         sta 6
         long m
 
@@ -6254,12 +6113,17 @@ drawSprite36 entry
         tcd
 
         short m
-        lda #$bb
+        lda #$bf
         sta 1
+        lda #$ff
         sta 2
+        lda #$fb
         sta 3
+        lda #$bf
         sta 4
+        lda #$ff
         sta 5
+        lda #$fb
         sta 6
         long m
 
@@ -6290,17 +6154,12 @@ drawSprite36 entry
         short m
         lda #$0b
         sta 0
-        lda #$bf
+        lda #$bb
         sta 1
-        lda #$ff
         sta 2
-        lda #$fb
         sta 3
-        lda #$bf
         sta 4
-        lda #$ff
         sta 5
-        lda #$fb
         sta 6
         lda #$b0
         sta 7
@@ -6314,17 +6173,12 @@ drawSprite36 entry
         short m
         lda #$0b
         sta 0
-        lda #$bf
+        lda #$bb
         sta 1
-        lda #$11
         sta 2
-        lda #$fb
         sta 3
-        lda #$bf
         sta 4
-        lda #$11
         sta 5
-        lda #$fb
         sta 6
         lda #$b0
         sta 7
@@ -6340,14 +6194,10 @@ drawSprite36 entry
         sta 0
         lda #$bb
         sta 1
-        lda #$11
         sta 2
-        lda #$bb
         sta 3
         sta 4
-        lda #$11
         sta 5
-        lda #$bb
         sta 6
         lda #$b0
         sta 7
@@ -6380,16 +6230,17 @@ drawSprite36 entry
         short m
         lda #$0b
         sta 0
-        lda #$bb
-        sta 1
         lda #$b0
+        sta 1
+        lda #$bb
         sta 2
-        lda #$bb
+        lda #$b0
         sta 3
-        sta 4
         lda #$0b
-        sta 5
+        sta 4
         lda #$bb
+        sta 5
+        lda #$0b
         sta 6
         lda #$b0
         sta 7
@@ -6401,14 +6252,16 @@ drawSprite36 entry
         tcd
 
         short m
-        lda #$bb
-        sta 1
         lda #$0b
-        sta 3
+        sta 0
+        sta 2
         lda #$b0
+        sta 3
+        lda #$0b
         sta 4
-        lda #$bb
-        sta 6
+        lda #$b0
+        sta 5
+        sta 7
         long m
 
         long m
@@ -6439,10 +6292,12 @@ drawSprite37 entry
         tcd
 
         short m
-        lda #$bb
+        lda #$11
         sta 2
+        lda #$bb
         sta 3
         sta 4
+        lda #$11
         sta 5
         long m
 
@@ -6452,14 +6307,17 @@ drawSprite37 entry
         tcd
 
         short m
-        lda #$0b
+        lda #$0f
         sta 1
-        lda #$bb
+        lda #$11
         sta 2
+        lda #$fb
         sta 3
+        lda #$bf
         sta 4
+        lda #$11
         sta 5
-        lda #$b0
+        lda #$f0
         sta 6
         long m
 
@@ -6469,12 +6327,17 @@ drawSprite37 entry
         tcd
 
         short m
-        lda #$bb
+        lda #$bf
         sta 1
+        lda #$ff
         sta 2
+        lda #$fb
         sta 3
+        lda #$bf
         sta 4
+        lda #$ff
         sta 5
+        lda #$fb
         sta 6
         long m
 
@@ -6505,17 +6368,12 @@ drawSprite37 entry
         short m
         lda #$0b
         sta 0
-        lda #$bf
+        lda #$bb
         sta 1
-        lda #$ff
         sta 2
-        lda #$fb
         sta 3
-        lda #$bf
         sta 4
-        lda #$ff
         sta 5
-        lda #$fb
         sta 6
         lda #$b0
         sta 7
@@ -6529,17 +6387,12 @@ drawSprite37 entry
         short m
         lda #$0b
         sta 0
-        lda #$bf
+        lda #$bb
         sta 1
-        lda #$11
         sta 2
-        lda #$fb
         sta 3
-        lda #$bf
         sta 4
-        lda #$11
         sta 5
-        lda #$fb
         sta 6
         lda #$b0
         sta 7
@@ -6555,14 +6408,10 @@ drawSprite37 entry
         sta 0
         lda #$bb
         sta 1
-        lda #$11
         sta 2
-        lda #$bb
         sta 3
         sta 4
-        lda #$11
         sta 5
-        lda #$bb
         sta 6
         lda #$b0
         sta 7
@@ -6643,7 +6492,7 @@ drawSprite38 entry
         tcd
 
         short m
-        lda #$bb
+        lda #$ff
         sta 3
         sta 4
         long m
@@ -6654,7 +6503,7 @@ drawSprite38 entry
         tcd
 
         short m
-        lda #$bb
+        lda #$ff
         sta 2
         sta 3
         sta 4
@@ -6667,14 +6516,14 @@ drawSprite38 entry
         tcd
 
         short m
-        lda #$0b
+        lda #$0f
         sta 1
-        lda #$bb
+        lda #$ff
         sta 2
         sta 3
         sta 4
         sta 5
-        lda #$b0
+        lda #$f0
         sta 6
         long m
 
@@ -6684,7 +6533,7 @@ drawSprite38 entry
         tcd
 
         short m
-        lda #$bb
+        lda #$ff
         sta 1
         sta 2
         sta 3
@@ -6699,16 +6548,17 @@ drawSprite38 entry
         tcd
 
         short m
-        lda #$bb
+        lda #$ff
         sta 1
-        lda #$ff
+        lda #$f3
         sta 2
-        lda #$bb
+        lda #$3f
         sta 3
+        lda #$f3
         sta 4
-        lda #$ff
+        lda #$3f
         sta 5
-        lda #$bb
+        lda #$ff
         sta 6
         long m
 
@@ -6718,21 +6568,21 @@ drawSprite38 entry
         tcd
 
         short m
-        lda #$0b
+        lda #$0f
         sta 0
-        lda #$bf
+        lda #$ff
         sta 1
-        lda #$ff
+        lda #$f3
         sta 2
-        lda #$fb
+        lda #$3f
         sta 3
-        lda #$bf
+        lda #$f3
         sta 4
-        lda #$ff
+        lda #$3f
         sta 5
-        lda #$fb
+        lda #$ff
         sta 6
-        lda #$b0
+        lda #$f0
         sta 7
         long m
 
@@ -6742,21 +6592,16 @@ drawSprite38 entry
         tcd
 
         short m
-        lda #$0b
+        lda #$0f
         sta 0
-        lda #$bf
+        lda #$ff
         sta 1
-        lda #$11
         sta 2
-        lda #$fb
         sta 3
-        lda #$bf
         sta 4
-        lda #$11
         sta 5
-        lda #$fb
         sta 6
-        lda #$b0
+        lda #$f0
         sta 7
         long m
 
@@ -6766,20 +6611,21 @@ drawSprite38 entry
         tcd
 
         short m
-        lda #$0b
+        lda #$0f
         sta 0
-        lda #$bb
+        lda #$f3
         sta 1
-        lda #$11
+        lda #$3f
         sta 2
-        lda #$bb
+        lda #$f3
         sta 3
+        lda #$3f
         sta 4
-        lda #$11
+        lda #$f3
         sta 5
-        lda #$bb
+        lda #$3f
         sta 6
-        lda #$b0
+        lda #$f0
         sta 7
         long m
 
@@ -6789,16 +6635,21 @@ drawSprite38 entry
         tcd
 
         short m
-        lda #$0b
+        lda #$0f
         sta 0
-        lda #$bb
+        lda #$3f
         sta 1
+        lda #$f3
         sta 2
+        lda #$3f
         sta 3
+        lda #$f3
         sta 4
+        lda #$3f
         sta 5
+        lda #$f3
         sta 6
-        lda #$b0
+        lda #$f0
         sta 7
         long m
 
@@ -6808,20 +6659,21 @@ drawSprite38 entry
         tcd
 
         short m
-        lda #$0b
+        lda #$0f
         sta 0
-        lda #$bb
+        lda #$f0
         sta 1
-        lda #$b0
+        lda #$ff
         sta 2
-        lda #$bb
+        lda #$f0
         sta 3
+        lda #$0f
         sta 4
-        lda #$0b
+        lda #$ff
         sta 5
-        lda #$bb
+        lda #$0f
         sta 6
-        lda #$b0
+        lda #$f0
         sta 7
         long m
 
@@ -6831,14 +6683,16 @@ drawSprite38 entry
         tcd
 
         short m
-        lda #$bb
-        sta 1
-        lda #$0b
+        lda #$0f
+        sta 0
+        sta 2
+        lda #$f0
         sta 3
-        lda #$b0
+        lda #$0f
         sta 4
-        lda #$bb
-        sta 6
+        lda #$f0
+        sta 5
+        sta 7
         long m
 
         long m
@@ -6858,7 +6712,7 @@ drawSprite39 entry
         tcd
 
         short m
-        lda #$bb
+        lda #$ff
         sta 3
         sta 4
         long m
@@ -6869,7 +6723,7 @@ drawSprite39 entry
         tcd
 
         short m
-        lda #$bb
+        lda #$ff
         sta 2
         sta 3
         sta 4
@@ -6882,14 +6736,14 @@ drawSprite39 entry
         tcd
 
         short m
-        lda #$0b
+        lda #$0f
         sta 1
-        lda #$bb
+        lda #$ff
         sta 2
         sta 3
         sta 4
         sta 5
-        lda #$b0
+        lda #$f0
         sta 6
         long m
 
@@ -6899,7 +6753,7 @@ drawSprite39 entry
         tcd
 
         short m
-        lda #$bb
+        lda #$ff
         sta 1
         sta 2
         sta 3
@@ -6914,16 +6768,17 @@ drawSprite39 entry
         tcd
 
         short m
-        lda #$bb
+        lda #$ff
         sta 1
-        lda #$ff
+        lda #$f3
         sta 2
-        lda #$bb
+        lda #$3f
         sta 3
+        lda #$f3
         sta 4
-        lda #$ff
+        lda #$3f
         sta 5
-        lda #$bb
+        lda #$ff
         sta 6
         long m
 
@@ -6933,21 +6788,21 @@ drawSprite39 entry
         tcd
 
         short m
-        lda #$0b
+        lda #$0f
         sta 0
-        lda #$bf
+        lda #$ff
         sta 1
-        lda #$ff
+        lda #$f3
         sta 2
-        lda #$fb
+        lda #$3f
         sta 3
-        lda #$bf
+        lda #$f3
         sta 4
-        lda #$ff
+        lda #$3f
         sta 5
-        lda #$fb
+        lda #$ff
         sta 6
-        lda #$b0
+        lda #$f0
         sta 7
         long m
 
@@ -6957,21 +6812,16 @@ drawSprite39 entry
         tcd
 
         short m
-        lda #$0b
+        lda #$0f
         sta 0
-        lda #$bf
+        lda #$ff
         sta 1
-        lda #$11
         sta 2
-        lda #$fb
         sta 3
-        lda #$bf
         sta 4
-        lda #$11
         sta 5
-        lda #$fb
         sta 6
-        lda #$b0
+        lda #$f0
         sta 7
         long m
 
@@ -6981,20 +6831,21 @@ drawSprite39 entry
         tcd
 
         short m
-        lda #$0b
+        lda #$0f
         sta 0
-        lda #$bb
+        lda #$f3
         sta 1
-        lda #$11
+        lda #$3f
         sta 2
-        lda #$bb
+        lda #$f3
         sta 3
+        lda #$3f
         sta 4
-        lda #$11
+        lda #$f3
         sta 5
-        lda #$bb
+        lda #$3f
         sta 6
-        lda #$b0
+        lda #$f0
         sta 7
         long m
 
@@ -7004,16 +6855,21 @@ drawSprite39 entry
         tcd
 
         short m
-        lda #$0b
+        lda #$0f
         sta 0
-        lda #$bb
+        lda #$3f
         sta 1
+        lda #$f3
         sta 2
+        lda #$3f
         sta 3
+        lda #$f3
         sta 4
+        lda #$3f
         sta 5
+        lda #$f3
         sta 6
-        lda #$b0
+        lda #$f0
         sta 7
         long m
 
@@ -7023,20 +6879,20 @@ drawSprite39 entry
         tcd
 
         short m
-        lda #$0b
+        lda #$0f
         sta 0
-        lda #$bb
+        lda #$ff
         sta 1
-        lda #$b0
+        lda #$f0
         sta 2
-        lda #$bb
+        lda #$ff
         sta 3
         sta 4
-        lda #$0b
+        lda #$0f
         sta 5
-        lda #$bb
+        lda #$ff
         sta 6
-        lda #$b0
+        lda #$f0
         sta 7
         long m
 
@@ -7046,13 +6902,13 @@ drawSprite39 entry
         tcd
 
         short m
-        lda #$bb
+        lda #$ff
         sta 1
-        lda #$0b
+        lda #$0f
         sta 3
-        lda #$b0
+        lda #$f0
         sta 4
-        lda #$bb
+        lda #$ff
         sta 6
         long m
 
@@ -7462,17 +7318,16 @@ drawSprite41 entry
         short m
         lda #$08
         sta 0
-        lda #$80
+        lda #$88
         sta 1
-        lda #$88
-        sta 2
         lda #$80
-        sta 3
-        lda #$08
-        sta 4
+        sta 2
         lda #$88
-        sta 5
+        sta 3
+        sta 4
         lda #$08
+        sta 5
+        lda #$88
         sta 6
         lda #$80
         sta 7
@@ -7484,16 +7339,14 @@ drawSprite41 entry
         tcd
 
         short m
+        lda #$88
+        sta 1
         lda #$08
-        sta 0
-        sta 2
-        lda #$80
         sta 3
-        lda #$08
-        sta 4
         lda #$80
-        sta 5
-        sta 7
+        sta 4
+        lda #$88
+        sta 6
         long m
 
         long m
@@ -7554,17 +7407,17 @@ drawSprite42 entry
         tcd
 
         short m
-        lda #$88
+        lda #$8f
         sta 1
-        lda #$8f
+        lda #$f8
         sta 2
-        lda #$f8
-        sta 3
         lda #$88
-        sta 4
+        sta 3
         lda #$8f
-        sta 5
+        sta 4
         lda #$f8
+        sta 5
+        lda #$88
         sta 6
         long m
 
@@ -7574,17 +7427,17 @@ drawSprite42 entry
         tcd
 
         short m
-        lda #$88
+        lda #$11
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$88
+        sta 3
+        lda #$11
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$88
         sta 6
         long m
 
@@ -7596,17 +7449,17 @@ drawSprite42 entry
         short m
         lda #$08
         sta 0
-        lda #$88
+        lda #$11
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$88
+        sta 3
+        lda #$11
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$88
         sta 6
         lda #$80
         sta 7
@@ -7620,17 +7473,17 @@ drawSprite42 entry
         short m
         lda #$08
         sta 0
-        lda #$88
+        lda #$8f
         sta 1
-        lda #$8f
+        lda #$f8
         sta 2
-        lda #$f8
-        sta 3
         lda #$88
-        sta 4
+        sta 3
         lda #$8f
-        sta 5
+        sta 4
         lda #$f8
+        sta 5
+        lda #$88
         sta 6
         lda #$80
         sta 7
@@ -7774,17 +7627,17 @@ drawSprite43 entry
         tcd
 
         short m
-        lda #$88
+        lda #$8f
         sta 1
-        lda #$8f
+        lda #$f8
         sta 2
-        lda #$f8
-        sta 3
         lda #$88
-        sta 4
+        sta 3
         lda #$8f
-        sta 5
+        sta 4
         lda #$f8
+        sta 5
+        lda #$88
         sta 6
         long m
 
@@ -7794,17 +7647,17 @@ drawSprite43 entry
         tcd
 
         short m
-        lda #$88
+        lda #$11
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$88
+        sta 3
+        lda #$11
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$88
         sta 6
         long m
 
@@ -7816,17 +7669,17 @@ drawSprite43 entry
         short m
         lda #$08
         sta 0
-        lda #$88
+        lda #$11
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$88
+        sta 3
+        lda #$11
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$88
         sta 6
         lda #$80
         sta 7
@@ -7840,17 +7693,17 @@ drawSprite43 entry
         short m
         lda #$08
         sta 0
-        lda #$88
+        lda #$8f
         sta 1
-        lda #$8f
+        lda #$f8
         sta 2
-        lda #$f8
-        sta 3
         lda #$88
-        sta 4
+        sta 3
         lda #$8f
-        sta 5
+        sta 4
         lda #$f8
+        sta 5
+        lda #$88
         sta 6
         lda #$80
         sta 7
@@ -7902,17 +7755,16 @@ drawSprite43 entry
         short m
         lda #$08
         sta 0
-        lda #$80
+        lda #$88
         sta 1
-        lda #$88
-        sta 2
         lda #$80
-        sta 3
-        lda #$08
-        sta 4
+        sta 2
         lda #$88
-        sta 5
+        sta 3
+        sta 4
         lda #$08
+        sta 5
+        lda #$88
         sta 6
         lda #$80
         sta 7
@@ -7924,16 +7776,14 @@ drawSprite43 entry
         tcd
 
         short m
+        lda #$88
+        sta 1
         lda #$08
-        sta 0
-        sta 2
-        lda #$80
         sta 3
-        lda #$08
-        sta 4
         lda #$80
-        sta 5
-        sta 7
+        sta 4
+        lda #$88
+        sta 6
         long m
 
         long m
@@ -7996,15 +7846,10 @@ drawSprite44 entry
         short m
         lda #$88
         sta 1
-        lda #$8f
         sta 2
-        lda #$f8
         sta 3
-        lda #$88
         sta 4
-        lda #$8f
         sta 5
-        lda #$f8
         sta 6
         long m
 
@@ -8018,13 +7863,12 @@ drawSprite44 entry
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$88
+        sta 3
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$88
         sta 6
         long m
 
@@ -8036,17 +7880,17 @@ drawSprite44 entry
         short m
         lda #$08
         sta 0
-        lda #$88
+        lda #$8f
         sta 1
         lda #$ff
         sta 2
-        lda #$11
+        lda #$f8
         sta 3
-        lda #$88
+        lda #$8f
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$f8
         sta 6
         lda #$80
         sta 7
@@ -8060,15 +7904,15 @@ drawSprite44 entry
         short m
         lda #$08
         sta 0
-        lda #$88
-        sta 1
         lda #$8f
+        sta 1
+        lda #$11
         sta 2
         lda #$f8
         sta 3
-        lda #$88
-        sta 4
         lda #$8f
+        sta 4
+        lda #$11
         sta 5
         lda #$f8
         sta 6
@@ -8086,10 +7930,14 @@ drawSprite44 entry
         sta 0
         lda #$88
         sta 1
+        lda #$11
         sta 2
+        lda #$88
         sta 3
         sta 4
+        lda #$11
         sta 5
+        lda #$88
         sta 6
         lda #$80
         sta 7
@@ -8399,10 +8247,12 @@ drawSprite46 entry
         tcd
 
         short m
-        lda #$88
+        lda #$11
         sta 2
+        lda #$88
         sta 3
         sta 4
+        lda #$11
         sta 5
         long m
 
@@ -8412,14 +8262,17 @@ drawSprite46 entry
         tcd
 
         short m
-        lda #$08
+        lda #$0f
         sta 1
-        lda #$88
+        lda #$11
         sta 2
+        lda #$f8
         sta 3
+        lda #$8f
         sta 4
+        lda #$11
         sta 5
-        lda #$80
+        lda #$f0
         sta 6
         long m
 
@@ -8429,12 +8282,17 @@ drawSprite46 entry
         tcd
 
         short m
-        lda #$88
+        lda #$8f
         sta 1
+        lda #$ff
         sta 2
+        lda #$f8
         sta 3
+        lda #$8f
         sta 4
+        lda #$ff
         sta 5
+        lda #$f8
         sta 6
         long m
 
@@ -8465,17 +8323,12 @@ drawSprite46 entry
         short m
         lda #$08
         sta 0
-        lda #$8f
+        lda #$88
         sta 1
-        lda #$ff
         sta 2
-        lda #$f8
         sta 3
-        lda #$8f
         sta 4
-        lda #$ff
         sta 5
-        lda #$f8
         sta 6
         lda #$80
         sta 7
@@ -8489,17 +8342,12 @@ drawSprite46 entry
         short m
         lda #$08
         sta 0
-        lda #$8f
+        lda #$88
         sta 1
-        lda #$11
         sta 2
-        lda #$f8
         sta 3
-        lda #$8f
         sta 4
-        lda #$11
         sta 5
-        lda #$f8
         sta 6
         lda #$80
         sta 7
@@ -8515,14 +8363,10 @@ drawSprite46 entry
         sta 0
         lda #$88
         sta 1
-        lda #$11
         sta 2
-        lda #$88
         sta 3
         sta 4
-        lda #$11
         sta 5
-        lda #$88
         sta 6
         lda #$80
         sta 7
@@ -8555,16 +8399,17 @@ drawSprite46 entry
         short m
         lda #$08
         sta 0
-        lda #$88
-        sta 1
         lda #$80
+        sta 1
+        lda #$88
         sta 2
-        lda #$88
+        lda #$80
         sta 3
-        sta 4
         lda #$08
-        sta 5
+        sta 4
         lda #$88
+        sta 5
+        lda #$08
         sta 6
         lda #$80
         sta 7
@@ -8576,14 +8421,16 @@ drawSprite46 entry
         tcd
 
         short m
-        lda #$88
-        sta 1
         lda #$08
-        sta 3
+        sta 0
+        sta 2
         lda #$80
+        sta 3
+        lda #$08
         sta 4
-        lda #$88
-        sta 6
+        lda #$80
+        sta 5
+        sta 7
         long m
 
         long m
@@ -8614,10 +8461,12 @@ drawSprite47 entry
         tcd
 
         short m
-        lda #$88
+        lda #$11
         sta 2
+        lda #$88
         sta 3
         sta 4
+        lda #$11
         sta 5
         long m
 
@@ -8627,14 +8476,17 @@ drawSprite47 entry
         tcd
 
         short m
-        lda #$08
+        lda #$0f
         sta 1
-        lda #$88
+        lda #$11
         sta 2
+        lda #$f8
         sta 3
+        lda #$8f
         sta 4
+        lda #$11
         sta 5
-        lda #$80
+        lda #$f0
         sta 6
         long m
 
@@ -8644,12 +8496,17 @@ drawSprite47 entry
         tcd
 
         short m
-        lda #$88
+        lda #$8f
         sta 1
+        lda #$ff
         sta 2
+        lda #$f8
         sta 3
+        lda #$8f
         sta 4
+        lda #$ff
         sta 5
+        lda #$f8
         sta 6
         long m
 
@@ -8680,17 +8537,12 @@ drawSprite47 entry
         short m
         lda #$08
         sta 0
-        lda #$8f
+        lda #$88
         sta 1
-        lda #$ff
         sta 2
-        lda #$f8
         sta 3
-        lda #$8f
         sta 4
-        lda #$ff
         sta 5
-        lda #$f8
         sta 6
         lda #$80
         sta 7
@@ -8704,17 +8556,12 @@ drawSprite47 entry
         short m
         lda #$08
         sta 0
-        lda #$8f
+        lda #$88
         sta 1
-        lda #$11
         sta 2
-        lda #$f8
         sta 3
-        lda #$8f
         sta 4
-        lda #$11
         sta 5
-        lda #$f8
         sta 6
         lda #$80
         sta 7
@@ -8730,14 +8577,10 @@ drawSprite47 entry
         sta 0
         lda #$88
         sta 1
-        lda #$11
         sta 2
-        lda #$88
         sta 3
         sta 4
-        lda #$11
         sta 5
-        lda #$88
         sta 6
         lda #$80
         sta 7
@@ -8814,57 +8657,17 @@ drawSprite48 entry
 
         lda drawAddress
         clc
-        adc #480
-        tcd
-
-        short m
-        lda #$88
-        sta 3
-        sta 4
-        long m
-
-        lda drawAddress
-        clc
-        adc #640
-        tcd
-
-        short m
-        lda #$88
-        sta 2
-        sta 3
-        sta 4
-        sta 5
-        long m
-
-        lda drawAddress
-        clc
-        adc #800
-        tcd
-
-        short m
-        lda #$08
-        sta 1
-        lda #$88
-        sta 2
-        sta 3
-        sta 4
-        sta 5
-        lda #$80
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
         adc #960
         tcd
 
         short m
-        lda #$88
-        sta 1
+        lda #$0f
         sta 2
+        lda #$f0
         sta 3
-        sta 4
+        lda #$0f
         sta 5
+        lda #$f0
         sta 6
         long m
 
@@ -8874,16 +8677,13 @@ drawSprite48 entry
         tcd
 
         short m
-        lda #$88
-        sta 1
         lda #$ff
         sta 2
-        lda #$88
+        lda #$11
         sta 3
-        sta 4
         lda #$ff
         sta 5
-        lda #$88
+        lda #$11
         sta 6
         long m
 
@@ -8893,22 +8693,14 @@ drawSprite48 entry
         tcd
 
         short m
-        lda #$08
-        sta 0
-        lda #$8f
-        sta 1
         lda #$ff
         sta 2
-        lda #$f8
+        lda #$11
         sta 3
-        lda #$8f
-        sta 4
         lda #$ff
         sta 5
-        lda #$f8
+        lda #$11
         sta 6
-        lda #$80
-        sta 7
         long m
 
         lda drawAddress
@@ -8917,102 +8709,13 @@ drawSprite48 entry
         tcd
 
         short m
-        lda #$08
-        sta 0
-        lda #$8f
-        sta 1
-        lda #$11
+        lda #$0f
         sta 2
-        lda #$f8
+        lda #$f0
         sta 3
-        lda #$8f
-        sta 4
-        lda #$11
+        lda #$0f
         sta 5
-        lda #$f8
-        sta 6
-        lda #$80
-        sta 7
-        long m
-
-        lda drawAddress
-        clc
-        adc #1600
-        tcd
-
-        short m
-        lda #$08
-        sta 0
-        lda #$88
-        sta 1
-        lda #$11
-        sta 2
-        lda #$88
-        sta 3
-        sta 4
-        lda #$11
-        sta 5
-        lda #$88
-        sta 6
-        lda #$80
-        sta 7
-        long m
-
-        lda drawAddress
-        clc
-        adc #1760
-        tcd
-
-        short m
-        lda #$08
-        sta 0
-        lda #$88
-        sta 1
-        sta 2
-        sta 3
-        sta 4
-        sta 5
-        sta 6
-        lda #$80
-        sta 7
-        long m
-
-        lda drawAddress
-        clc
-        adc #1920
-        tcd
-
-        short m
-        lda #$08
-        sta 0
-        lda #$88
-        sta 1
-        lda #$80
-        sta 2
-        lda #$88
-        sta 3
-        sta 4
-        lda #$08
-        sta 5
-        lda #$88
-        sta 6
-        lda #$80
-        sta 7
-        long m
-
-        lda drawAddress
-        clc
-        adc #2080
-        tcd
-
-        short m
-        lda #$88
-        sta 1
-        lda #$08
-        sta 3
-        lda #$80
-        sta 4
-        lda #$88
+        lda #$f0
         sta 6
         long m
 
@@ -9029,58 +8732,18 @@ drawSprite49 entry
 
         lda drawAddress
         clc
-        adc #480
-        tcd
-
-        short m
-        lda #$88
-        sta 3
-        sta 4
-        long m
-
-        lda drawAddress
-        clc
-        adc #640
-        tcd
-
-        short m
-        lda #$88
-        sta 2
-        sta 3
-        sta 4
-        sta 5
-        long m
-
-        lda drawAddress
-        clc
-        adc #800
-        tcd
-
-        short m
-        lda #$08
-        sta 1
-        lda #$88
-        sta 2
-        sta 3
-        sta 4
-        sta 5
-        lda #$80
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
         adc #960
         tcd
 
         short m
-        lda #$88
+        lda #$0f
         sta 1
+        lda #$f0
         sta 2
-        sta 3
+        lda #$0f
         sta 4
+        lda #$f0
         sta 5
-        sta 6
         long m
 
         lda drawAddress
@@ -9089,17 +8752,14 @@ drawSprite49 entry
         tcd
 
         short m
-        lda #$88
+        lda #$11
         sta 1
         lda #$ff
         sta 2
-        lda #$88
-        sta 3
+        lda #$11
         sta 4
         lda #$ff
         sta 5
-        lda #$88
-        sta 6
         long m
 
         lda drawAddress
@@ -9108,22 +8768,14 @@ drawSprite49 entry
         tcd
 
         short m
-        lda #$08
-        sta 0
-        lda #$8f
+        lda #$11
         sta 1
         lda #$ff
         sta 2
-        lda #$f8
-        sta 3
-        lda #$8f
+        lda #$11
         sta 4
         lda #$ff
         sta 5
-        lda #$f8
-        sta 6
-        lda #$80
-        sta 7
         long m
 
         lda drawAddress
@@ -9132,103 +8784,14 @@ drawSprite49 entry
         tcd
 
         short m
-        lda #$08
-        sta 0
-        lda #$8f
+        lda #$0f
         sta 1
-        lda #$11
+        lda #$f0
         sta 2
-        lda #$f8
-        sta 3
-        lda #$8f
+        lda #$0f
         sta 4
-        lda #$11
+        lda #$f0
         sta 5
-        lda #$f8
-        sta 6
-        lda #$80
-        sta 7
-        long m
-
-        lda drawAddress
-        clc
-        adc #1600
-        tcd
-
-        short m
-        lda #$08
-        sta 0
-        lda #$88
-        sta 1
-        lda #$11
-        sta 2
-        lda #$88
-        sta 3
-        sta 4
-        lda #$11
-        sta 5
-        lda #$88
-        sta 6
-        lda #$80
-        sta 7
-        long m
-
-        lda drawAddress
-        clc
-        adc #1760
-        tcd
-
-        short m
-        lda #$08
-        sta 0
-        lda #$88
-        sta 1
-        sta 2
-        sta 3
-        sta 4
-        sta 5
-        sta 6
-        lda #$80
-        sta 7
-        long m
-
-        lda drawAddress
-        clc
-        adc #1920
-        tcd
-
-        short m
-        lda #$08
-        sta 0
-        lda #$88
-        sta 1
-        lda #$80
-        sta 2
-        lda #$88
-        sta 3
-        sta 4
-        lda #$08
-        sta 5
-        lda #$88
-        sta 6
-        lda #$80
-        sta 7
-        long m
-
-        lda drawAddress
-        clc
-        adc #2080
-        tcd
-
-        short m
-        lda #$88
-        sta 1
-        lda #$08
-        sta 3
-        lda #$80
-        sta 4
-        lda #$88
-        sta 6
         long m
 
         long m
@@ -9637,17 +9200,16 @@ drawSprite51 entry
         short m
         lda #$09
         sta 0
-        lda #$90
+        lda #$99
         sta 1
-        lda #$99
-        sta 2
         lda #$90
-        sta 3
-        lda #$09
-        sta 4
+        sta 2
         lda #$99
-        sta 5
+        sta 3
+        sta 4
         lda #$09
+        sta 5
+        lda #$99
         sta 6
         lda #$90
         sta 7
@@ -9659,16 +9221,14 @@ drawSprite51 entry
         tcd
 
         short m
+        lda #$99
+        sta 1
         lda #$09
-        sta 0
-        sta 2
-        lda #$90
         sta 3
-        lda #$09
-        sta 4
         lda #$90
-        sta 5
-        sta 7
+        sta 4
+        lda #$99
+        sta 6
         long m
 
         long m
@@ -9729,17 +9289,17 @@ drawSprite52 entry
         tcd
 
         short m
-        lda #$99
+        lda #$9f
         sta 1
-        lda #$9f
+        lda #$f9
         sta 2
-        lda #$f9
-        sta 3
         lda #$99
-        sta 4
+        sta 3
         lda #$9f
-        sta 5
+        sta 4
         lda #$f9
+        sta 5
+        lda #$99
         sta 6
         long m
 
@@ -9749,17 +9309,17 @@ drawSprite52 entry
         tcd
 
         short m
-        lda #$99
+        lda #$11
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$99
+        sta 3
+        lda #$11
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$99
         sta 6
         long m
 
@@ -9771,17 +9331,17 @@ drawSprite52 entry
         short m
         lda #$09
         sta 0
-        lda #$99
+        lda #$11
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$99
+        sta 3
+        lda #$11
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$99
         sta 6
         lda #$90
         sta 7
@@ -9795,17 +9355,17 @@ drawSprite52 entry
         short m
         lda #$09
         sta 0
-        lda #$99
+        lda #$9f
         sta 1
-        lda #$9f
+        lda #$f9
         sta 2
-        lda #$f9
-        sta 3
         lda #$99
-        sta 4
+        sta 3
         lda #$9f
-        sta 5
+        sta 4
         lda #$f9
+        sta 5
+        lda #$99
         sta 6
         lda #$90
         sta 7
@@ -9949,17 +9509,17 @@ drawSprite53 entry
         tcd
 
         short m
-        lda #$99
+        lda #$9f
         sta 1
-        lda #$9f
+        lda #$f9
         sta 2
-        lda #$f9
-        sta 3
         lda #$99
-        sta 4
+        sta 3
         lda #$9f
-        sta 5
+        sta 4
         lda #$f9
+        sta 5
+        lda #$99
         sta 6
         long m
 
@@ -9969,17 +9529,17 @@ drawSprite53 entry
         tcd
 
         short m
-        lda #$99
+        lda #$11
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$99
+        sta 3
+        lda #$11
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$99
         sta 6
         long m
 
@@ -9991,17 +9551,17 @@ drawSprite53 entry
         short m
         lda #$09
         sta 0
-        lda #$99
+        lda #$11
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$99
+        sta 3
+        lda #$11
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$99
         sta 6
         lda #$90
         sta 7
@@ -10015,17 +9575,17 @@ drawSprite53 entry
         short m
         lda #$09
         sta 0
-        lda #$99
+        lda #$9f
         sta 1
-        lda #$9f
+        lda #$f9
         sta 2
-        lda #$f9
-        sta 3
         lda #$99
-        sta 4
+        sta 3
         lda #$9f
-        sta 5
+        sta 4
         lda #$f9
+        sta 5
+        lda #$99
         sta 6
         lda #$90
         sta 7
@@ -10077,17 +9637,16 @@ drawSprite53 entry
         short m
         lda #$09
         sta 0
-        lda #$90
+        lda #$99
         sta 1
-        lda #$99
-        sta 2
         lda #$90
-        sta 3
-        lda #$09
-        sta 4
+        sta 2
         lda #$99
-        sta 5
+        sta 3
+        sta 4
         lda #$09
+        sta 5
+        lda #$99
         sta 6
         lda #$90
         sta 7
@@ -10099,16 +9658,14 @@ drawSprite53 entry
         tcd
 
         short m
+        lda #$99
+        sta 1
         lda #$09
-        sta 0
-        sta 2
-        lda #$90
         sta 3
-        lda #$09
-        sta 4
         lda #$90
-        sta 5
-        sta 7
+        sta 4
+        lda #$99
+        sta 6
         long m
 
         long m
@@ -10171,15 +9728,10 @@ drawSprite54 entry
         short m
         lda #$99
         sta 1
-        lda #$9f
         sta 2
-        lda #$f9
         sta 3
-        lda #$99
         sta 4
-        lda #$9f
         sta 5
-        lda #$f9
         sta 6
         long m
 
@@ -10193,13 +9745,12 @@ drawSprite54 entry
         sta 1
         lda #$ff
         sta 2
-        lda #$11
-        sta 3
         lda #$99
+        sta 3
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$99
         sta 6
         long m
 
@@ -10211,17 +9762,17 @@ drawSprite54 entry
         short m
         lda #$09
         sta 0
-        lda #$99
+        lda #$9f
         sta 1
         lda #$ff
         sta 2
-        lda #$11
+        lda #$f9
         sta 3
-        lda #$99
+        lda #$9f
         sta 4
         lda #$ff
         sta 5
-        lda #$11
+        lda #$f9
         sta 6
         lda #$90
         sta 7
@@ -10235,15 +9786,15 @@ drawSprite54 entry
         short m
         lda #$09
         sta 0
-        lda #$99
-        sta 1
         lda #$9f
+        sta 1
+        lda #$11
         sta 2
         lda #$f9
         sta 3
-        lda #$99
-        sta 4
         lda #$9f
+        sta 4
+        lda #$11
         sta 5
         lda #$f9
         sta 6
@@ -10261,10 +9812,14 @@ drawSprite54 entry
         sta 0
         lda #$99
         sta 1
+        lda #$11
         sta 2
+        lda #$99
         sta 3
         sta 4
+        lda #$11
         sta 5
+        lda #$99
         sta 6
         lda #$90
         sta 7
@@ -10574,10 +10129,12 @@ drawSprite56 entry
         tcd
 
         short m
-        lda #$99
+        lda #$11
         sta 2
+        lda #$99
         sta 3
         sta 4
+        lda #$11
         sta 5
         long m
 
@@ -10587,14 +10144,17 @@ drawSprite56 entry
         tcd
 
         short m
-        lda #$09
+        lda #$0f
         sta 1
-        lda #$99
+        lda #$11
         sta 2
+        lda #$f9
         sta 3
+        lda #$9f
         sta 4
+        lda #$11
         sta 5
-        lda #$90
+        lda #$f0
         sta 6
         long m
 
@@ -10604,12 +10164,17 @@ drawSprite56 entry
         tcd
 
         short m
-        lda #$99
+        lda #$9f
         sta 1
+        lda #$ff
         sta 2
+        lda #$f9
         sta 3
+        lda #$9f
         sta 4
+        lda #$ff
         sta 5
+        lda #$f9
         sta 6
         long m
 
@@ -10640,17 +10205,12 @@ drawSprite56 entry
         short m
         lda #$09
         sta 0
-        lda #$9f
+        lda #$99
         sta 1
-        lda #$ff
         sta 2
-        lda #$f9
         sta 3
-        lda #$9f
         sta 4
-        lda #$ff
         sta 5
-        lda #$f9
         sta 6
         lda #$90
         sta 7
@@ -10664,17 +10224,12 @@ drawSprite56 entry
         short m
         lda #$09
         sta 0
-        lda #$9f
+        lda #$99
         sta 1
-        lda #$11
         sta 2
-        lda #$f9
         sta 3
-        lda #$9f
         sta 4
-        lda #$11
         sta 5
-        lda #$f9
         sta 6
         lda #$90
         sta 7
@@ -10690,14 +10245,10 @@ drawSprite56 entry
         sta 0
         lda #$99
         sta 1
-        lda #$11
         sta 2
-        lda #$99
         sta 3
         sta 4
-        lda #$11
         sta 5
-        lda #$99
         sta 6
         lda #$90
         sta 7
@@ -10730,16 +10281,17 @@ drawSprite56 entry
         short m
         lda #$09
         sta 0
-        lda #$99
-        sta 1
         lda #$90
+        sta 1
+        lda #$99
         sta 2
-        lda #$99
+        lda #$90
         sta 3
-        sta 4
         lda #$09
-        sta 5
+        sta 4
         lda #$99
+        sta 5
+        lda #$09
         sta 6
         lda #$90
         sta 7
@@ -10751,14 +10303,16 @@ drawSprite56 entry
         tcd
 
         short m
-        lda #$99
-        sta 1
         lda #$09
-        sta 3
+        sta 0
+        sta 2
         lda #$90
+        sta 3
+        lda #$09
         sta 4
-        lda #$99
-        sta 6
+        lda #$90
+        sta 5
+        sta 7
         long m
 
         long m
@@ -10789,10 +10343,12 @@ drawSprite57 entry
         tcd
 
         short m
-        lda #$99
+        lda #$11
         sta 2
+        lda #$99
         sta 3
         sta 4
+        lda #$11
         sta 5
         long m
 
@@ -10802,14 +10358,17 @@ drawSprite57 entry
         tcd
 
         short m
-        lda #$09
+        lda #$0f
         sta 1
-        lda #$99
+        lda #$11
         sta 2
+        lda #$f9
         sta 3
+        lda #$9f
         sta 4
+        lda #$11
         sta 5
-        lda #$90
+        lda #$f0
         sta 6
         long m
 
@@ -10819,12 +10378,17 @@ drawSprite57 entry
         tcd
 
         short m
-        lda #$99
+        lda #$9f
         sta 1
+        lda #$ff
         sta 2
+        lda #$f9
         sta 3
+        lda #$9f
         sta 4
+        lda #$ff
         sta 5
+        lda #$f9
         sta 6
         long m
 
@@ -10855,17 +10419,12 @@ drawSprite57 entry
         short m
         lda #$09
         sta 0
-        lda #$9f
+        lda #$99
         sta 1
-        lda #$ff
         sta 2
-        lda #$f9
         sta 3
-        lda #$9f
         sta 4
-        lda #$ff
         sta 5
-        lda #$f9
         sta 6
         lda #$90
         sta 7
@@ -10879,17 +10438,12 @@ drawSprite57 entry
         short m
         lda #$09
         sta 0
-        lda #$9f
+        lda #$99
         sta 1
-        lda #$11
         sta 2
-        lda #$f9
         sta 3
-        lda #$9f
         sta 4
-        lda #$11
         sta 5
-        lda #$f9
         sta 6
         lda #$90
         sta 7
@@ -10905,14 +10459,10 @@ drawSprite57 entry
         sta 0
         lda #$99
         sta 1
-        lda #$11
         sta 2
-        lda #$99
         sta 3
         sta 4
-        lda #$11
         sta 5
-        lda #$99
         sta 6
         lda #$90
         sta 7
@@ -10989,77 +10539,13 @@ drawSprite58 entry
 
         lda drawAddress
         clc
-        adc #480
-        tcd
-
-        short m
-        lda #$99
-        sta 3
-        sta 4
-        long m
-
-        lda drawAddress
-        clc
-        adc #640
-        tcd
-
-        short m
-        lda #$99
-        sta 2
-        sta 3
-        sta 4
-        sta 5
-        long m
-
-        lda drawAddress
-        clc
-        adc #800
-        tcd
-
-        short m
-        lda #$09
-        sta 1
-        lda #$99
-        sta 2
-        sta 3
-        sta 4
-        sta 5
-        lda #$90
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
-        adc #960
-        tcd
-
-        short m
-        lda #$99
-        sta 1
-        sta 2
-        sta 3
-        sta 4
-        sta 5
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
         adc #1120
         tcd
 
         short m
-        lda #$99
-        sta 1
         lda #$ff
         sta 2
-        lda #$99
-        sta 3
-        sta 4
-        lda #$ff
         sta 5
-        lda #$99
-        sta 6
         long m
 
         lda drawAddress
@@ -11068,22 +10554,18 @@ drawSprite58 entry
         tcd
 
         short m
-        lda #$09
-        sta 0
-        lda #$9f
+        lda #$0f
         sta 1
         lda #$ff
         sta 2
-        lda #$f9
+        lda #$f0
         sta 3
-        lda #$9f
+        lda #$0f
         sta 4
         lda #$ff
         sta 5
-        lda #$f9
+        lda #$f0
         sta 6
-        lda #$90
-        sta 7
         long m
 
         lda drawAddress
@@ -11092,22 +10574,18 @@ drawSprite58 entry
         tcd
 
         short m
-        lda #$09
-        sta 0
-        lda #$9f
+        lda #$0f
         sta 1
         lda #$11
         sta 2
-        lda #$f9
+        lda #$f0
         sta 3
-        lda #$9f
+        lda #$0f
         sta 4
         lda #$11
         sta 5
-        lda #$f9
+        lda #$f0
         sta 6
-        lda #$90
-        sta 7
         long m
 
         lda drawAddress
@@ -11116,79 +10594,9 @@ drawSprite58 entry
         tcd
 
         short m
-        lda #$09
-        sta 0
-        lda #$99
-        sta 1
         lda #$11
         sta 2
-        lda #$99
-        sta 3
-        sta 4
-        lda #$11
         sta 5
-        lda #$99
-        sta 6
-        lda #$90
-        sta 7
-        long m
-
-        lda drawAddress
-        clc
-        adc #1760
-        tcd
-
-        short m
-        lda #$09
-        sta 0
-        lda #$99
-        sta 1
-        sta 2
-        sta 3
-        sta 4
-        sta 5
-        sta 6
-        lda #$90
-        sta 7
-        long m
-
-        lda drawAddress
-        clc
-        adc #1920
-        tcd
-
-        short m
-        lda #$09
-        sta 0
-        lda #$99
-        sta 1
-        lda #$90
-        sta 2
-        lda #$99
-        sta 3
-        sta 4
-        lda #$09
-        sta 5
-        lda #$99
-        sta 6
-        lda #$90
-        sta 7
-        long m
-
-        lda drawAddress
-        clc
-        adc #2080
-        tcd
-
-        short m
-        lda #$99
-        sta 1
-        lda #$09
-        sta 3
-        lda #$90
-        sta 4
-        lda #$99
-        sta 6
         long m
 
         long m
@@ -11204,25 +10612,12 @@ drawSprite59 entry
 
         lda drawAddress
         clc
-        adc #480
-        tcd
-
-        short m
-        lda #$99
-        sta 3
-        sta 4
-        long m
-
-        lda drawAddress
-        clc
         adc #640
         tcd
 
         short m
-        lda #$99
+        lda #$11
         sta 2
-        sta 3
-        sta 4
         sta 5
         long m
 
@@ -11232,14 +10627,17 @@ drawSprite59 entry
         tcd
 
         short m
-        lda #$09
+        lda #$0f
         sta 1
-        lda #$99
+        lda #$11
         sta 2
+        lda #$f0
         sta 3
+        lda #$0f
         sta 4
+        lda #$11
         sta 5
-        lda #$90
+        lda #$f0
         sta 6
         long m
 
@@ -11249,12 +10647,17 @@ drawSprite59 entry
         tcd
 
         short m
-        lda #$99
+        lda #$0f
         sta 1
+        lda #$ff
         sta 2
+        lda #$f0
         sta 3
+        lda #$0f
         sta 4
+        lda #$ff
         sta 5
+        lda #$f0
         sta 6
         long m
 
@@ -11264,146 +10667,9 @@ drawSprite59 entry
         tcd
 
         short m
-        lda #$99
-        sta 1
         lda #$ff
         sta 2
-        lda #$99
-        sta 3
-        sta 4
-        lda #$ff
         sta 5
-        lda #$99
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
-        adc #1280
-        tcd
-
-        short m
-        lda #$09
-        sta 0
-        lda #$9f
-        sta 1
-        lda #$ff
-        sta 2
-        lda #$f9
-        sta 3
-        lda #$9f
-        sta 4
-        lda #$ff
-        sta 5
-        lda #$f9
-        sta 6
-        lda #$90
-        sta 7
-        long m
-
-        lda drawAddress
-        clc
-        adc #1440
-        tcd
-
-        short m
-        lda #$09
-        sta 0
-        lda #$9f
-        sta 1
-        lda #$11
-        sta 2
-        lda #$f9
-        sta 3
-        lda #$9f
-        sta 4
-        lda #$11
-        sta 5
-        lda #$f9
-        sta 6
-        lda #$90
-        sta 7
-        long m
-
-        lda drawAddress
-        clc
-        adc #1600
-        tcd
-
-        short m
-        lda #$09
-        sta 0
-        lda #$99
-        sta 1
-        lda #$11
-        sta 2
-        lda #$99
-        sta 3
-        sta 4
-        lda #$11
-        sta 5
-        lda #$99
-        sta 6
-        lda #$90
-        sta 7
-        long m
-
-        lda drawAddress
-        clc
-        adc #1760
-        tcd
-
-        short m
-        lda #$09
-        sta 0
-        lda #$99
-        sta 1
-        sta 2
-        sta 3
-        sta 4
-        sta 5
-        sta 6
-        lda #$90
-        sta 7
-        long m
-
-        lda drawAddress
-        clc
-        adc #1920
-        tcd
-
-        short m
-        lda #$09
-        sta 0
-        lda #$99
-        sta 1
-        lda #$90
-        sta 2
-        lda #$99
-        sta 3
-        sta 4
-        lda #$09
-        sta 5
-        lda #$99
-        sta 6
-        lda #$90
-        sta 7
-        long m
-
-        lda drawAddress
-        clc
-        adc #2080
-        tcd
-
-        short m
-        lda #$99
-        sta 1
-        lda #$09
-        sta 3
-        lda #$90
-        sta 4
-        lda #$99
-        sta 6
         long m
 
         long m
@@ -11586,8 +10852,8 @@ drawSprite61 entry
         tcd
 
         short m
-        lda #$99
-        sta 6
+        lda #$0f
+        sta 3
         long m
 
         lda drawAddress
@@ -11596,11 +10862,14 @@ drawSprite61 entry
         tcd
 
         short m
-        lda #$09
+        lda #$66
+        sta 2
+        lda #$6f
+        sta 3
+        lda #$66
         sta 4
-        lda #$99
+        lda #$60
         sta 5
-        sta 6
         long m
 
         lda drawAddress
@@ -11609,11 +10878,15 @@ drawSprite61 entry
         tcd
 
         short m
-        lda #$09
+        lda #$03
+        sta 1
+        lda #$33
+        sta 2
+        lda #$66
         sta 3
-        lda #$90
+        lda #$63
         sta 4
-        lda #$09
+        lda #$3f
         sta 5
         long m
 
@@ -11623,13 +10896,17 @@ drawSprite61 entry
         tcd
 
         short m
-        lda #$03
+        lda #$3f
         sta 1
         lda #$33
         sta 2
-        lda #$90
         sta 3
+        lda #$3f
+        sta 4
+        lda #$33
         sta 5
+        lda #$30
+        sta 6
         long m
 
         lda drawAddress
@@ -11640,12 +10917,14 @@ drawSprite61 entry
         short m
         lda #$33
         sta 1
-        lda #$39
+        lda #$3f
         sta 2
-        lda #$33
         sta 3
-        lda #$09
+        lda #$33
         sta 4
+        sta 5
+        lda #$30
+        sta 6
         long m
 
         lda drawAddress
@@ -11654,15 +10933,13 @@ drawSprite61 entry
         tcd
 
         short m
-        lda #$3f
+        lda #$03
         sta 1
         lda #$33
         sta 2
-        lda #$31
         sta 3
-        lda #$39
         sta 4
-        lda #$33
+        lda #$f3
         sta 5
         long m
 
@@ -11672,17 +10949,15 @@ drawSprite61 entry
         tcd
 
         short m
-        lda #$33
+        lda #$03
         sta 1
         lda #$f3
         sta 2
-        lda #$13
+        lda #$3f
         sta 3
         lda #$33
         sta 4
         sta 5
-        lda #$30
-        sta 6
         long m
 
         lda drawAddress
@@ -11691,18 +10966,11 @@ drawSprite61 entry
         tcd
 
         short m
-        lda #$03
-        sta 1
         lda #$33
         sta 2
-        lda #$13
         sta 3
-        lda #$f3
+        lda #$3f
         sta 4
-        lda #$33
-        sta 5
-        lda #$30
-        sta 6
         long m
 
         lda drawAddress
@@ -11712,13 +10980,11 @@ drawSprite61 entry
 
         short m
         lda #$03
+        sta 2
+        lda #$f3
         sta 3
-        lda #$3f
-        sta 4
         lda #$33
-        sta 5
-        lda #$30
-        sta 6
+        sta 4
         long m
 
         lda drawAddress
@@ -11727,9 +10993,8 @@ drawSprite61 entry
         tcd
 
         short m
-        lda #$33
-        sta 4
-        sta 5
+        lda #$03
+        sta 3
         long m
 
         long m
@@ -11749,8 +11014,12 @@ drawSprite62 entry
         tcd
 
         short m
-        lda #$99
-        sta 6
+        lda #$05
+        sta 3
+        lda #$06
+        sta 4
+        lda #$60
+        sta 5
         long m
 
         lda drawAddress
@@ -11759,10 +11028,12 @@ drawSprite62 entry
         tcd
 
         short m
-        lda #$09
+        lda #$05
+        sta 3
+        lda #$66
         sta 4
-        lda #$99
         sta 5
+        lda #$60
         sta 6
         long m
 
@@ -11772,11 +11043,13 @@ drawSprite62 entry
         tcd
 
         short m
-        lda #$09
+        lda #$99
+        sta 2
+        lda #$55
         sta 3
-        lda #$90
+        lda #$59
         sta 4
-        lda #$09
+        lda #$99
         sta 5
         long m
 
@@ -11786,13 +11059,17 @@ drawSprite62 entry
         tcd
 
         short m
-        lda #$03
+        lda #$09
         sta 1
-        lda #$33
+        lda #$99
         sta 2
-        lda #$90
+        lda #$95
         sta 3
+        lda #$99
+        sta 4
         sta 5
+        lda #$90
+        sta 6
         long m
 
         lda drawAddress
@@ -11801,14 +11078,13 @@ drawSprite62 entry
         tcd
 
         short m
-        lda #$33
+        lda #$99
         sta 1
-        lda #$39
         sta 2
-        lda #$33
         sta 3
-        lda #$09
         sta 4
+        sta 5
+        sta 6
         long m
 
         lda drawAddress
@@ -11817,16 +11093,13 @@ drawSprite62 entry
         tcd
 
         short m
-        lda #$3f
+        lda #$99
         sta 1
-        lda #$33
         sta 2
-        lda #$31
         sta 3
-        lda #$39
         sta 4
-        lda #$33
         sta 5
+        sta 6
         long m
 
         lda drawAddress
@@ -11835,16 +11108,12 @@ drawSprite62 entry
         tcd
 
         short m
-        lda #$33
+        lda #$99
         sta 1
-        lda #$f3
         sta 2
-        lda #$13
         sta 3
-        lda #$33
         sta 4
         sta 5
-        lda #$30
         sta 6
         long m
 
@@ -11854,17 +11123,14 @@ drawSprite62 entry
         tcd
 
         short m
-        lda #$03
+        lda #$09
         sta 1
-        lda #$33
+        lda #$99
         sta 2
-        lda #$13
         sta 3
-        lda #$f3
         sta 4
-        lda #$33
         sta 5
-        lda #$30
+        lda #$90
         sta 6
         long m
 
@@ -11874,13 +11140,14 @@ drawSprite62 entry
         tcd
 
         short m
-        lda #$03
+        lda #$09
+        sta 1
+        lda #$99
+        sta 2
         sta 3
-        lda #$3f
         sta 4
-        lda #$33
         sta 5
-        lda #$30
+        lda #$90
         sta 6
         long m
 
@@ -11890,8 +11157,12 @@ drawSprite62 entry
         tcd
 
         short m
-        lda #$33
+        lda #$09
+        sta 2
+        lda #$99
+        sta 3
         sta 4
+        lda #$90
         sta 5
         long m
 
@@ -11912,8 +11183,8 @@ drawSprite63 entry
         tcd
 
         short m
-        lda #$99
-        sta 6
+        lda #$90
+        sta 4
         long m
 
         lda drawAddress
@@ -11922,11 +11193,16 @@ drawSprite63 entry
         tcd
 
         short m
+        lda #$03
+        sta 1
+        lda #$33
+        sta 2
         lda #$09
+        sta 3
+        lda #$03
         sta 4
-        lda #$99
+        lda #$33
         sta 5
-        sta 6
         long m
 
         lda drawAddress
@@ -11935,12 +11211,16 @@ drawSprite63 entry
         tcd
 
         short m
-        lda #$09
+        lda #$33
+        sta 1
+        sta 2
+        lda #$39
         sta 3
-        lda #$90
+        lda #$33
         sta 4
-        lda #$09
         sta 5
+        lda #$30
+        sta 6
         long m
 
         lda drawAddress
@@ -11949,13 +11229,13 @@ drawSprite63 entry
         tcd
 
         short m
-        lda #$03
-        sta 1
         lda #$33
+        sta 1
         sta 2
-        lda #$90
         sta 3
+        sta 4
         sta 5
+        sta 6
         long m
 
         lda drawAddress
@@ -11966,12 +11246,11 @@ drawSprite63 entry
         short m
         lda #$33
         sta 1
-        lda #$39
         sta 2
-        lda #$33
         sta 3
-        lda #$09
         sta 4
+        sta 5
+        sta 6
         long m
 
         lda drawAddress
@@ -11980,16 +11259,15 @@ drawSprite63 entry
         tcd
 
         short m
-        lda #$3f
+        lda #$33
         sta 1
-        lda #$33
         sta 2
-        lda #$31
         sta 3
-        lda #$39
         sta 4
-        lda #$33
+        lda #$3f
         sta 5
+        lda #$33
+        sta 6
         long m
 
         lda drawAddress
@@ -11998,14 +11276,13 @@ drawSprite63 entry
         tcd
 
         short m
-        lda #$33
+        lda #$03
         sta 1
-        lda #$f3
-        sta 2
-        lda #$13
-        sta 3
         lda #$33
+        sta 2
+        sta 3
         sta 4
+        lda #$3f
         sta 5
         lda #$30
         sta 6
@@ -12021,11 +11298,9 @@ drawSprite63 entry
         sta 1
         lda #$33
         sta 2
-        lda #$13
         sta 3
-        lda #$f3
         sta 4
-        lda #$33
+        lda #$f3
         sta 5
         lda #$30
         sta 6
@@ -12037,14 +11312,11 @@ drawSprite63 entry
         tcd
 
         short m
-        lda #$03
-        sta 3
-        lda #$3f
-        sta 4
         lda #$33
+        sta 2
+        sta 3
+        sta 4
         sta 5
-        lda #$30
-        sta 6
         long m
 
         lda drawAddress
@@ -12053,8 +11325,13 @@ drawSprite63 entry
         tcd
 
         short m
+        lda #$03
+        sta 2
+        lda #$30
+        sta 3
         lda #$33
         sta 4
+        lda #$30
         sta 5
         long m
 
@@ -12071,12 +11348,25 @@ drawSprite64 entry
 
         lda drawAddress
         clc
+        adc #320
+        tcd
+
+        short m
+        lda #$04
+        sta 2
+        long m
+
+        lda drawAddress
+        clc
         adc #480
         tcd
 
         short m
-        lda #$99
-        sta 6
+        lda #$44
+        sta 3
+        sta 4
+        lda #$40
+        sta 5
         long m
 
         lda drawAddress
@@ -12085,11 +11375,8 @@ drawSprite64 entry
         tcd
 
         short m
-        lda #$09
+        lda #$40
         sta 4
-        lda #$99
-        sta 5
-        sta 6
         long m
 
         lda drawAddress
@@ -12098,11 +11385,11 @@ drawSprite64 entry
         tcd
 
         short m
-        lda #$09
+        lda #$66
         sta 3
-        lda #$90
+        lda #$f6
         sta 4
-        lda #$09
+        lda #$60
         sta 5
         long m
 
@@ -12112,12 +11399,13 @@ drawSprite64 entry
         tcd
 
         short m
-        lda #$03
-        sta 1
-        lda #$33
+        lda #$04
         sta 2
-        lda #$90
+        lda #$f4
         sta 3
+        lda #$66
+        sta 4
+        lda #$64
         sta 5
         long m
 
@@ -12127,14 +11415,16 @@ drawSprite64 entry
         tcd
 
         short m
-        lda #$33
-        sta 1
-        lda #$39
+        lda #$66
         sta 2
-        lda #$33
+        lda #$46
         sta 3
-        lda #$09
+        lda #$6f
         sta 4
+        lda #$46
+        sta 5
+        lda #$60
+        sta 6
         long m
 
         lda drawAddress
@@ -12143,16 +11433,17 @@ drawSprite64 entry
         tcd
 
         short m
-        lda #$3f
+        lda #$06
         sta 1
-        lda #$33
+        lda #$f4
         sta 2
-        lda #$31
+        lda #$66
         sta 3
-        lda #$39
+        lda #$64
         sta 4
-        lda #$33
         sta 5
+        lda #$66
+        sta 6
         long m
 
         lda drawAddress
@@ -12161,16 +11452,17 @@ drawSprite64 entry
         tcd
 
         short m
-        lda #$33
+        lda #$06
         sta 1
-        lda #$f3
+        lda #$46
         sta 2
-        lda #$13
+        lda #$6f
         sta 3
-        lda #$33
+        lda #$46
         sta 4
+        lda #$6f
         sta 5
-        lda #$30
+        lda #$46
         sta 6
         long m
 
@@ -12180,17 +11472,17 @@ drawSprite64 entry
         tcd
 
         short m
-        lda #$03
+        lda #$06
         sta 1
-        lda #$33
+        lda #$f4
         sta 2
-        lda #$13
+        lda #$66
         sta 3
-        lda #$f3
+        lda #$64
         sta 4
-        lda #$33
+        lda #$46
         sta 5
-        lda #$30
+        lda #$66
         sta 6
         long m
 
@@ -12200,13 +11492,14 @@ drawSprite64 entry
         tcd
 
         short m
-        lda #$03
+        lda #$66
+        sta 2
+        lda #$4f
         sta 3
-        lda #$3f
         sta 4
-        lda #$33
+        lda #$64
         sta 5
-        lda #$30
+        lda #$60
         sta 6
         long m
 
@@ -12216,8 +11509,27 @@ drawSprite64 entry
         tcd
 
         short m
-        lda #$33
+        lda #$06
+        sta 2
+        lda #$64
+        sta 3
+        lda #$66
         sta 4
+        lda #$46
+        sta 5
+        long m
+
+        lda drawAddress
+        clc
+        adc #2080
+        tcd
+
+        short m
+        lda #$66
+        sta 3
+        lda #$64
+        sta 4
+        lda #$60
         sta 5
         long m
 
@@ -12403,8 +11715,10 @@ drawSprite66 entry
         tcd
 
         short m
-        lda #$03
+        lda #$0a
         sta 3
+        lda #$a0
+        sta 4
         long m
 
         lda drawAddress
@@ -12413,10 +11727,14 @@ drawSprite66 entry
         tcd
 
         short m
-        lda #$33
+        lda #$0a
+        sta 2
+        lda #$a1
         sta 3
-        lda #$30
+        lda #$1a
         sta 4
+        lda #$a0
+        sta 5
         long m
 
         lda drawAddress
@@ -12425,15 +11743,11 @@ drawSprite66 entry
         tcd
 
         short m
-        lda #$20
-        sta 1
-        lda #$03
+        lda #$aa
         sta 2
-        lda #$33
         sta 3
         sta 4
-        lda #$20
-        sta 6
+        sta 5
         long m
 
         lda drawAddress
@@ -12442,17 +11756,13 @@ drawSprite66 entry
         tcd
 
         short m
-        lda #$2a
-        sta 1
-        lda #$33
+        lda #$aa
         sta 2
-        lda #$a3
+        lda #$1a
         sta 3
+        lda #$aa
         sta 4
-        lda #$3a
         sta 5
-        lda #$20
-        sta 6
         long m
 
         lda drawAddress
@@ -12461,16 +11771,15 @@ drawSprite66 entry
         tcd
 
         short m
-        lda #$2a
+        lda #$0a
         sta 1
-        lda #$aa
+        lda #$a1
         sta 2
-        lda #$a3
-        sta 3
         lda #$aa
+        sta 3
         sta 4
         sta 5
-        lda #$20
+        lda #$a0
         sta 6
         long m
 
@@ -12480,15 +11789,15 @@ drawSprite66 entry
         tcd
 
         short m
-        lda #$22
+        lda #$0a
         sta 1
-        lda #$aa
+        lda #$a1
         sta 2
+        lda #$aa
         sta 3
         sta 4
-        lda #$a2
         sta 5
-        lda #$20
+        lda #$a0
         sta 6
         long m
 
@@ -12498,15 +11807,16 @@ drawSprite66 entry
         tcd
 
         short m
-        lda #$02
+        lda #$0a
         sta 1
-        lda #$2a
-        sta 2
         lda #$1a
+        sta 2
+        lda #$aa
         sta 3
         sta 4
-        lda #$22
         sta 5
+        lda #$a0
+        sta 6
         long m
 
         lda drawAddress
@@ -12515,14 +11825,15 @@ drawSprite66 entry
         tcd
 
         short m
-        lda #$22
-        sta 2
+        lda #$aa
+        sta 1
         lda #$1a
+        sta 2
+        lda #$aa
         sta 3
-        lda #$12
         sta 4
-        lda #$20
         sta 5
+        sta 6
         long m
 
         lda drawAddress
@@ -12531,12 +11842,13 @@ drawSprite66 entry
         tcd
 
         short m
-        lda #$02
+        lda #$aa
+        sta 1
         sta 2
-        lda #$1a
         sta 3
-        lda #$12
         sta 4
+        sta 5
+        sta 6
         long m
 
         lda drawAddress
@@ -12545,10 +11857,36 @@ drawSprite66 entry
         tcd
 
         short m
-        lda #$1a
+        lda #$a7
+        sta 1
+        lda #$77
+        sta 2
         sta 3
-        lda #$10
+        lda #$ff
         sta 4
+        lda #$77
+        sta 5
+        lda #$7a
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #2080
+        tcd
+
+        short m
+        lda #$07
+        sta 1
+        lda #$77
+        sta 2
+        sta 3
+        lda #$ff
+        sta 4
+        lda #$77
+        sta 5
+        lda #$70
+        sta 6
         long m
 
         long m
@@ -12568,8 +11906,10 @@ drawSprite67 entry
         tcd
 
         short m
-        lda #$03
+        lda #$77
         sta 3
+        lda #$70
+        sta 4
         long m
 
         lda drawAddress
@@ -12578,10 +11918,12 @@ drawSprite67 entry
         tcd
 
         short m
-        lda #$33
-        sta 3
-        lda #$30
+        lda #$77
+        sta 2
+        lda #$07
         sta 4
+        lda #$70
+        sta 5
         long m
 
         lda drawAddress
@@ -12590,15 +11932,12 @@ drawSprite67 entry
         tcd
 
         short m
-        lda #$20
-        sta 1
-        lda #$03
+        lda #$77
         sta 2
-        lda #$33
         sta 3
         sta 4
-        lda #$20
-        sta 6
+        lda #$70
+        sta 5
         long m
 
         lda drawAddress
@@ -12607,17 +11946,12 @@ drawSprite67 entry
         tcd
 
         short m
-        lda #$2a
-        sta 1
-        lda #$33
+        lda #$77
         sta 2
-        lda #$a3
         sta 3
         sta 4
-        lda #$3a
+        lda #$70
         sta 5
-        lda #$20
-        sta 6
         long m
 
         lda drawAddress
@@ -12626,17 +11960,10 @@ drawSprite67 entry
         tcd
 
         short m
-        lda #$2a
-        sta 1
-        lda #$aa
-        sta 2
-        lda #$a3
+        lda #$f1
         sta 3
-        lda #$aa
+        lda #$f0
         sta 4
-        sta 5
-        lda #$20
-        sta 6
         long m
 
         lda drawAddress
@@ -12645,16 +11972,10 @@ drawSprite67 entry
         tcd
 
         short m
-        lda #$22
-        sta 1
-        lda #$aa
-        sta 2
+        lda #$f1
         sta 3
+        lda #$ff
         sta 4
-        lda #$a2
-        sta 5
-        lda #$20
-        sta 6
         long m
 
         lda drawAddress
@@ -12663,15 +11984,10 @@ drawSprite67 entry
         tcd
 
         short m
-        lda #$02
-        sta 1
-        lda #$2a
-        sta 2
-        lda #$1a
+        lda #$f1
         sta 3
+        lda #$f0
         sta 4
-        lda #$22
-        sta 5
         long m
 
         lda drawAddress
@@ -12680,14 +11996,10 @@ drawSprite67 entry
         tcd
 
         short m
-        lda #$22
-        sta 2
-        lda #$1a
+        lda #$f1
         sta 3
-        lda #$12
+        lda #$10
         sta 4
-        lda #$20
-        sta 5
         long m
 
         lda drawAddress
@@ -12696,11 +12008,9 @@ drawSprite67 entry
         tcd
 
         short m
-        lda #$02
-        sta 2
-        lda #$1a
+        lda #$f1
         sta 3
-        lda #$12
+        lda #$ff
         sta 4
         long m
 
@@ -12710,10 +12020,20 @@ drawSprite67 entry
         tcd
 
         short m
-        lda #$1a
+        lda #$f1
         sta 3
-        lda #$10
+        lda #$f0
         sta 4
+        long m
+
+        lda drawAddress
+        clc
+        adc #2080
+        tcd
+
+        short m
+        lda #$0f
+        sta 3
         long m
 
         long m
@@ -12729,144 +12049,19 @@ drawSprite68 entry
 
         lda drawAddress
         clc
-        adc #480
-        tcd
-
-        short m
-        lda #$03
-        sta 3
-        long m
-
-        lda drawAddress
-        clc
-        adc #640
-        tcd
-
-        short m
-        lda #$33
-        sta 3
-        lda #$30
-        sta 4
-        long m
-
-        lda drawAddress
-        clc
-        adc #800
-        tcd
-
-        short m
-        lda #$20
-        sta 1
-        lda #$03
-        sta 2
-        lda #$33
-        sta 3
-        sta 4
-        lda #$20
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
-        adc #960
-        tcd
-
-        short m
-        lda #$2a
-        sta 1
-        lda #$33
-        sta 2
-        lda #$a3
-        sta 3
-        sta 4
-        lda #$3a
-        sta 5
-        lda #$20
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
-        adc #1120
-        tcd
-
-        short m
-        lda #$2a
-        sta 1
-        lda #$aa
-        sta 2
-        lda #$a3
-        sta 3
-        lda #$aa
-        sta 4
-        sta 5
-        lda #$20
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
-        adc #1280
-        tcd
-
-        short m
-        lda #$22
-        sta 1
-        lda #$aa
-        sta 2
-        sta 3
-        sta 4
-        lda #$a2
-        sta 5
-        lda #$20
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
-        adc #1440
-        tcd
-
-        short m
-        lda #$02
-        sta 1
-        lda #$2a
-        sta 2
-        lda #$1a
-        sta 3
-        sta 4
-        lda #$22
-        sta 5
-        long m
-
-        lda drawAddress
-        clc
-        adc #1600
-        tcd
-
-        short m
-        lda #$22
-        sta 2
-        lda #$1a
-        sta 3
-        lda #$12
-        sta 4
-        lda #$20
-        sta 5
-        long m
-
-        lda drawAddress
-        clc
         adc #1760
         tcd
 
         short m
-        lda #$02
+        lda #$bb
+        sta 0
+        sta 1
         sta 2
-        lda #$1a
         sta 3
-        lda #$12
         sta 4
+        sta 5
+        sta 6
+        sta 7
         long m
 
         lda drawAddress
@@ -12875,10 +12070,15 @@ drawSprite68 entry
         tcd
 
         short m
-        lda #$1a
+        lda #$bb
+        sta 0
+        sta 1
+        sta 2
         sta 3
-        lda #$10
         sta 4
+        sta 5
+        sta 6
+        sta 7
         long m
 
         long m
@@ -12894,41 +12094,13 @@ drawSprite69 entry
 
         lda drawAddress
         clc
-        adc #480
-        tcd
-
-        short m
-        lda #$03
-        sta 3
-        long m
-
-        lda drawAddress
-        clc
-        adc #640
-        tcd
-
-        short m
-        lda #$33
-        sta 3
-        lda #$30
-        sta 4
-        long m
-
-        lda drawAddress
-        clc
         adc #800
         tcd
 
         short m
-        lda #$20
-        sta 1
-        lda #$03
+        lda #$0a
         sta 2
-        lda #$33
-        sta 3
         sta 4
-        lda #$20
-        sta 6
         long m
 
         lda drawAddress
@@ -12937,17 +12109,13 @@ drawSprite69 entry
         tcd
 
         short m
-        lda #$2a
+        lda #$0a
         sta 1
-        lda #$33
-        sta 2
-        lda #$a3
+        lda #$a0
         sta 3
         sta 4
-        lda #$3a
+        lda #$0a
         sta 5
-        lda #$20
-        sta 6
         long m
 
         lda drawAddress
@@ -12956,35 +12124,9 @@ drawSprite69 entry
         tcd
 
         short m
-        lda #$2a
-        sta 1
-        lda #$aa
+        lda #$a0
         sta 2
-        lda #$a3
-        sta 3
-        lda #$aa
-        sta 4
         sta 5
-        lda #$20
-        sta 6
-        long m
-
-        lda drawAddress
-        clc
-        adc #1280
-        tcd
-
-        short m
-        lda #$22
-        sta 1
-        lda #$aa
-        sta 2
-        sta 3
-        sta 4
-        lda #$a2
-        sta 5
-        lda #$20
-        sta 6
         long m
 
         lda drawAddress
@@ -12993,31 +12135,12 @@ drawSprite69 entry
         tcd
 
         short m
-        lda #$02
+        lda #$aa
         sta 1
-        lda #$2a
-        sta 2
-        lda #$1a
-        sta 3
-        sta 4
-        lda #$22
+        lda #$0a
         sta 5
-        long m
-
-        lda drawAddress
-        clc
-        adc #1600
-        tcd
-
-        short m
-        lda #$22
-        sta 2
-        lda #$1a
-        sta 3
-        lda #$12
-        sta 4
-        lda #$20
-        sta 5
+        lda #$a0
+        sta 6
         long m
 
         lda drawAddress
@@ -13026,12 +12149,9 @@ drawSprite69 entry
         tcd
 
         short m
-        lda #$02
+        lda #$a0
         sta 2
-        lda #$1a
-        sta 3
-        lda #$12
-        sta 4
+        sta 5
         long m
 
         lda drawAddress
@@ -13040,9 +12160,23 @@ drawSprite69 entry
         tcd
 
         short m
-        lda #$1a
+        lda #$0a
+        sta 1
+        lda #$a0
         sta 3
-        lda #$10
+        sta 4
+        lda #$0a
+        sta 5
+        long m
+
+        lda drawAddress
+        clc
+        adc #2080
+        tcd
+
+        short m
+        lda #$0a
+        sta 2
         sta 4
         long m
 
@@ -13177,8 +12311,6 @@ drawSprite71 entry
         tcd
 
         short m
-        lda #$88
-        sta 1
         lda #$80
         sta 2
         lda #$88
@@ -13196,8 +12328,10 @@ drawSprite71 entry
 
         short m
         lda #$08
-        sta 0
+        sta 1
+        lda #$80
         sta 2
+        lda #$08
         sta 3
         lda #$80
         sta 5
@@ -13213,6 +12347,7 @@ drawSprite71 entry
 
         short m
         lda #$80
+        sta 1
         sta 2
         lda #$08
         sta 3
@@ -13230,7 +12365,10 @@ drawSprite71 entry
 
         short m
         lda #$08
-        sta 1
+        sta 0
+        lda #$80
+        sta 2
+        lda #$08
         sta 3
         lda #$80
         sta 5
@@ -13245,8 +12383,11 @@ drawSprite71 entry
         tcd
 
         short m
-        lda #$80
+        lda #$08
+        sta 0
+        lda #$88
         sta 1
+        sta 2
         lda #$08
         sta 3
         lda #$80
@@ -13262,11 +12403,9 @@ drawSprite71 entry
         tcd
 
         short m
-        lda #$08
-        sta 0
-        lda #$88
-        sta 1
+        lda #$80
         sta 2
+        lda #$88
         sta 4
         lda #$08
         sta 6
@@ -13326,6 +12465,8 @@ drawSprite72 entry
         tcd
 
         short m
+        lda #$88
+        sta 1
         lda #$80
         sta 2
         lda #$08
@@ -13344,7 +12485,8 @@ drawSprite72 entry
 
         short m
         lda #$08
-        sta 1
+        sta 0
+        sta 2
         sta 3
         lda #$80
         sta 5
@@ -13359,9 +12501,9 @@ drawSprite72 entry
         tcd
 
         short m
-        lda #$80
-        sta 1
         lda #$08
+        sta 0
+        sta 2
         sta 3
         lda #$80
         sta 5
@@ -13376,11 +12518,11 @@ drawSprite72 entry
         tcd
 
         short m
-        lda #$08
-        sta 0
         lda #$88
         sta 1
+        lda #$80
         sta 2
+        lda #$88
         sta 4
         lda #$08
         sta 6
@@ -13405,16 +12547,12 @@ drawSprite73 entry
         tcd
 
         short m
-        lda #$88
-        sta 1
         lda #$80
-        sta 2
-        lda #$88
         sta 4
         lda #$08
+        sta 5
+        lda #$88
         sta 6
-        lda #$80
-        sta 7
         long m
 
         lda drawAddress
@@ -13423,13 +12561,9 @@ drawSprite73 entry
         tcd
 
         short m
-        lda #$08
-        sta 0
-        sta 2
-        sta 3
         lda #$80
+        sta 4
         sta 5
-        sta 6
         lda #$08
         sta 7
         long m
@@ -13441,10 +12575,8 @@ drawSprite73 entry
 
         short m
         lda #$80
-        sta 2
-        lda #$08
-        sta 3
-        lda #$80
+        sta 4
+        lda #$88
         sta 5
         sta 6
         lda #$08
@@ -13457,13 +12589,11 @@ drawSprite73 entry
         tcd
 
         short m
-        lda #$08
-        sta 1
-        sta 3
         lda #$80
+        sta 4
         sta 5
-        sta 6
         lda #$08
+        sta 6
         sta 7
         long m
 
@@ -13474,13 +12604,10 @@ drawSprite73 entry
 
         short m
         lda #$80
-        sta 1
-        lda #$08
-        sta 3
-        lda #$80
+        sta 4
         sta 5
-        sta 6
         lda #$08
+        sta 6
         sta 7
         long m
 
@@ -13490,16 +12617,12 @@ drawSprite73 entry
         tcd
 
         short m
-        lda #$08
-        sta 0
-        lda #$88
-        sta 1
-        sta 2
+        lda #$80
         sta 4
         lda #$08
-        sta 6
+        sta 5
         lda #$80
-        sta 7
+        sta 6
         long m
 
         long m
@@ -13520,15 +12643,11 @@ drawSprite74 entry
 
         short m
         lda #$88
-        sta 1
-        lda #$80
-        sta 2
-        lda #$88
-        sta 4
+        sta 0
         lda #$08
-        sta 6
+        sta 2
         lda #$80
-        sta 7
+        sta 3
         long m
 
         lda drawAddress
@@ -13537,15 +12656,11 @@ drawSprite74 entry
         tcd
 
         short m
-        lda #$08
-        sta 0
-        sta 2
-        sta 3
         lda #$80
-        sta 5
-        sta 6
+        sta 1
+        sta 2
         lda #$08
-        sta 7
+        sta 3
         long m
 
         lda drawAddress
@@ -13555,14 +12670,10 @@ drawSprite74 entry
 
         short m
         lda #$80
+        sta 1
         sta 2
         lda #$08
         sta 3
-        lda #$80
-        sta 5
-        sta 6
-        lda #$08
-        sta 7
         long m
 
         lda drawAddress
@@ -13571,14 +12682,11 @@ drawSprite74 entry
         tcd
 
         short m
-        lda #$08
-        sta 1
-        sta 3
         lda #$80
-        sta 5
-        sta 6
+        sta 1
+        sta 2
         lda #$08
-        sta 7
+        sta 3
         long m
 
         lda drawAddress
@@ -13589,13 +12697,9 @@ drawSprite74 entry
         short m
         lda #$80
         sta 1
+        sta 2
         lda #$08
         sta 3
-        lda #$80
-        sta 5
-        sta 6
-        lda #$08
-        sta 7
         long m
 
         lda drawAddress
@@ -13604,16 +12708,12 @@ drawSprite74 entry
         tcd
 
         short m
-        lda #$08
-        sta 0
         lda #$88
-        sta 1
-        sta 2
-        sta 4
+        sta 0
         lda #$08
-        sta 6
+        sta 2
         lda #$80
-        sta 7
+        sta 3
         long m
 
         long m
