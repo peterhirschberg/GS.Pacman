@@ -46,38 +46,13 @@ drawSprites entry
 
 drawSpritePacman entry
 
-        lda #45
+        lda #48
         sta spriteX
         lda #45
         sta spriteY
 
         jsr translateSpritePosToMazePos
         jsl drawSprite0
-        
-        
-        lda spriteY
-        clc
-        adc #20
-        sta spriteY
-        
-        jsr translateSpritePosToMazePos
-        jsl drawSprite30
-
-        lda spriteY
-        clc
-        adc #30
-        sta spriteY
-        
-        jsr translateSpritePosToMazePos
-        jsl drawSprite40
-
-        lda spriteY
-        clc
-        adc #40
-        sta spriteY
-        
-        jsr translateSpritePosToMazePos
-        jsl drawSprite40
         
         rts
         
@@ -100,35 +75,176 @@ drawSpriteGhost entry
         lda testX
         cmp #200
         bcs wrapX
-        rts
+        bra next1
         
 wrapX anop
         lda #0
         sta testX
+        
+next1 anop
+
+        lda #92
+        sta spriteX
+        lda ghost2Y
+        sta spriteY
+
+        jsr translateSpritePosToMazePos
+        jsl drawSprite30
+        
+        lda #108
+        sta spriteX
+        lda ghost3Y
+        sta spriteY
+
+        jsr translateSpritePosToMazePos
+        jsl drawSprite40
+
+        lda #124
+        sta spriteX
+        lda ghost4Y
+        sta spriteY
+
+        jsr translateSpritePosToMazePos
+        jsl drawSprite40
+
+        
+        lda ghost2Y
+        sta ghost2OldY
+
+        lda ghost3Y
+        sta ghost3OldY
+
+        lda ghost4Y
+        sta ghost4OldY
+
+        
+        lda ghost2Y
+        clc
+        adc ghost2Dir
+        sta ghost2Y
+
+        lda ghost3Y
+        clc
+        adc ghost3Dir
+        sta ghost3Y
+
+        lda ghost4Y
+        clc
+        adc ghost4Dir
+        sta ghost4Y
+
+        
+        
+        lda ghost2Y
+        cmp #94
+        beq ghost2Up
+        
+        lda ghost2Y
+        cmp #82
+        beq ghost2Down
+        bra ghost3
+        
+ghost2Up anop
+        lda #-1
+        sta ghost2Dir
+        bra ghost3
+
+ghost2Down anop
+        lda #1
+        sta ghost2Dir
+        
+ghost3 anop
+
+
+
+
+
+        lda ghost3Y
+        cmp #94
+        beq ghost3Up
+        
+        lda ghost3Y
+        cmp #82
+        beq ghost3Down
+        bra ghost4
+        
+ghost3Up anop
+        lda #-1
+        sta ghost3Dir
+        bra ghost4
+
+ghost3Down anop
+        lda #1
+        sta ghost3Dir
+        
+ghost4 anop
+
+
+
+
+
+        lda ghost4Y
+        cmp #94
+        beq ghost4Up
+        
+        lda ghost4Y
+        cmp #82
+        beq ghost4Down
+        bra ghost5
+        
+ghost4Up anop
+        lda #-1
+        sta ghost4Dir
+        bra ghost5
+
+ghost4Down anop
+        lda #1
+        sta ghost4Dir
+        
+ghost5 anop
+
+
 
         rts
         
         
 eraseSprites entry
 
-        lda #0
-        sta tileSrcX
-        lda #64
-        sta tileSrcY
-
         lda oldX
-        sta tileDstX
-        lda #12
-        sta tileDstY
-
-        lda tileDstX
         sta spriteX
-        lda tileDstY
+        lda #12
         sta spriteY
 
         jsr translateSpritePosToMazePos
-
         jsr eraseSpriteRect
+        
+
+        lda #92
+        sta spriteX
+        lda ghost2OldY
+        sta spriteY
+        
+        jsr translateSpritePosToMazePos
+        jsr eraseSpriteRect
+
+        
+        lda #108
+        sta spriteX
+        lda ghost3OldY
+        sta spriteY
+        
+        jsr translateSpritePosToMazePos
+        jsr eraseSpriteRect
+
+        
+        lda #124
+        sta spriteX
+        lda ghost4OldY
+        sta spriteY
+        
+        jsr translateSpritePosToMazePos
+        jsr eraseSpriteRect
+
         
         rts
 
@@ -214,6 +330,18 @@ tileDstY dc i2'0'
 
 testX dc i2'0'
 oldX dc i2'0'
+
+ghost2Y dc i2'80'
+ghost3Y dc i2'85'
+ghost4Y dc i2'82'
+
+ghost2OldY dc i2'85'
+ghost3OldY dc i2'85'
+ghost4OldY dc i2'84'
+
+ghost2Dir dc i2'1'
+ghost3Dir dc i2'-1'
+ghost4Dir dc i2'1'
 
 spriteSheetRowOffsets anop
         dc i2'$0'
