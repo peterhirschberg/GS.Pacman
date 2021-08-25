@@ -158,50 +158,28 @@ eraseVLoop anop
 ; ----------------------------------------
 
         ldx screenCounter
+        
         lda >MAZE_BUFFER,x
         sta >SCREEN_ADDR,x
         
-        inc screenCounter
+        inx
+        inx
 
-        ldx screenCounter
         lda >MAZE_BUFFER,x
         sta >SCREEN_ADDR,x
 
-        inc screenCounter
+        inx
+        inx
 
-        ldx screenCounter
         lda >MAZE_BUFFER,x
         sta >SCREEN_ADDR,x
 
-        inc screenCounter
+        inx
+        inx
 
-        ldx screenCounter
-        lda >MAZE_BUFFER,x
-        sta >SCREEN_ADDR,x
-        
-        inc screenCounter
-
-        ldx screenCounter
         lda >MAZE_BUFFER,x
         sta >SCREEN_ADDR,x
 
-        inc screenCounter
-
-        ldx screenCounter
-        lda >MAZE_BUFFER,x
-        sta >SCREEN_ADDR,x
-
-        inc screenCounter
-
-        ldx screenCounter
-        lda >MAZE_BUFFER,x
-        sta >SCREEN_ADDR,x
-
-        inc screenCounter
-
-        ldx screenCounter
-        lda >MAZE_BUFFER,x
-        sta >SCREEN_ADDR,x
 
 ; ----------------------------------------
 

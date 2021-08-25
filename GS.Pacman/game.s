@@ -39,7 +39,11 @@ mainLoop anop
 ;        jsr cleanMaze
 
         jsr eraseSprites
-        
+        jsr eraseSprites
+        jsr eraseSprites
+        jsr eraseSprites
+        jsr eraseSprites
+
         jsr borderStart
 
 ;        jsr drawSprites
