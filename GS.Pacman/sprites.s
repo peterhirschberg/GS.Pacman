@@ -313,56 +313,472 @@ eraseSpriteRect entry
         lsr a
         sta spriteX
 
-        lda #0
-        sta rowCounter
-
-eraseVLoop anop
-
-        lda rowCounter
-        clc
-        adc spriteY
+        lda spriteY
         asl a
         tax
         lda screenRowOffsets,x
         clc
         adc spriteX
-        sta screenCounter
+        sta screenRowAddress
+        tax
 
 ; ----------------------------------------
 
-        ldx screenCounter
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+
+        inx
+        inx
+
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+
+        inx
+        inx
+
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+
+; ----------------------------------------
+
+        lda screenRowAddress
+        clc
+        adc #160
+        sta screenRowAddress
+        tax
+
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
         
         lda >MAZE_BUFFER,x
         sta >SCREEN_ADDR,x
         
         inx
         inx
-
+        
         lda >MAZE_BUFFER,x
         sta >SCREEN_ADDR,x
-
+        
         inx
         inx
-
+        
         lda >MAZE_BUFFER,x
         sta >SCREEN_ADDR,x
-
-        inx
-        inx
-
-        lda >MAZE_BUFFER,x
-        sta >SCREEN_ADDR,x
-
 
 ; ----------------------------------------
-
-        inc rowCounter
-        lda rowCounter
-        cmp #16
-        beq eraseDone
-        brl eraseVLoop
-
-eraseDone anop
+        
+        lda screenRowAddress
+        clc
+        adc #160
+        sta screenRowAddress
+        tax
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+; ----------------------------------------
+        
+        lda screenRowAddress
+        clc
+        adc #160
+        sta screenRowAddress
+        tax
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+; ----------------------------------------
+        
+        lda screenRowAddress
+        clc
+        adc #160
+        sta screenRowAddress
+        tax
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+; ----------------------------------------
+        
+        lda screenRowAddress
+        clc
+        adc #160
+        sta screenRowAddress
+        tax
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+; ----------------------------------------
+        
+        lda screenRowAddress
+        clc
+        adc #160
+        sta screenRowAddress
+        tax
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+; ----------------------------------------
+        
+        lda screenRowAddress
+        clc
+        adc #160
+        sta screenRowAddress
+        tax
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+; ----------------------------------------
+        
+        lda screenRowAddress
+        clc
+        adc #160
+        sta screenRowAddress
+        tax
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+; ----------------------------------------
+        
+        lda screenRowAddress
+        clc
+        adc #160
+        sta screenRowAddress
+        tax
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+; ----------------------------------------
+        
+        lda screenRowAddress
+        clc
+        adc #160
+        sta screenRowAddress
+        tax
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+; ----------------------------------------
+        
+        lda screenRowAddress
+        clc
+        adc #160
+        sta screenRowAddress
+        tax
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+; ----------------------------------------
+        
+        lda screenRowAddress
+        clc
+        adc #160
+        sta screenRowAddress
+        tax
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+; ----------------------------------------
+        
+        lda screenRowAddress
+        clc
+        adc #160
+        sta screenRowAddress
+        tax
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+; ----------------------------------------
+        
+        lda screenRowAddress
+        clc
+        adc #160
+        sta screenRowAddress
+        tax
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+; ----------------------------------------
+        
+        lda screenRowAddress
+        clc
+        adc #160
+        sta screenRowAddress
+        tax
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
+        
+        inx
+        inx
+        
+        lda >MAZE_BUFFER,x
+        sta >SCREEN_ADDR,x
 
         rts
         
