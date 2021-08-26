@@ -77,12 +77,12 @@ setColorTable entry
         lda #$0006
         sta >COLOR_TABLE,x
 
-; 2 - white
+; 2 - dot color
         ldx #4
-        lda #$0fff
+        lda #$0fca
         sta >COLOR_TABLE,x
 
-; 3 - red
+; 3 - red ghost
         ldx #6
         lda #$0f00
         sta >COLOR_TABLE,x
@@ -107,12 +107,12 @@ setColorTable entry
         lda #$076f
         sta >COLOR_TABLE,x
 
-; 8 - light blue
+; 8 - blue ghost
         ldx #16
         lda #$00fe
         sta >COLOR_TABLE,x
 
-; 9 - orange
+; 9 - orange ghost
         ldx #18
         lda #$0fa4
         sta >COLOR_TABLE,x
@@ -122,7 +122,7 @@ setColorTable entry
         lda #$0ff0
         sta >COLOR_TABLE,x
 
-; B - pink
+; B - pink ghost
         ldx #22
         lda #$0fcf
         sta >COLOR_TABLE,x
@@ -139,7 +139,7 @@ setColorTable entry
 
 ; E - power pellet "flash" color
         ldx #28
-        lda #$0fff
+        lda #$0fca
         sta >COLOR_TABLE,x
 
 ; F - white
