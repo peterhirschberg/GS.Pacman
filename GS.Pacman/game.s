@@ -42,7 +42,11 @@ mainLoop anop
 
         jsr borderStart
 
-;        jsr drawSprites
+        
+        
+        jsr drawSprites
+        
+        
         
         
         jsr drawSpriteGhost

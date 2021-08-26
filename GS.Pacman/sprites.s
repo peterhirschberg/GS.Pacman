@@ -40,9 +40,48 @@ drawSprites entry
 
 ;        jsr drawSprite
 
+
+        lda #10
+        sta spriteX
+        lda #10
+        sta spriteY
+
+        lda #SPRITE_PAC_RIGHT_1
+        jsr drawSpriteByIndex
+
+        lda #10
+        sta spriteX
+        lda #30
+        sta spriteY
+
+        lda #SPRITE_PAC_RIGHT_2
+        jsr drawSpriteByIndex
+
+        lda #10
+        sta spriteX
+        lda #50
+        sta spriteY
+
+        lda #SPRITE_PAC_FULL_1
+        jsr drawSpriteByIndex
+
+        
         rts
 
 
+        
+
+drawSpriteByIndex entry
+        tax
+        lda drawSpriteTable,x
+        sta callDrawSprite+1
+        lda drawSpriteTable+1,x
+        sta callDrawSprite+2
+callDrawSprite anop
+        jsl $FFFFFF
+        rts
+        
+        
 
 drawSpritePacman entry
 
@@ -825,9 +864,9 @@ pactimer dc i2'0'
 spritesData data
 
     
-SPRITE_PAC_RIGHT_1      gequ 0
-SPRITE_PAC_RIGHT_2      gequ 1
-SPRITE_PAC_FULL_1       gequ 2
+SPRITE_PAC_RIGHT_1      gequ 0*4
+SPRITE_PAC_RIGHT_2      gequ 1*4
+SPRITE_PAC_FULL_1       gequ 2*4
 SPRITE_PAC_DOWN_1       gequ 0
 SPRITE_PAC_DOWN_2       gequ 1
 SPRITE_PAC_LEFT_1       gequ 0
@@ -905,5 +944,10 @@ SPRITE_1600R      gequ 0
 spriteX dc i2'0'
 spriteY dc i2'0'
 
+
+drawSpriteTable anop
+        dc i4'drawSprite0'
+        dc i4'drawSprite1'
+        dc i4'drawSprite2'
 
         end
