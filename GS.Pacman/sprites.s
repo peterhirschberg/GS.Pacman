@@ -38,8 +38,6 @@ translateSpritePosToMazePos entry
 
 drawSprites entry
 
-;        jsr drawSprite
-
 
         lda #10
         sta spriteX
