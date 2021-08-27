@@ -38,7 +38,7 @@ mainLoop anop
         
         jsr runPac
         
-;        jsr cleanMaze
+
 
         jsr eraseSprites
         
@@ -53,7 +53,6 @@ mainLoop anop
         
         jsr drawSpriteGhost
         
-;        jsr drawSpritePacman
 
         jsr drawPac
 

@@ -18,30 +18,34 @@ pac start
     
 runPac entry
 
-; pac right
+; animation
+        jsr animatePac
+
+        rts
+        
+        
+animatePac entry
 
         dec pacAnimationTimer
         lda pacAnimationTimer
         bmi incrementAnimationIndex
         rts
-        
+
 incrementAnimationIndex anop
-        lda #2
+        lda #10 ; animation timer duration
         sta pacAnimationTimer
 
         inc pacAnimationIndex
-
-        ldx #0
-        lda pacRightAnimationSprites,x
-        cmp pacAnimationIndex
+        lda pacAnimationIndex
+        cmp #4 ; num animation frames
         beq resetAnimationIndex
         rts
-        
+
 resetAnimationIndex anop
 
         lda #0
         sta pacAnimationIndex
-        
+
         rts
 
         
@@ -57,7 +61,7 @@ drawPac entry
         lda pacAnimationIndex
         asl a
         tax
-        lda pacRightAnimationSprites,x
+        lda pacUpAnimationSprites,x
         jsr drawSpriteByIndex
         
         rts
@@ -106,15 +110,34 @@ pacData data
 ;SPRITE_PAC_DIE_10       gequ 19*4
 ;SPRITE_PAC_DIE_11       gequ 19*4
 
+; up animation full frame is 1px too high :-(
+
 pacRightAnimationSprites anop
-        dc i2'4'
         dc i2'SPRITE_PAC_RIGHT_1'
         dc i2'SPRITE_PAC_RIGHT_2'
         dc i2'SPRITE_PAC_FULL_1'
         dc i2'SPRITE_PAC_RIGHT_2'
 
-pacX dc i2'0'
-pacY dc i2'0'
+pacLeftAnimationSprites anop
+        dc i2'SPRITE_PAC_LEFT_1'
+        dc i2'SPRITE_PAC_LEFT_2'
+        dc i2'SPRITE_PAC_FULL_2'
+        dc i2'SPRITE_PAC_LEFT_2'
+
+pacUpAnimationSprites anop
+        dc i2'SPRITE_PAC_UP_1'
+        dc i2'SPRITE_PAC_UP_2'
+        dc i2'SPRITE_PAC_FULL_1'
+        dc i2'SPRITE_PAC_UP_2'
+
+pacDownAnimationSprites anop
+        dc i2'SPRITE_PAC_DOWN_1'
+        dc i2'SPRITE_PAC_DOWN_2'
+        dc i2'SPRITE_PAC_FULL_1'
+        dc i2'SPRITE_PAC_DOWN_2'
+        
+pacX dc i2'48'
+pacY dc i2'48'
 
 pacAnimationIndex dc i2'0'
 pacAnimationTimer dc i2'0'

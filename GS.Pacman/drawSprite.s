@@ -12722,6 +12722,197 @@ drawSprite74 entry
         rtl
     
     
+drawSprite75 entry
+
+; Hack for missing "up" sprite
+
+        lda >spriteY
+        clc
+        adc #1
+        sta >spriteY
+        
+
+        spriteGetDrawAddress
+        _spriteHeader
+
+
+        lda drawAddress
+        clc
+        adc #320
+        tcd
+
+        short m
+        lda #$0a
+        sta 2
+        lda #$aa
+        sta 3
+        sta 4
+        long m
+
+        lda drawAddress
+        clc
+        adc #480
+        tcd
+
+        short m
+        lda #$0a
+        sta 1
+        lda #$aa
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        long m
+
+        lda drawAddress
+        clc
+        adc #640
+        tcd
+
+        short m
+        lda #$aa
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        lda #$a0
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #800
+        tcd
+
+        short m
+        lda #$aa
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        lda #$a0
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #960
+        tcd
+
+        short m
+        lda #$0a
+        sta 0
+        lda #$aa
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #1120
+        tcd
+
+        short m
+        lda #$0a
+        sta 0
+        lda #$aa
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #1280
+        tcd
+
+        short m
+        lda #$0a
+        sta 0
+        lda #$aa
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #1440
+        tcd
+
+        short m
+        lda #$aa
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        lda #$a0
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #1600
+        tcd
+
+        short m
+        lda #$aa
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        lda #$a0
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #1760
+        tcd
+
+        short m
+        lda #$0a
+        sta 1
+        lda #$aa
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        long m
+
+        lda drawAddress
+        clc
+        adc #1920
+        tcd
+
+        short m
+        lda #$0a
+        sta 2
+        lda #$aa
+        sta 3
+        sta 4
+        long m
+
+        long m
+
+        _spriteFooter
+        rtl
+    
+    
 drawAddress dc i4'0'
 
 

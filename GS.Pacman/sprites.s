@@ -38,32 +38,8 @@ translateSpritePosToMazePos entry
 
 drawSprites entry
 
+; TODO
 
-        lda #10
-        sta spriteX
-        lda #10
-        sta spriteY
-
-        lda #SPRITE_PAC_RIGHT_1
-        jsr drawSpriteByIndex
-
-        lda #10
-        sta spriteX
-        lda #30
-        sta spriteY
-
-        lda #SPRITE_PAC_RIGHT_2
-        jsr drawSpriteByIndex
-
-        lda #10
-        sta spriteX
-        lda #50
-        sta spriteY
-
-        lda #SPRITE_PAC_FULL_1
-        jsr drawSpriteByIndex
-
-        
         rts
 
 
@@ -78,65 +54,6 @@ drawSpriteByIndex entry
         sta callDrawSprite+2
 callDrawSprite anop
         jsl $FFFFFF
-        rts
-        
-        
-
-drawSpritePacman entry
-
-        lda #48
-        sta spriteX
-        lda #45
-        sta spriteY
-
-        jsr translateSpritePosToMazePos
-        
-        lda pacstate
-        cmp #0
-        beq pacstate0
-        cmp #1
-        beq pacstate1
-        cmp #2
-        beq pacstate2
-        cmp #3
-        beq pacstate3
-        bra pacdone
-
-pacstate0 anop
-        jsl drawSprite0
-        bra pacdone
-pacstate1 anop
-        jsl drawSprite1
-        bra pacdone
-pacstate2 anop
-        jsl drawSprite2
-        bra pacdone
-pacstate3 anop
-        jsl drawSprite1
-        bra pacdone
-
-pacdone anop
-
-        dec pactimer
-        lda pactimer
-        bmi incpac
-        rts
-        
-incpac anop
-
-        lda #2
-        sta pactimer
-
-        inc pacstate
-        lda pacstate
-        cmp #4
-        beq resetState
-        rts
-        
-resetState anop
-        lda #0
-        sta pacstate
-        
         rts
         
 
@@ -161,7 +78,7 @@ drawSpriteGhost entry
         bra next1
         
 wrapX anop
-        lda #0
+        lda #8
         sta testX
         
 next1 anop
@@ -292,16 +209,6 @@ ghost5 anop
         
         
 eraseSprites entry
-
-; pacman
-
-;        lda #48
-;        sta spriteX
-;        lda #45
-;        sta spriteY
-
-;        jsr translateSpritePosToMazePos
-;        jsr eraseSpriteRect
 
 ; ghosts
 
@@ -839,7 +746,7 @@ tileSrcY dc i2'0'
 tileDstX dc i2'0'
 tileDstY dc i2'0'
 
-testX dc i2'0'
+testX dc i2'8'
 oldX dc i2'0'
 
 ghost2Y dc i2'80'
@@ -938,6 +845,7 @@ SPRITE_400              gequ 71*4
 SPRITE_800              gequ 72*4
 SPRITE_1600L            gequ 73*4
 SPRITE_1600R            gequ 74*4
+SPRITE_PAC_FULL_3       gequ 75*4
 
 
 spriteX dc i2'0'
@@ -1017,6 +925,7 @@ drawSpriteTable anop
         dc i4'drawSprite69'
         dc i4'drawSprite70'
         dc i4'drawSprite72'
+        dc i4'drawSprite74'
         dc i4'drawSprite74'
 
         
