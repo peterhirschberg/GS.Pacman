@@ -32,7 +32,7 @@ animatePac entry
         rts
 
 incrementAnimationIndex anop
-        lda #10 ; animation timer duration
+        lda #3 ; animation timer duration
         sta pacAnimationTimer
 
         inc pacAnimationIndex
@@ -61,7 +61,7 @@ drawPac entry
         lda pacAnimationIndex
         asl a
         tax
-        lda pacUpAnimationSprites,x
+        lda pacRightAnimationSprites,x
         jsr drawSpriteByIndex
         
         rts
@@ -135,6 +135,20 @@ pacDownAnimationSprites anop
         dc i2'SPRITE_PAC_DOWN_2'
         dc i2'SPRITE_PAC_FULL_1'
         dc i2'SPRITE_PAC_DOWN_2'
+
+pacDieAnimationSprites anop
+        dc i2'SPRITE_PAC_DIE_1'
+        dc i2'SPRITE_PAC_DIE_2'
+        dc i2'SPRITE_PAC_DIE_3'
+        dc i2'SPRITE_PAC_DIE_4'
+        dc i2'SPRITE_PAC_DIE_5'
+        dc i2'SPRITE_PAC_DIE_6'
+        dc i2'SPRITE_PAC_DIE_7'
+        dc i2'SPRITE_PAC_DIE_8'
+        dc i2'SPRITE_PAC_DIE_9'
+        dc i2'SPRITE_PAC_DIE_10'
+        dc i2'SPRITE_PAC_DIE_11'
+
         
 pacX dc i2'48'
 pacY dc i2'48'
