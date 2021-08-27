@@ -36,9 +36,13 @@ mainLoop anop
 
         jsr runMaze
         
+        jsr runPac
+        
 ;        jsr cleanMaze
 
         jsr eraseSprites
+        
+        jsr erasePac
 
         jsr borderStart
 
@@ -47,12 +51,13 @@ mainLoop anop
         jsr drawSprites
         
         
-        
-        
         jsr drawSpriteGhost
         
-        jsr drawSpritePacman
-        
+;        jsr drawSpritePacman
+
+        jsr drawPac
+
+
         jsr borderDone
         
         brl mainLoop

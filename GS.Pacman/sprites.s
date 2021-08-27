@@ -71,6 +71,7 @@ drawSprites entry
 ; Thanks to Ian Brumby and John Brooks for this lookup routine
 drawSpriteByIndex entry
         tax
+        jsr translateSpritePosToMazePos
         lda drawSpriteTable,x
         sta callDrawSprite+1
         lda drawSpriteTable+1,x
@@ -294,13 +295,13 @@ eraseSprites entry
 
 ; pacman
 
-        lda #48
-        sta spriteX
-        lda #45
-        sta spriteY
+;        lda #48
+;        sta spriteX
+;        lda #45
+;        sta spriteY
 
-        jsr translateSpritePosToMazePos
-        jsr eraseSpriteRect
+;        jsr translateSpritePosToMazePos
+;        jsr eraseSpriteRect
 
 ; ghosts
 
