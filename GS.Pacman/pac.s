@@ -51,8 +51,6 @@ resetAnimationIndex anop
         
 drawPac entry
 
-; pac right
-
         lda pacX
         sta spriteX
         lda pacY
@@ -61,10 +59,39 @@ drawPac entry
         lda pacAnimationIndex
         asl a
         tax
-        lda pacRightAnimationSprites,x
-        jsr drawSpriteByIndex
+        
+        lda pacDirection
+        cmp #DIRECTION_RIGHT
+        beq drawDirectionRight
+        cmp #DIRECTION_DOWN
+        beq drawDirectionDown
+        cmp #DIRECTION_LEFT
+        beq drawDirectionLeft
+        cmp #DIRECTION_UP
+        beq drawDirectionUp
         
         rts
+        
+drawDirectionRight anop
+        lda pacRightAnimationSprites,x
+        jsr drawSpriteByIndex
+        rts
+
+drawDirectionDown anop
+        lda pacDownAnimationSprites,x
+        jsr drawSpriteByIndex
+        rts
+
+drawDirectionLeft anop
+        lda pacLeftAnimationSprites,x
+        jsr drawSpriteByIndex
+        rts
+
+drawDirectionUp anop
+        lda pacUpAnimationSprites,x
+        jsr drawSpriteByIndex
+        rts
+
         
         
         
@@ -136,6 +163,7 @@ pacDownAnimationSprites anop
         dc i2'SPRITE_PAC_FULL_1'
         dc i2'SPRITE_PAC_DOWN_2'
 
+; 11 frames for "die" animation
 pacDieAnimationSprites anop
         dc i2'SPRITE_PAC_DIE_1'
         dc i2'SPRITE_PAC_DIE_2'
@@ -156,5 +184,6 @@ pacY dc i2'48'
 pacAnimationIndex dc i2'0'
 pacAnimationTimer dc i2'0'
 
+pacDirection dc i2'DIRECTION_RIGHT'
 
         end
