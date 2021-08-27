@@ -127,7 +127,7 @@ pacLeftAnimationSprites anop
 pacUpAnimationSprites anop
         dc i2'SPRITE_PAC_UP_1'
         dc i2'SPRITE_PAC_UP_2'
-        dc i2'SPRITE_PAC_FULL_1'
+        dc i2'SPRITE_PAC_FULL_3'
         dc i2'SPRITE_PAC_UP_2'
 
 pacDownAnimationSprites anop

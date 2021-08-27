@@ -924,9 +924,11 @@ drawSpriteTable anop
         dc i4'drawSprite68'
         dc i4'drawSprite69'
         dc i4'drawSprite70'
+        dc i4'drawSprite71'
         dc i4'drawSprite72'
+        dc i4'drawSprite73'
         dc i4'drawSprite74'
-        dc i4'drawSprite74'
+        dc i4'drawSprite75'
 
         
         end
