@@ -40,6 +40,15 @@ runGhosts entry
         
 runGhost entry
 
+        lda currentGhost
+        tax
+
+        lda ghostPixelX,x
+        sta ghostPixelOldX,x
+        lda ghostPixelY,x
+        sta ghostPixelOldY,x
+        
+; TODO - do stuff
 
         rts
         
@@ -326,28 +335,28 @@ GHOSTSTATE_LEAVINGPEN   gequ 4
 
 
 ghostPixelX anop
-        dc i2'0'
-        dc i2'20'
-        dc i2'40'
-        dc i2'60'
+        dc i2'8'
+        dc i2'28'
+        dc i2'48'
+        dc i2'68'
 
 ghostPixelY anop
-        dc i2'0'
-        dc i2'0'
-        dc i2'0'
-        dc i2'0'
+        dc i2'8'
+        dc i2'8'
+        dc i2'8'
+        dc i2'8'
 
 ghostPixelOldX anop
-        dc i2'0'
-        dc i2'0'
-        dc i2'0'
-        dc i2'0'
+        dc i2'8'
+        dc i2'28'
+        dc i2'48'
+        dc i2'68'
 
 ghostPixelOldY anop
-        dc i2'0'
-        dc i2'0'
-        dc i2'0'
-        dc i2'0'
+        dc i2'8'
+        dc i2'8'
+        dc i2'8'
+        dc i2'8'
         
 ghostTileX anop
         dc i2'0'

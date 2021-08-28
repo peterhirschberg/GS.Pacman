@@ -74,7 +74,7 @@ setColorTable entry
 
 ; 1 - blue eye color
         ldx #2
-        lda #$0006
+        lda #$022e
         sta >COLOR_TABLE,x
 
 ; 2 - dot color
@@ -89,7 +89,7 @@ setColorTable entry
 
 ; 4 - blue (maze)
         ldx #8
-        lda #$000f
+        lda #$022e
         sta >COLOR_TABLE,x
 
 ; 5

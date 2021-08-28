@@ -256,6 +256,8 @@ eraseSprites entry
 
 eraseSpriteRect entry
 
+        jsr translateSpritePosToMazePos
+
         lda spriteX
         lsr a
         sta spriteX
