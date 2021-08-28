@@ -48,9 +48,55 @@ runGhost entry
         lda ghostPixelY,x
         sta ghostPixelOldY,x
         
-; TODO - do stuff
+        jsr moveGhost
 
         rts
+        
+        
+moveGhost entry
+
+        lda currentGhost
+        tax
+        lda ghostDirection,x
+        cmp #DIRECTION_UP
+        beq moveGhostUp
+        cmp #DIRECTION_DOWN
+        beq moveGhostDown
+        cmp #DIRECTION_LEFT
+        beq moveGhostLeft
+        cmp #DIRECTION_RIGHT
+        beq moveGhostRight
+
+        rts
+        
+moveGhostUp anop
+        lda ghostPixelY,x
+        sec
+        sbc #1
+        sta ghostPixelY,x
+        rts
+
+moveGhostDown anop
+        lda ghostPixelY,x
+        clc
+        adc #1
+        sta ghostPixelY,x
+        rts
+
+moveGhostLeft anop
+        lda ghostPixelX,x
+        sec
+        sbc #1
+        sta ghostPixelX,x
+        rts
+
+moveGhostRight anop
+        lda ghostPixelX,x
+        clc
+        adc #1
+        sta ghostPixelX,x
+        rts
+
         
         
 animateGhosts entry
