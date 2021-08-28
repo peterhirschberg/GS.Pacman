@@ -401,20 +401,20 @@ redGhostDownAnimationSprites anop
         
         
 blueGhostLeftAnimationSprites anop
-        dc i2'SPRITE_CYANGHOST_LEFT_1'
-        dc i2'SPRITE_CYANGHOST_LEFT_2'
+        dc i2'SPRITE_BLUEGHOST_LEFT_1'
+        dc i2'SPRITE_BLUEGHOST_LEFT_2'
         
 blueGhostRightAnimationSprites anop
-        dc i2'SPRITE_CYANGHOST_RIGHT_1'
-        dc i2'SPRITE_CYANGHOST_RIGHT_2'
+        dc i2'SPRITE_BLUEGHOST_RIGHT_1'
+        dc i2'SPRITE_BLUEGHOST_RIGHT_2'
         
 blueGhostUpAnimationSprites anop
-        dc i2'SPRITE_CYANGHOST_UP_1'
-        dc i2'SPRITE_CYANGHOST_UP_2'
+        dc i2'SPRITE_BLUEGHOST_UP_1'
+        dc i2'SPRITE_BLUEGHOST_UP_2'
         
 blueGhostDownAnimationSprites anop
-        dc i2'SPRITE_CYANGHOST_DOWN_1'
-        dc i2'SPRITE_CYANGHOST_DOWN_2'
+        dc i2'SPRITE_BLUEGHOST_DOWN_1'
+        dc i2'SPRITE_BLUEGHOST_DOWN_2'
         
 
 pinkGhostLeftAnimationSprites anop
