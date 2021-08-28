@@ -38,11 +38,15 @@ mainLoop anop
         
         jsr runPac
         
-
+        jsr runGhosts
+        
+        
 
         jsr eraseSprites
         
         jsr erasePac
+        
+        
 
         jsr borderStart
 
@@ -50,12 +54,11 @@ mainLoop anop
         
         jsr drawSprites
         
-        
         jsr drawSpriteGhost
-        
 
         jsr drawPac
 
+        
 
         jsr borderDone
         

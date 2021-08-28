@@ -15,6 +15,65 @@ maze start
         using globalData
         using mazeData
 
+        
+    
+getPixelXFromTile entry
+; TODO
+        rts
+        
+        
+getPixelYFromTile entry
+; TODO
+        rts
+
+getTileIndexFromTileXY entry
+
+        lda tileY
+        asl a
+        tax
+        lda mazeTileRowOffsets,x
+        lsr a
+        clc
+        adc tileX
+
+        rts
+        
+getTileXFromPixelX entry
+
+        lsr a
+        lsr a
+        lsr a
+
+        rts
+    
+getTileYFromPixelY entry
+
+        lsr a
+        lsr a
+        lsr a
+
+        rts
+    
+getPixelXFromTileX entry
+
+        asl a
+        asl a
+        asl a
+        clc
+        adc #4
+
+        rts
+    
+getPixelYFromTileY entry
+
+        asl a
+        asl a
+        asl a
+        clc
+        adc #4
+
+        rts
+                
 
 
 runMaze entry
@@ -130,8 +189,8 @@ drawMazeDone anop
 
         rts
 
-        
-        
+    
+    
 setMazeTileDirty entry
 
         lda >dirtyMazeTileX
@@ -415,6 +474,9 @@ tileSrcY dc i2'0'
 tileDstX dc i2'0'
 tileDstY dc i2'0'
 
+tileX dc i2'0'
+tileY dc i2'0'
+
 powerPelletFlashTimer dc i2'0'
 powerPelletFlashState dc i2'0'
 
@@ -494,6 +556,7 @@ mazeTileRowOffsets anop
         dc i2'$460'
         dc i2'$498'
         dc i2'$4d0'
+
 
         end
 

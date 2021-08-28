@@ -52,6 +52,20 @@ resetAnimationIndex anop
 drawPac entry
 
         lda pacX
+        lsr a
+        lsr a
+        lsr a
+        tax
+
+        lda pacY
+        lsr a
+        lsr a
+        lsr a
+        tay
+
+
+
+        lda pacX
         sta spriteX
         lda pacY
         sta spriteY
@@ -114,31 +128,8 @@ erasePac entry
 
 
 pacData data
+
     
-;SPRITE_PAC_RIGHT_1      gequ 0*4
-;SPRITE_PAC_RIGHT_2      gequ 1*4
-;SPRITE_PAC_FULL_1       gequ 2*4
-;SPRITE_PAC_DOWN_1       gequ 3*4
-;SPRITE_PAC_DOWN_2       gequ 4*4
-;SPRITE_PAC_LEFT_1       gequ 5*4
-;SPRITE_PAC_LEFT_2       gequ 6*4
-;SPRITE_PAC_FULL_2       gequ 7*4
-;SPRITE_PAC_UP_1         gequ 8*4
-;SPRITE_PAC_UP_2         gequ 9*4
-;SPRITE_PAC_DIE_1        gequ 10*4
-;SPRITE_PAC_DIE_2        gequ 11*4
-;SPRITE_PAC_DIE_3        gequ 12*4
-;SPRITE_PAC_DIE_4        gequ 13*4
-;SPRITE_PAC_DIE_5        gequ 14*4
-;SPRITE_PAC_DIE_6        gequ 15*4
-;SPRITE_PAC_DIE_7        gequ 16*4
-;SPRITE_PAC_DIE_8        gequ 17*4
-;SPRITE_PAC_DIE_9        gequ 18*4
-;SPRITE_PAC_DIE_10       gequ 19*4
-;SPRITE_PAC_DIE_11       gequ 19*4
-
-; up animation full frame is 1px too high :-(
-
 pacRightAnimationSprites anop
         dc i2'SPRITE_PAC_RIGHT_1'
         dc i2'SPRITE_PAC_RIGHT_2'
@@ -185,5 +176,6 @@ pacAnimationIndex dc i2'0'
 pacAnimationTimer dc i2'0'
 
 pacDirection dc i2'DIRECTION_RIGHT'
+
 
         end

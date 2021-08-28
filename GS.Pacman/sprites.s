@@ -30,7 +30,7 @@ translateSpritePosToMazePos entry
         clc
         adc #MAZE_OFFSET_Y
         sec
-        sbc #8
+        sbc #4
         sta spriteY
 
         rts
