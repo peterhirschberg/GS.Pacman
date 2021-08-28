@@ -140,6 +140,75 @@ getAvailableDirectionsFromTileXY entry
         sta tileLeft
 
         
+        lda tileUp
+        cmp #0
+        beq canGoUp
+        cmp #1
+        beq canGoUp
+        cmp #2
+        beq canGoUp
+        cmp #8
+        beq canGoUp
+        bra cantGoUp
+        
+canGoUp anop
+        lda temp
+        ora #AVAILABLEDIR_UP
+
+cantGoUp anop
+        
+        lda tileDown
+        cmp #0
+        beq canGoDown
+        cmp #1
+        beq canGoDown
+        cmp #2
+        beq canGoDown
+        cmp #8
+        beq canGoDown
+        bra cantGoDown
+        
+canGoDown anop
+        lda temp
+        ora #AVAILABLEDIR_DOWN
+
+cantGoDown anop
+
+        lda tileRight
+        cmp #0
+        beq canGoRight
+        cmp #1
+        beq canGoRight
+        cmp #2
+        beq canGoRight
+        cmp #8
+        beq canGoRight
+        bra cantGoRight
+        
+canGoRight anop
+        lda temp
+        ora #AVAILABLEDIR_RIGHT
+
+cantGoRight anop
+
+        lda tileLeft
+        cmp #0
+        beq canGoLeft
+        cmp #1
+        beq canGoLeft
+        cmp #2
+        beq canGoLeft
+        cmp #8
+        beq canGoLeft
+        bra cantGoLeft
+        
+canGoLeft anop
+        lda temp
+        ora #AVAILABLEDIR_LEFT
+
+cantGoLeft anop
+
+        lda temp
 
         rts
                 
