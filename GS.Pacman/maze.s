@@ -26,7 +26,7 @@ getPixelYFromTile entry
 ; TODO
         rts
 
-getTileIndexFromTileXY entry
+getTileFromTileXY entry
 
         lda tileY
         asl a
@@ -35,6 +35,8 @@ getTileIndexFromTileXY entry
         lsr a
         clc
         adc tileX
+        tax
+        lda >mazeTileList,x
 
         rts
         
@@ -71,6 +73,73 @@ getPixelYFromTileY entry
         asl a
         clc
         adc #4
+
+        rts
+        
+getAvailableDirectionsFromTileXY entry
+
+        lda #AVAILABLEDIR_NONE
+        sta temp
+        
+
+        lda tileX
+        sta tileUpX
+        lda tileY
+        sec
+        sbc #1
+        sta tileUpY
+
+        lda tileX
+        sta tileDownX
+        lda tileY
+        clc
+        adc #1
+        sta tileDownY
+
+        lda tileX
+        clc
+        adc #1
+        sta tileRightX
+        lda tileY
+        sta tileRightY
+
+        lda tileX
+        sec
+        sbc #1
+        sta tileLeftX
+        lda tileY
+        sta tileLeftY
+
+        
+        lda tileUpX
+        sta tileX
+        lda tileUpY
+        sta tileY
+        jsr getTileFromTileXY
+        sta tileUp
+
+        lda tileRightX
+        sta tileX
+        lda tileRightY
+        sta tileY
+        jsr getTileFromTileXY
+        sta tileRight
+
+        lda tileDownX
+        sta tileX
+        lda tileDownY
+        sta tileY
+        jsr getTileFromTileXY
+        sta tileDown
+
+        lda tileLeftX
+        sta tileX
+        lda tileLeftY
+        sta tileY
+        jsr getTileFromTileXY
+        sta tileLeft
+
+        
 
         rts
                 
@@ -477,8 +546,27 @@ tileDstY dc i2'0'
 tileX dc i2'0'
 tileY dc i2'0'
 
+tileUpX dc i2'0'
+tileUpY dc i2'0'
+
+tileRightX dc i2'0'
+tileRightY dc i2'0'
+
+tileDownX dc i2'0'
+tileDownY dc i2'0'
+
+tileLeftX dc i2'0'
+tileLeftY dc i2'0'
+
+tileUp dc i2'0'
+tileRight dc i2'0'
+tileDown dc i2'0'
+tileLeft dc i2'0'
+
 powerPelletFlashTimer dc i2'0'
 powerPelletFlashState dc i2'0'
+
+temp dc i2'0'
 
 
 mazeGraphicsRowOffsets anop
@@ -566,6 +654,19 @@ mazeData data mazeDataSeg
     
 dirtyMazeTileX dc i2'0'
 dirtyMazeTileY dc i2'0'
+
+
+
+AVAILABLEDIR_NONE   gequ 0
+AVAILABLEDIR_UP     gequ 1
+AVAILABLEDIR_DOWN   gequ 2
+AVAILABLEDIR_LEFT   gequ 4
+AVAILABLEDIR_RIGHT  gequ 8
+
+;AVAILABLEDIR_ALL        gequ AVAILABLEDIR_UP | AVAILABLEDIR_RIGHT | AVAILABLEDIR_DOWN | AVAILABLEDIR_LEFT
+;AVAILABLEDIR_LEFTRIGHT  gequ AVAILABLEDIR_LEFT | AVAILABLEDIR_RIGHT
+;AVAILABLEDIR_UPDOWN     gequ AVAILABLEDIR_LEFT | AVAILABLEDIR_RIGHT
+
 
 
 ; Width: $24 bytes  Height: $30 lines
