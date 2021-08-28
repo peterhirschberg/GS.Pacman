@@ -57,6 +57,7 @@ callDrawSprite anop
         rts
         
 
+; DELETE
 drawSpriteGhost entry
 
         lda testX
@@ -208,6 +209,7 @@ ghost5 anop
         rts
         
         
+; DELETE
 eraseSprites entry
 
 ; ghosts

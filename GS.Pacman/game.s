@@ -33,6 +33,8 @@ mainLoop anop
         jsr waitForVbl
         
         jsr borderStart
+        
+        
 
         jsr runMaze
         
@@ -42,7 +44,7 @@ mainLoop anop
         
         
 
-        jsr eraseSprites
+        jsr eraseGhosts
         
         jsr erasePac
         
@@ -52,9 +54,7 @@ mainLoop anop
 
         
         
-        jsr drawSprites
-        
-        jsr drawSpriteGhost
+        jsr drawGhosts
 
         jsr drawPac
 

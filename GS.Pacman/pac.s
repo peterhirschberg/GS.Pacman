@@ -18,6 +18,11 @@ pac start
     
 runPac entry
 
+        lda pacX
+        sta pacOldX
+        lda pacY
+        sta pacOldY
+
 ; animation
         jsr animatePac
 
@@ -51,20 +56,9 @@ resetAnimationIndex anop
         
 drawPac entry
 
-        lda pacX
-        lsr a
-        lsr a
-        lsr a
-        tax
-
-        lda pacY
-        lsr a
-        lsr a
-        lsr a
-        tay
-
-
-
+   rts
+   
+   
         lda pacX
         sta spriteX
         lda pacY
@@ -111,12 +105,13 @@ drawDirectionUp anop
         
 erasePac entry
 
-        lda pacX
+    rts
+
+        lda pacOldX
         sta spriteX
-        lda pacY
+        lda pacOldY
         sta spriteY
 
-        jsr translateSpritePosToMazePos
         jsr eraseSpriteRect
 
         rts
@@ -171,6 +166,9 @@ pacDieAnimationSprites anop
         
 pacX dc i2'48'
 pacY dc i2'48'
+
+pacOldX dc i2'48'
+pacOldY dc i2'48'
 
 pacAnimationIndex dc i2'0'
 pacAnimationTimer dc i2'0'
