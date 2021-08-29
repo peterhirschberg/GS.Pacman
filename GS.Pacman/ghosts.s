@@ -19,10 +19,12 @@ ghosts start
 runGhosts entry
 
         jsr animateGhosts
-
+ 
         lda #GHOSTINDEX_RED
         sta currentGhost
         jsr runGhost
+        
+  rts
 
         lda #GHOSTINDEX_PINK
         sta currentGhost
@@ -81,6 +83,9 @@ dontPickDirection anop
         
 pickNextDirection entry
 
+    lda #DIRECTION_RIGHT
+    rts
+
 ; TEMP: just pick a random direction
 
 directionLoop anop
@@ -90,7 +95,7 @@ directionLoop anop
         jsl getRandom
         clc
         adc #1
-        
+       
         cmp #DIRECTION_UP
         beq checkUpAvailable
         cmp #DIRECTION_RIGHT
@@ -152,6 +157,9 @@ moveGhost entry
         sta ghostDirection,x
         lda #DIRECTION_NONE
         sta ghostIntendedDirection,x
+        
+;endlessLoop anop
+;        bra endlessLoop
         
 keepMoving anop
         
@@ -228,6 +236,8 @@ drawGhosts entry
         sta currentGhost
         jsr drawGhost
 
+  rts
+        
         lda #GHOSTINDEX_PINK
         sta currentGhost
         jsr drawGhost

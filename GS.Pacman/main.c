@@ -28,6 +28,7 @@ unsigned int randomSeed;
 
 
 boolean shouldQuit;
+int r = 0;
 
 void signalQuit(void)
 {
@@ -36,7 +37,9 @@ void signalQuit(void)
 
 word getRandom(range)
 {
-    return rand() % range;
+    ++r;
+    return r % range;
+//    return rand() % range;
 }
 
 word getRandomRange(word lower, word upper)

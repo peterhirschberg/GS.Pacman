@@ -13,6 +13,7 @@
 
 maze start
         using globalData
+        using spritesData
         using mazeData
         using mazeExchangeData
         
@@ -86,8 +87,24 @@ isSpriteCenteredInMazeTile entry
         and #7
         sta tileY
 
+        lda tileX
+        cmp #0
+        beq checkY
+        lda #0
+        rts
         
-        
+checkY anop
+
+        lda tileY
+        cmp #0
+        beq isCentered
+        lda #0
+        rts
+
+isCentered anop
+
+        lda #1
+
         rts
         
 getNextTileXYAlongDirection entry
