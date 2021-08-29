@@ -14,7 +14,7 @@
 maze start
         using globalData
         using mazeData
-
+        using mazeExchangeData
         
     
 getPixelXFromTile entry
@@ -74,6 +74,49 @@ getPixelYFromTileY entry
         clc
         adc #4
 
+        rts
+        
+isSpriteCenteredInMazeTile entry
+
+        lda spriteX
+        and #7
+        sta tileX
+
+        lda spriteY
+        and #7
+        sta tileY
+
+        
+        
+        rts
+        
+getNextTileXYAlongDirection entry
+
+        cmp #DIRECTION_UP
+        beq getTileUp
+        cmp #DIRECTION_RIGHT
+        beq getTileRight
+        cmp #DIRECTION_DOWN
+        beq getTileDown
+        cmp #DIRECTION_LEFT
+        beq getTileLeft
+
+        rts
+        
+getTileUp anop
+        dec tileY
+        rts
+
+getTileDown anop
+        inc tileY
+        rts
+        
+getTileRight anop
+        inc tileX
+        rts
+        
+getTileLeft anop
+        dec tileX
         rts
         
 getAvailableDirectionsFromTileXY entry
@@ -612,9 +655,6 @@ tileSrcY dc i2'0'
 tileDstX dc i2'0'
 tileDstY dc i2'0'
 
-tileX dc i2'0'
-tileY dc i2'0'
-
 tileUpX dc i2'0'
 tileUpY dc i2'0'
 
@@ -718,12 +758,17 @@ mazeTileRowOffsets anop
         end
 
 
+mazeExchangeData data
+tileX dc i2'0'
+tileY dc i2'0'
+        end
+
+
 mazeData data mazeDataSeg
 
     
 dirtyMazeTileX dc i2'0'
 dirtyMazeTileY dc i2'0'
-
 
 
 AVAILABLEDIR_NONE   gequ 0

@@ -34,6 +34,10 @@ void signalQuit(void)
     shouldQuit = true;
 }
 
+word getRandom(range)
+{
+    return rand() % range;
+}
 
 word getRandomRange(word lower, word upper)
 {

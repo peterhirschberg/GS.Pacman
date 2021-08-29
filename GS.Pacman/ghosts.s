@@ -11,8 +11,9 @@
 
 ghosts start
         using globalData
-        using ghostData
         using spritesData
+        using mazeExchangeData
+        using ghostData
         
         
 runGhosts entry
@@ -48,15 +49,112 @@ runGhost entry
         lda ghostPixelY,x
         sta ghostPixelOldY,x
         
+        lda ghostIntendedDirection,x
+        cmp #DIRECTION_NONE
+        bne dontPickDirection
+        
+; get next tile in the direction the ghost is moving
+
+        lda ghostPixelX,x
+        jsr getTileXFromPixelX
+        sta tileX
+        lda ghostPixelY,x
+        jsr getTileYFromPixelY
+        sta tileY
+        lda ghostDirection,x
+        jsr getNextTileXYAlongDirection
+
+; see what directions are available
+
+        jsr getAvailableDirectionsFromTileXY
+        sta availableDirections
+        
+        jsr pickNextDirection
+        sta ghostIntendedDirection,x
+
+dontPickDirection anop
+        
         jsr moveGhost
 
         rts
+
+        
+pickNextDirection entry
+
+; TEMP: just pick a random direction
+
+directionLoop anop
+
+        lda #4
+        pha
+        jsl getRandom
+        clc
+        adc #1
+        
+        cmp #DIRECTION_UP
+        beq checkUpAvailable
+        cmp #DIRECTION_RIGHT
+        beq checkRightAvailable
+        cmp #DIRECTION_DOWN
+        beq checkDownAvailable
+        cmp #DIRECTION_LEFT
+        beq checkLeftAvailable
+        rts
+        
+checkUpAvailable anop
+        lda availableDirections
+        and #AVAILABLEDIR_UP
+        cmp #0
+        beq directionLoop
+        lda #DIRECTION_UP
+        rts
+        
+checkRightAvailable anop
+        lda availableDirections
+        and #AVAILABLEDIR_RIGHT
+        cmp #0
+        beq directionLoop
+        lda #DIRECTION_RIGHT
+        rts
+        
+checkDownAvailable anop
+        lda availableDirections
+        and #AVAILABLEDIR_DOWN
+        cmp #0
+        beq directionLoop
+        lda #DIRECTION_DOWN
+        rts
+        
+checkLeftAvailable anop
+        lda availableDirections
+        and #AVAILABLEDIR_LEFT
+        cmp #0
+        beq directionLoop
+        lda #DIRECTION_LEFT
+        rts
+
         
         
 moveGhost entry
 
         lda currentGhost
         tax
+        
+        lda ghostPixelX
+        sta spriteX
+        lda ghostPixelY
+        sta spriteY
+        jsr isSpriteCenteredInMazeTile
+        lda #0
+        bne keepMoving
+        
+        lda ghostIntendedDirection,x
+        sta ghostDirection,x
+        lda #DIRECTION_NONE
+        sta ghostIntendedDirection,x
+        
+keepMoving anop
+        
         lda ghostDirection,x
         cmp #DIRECTION_UP
         beq moveGhostUp
@@ -359,6 +457,7 @@ currentGhost dc i2'0'
 ghostAnimationIndex dc i2'0'
 ghostAnimationTimer dc i2'0'
 
+availableDirections dc i2'0'
 
         end
 
@@ -427,7 +526,12 @@ ghostDirection anop
         dc i2'DIRECTION_RIGHT' ; TODO
         dc i2'DIRECTION_RIGHT' ; TODO
         dc i2'DIRECTION_RIGHT' ; TODO
-        
+
+ghostIntendedDirection anop
+        dc i2'DIRECTION_NONE'
+        dc i2'DIRECTION_NONE'
+        dc i2'DIRECTION_NONE'
+        dc i2'DIRECTION_NONE'
 
 redGhostLeftAnimationSprites anop
         dc i2'SPRITE_REDGHOST_LEFT_1'
