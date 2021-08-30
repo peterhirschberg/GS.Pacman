@@ -20,7 +20,7 @@ gameInit entry
 
         jsr drawMaze
         
-;        jsr borderInit
+        jsr borderInit
 
         rtl
 
@@ -32,7 +32,7 @@ mainLoop anop
 
         jsr waitForVbl
         
-;        jsr borderStart
+        jsr borderStart
         
         
 
@@ -50,7 +50,7 @@ mainLoop anop
         
         
 
-;        jsr borderStart
+        jsr borderStart
 
         
         
@@ -60,7 +60,7 @@ mainLoop anop
 
         
 
-;        jsr borderDone
+        jsr borderDone
         
         brl mainLoop
         

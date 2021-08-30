@@ -25,6 +25,21 @@
         mend
 
 
+        macro
+        shiftedToPixel
+        lsr a
+        lsr a
+        lsr a
+        mend
+
+
+        macro
+        pixelToShifted
+        asl a
+        asl a
+        asl a
+        mend
+
 
 ; ORCA/M macros
 

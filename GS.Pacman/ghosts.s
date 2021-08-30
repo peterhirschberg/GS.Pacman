@@ -7,6 +7,8 @@
 ;
 
         case on
+        mcopy global.macros
+        keep global
 
 
 ghosts start
@@ -15,6 +17,7 @@ ghosts start
         using mazeExchangeData
         using ghostData
         
+
         
 runGhosts entry
 
@@ -52,17 +55,21 @@ runGhost entry
         sta ghostInTunnel,x
         
         lda ghostPixelX,x
+        shiftedToPixel
         sta spriteX
         lda ghostPixelY,x
+        shiftedToPixel
         sta spriteY
         jsr isSpriteCenteredInMazeTile
         cmp #0
         beq dontPickDirection
         
         lda ghostPixelX,x
+        shiftedToPixel
         jsr getTileXFromPixelX
         sta tileX
         lda ghostPixelY,x
+        shiftedToPixel
         jsr getTileYFromPixelY
         sta tileY
         
@@ -71,16 +78,24 @@ runGhost entry
         cmp #8
         bne notInTunnel
 
+        lda #4
+        sta ghostSpeed,x
+        
         lda #1
         sta ghostInTunnel,x
         bra dontPickDirection
         
 notInTunnel anop
 
+        lda #8
+        sta ghostSpeed,x
+
         lda ghostPixelX,x
+        shiftedToPixel
         jsr getTileXFromPixelX
         sta tileX
         lda ghostPixelY,x
+        shiftedToPixel
         jsr getTileYFromPixelY
         sta tileY
 
@@ -104,21 +119,21 @@ dontPickDirection anop
 checkTunnel anop
 
 ; wrap if going through tunnel
-        lda #8
+        lda #64
         cmp ghostPixelX,x
         bcs resetToRight
         lda ghostPixelX,x
-        cmp #216
+        cmp #1728
         bcs resetToLeft
         rts
         
 resetToLeft anop
-        lda #8
+        lda #64
         sta ghostPixelX,x
         rts
         
 resetToRight anop
-        lda #216
+        lda #1728
         sta ghostPixelX,x
         rts
 
@@ -218,28 +233,28 @@ moveGhost entry
 moveGhostUp anop
         lda ghostPixelY,x
         sec
-        sbc #1
+        sbc ghostSpeed,x
         sta ghostPixelY,x
         rts
 
 moveGhostDown anop
         lda ghostPixelY,x
         clc
-        adc #1
+        adc ghostSpeed,x
         sta ghostPixelY,x
         rts
 
 moveGhostLeft anop
         lda ghostPixelX,x
         sec
-        sbc #1
+        sbc ghostSpeed,x
         sta ghostPixelX,x
         rts
 
 moveGhostRight anop
         lda ghostPixelX,x
         clc
-        adc #1
+        adc ghostSpeed,x
         sta ghostPixelX,x
         rts
 
@@ -297,8 +312,10 @@ drawGhost entry
         tax
 
         lda ghostPixelX,x
+        shiftedToPixel
         sta spriteX
         lda ghostPixelY,x
+        shiftedToPixel
         sta spriteY
         
         lda ghostDirection,x
@@ -489,8 +506,10 @@ eraseGhost entry
         tax
 
         lda ghostPixelOldX,x
+        shiftedToPixel
         sta spriteX
         lda ghostPixelOldY,x
+        shiftedToPixel
         sta spriteY
 
         jsr eraseSpriteRect
@@ -543,28 +562,28 @@ GHOSTSTATE_LEAVINGPEN   gequ 4
 
 
 ghostPixelX anop
-        dc i2'8'
-        dc i2'28'
-        dc i2'48'
-        dc i2'68'
+        dc i2'64'
+        dc i2'64'
+        dc i2'64'
+        dc i2'64'
 
 ghostPixelY anop
-        dc i2'8'
-        dc i2'8'
-        dc i2'8'
-        dc i2'8'
+        dc i2'64'
+        dc i2'64'
+        dc i2'64'
+        dc i2'64'
 
 ghostPixelOldX anop
-        dc i2'8'
-        dc i2'28'
-        dc i2'48'
-        dc i2'68'
+        dc i2'64'
+        dc i2'64'
+        dc i2'64'
+        dc i2'64'
 
 ghostPixelOldY anop
-        dc i2'8'
-        dc i2'8'
-        dc i2'8'
-        dc i2'8'
+        dc i2'64'
+        dc i2'64'
+        dc i2'64'
+        dc i2'64'
         
 ghostTileX anop
         dc i2'0'
@@ -596,6 +615,12 @@ ghostIntendedDirection anop
         dc i2'DIRECTION_RIGHT'
         dc i2'DIRECTION_RIGHT'
 
+ghostSpeed anop
+        dc i2'8'
+        dc i2'8'
+        dc i2'8'
+        dc i2'8'
+        
 ghostInTunnel anop
         dc i2'0'
         dc i2'0'
