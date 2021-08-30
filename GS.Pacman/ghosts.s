@@ -24,6 +24,8 @@ runGhosts entry
         sta currentGhost
         jsr runGhost
         
+  rts
+        
         lda #GHOSTINDEX_PINK
         sta currentGhost
         jsr runGhost
@@ -48,19 +50,15 @@ runGhost entry
         lda ghostPixelY,x
         sta ghostPixelOldY,x
         
+        lda ghostCurrentTile,x
+        sta ghostPreviousTile,x
         
-        lda ghostPixelX,x
-        sta spriteX
-        lda ghostPixelY,x
-        sta spriteY
-        jsr isSpriteCenteredInMazeTile
-        cmp #0
-        beq dontPickDirection
         
 ;        ldx currentGhost
 ;        lda ghostIntendedDirection,x
 ;        cmp #DIRECTION_UNDECIDED
-;        beq keepMoving
+;        bne dontPickNextDirection
+        
 ;        sta ghostDirection,x
 ;        lda #DIRECTION_UNDECIDED
 ;        sta ghostIntendedDirection,x
@@ -74,7 +72,6 @@ runGhost entry
 ;        cmp #DIRECTION_UNDECIDED
 ;        bne dontPickDirection
 
-; get next tile in the direction the ghost is moving
 
         lda ghostPixelX,x
         jsr getTileXFromPixelX
@@ -82,22 +79,67 @@ runGhost entry
         lda ghostPixelY,x
         jsr getTileYFromPixelY
         sta tileY
+
+        jsr getTileFromTileXY
+        ldx currentGhost
+        sta ghostCurrentTile,x
+        cmp ghostPreviousTile,x
+        beq dontPickNextDirection
+
+; get next tile in the direction the ghost is moving
+
+        lda ghostDirection,x
+        jsr getNextTileXYAlongDirection
         
-;        lda ghostDirection,x
-;        jsr getNextTileXYAlongDirection
+        jsr getTileFromTileXY
+        ldx currentGhost
+        sta ghostTurnTile,x
 
 ; see what directions are available
 
         jsr getAvailableDirectionsFromTileXY ; modifies tileX/Y
         sta availableDirections
         
-        jsr pickNextDirection
-;        sta ghostIntendedDirection,x
-
         ldx currentGhost
+        jsr pickNextDirection
+        sta ghostIntendedDirection,x
+        
+dontPickNextDirection anop
+
+        lda ghostPixelX,x
+        jsr getTileXFromPixelX
+        sta tileX
+        lda ghostPixelY,x
+        jsr getTileYFromPixelY
+        sta tileY
+
+; see if the ghost is occupying the tile where it decided to turn
+
+        jsr getTileFromTileXY
+        ldx currentGhost
+        cmp ghostTurnTile,x
+        bne notReadyToTurn
+
+; wait for the ghost to be centered over the turn tile
+
+        lda ghostPixelX,x
+        sta spriteX
+        lda ghostPixelY,x
+        sta spriteY
+        jsr isSpriteCenteredInMazeTile
+        cmp #0
+        beq notReadyToTurn
+        
+        ldx currentGhost
+        lda ghostIntendedDirection,x
+;        cmp #DIRECTION_UNDECIDED
+;        beq notReadyToTurn
         sta ghostDirection,x
         
-dontPickDirection anop
+;        lda #DIRECTION_UNDECIDED
+;        sta ghostIntendedDirection,x
+        
+notReadyToTurn anop
         
         jsr moveGhost
 
@@ -254,6 +296,8 @@ drawGhosts entry
         sta currentGhost
         jsr drawGhost
 
+  rts
+        
         lda #GHOSTINDEX_PINK
         sta currentGhost
         jsr drawGhost
@@ -569,10 +613,28 @@ ghostDirection anop
         dc i2'DIRECTION_RIGHT' ; TODO
 
 ghostIntendedDirection anop
-        dc i2'DIRECTION_RIGHT'
-        dc i2'DIRECTION_RIGHT'
-        dc i2'DIRECTION_RIGHT'
-        dc i2'DIRECTION_RIGHT'
+        dc i2'DIRECTION_UNDECIDED'
+        dc i2'DIRECTION_UNDECIDED'
+        dc i2'DIRECTION_UNDECIDED'
+        dc i2'DIRECTION_UNDECIDED'
+
+ghostTurnTile anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+
+ghostCurrentTile anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+
+ghostPreviousTile anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
 
         
 redGhostLeftAnimationSprites anop
