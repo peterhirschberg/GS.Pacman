@@ -57,25 +57,6 @@ runGhost entry
         cmp #0
         beq dontPickDirection
         
-;        ldx currentGhost
-;        lda ghostIntendedDirection,x
-;        cmp #DIRECTION_UNDECIDED
-;        beq keepMoving
-;        sta ghostDirection,x
-;        lda #DIRECTION_UNDECIDED
-;        sta ghostIntendedDirection,x
-
-;keepMoving anop
-
-;        ldx currentGhost
-
-
-;        lda ghostIntendedDirection,x
-;        cmp #DIRECTION_UNDECIDED
-;        bne dontPickDirection
-
-; get next tile in the direction the ghost is moving
-
         lda ghostPixelX,x
         jsr getTileXFromPixelX
         sta tileX
@@ -83,17 +64,10 @@ runGhost entry
         jsr getTileYFromPixelY
         sta tileY
         
-;        lda ghostDirection,x
-;        jsr getNextTileXYAlongDirection
-
-; see what directions are available
-
         jsr getAvailableDirectionsFromTileXY ; modifies tileX/Y
         sta availableDirections
         
         jsr pickNextDirection
-;        sta ghostIntendedDirection,x
-
         ldx currentGhost
         sta ghostDirection,x
         
@@ -197,11 +171,15 @@ moveGhostUp anop
         lda ghostPixelY,x
         sec
         sbc #1
+        sec
+        sbc #1
         sta ghostPixelY,x
         rts
 
 moveGhostDown anop
         lda ghostPixelY,x
+        clc
+        adc #1
         clc
         adc #1
         sta ghostPixelY,x
@@ -211,11 +189,15 @@ moveGhostLeft anop
         lda ghostPixelX,x
         sec
         sbc #1
+        sec
+        sbc #1
         sta ghostPixelX,x
         rts
 
 moveGhostRight anop
         lda ghostPixelX,x
+        clc
+        adc #1
         clc
         adc #1
         sta ghostPixelX,x
@@ -521,7 +503,7 @@ GHOSTSTATE_LEAVINGPEN   gequ 4
 
 
 ghostPixelX anop
-        dc i2'9'
+        dc i2'8'
         dc i2'28'
         dc i2'48'
         dc i2'68'
@@ -563,10 +545,10 @@ ghostState anop
         dc i2'GHOSTSTATE_CHASE'
 
 ghostDirection anop
-        dc i2'DIRECTION_RIGHT' ; TODO
-        dc i2'DIRECTION_RIGHT' ; TODO
-        dc i2'DIRECTION_RIGHT' ; TODO
-        dc i2'DIRECTION_RIGHT' ; TODO
+        dc i2'DIRECTION_RIGHT'
+        dc i2'DIRECTION_RIGHT'
+        dc i2'DIRECTION_RIGHT'
+        dc i2'DIRECTION_RIGHT'
 
 ghostIntendedDirection anop
         dc i2'DIRECTION_RIGHT'
