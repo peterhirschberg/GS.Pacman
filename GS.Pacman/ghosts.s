@@ -75,11 +75,11 @@ runGhost entry
         sta availableDirections
         
         jsr pickNextDirection
-;        sta ghostIntendedDirection,x
+        sta ghostIntendedDirection,x
 
         ldx currentGhost
         
-        sta ghostDirection,x
+;        sta ghostDirection,x
         
 dontPickDirection anop
         
@@ -124,9 +124,9 @@ checkUpAvailable anop
         and #AVAILABLEDIR_UP
         cmp #0
         beq directionLoop
+        lda #DIRECTION_UP
         cmp reverseDirection
         beq directionLoop
-        lda #DIRECTION_UP
         rts
         
 checkRightAvailable anop
@@ -134,9 +134,9 @@ checkRightAvailable anop
         and #AVAILABLEDIR_RIGHT
         cmp #0
         beq directionLoop
+        lda #DIRECTION_RIGHT
         cmp reverseDirection
         beq directionLoop
-        lda #DIRECTION_RIGHT
         rts
         
 checkDownAvailable anop
@@ -144,27 +144,26 @@ checkDownAvailable anop
         and #AVAILABLEDIR_DOWN
         cmp #0
         beq directionLoop
+        lda #DIRECTION_DOWN
         cmp reverseDirection
         beq directionLoop
-        lda #DIRECTION_DOWN
         rts
         
 checkLeftAvailable anop
         lda availableDirections
         and #AVAILABLEDIR_LEFT
         cmp #0
-;        beq directionLoop
-        cmp reverseDirection
         beq directionLoop
         lda #DIRECTION_LEFT
+        cmp reverseDirection
+        beq directionLoop
         rts
 
         
         
 moveGhost entry
 
-        lda currentGhost
-        tax
+        ldx currentGhost
         
         lda ghostPixelX
         sta spriteX
@@ -174,18 +173,20 @@ moveGhost entry
         cmp #0
         beq keepMoving
         
-;        lda ghostIntendedDirection,x
-;        sta ghostDirection,x
-;        lda #DIRECTION_NONE
-;        sta ghostIntendedDirection,x
+        ldx currentGhost
+        lda ghostIntendedDirection,x
+        cmp #DIRECTION_NONE
+        beq keepMoving
+        sta ghostDirection,x
+        lda #DIRECTION_NONE
+        sta ghostIntendedDirection,x
         
 ;endlessLoop anop
 ;        bra endlessLoop
         
 keepMoving anop
 
-        lda currentGhost
-        tax
+        ldx currentGhost
 
         lda ghostDirection,x
         cmp #DIRECTION_UP
