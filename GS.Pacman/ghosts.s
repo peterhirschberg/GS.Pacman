@@ -92,6 +92,14 @@ pickNextDirection entry
 
 ; TEMP: just pick a random direction
 
+        ldx currentGhost
+        lda ghostDirection,x
+        asl a
+        tax
+        lda reverseDirections,x
+        sta reverseDirection
+        ldx currentGhost
+
 directionLoop anop
 
         lda #4
@@ -116,7 +124,7 @@ checkUpAvailable anop
         and #AVAILABLEDIR_UP
         cmp #0
         beq directionLoop
-        cmp ghostDirection,x
+        cmp reverseDirection
         beq directionLoop
         lda #DIRECTION_UP
         rts
@@ -126,7 +134,7 @@ checkRightAvailable anop
         and #AVAILABLEDIR_RIGHT
         cmp #0
         beq directionLoop
-        cmp ghostDirection,x
+        cmp reverseDirection
         beq directionLoop
         lda #DIRECTION_RIGHT
         rts
@@ -136,7 +144,7 @@ checkDownAvailable anop
         and #AVAILABLEDIR_DOWN
         cmp #0
         beq directionLoop
-        cmp ghostDirection,x
+        cmp reverseDirection
         beq directionLoop
         lda #DIRECTION_DOWN
         rts
@@ -146,7 +154,7 @@ checkLeftAvailable anop
         and #AVAILABLEDIR_LEFT
         cmp #0
 ;        beq directionLoop
-        cmp ghostDirection,x
+        cmp reverseDirection
         beq directionLoop
         lda #DIRECTION_LEFT
         rts
@@ -479,13 +487,13 @@ eraseGhost entry
         
 currentGhost dc i2'0'
 
+reverseDirection dc i2'0'
 
 ghostAnimationIndex dc i2'0'
 ghostAnimationTimer dc i2'0'
 
 availableDirections dc i2'0'
 
-savex dc i2'0'
 
         end
 
