@@ -48,6 +48,8 @@ runGhost entry
         lda ghostPixelY,x
         sta ghostPixelOldY,x
         
+        lda #0
+        sta ghostInTunnel,x
         
         lda ghostPixelX,x
         sta spriteX
@@ -64,6 +66,24 @@ runGhost entry
         jsr getTileYFromPixelY
         sta tileY
         
+        jsr getTileFromTileXY
+        ldx currentGhost
+        cmp #8
+        bne notInTunnel
+
+        lda #1
+        sta ghostInTunnel,x
+        bra dontPickDirection
+        
+notInTunnel anop
+
+        lda ghostPixelX,x
+        jsr getTileXFromPixelX
+        sta tileX
+        lda ghostPixelY,x
+        jsr getTileYFromPixelY
+        sta tileY
+
         jsr getAvailableDirectionsFromTileXY ; modifies tileX/Y
         sta availableDirections
         
@@ -72,8 +92,36 @@ runGhost entry
         sta ghostDirection,x
         
 dontPickDirection anop
-        
+
+        ldx currentGhost
         jsr moveGhost
+        
+        lda ghostInTunnel,x
+        cmp #0
+        bne checkTunnel
+        rts
+        
+checkTunnel anop
+
+; wrap if going through tunnel
+        lda #8
+        cmp ghostPixelX,x
+        bcs resetToRight
+        lda ghostPixelX,x
+        cmp #216
+        bcs resetToLeft
+        rts
+        
+resetToLeft anop
+        lda #8
+        sta ghostPixelX,x
+        rts
+        
+resetToRight anop
+        lda #216
+        sta ghostPixelX,x
+        rts
+
 
         rts
 
@@ -171,15 +219,11 @@ moveGhostUp anop
         lda ghostPixelY,x
         sec
         sbc #1
-        sec
-        sbc #1
         sta ghostPixelY,x
         rts
 
 moveGhostDown anop
         lda ghostPixelY,x
-        clc
-        adc #1
         clc
         adc #1
         sta ghostPixelY,x
@@ -189,15 +233,11 @@ moveGhostLeft anop
         lda ghostPixelX,x
         sec
         sbc #1
-        sec
-        sbc #1
         sta ghostPixelX,x
         rts
 
 moveGhostRight anop
         lda ghostPixelX,x
-        clc
-        adc #1
         clc
         adc #1
         sta ghostPixelX,x
@@ -555,6 +595,12 @@ ghostIntendedDirection anop
         dc i2'DIRECTION_RIGHT'
         dc i2'DIRECTION_RIGHT'
         dc i2'DIRECTION_RIGHT'
+
+ghostInTunnel anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
 
         
 redGhostLeftAnimationSprites anop
