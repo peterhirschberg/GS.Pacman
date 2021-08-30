@@ -24,8 +24,6 @@ runGhosts entry
         sta currentGhost
         jsr runGhost
         
-  rts
-
         lda #GHOSTINDEX_PINK
         sta currentGhost
         jsr runGhost
@@ -49,13 +47,33 @@ runGhost entry
         sta ghostPixelOldX,x
         lda ghostPixelY,x
         sta ghostPixelOldY,x
-
-;    bra dontPickDirection
-
-        lda ghostIntendedDirection,x
-        cmp #DIRECTION_NONE
-        bne dontPickDirection
         
+        
+        lda ghostPixelX,x
+        sta spriteX
+        lda ghostPixelY,x
+        sta spriteY
+        jsr isSpriteCenteredInMazeTile
+        cmp #0
+        beq dontPickDirection
+        
+;        ldx currentGhost
+;        lda ghostIntendedDirection,x
+;        cmp #DIRECTION_UNDECIDED
+;        beq keepMoving
+;        sta ghostDirection,x
+;        lda #DIRECTION_UNDECIDED
+;        sta ghostIntendedDirection,x
+
+;keepMoving anop
+
+;        ldx currentGhost
+
+
+;        lda ghostIntendedDirection,x
+;        cmp #DIRECTION_UNDECIDED
+;        bne dontPickDirection
+
 ; get next tile in the direction the ghost is moving
 
         lda ghostPixelX,x
@@ -74,11 +92,10 @@ runGhost entry
         sta availableDirections
         
         jsr pickNextDirection
-        sta ghostIntendedDirection,x
+;        sta ghostIntendedDirection,x
 
         ldx currentGhost
-        
-;        sta ghostDirection,x
+        sta ghostDirection,x
         
 dontPickDirection anop
         
@@ -100,11 +117,7 @@ pickNextDirection entry
 
 directionLoop anop
 
-        lda #5 ; ??????????????????
-        pha
-        jsl getRandom
-        clc
-        adc #1
+        jsr getRandomDir
         
         ldx currentGhost
         
@@ -116,7 +129,10 @@ directionLoop anop
         beq checkDownAvailable
         cmp #DIRECTION_LEFT
         beq checkLeftAvailable
-
+        
+;        tax
+;        brk
+        
         rts
         
 checkUpAvailable anop
@@ -162,26 +178,6 @@ checkLeftAvailable anop
         
         
 moveGhost entry
-
-        ldx currentGhost
-        
-        lda ghostPixelX
-        sta spriteX
-        lda ghostPixelY
-        sta spriteY
-        jsr isSpriteCenteredInMazeTile
-        cmp #0
-        beq keepMoving
-        
-        ldx currentGhost
-        lda ghostIntendedDirection,x
-        cmp #DIRECTION_NONE
-        beq keepMoving
-        sta ghostDirection,x
-        lda #DIRECTION_NONE
-        sta ghostIntendedDirection,x
-        
-keepMoving anop
 
         ldx currentGhost
 
@@ -258,8 +254,6 @@ drawGhosts entry
         sta currentGhost
         jsr drawGhost
 
-  rts
-        
         lda #GHOSTINDEX_PINK
         sta currentGhost
         jsr drawGhost
@@ -481,6 +475,19 @@ eraseGhost entry
         
         rts
         
+
+getRandomDir entry
+        inc randomDirIndex
+        lda randomDirIndex
+        cmp #255
+        bne dontResetRandomDirIndex
+        lda #0
+        sta randomDirIndex
+dontResetRandomDirIndex anop
+        asl a
+        tax
+        lda randomDirectionTable,x
+        rts
         
         
 currentGhost dc i2'0'
@@ -563,9 +570,9 @@ ghostDirection anop
 
 ghostIntendedDirection anop
         dc i2'DIRECTION_RIGHT'
-        dc i2'DIRECTION_NONE'
-        dc i2'DIRECTION_NONE'
-        dc i2'DIRECTION_NONE'
+        dc i2'DIRECTION_RIGHT'
+        dc i2'DIRECTION_RIGHT'
+        dc i2'DIRECTION_RIGHT'
 
         
 redGhostLeftAnimationSprites anop
@@ -635,5 +642,267 @@ orangeGhostDownAnimationSprites anop
         dc i2'SPRITE_ORANGEGHOST_DOWN_1'
         dc i2'SPRITE_ORANGEGHOST_DOWN_2'
         
+        
+; random directions
+
+randomDirIndex dc i2'0'
+
+randomDirectionTable anop
+        dc i2'1'
+        dc i2'3'
+        dc i2'2'
+        dc i2'2'
+        dc i2'3'
+        dc i2'0'
+        dc i2'3'
+        dc i2'3'
+        dc i2'1'
+        dc i2'3'
+        dc i2'3'
+        dc i2'3'
+        dc i2'3'
+        dc i2'2'
+        dc i2'1'
+        dc i2'2'
+        dc i2'1'
+        dc i2'2'
+        dc i2'3'
+        dc i2'0'
+        dc i2'1'
+        dc i2'1'
+        dc i2'1'
+        dc i2'3'
+        dc i2'3'
+        dc i2'3'
+        dc i2'2'
+        dc i2'3'
+        dc i2'0'
+        dc i2'1'
+        dc i2'0'
+        dc i2'2'
+        dc i2'0'
+        dc i2'0'
+        dc i2'2'
+        dc i2'1'
+        dc i2'1'
+        dc i2'1'
+        dc i2'3'
+        dc i2'1'
+        dc i2'0'
+        dc i2'0'
+        dc i2'3'
+        dc i2'2'
+        dc i2'2'
+        dc i2'3'
+        dc i2'1'
+        dc i2'2'
+        dc i2'3'
+        dc i2'2'
+        dc i2'3'
+        dc i2'1'
+        dc i2'2'
+        dc i2'1'
+        dc i2'1'
+        dc i2'1'
+        dc i2'1'
+        dc i2'3'
+        dc i2'3'
+        dc i2'1'
+        dc i2'1'
+        dc i2'1'
+        dc i2'3'
+        dc i2'1'
+        dc i2'3'
+        dc i2'3'
+        dc i2'0'
+        dc i2'2'
+        dc i2'0'
+        dc i2'0'
+        dc i2'2'
+        dc i2'0'
+        dc i2'2'
+        dc i2'1'
+        dc i2'2'
+        dc i2'3'
+        dc i2'3'
+        dc i2'3'
+        dc i2'3'
+        dc i2'2'
+        dc i2'0'
+        dc i2'2'
+        dc i2'2'
+        dc i2'0'
+        dc i2'1'
+        dc i2'2'
+        dc i2'0'
+        dc i2'1'
+        dc i2'2'
+        dc i2'3'
+        dc i2'3'
+        dc i2'2'
+        dc i2'2'
+        dc i2'3'
+        dc i2'3'
+        dc i2'1'
+        dc i2'0'
+        dc i2'3'
+        dc i2'0'
+        dc i2'2'
+        dc i2'0'
+        dc i2'0'
+        dc i2'1'
+        dc i2'1'
+        dc i2'3'
+        dc i2'3'
+        dc i2'0'
+        dc i2'2'
+        dc i2'1'
+        dc i2'2'
+        dc i2'2'
+        dc i2'2'
+        dc i2'0'
+        dc i2'2'
+        dc i2'0'
+        dc i2'3'
+        dc i2'0'
+        dc i2'1'
+        dc i2'0'
+        dc i2'3'
+        dc i2'0'
+        dc i2'3'
+        dc i2'0'
+        dc i2'3'
+        dc i2'1'
+        dc i2'3'
+        dc i2'3'
+        dc i2'0'
+        dc i2'1'
+        dc i2'3'
+        dc i2'0'
+        dc i2'0'
+        dc i2'2'
+        dc i2'2'
+        dc i2'2'
+        dc i2'2'
+        dc i2'3'
+        dc i2'3'
+        dc i2'2'
+        dc i2'0'
+        dc i2'3'
+        dc i2'3'
+        dc i2'2'
+        dc i2'1'
+        dc i2'1'
+        dc i2'3'
+        dc i2'0'
+        dc i2'3'
+        dc i2'1'
+        dc i2'0'
+        dc i2'0'
+        dc i2'3'
+        dc i2'1'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'3'
+        dc i2'0'
+        dc i2'3'
+        dc i2'2'
+        dc i2'3'
+        dc i2'3'
+        dc i2'3'
+        dc i2'3'
+        dc i2'1'
+        dc i2'2'
+        dc i2'0'
+        dc i2'3'
+        dc i2'3'
+        dc i2'0'
+        dc i2'3'
+        dc i2'0'
+        dc i2'3'
+        dc i2'0'
+        dc i2'0'
+        dc i2'3'
+        dc i2'2'
+        dc i2'2'
+        dc i2'1'
+        dc i2'3'
+        dc i2'0'
+        dc i2'1'
+        dc i2'2'
+        dc i2'1'
+        dc i2'2'
+        dc i2'0'
+        dc i2'3'
+        dc i2'0'
+        dc i2'1'
+        dc i2'2'
+        dc i2'1'
+        dc i2'1'
+        dc i2'2'
+        dc i2'1'
+        dc i2'0'
+        dc i2'2'
+        dc i2'3'
+        dc i2'3'
+        dc i2'3'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'1'
+        dc i2'3'
+        dc i2'3'
+        dc i2'0'
+        dc i2'2'
+        dc i2'1'
+        dc i2'3'
+        dc i2'2'
+        dc i2'1'
+        dc i2'2'
+        dc i2'1'
+        dc i2'0'
+        dc i2'2'
+        dc i2'2'
+        dc i2'3'
+        dc i2'3'
+        dc i2'3'
+        dc i2'2'
+        dc i2'2'
+        dc i2'3'
+        dc i2'3'
+        dc i2'0'
+        dc i2'2'
+        dc i2'3'
+        dc i2'3'
+        dc i2'2'
+        dc i2'2'
+        dc i2'3'
+        dc i2'2'
+        dc i2'3'
+        dc i2'0'
+        dc i2'0'
+        dc i2'3'
+        dc i2'3'
+        dc i2'2'
+        dc i2'1'
+        dc i2'2'
+        dc i2'3'
+        dc i2'1'
+        dc i2'0'
+        dc i2'3'
+        dc i2'2'
+        dc i2'2'
+        dc i2'2'
+        dc i2'0'
+        dc i2'2'
+        dc i2'2'
+        dc i2'1'
+        dc i2'2'
+        dc i2'0'
+        dc i2'1'
+        dc i2'2'
+        dc i2'2'
+        dc i2'1'
         
         end

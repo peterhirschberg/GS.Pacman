@@ -37,12 +37,14 @@ void signalQuit(void)
 
 word getRandom(range)
 {
+/*
     ++r;
-    if (r >= 5) {
+    if (r >= 4) {
         r = 0;
     }
     return r;
-//    return rand() % range;
+*/
+    return rand() % range;
 }
 
 word getRandomRange(word lower, word upper)

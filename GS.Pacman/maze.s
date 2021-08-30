@@ -82,9 +82,6 @@ getPixelYFromTileY entry
         
 isSpriteCenteredInMazeTile entry
 
-    lda #1
-    rts
-
         lda spriteX
         and #7
         sta tileX
@@ -213,8 +210,8 @@ getAvailableDirectionsFromTileXY entry
         beq canGoUp
         cmp #2
         beq canGoUp
-        cmp #8
-        beq canGoUp
+;        cmp #8
+;        beq canGoUp
         bra cantGoUp
         
 canGoUp anop
@@ -231,8 +228,8 @@ cantGoUp anop
         beq canGoDown
         cmp #2
         beq canGoDown
-        cmp #8
-        beq canGoDown
+;        cmp #8
+;        beq canGoDown
         bra cantGoDown
         
 canGoDown anop
@@ -249,8 +246,8 @@ cantGoDown anop
         beq canGoRight
         cmp #2
         beq canGoRight
-        cmp #8
-        beq canGoRight
+;        cmp #8
+;        beq canGoRight
         bra cantGoRight
         
 canGoRight anop
@@ -267,8 +264,8 @@ cantGoRight anop
         beq canGoLeft
         cmp #2
         beq canGoLeft
-        cmp #8
-        beq canGoLeft
+;        cmp #8
+;        beq canGoLeft
         bra cantGoLeft
         
 canGoLeft anop
