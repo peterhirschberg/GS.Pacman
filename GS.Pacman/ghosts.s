@@ -109,6 +109,9 @@ pickNextDirection entry
 ; TEMP: just pick a random direction
 
         ldx currentGhost
+        
+; ghosts cannot reverse direction (except when changing modes)
+
         lda ghostDirection,x
         asl a
         tax
@@ -129,9 +132,6 @@ directionLoop anop
         beq checkDownAvailable
         cmp #DIRECTION_LEFT
         beq checkLeftAvailable
-        
-;        tax
-;        brk
         
         rts
         
