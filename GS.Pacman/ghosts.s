@@ -43,8 +43,7 @@ runGhosts entry
         
 runGhost entry
 
-        lda currentGhost
-        tax
+        ldx currentGhost
 
         lda ghostPixelX,x
         sta ghostPixelOldX,x
@@ -53,9 +52,9 @@ runGhost entry
 
 ;    bra dontPickDirection
 
-;        lda ghostIntendedDirection,x
-;        cmp #DIRECTION_NONE
-;        bne dontPickDirection
+        lda ghostIntendedDirection,x
+        cmp #DIRECTION_NONE
+        bne dontPickDirection
         
 ; get next tile in the direction the ghost is moving
 
@@ -71,7 +70,7 @@ runGhost entry
 
 ; see what directions are available
 
-        jsr getAvailableDirectionsFromTileXY
+        jsr getAvailableDirectionsFromTileXY ; modifies tileX/Y
         sta availableDirections
         
         jsr pickNextDirection
@@ -98,15 +97,16 @@ pickNextDirection entry
         tax
         lda reverseDirections,x
         sta reverseDirection
-        ldx currentGhost
 
 directionLoop anop
 
-        lda #4
+        lda #5 ; ??????????????????
         pha
         jsl getRandom
         clc
         adc #1
+        
+        ldx currentGhost
         
         cmp #DIRECTION_UP
         beq checkUpAvailable
@@ -180,9 +180,6 @@ moveGhost entry
         sta ghostDirection,x
         lda #DIRECTION_NONE
         sta ghostIntendedDirection,x
-        
-;endlessLoop anop
-;        bra endlessLoop
         
 keepMoving anop
 
