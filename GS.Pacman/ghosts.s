@@ -516,7 +516,7 @@ GHOSTSTATE_LEAVINGPEN   gequ 4
 
 
 ghostPixelX anop
-        dc i2'8'
+        dc i2'9'
         dc i2'28'
         dc i2'48'
         dc i2'68'
