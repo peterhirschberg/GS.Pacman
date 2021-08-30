@@ -74,16 +74,13 @@ runGhost entry
         jsr getAvailableDirectionsFromTileXY
         sta availableDirections
         
-        stx savex
         jsr pickNextDirection
-        ldx savex
 ;        sta ghostIntendedDirection,x
 
-    lda currentGhost
-    tax
-
+        ldx currentGhost
+        
         sta ghostDirection,x
-
+        
 dontPickDirection anop
         
         jsr moveGhost
@@ -119,6 +116,8 @@ checkUpAvailable anop
         and #AVAILABLEDIR_UP
         cmp #0
         beq directionLoop
+        cmp ghostDirection,x
+        beq directionLoop
         lda #DIRECTION_UP
         rts
         
@@ -126,6 +125,8 @@ checkRightAvailable anop
         lda availableDirections
         and #AVAILABLEDIR_RIGHT
         cmp #0
+        beq directionLoop
+        cmp ghostDirection,x
         beq directionLoop
         lda #DIRECTION_RIGHT
         rts
@@ -135,6 +136,8 @@ checkDownAvailable anop
         and #AVAILABLEDIR_DOWN
         cmp #0
         beq directionLoop
+        cmp ghostDirection,x
+        beq directionLoop
         lda #DIRECTION_DOWN
         rts
         
@@ -142,6 +145,8 @@ checkLeftAvailable anop
         lda availableDirections
         and #AVAILABLEDIR_LEFT
         cmp #0
+;        beq directionLoop
+        cmp ghostDirection,x
         beq directionLoop
         lda #DIRECTION_LEFT
         rts
