@@ -54,8 +54,8 @@ runGhost entry
 ;    bra dontPickDirection
 
         lda ghostIntendedDirection,x
-;        cmp #DIRECTION_NONE
-;        bne dontPickDirection
+        cmp #DIRECTION_NONE
+        bne dontPickDirection
         
 ; get next tile in the direction the ghost is moving
 
@@ -78,6 +78,7 @@ runGhost entry
         jsr pickNextDirection
         ldx savex
         sta ghostIntendedDirection,x
+;        sta ghostDirection,x
 
 dontPickDirection anop
         
@@ -90,15 +91,11 @@ pickNextDirection entry
 
 ; TEMP: just pick a random direction
 
-directionLoop anop
-
         lda #4
         pha
         jsl getRandom
         clc
         adc #1
-        
-        lda #DIRECTION_DOWN
         
         cmp #DIRECTION_UP
         beq checkUpAvailable
@@ -108,6 +105,9 @@ directionLoop anop
         beq checkDownAvailable
         cmp #DIRECTION_LEFT
         beq checkLeftAvailable
+        
+directionLoop anop
+
         rts
         
 checkUpAvailable anop
@@ -155,11 +155,11 @@ moveGhost entry
         sta spriteY
         jsr isSpriteCenteredInMazeTile
         lda #0
-        bne keepMoving
+        beq keepMoving
         
         lda ghostIntendedDirection,x
         sta ghostDirection,x
-;        lda #DIRECTION_NONE
+        lda #DIRECTION_NONE
         sta ghostIntendedDirection,x
         
 ;endlessLoop anop
