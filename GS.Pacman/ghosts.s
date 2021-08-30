@@ -19,7 +19,7 @@ ghosts start
 runGhosts entry
 
         jsr animateGhosts
- 
+
         lda #GHOSTINDEX_RED
         sta currentGhost
         jsr runGhost
@@ -50,10 +50,12 @@ runGhost entry
         sta ghostPixelOldX,x
         lda ghostPixelY,x
         sta ghostPixelOldY,x
-        
+
+;    bra dontPickDirection
+
         lda ghostIntendedDirection,x
-        cmp #DIRECTION_NONE
-        bne dontPickDirection
+;        cmp #DIRECTION_NONE
+;        bne dontPickDirection
         
 ; get next tile in the direction the ghost is moving
 
@@ -63,6 +65,7 @@ runGhost entry
         lda ghostPixelY,x
         jsr getTileYFromPixelY
         sta tileY
+        
         lda ghostDirection,x
         jsr getNextTileXYAlongDirection
 
@@ -71,7 +74,9 @@ runGhost entry
         jsr getAvailableDirectionsFromTileXY
         sta availableDirections
         
+        stx savex
         jsr pickNextDirection
+        ldx savex
         sta ghostIntendedDirection,x
 
 dontPickDirection anop
@@ -83,9 +88,6 @@ dontPickDirection anop
         
 pickNextDirection entry
 
-    lda #DIRECTION_RIGHT
-    rts
-
 ; TEMP: just pick a random direction
 
 directionLoop anop
@@ -95,7 +97,9 @@ directionLoop anop
         jsl getRandom
         clc
         adc #1
-       
+        
+        lda #DIRECTION_DOWN
+        
         cmp #DIRECTION_UP
         beq checkUpAvailable
         cmp #DIRECTION_RIGHT
@@ -155,7 +159,7 @@ moveGhost entry
         
         lda ghostIntendedDirection,x
         sta ghostDirection,x
-        lda #DIRECTION_NONE
+;        lda #DIRECTION_NONE
         sta ghostIntendedDirection,x
         
 ;endlessLoop anop
@@ -469,6 +473,8 @@ ghostAnimationTimer dc i2'0'
 
 availableDirections dc i2'0'
 
+savex dc i2'0'
+
         end
 
 
@@ -538,11 +544,12 @@ ghostDirection anop
         dc i2'DIRECTION_RIGHT' ; TODO
 
 ghostIntendedDirection anop
-        dc i2'DIRECTION_NONE'
+        dc i2'DIRECTION_RIGHT'
         dc i2'DIRECTION_NONE'
         dc i2'DIRECTION_NONE'
         dc i2'DIRECTION_NONE'
 
+        
 redGhostLeftAnimationSprites anop
         dc i2'SPRITE_REDGHOST_LEFT_1'
         dc i2'SPRITE_REDGHOST_LEFT_2'

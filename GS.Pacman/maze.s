@@ -29,11 +29,14 @@ getPixelYFromTile entry
 
 getTileFromTileXY entry
 
+        lda tileX
+        asl a
+        sta tileX
+
         lda tileY
         asl a
         tax
         lda mazeTileRowOffsets,x
-        lsr a
         clc
         adc tileX
         tax
@@ -214,6 +217,7 @@ getAvailableDirectionsFromTileXY entry
 canGoUp anop
         lda temp
         ora #AVAILABLEDIR_UP
+        sta temp
 
 cantGoUp anop
         
@@ -231,7 +235,8 @@ cantGoUp anop
 canGoDown anop
         lda temp
         ora #AVAILABLEDIR_DOWN
-
+        sta temp
+        
 cantGoDown anop
 
         lda tileRight
@@ -248,7 +253,8 @@ cantGoDown anop
 canGoRight anop
         lda temp
         ora #AVAILABLEDIR_RIGHT
-
+        sta temp
+        
 cantGoRight anop
 
         lda tileLeft
@@ -265,7 +271,8 @@ cantGoRight anop
 canGoLeft anop
         lda temp
         ora #AVAILABLEDIR_LEFT
-
+        sta temp
+        
 cantGoLeft anop
 
         lda temp
