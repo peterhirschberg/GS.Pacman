@@ -26,7 +26,7 @@ READ_VBL                gequ $e0c019
 
 
 MAZE_OFFSET_X           gequ 24
-MAZE_OFFSET_Y           gequ 8
+MAZE_OFFSET_Y           gequ 16
 
 MAZE_BUFFER             gequ $1c0000
 

@@ -41,8 +41,10 @@ mainLoop anop
         jsr runPac
         
         jsr runGhosts
+
         
-        
+        jsr borderStart
+
 
         jsr eraseGhosts
         
