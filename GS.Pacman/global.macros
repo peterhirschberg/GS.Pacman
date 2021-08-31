@@ -40,6 +40,8 @@
         asl a
         mend
 
+
+; Thanks to Lucas Scharenbroich for this macro
         macro
         CmpAndSwap
         ldx sort1

@@ -272,6 +272,8 @@ resetAnimationIndex anop
 
 drawGhosts entry
 
+; Sort the ghosts in vertical order, drawing the topmost ghosts first to minimize flicker
+; Thanks to Lucas Scharenbroich and Ian Brumby for the sorting algorithm
 
     lda ghostDrawOrder+0
     sta sort1
