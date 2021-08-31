@@ -141,6 +141,25 @@ getTileLeft anop
         
 getAvailableDirectionsFromTileXY entry
 
+        lda tileX
+        asl a
+        sta temp
+
+        lda tileY
+        asl a
+        tax
+        lda mazeTileRowOffsets,x
+        clc
+        adc temp
+        sta mazeDataAddress
+        tax
+        lda >mazeAvailableDirections,x
+        cmp #AVAILABLEDIR_UNCOMPUTED
+        bne computeAvailable
+        rts
+        
+computeAvailable anop
+
         lda #AVAILABLEDIR_NONE
         sta temp
         
@@ -276,6 +295,10 @@ canGoLeft anop
 cantGoLeft anop
 
         lda temp
+        
+; cache for next time
+        ldx mazeDataAddress
+        sta >mazeAvailableDirections,x
 
         rts
                 
@@ -673,6 +696,8 @@ rowAddress dc i4'0'
 screenCounter dc i4'0'
 dataCounter dc i4'0'
 
+mazeDataAddress dc i4'0'
+
 tileSrcX dc i2'0'
 tileSrcY dc i2'0'
 
@@ -795,6 +820,7 @@ dirtyMazeTileX dc i2'0'
 dirtyMazeTileY dc i2'0'
 
 
+AVAILABLEDIR_UNCOMPUTED gequ -1
 AVAILABLEDIR_NONE   gequ 0
 AVAILABLEDIR_UP     gequ 1
 AVAILABLEDIR_DOWN   gequ 2
@@ -938,7 +964,7 @@ future anop
         dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
 
 
-pathData anop
+mazeAvailableDirections anop
         dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
         dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
         dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
