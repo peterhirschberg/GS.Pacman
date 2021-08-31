@@ -275,6 +275,8 @@ drawGhosts entry
 ; Sort the ghosts in vertical order, drawing the topmost ghosts first to minimize flicker
 ; Thanks to Lucas Scharenbroich and Ian Brumby for the sorting algorithm
 
+    jmp oldway
+
 
       lda #0                            ; build a permutation index
       ldx ghostPixelY+0                 ; compare 1 and 3
@@ -301,8 +303,8 @@ drawGhosts entry
       asl a
       asl a
       tax                               ; Put permutation index in X
-      
-      inx
+
+    brk
       
       lda sortTable,x
       ldy #0
@@ -336,6 +338,7 @@ drawGhosts entry
 
 ; -------------------
 
+oldway anop
 
         lda ghostDrawOrder+0
         sta sort1
