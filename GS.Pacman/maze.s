@@ -139,7 +139,8 @@ getTileLeft anop
         dec tileX
         rts
         
-
+        
+; precalcualate all available paths for each tile of the maze
 ; 28 tiles wide
 ; 23 tiles high
 initMaze entry

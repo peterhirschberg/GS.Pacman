@@ -273,72 +273,7 @@ resetAnimationIndex anop
 drawGhosts entry
 
 ; Sort the ghosts in vertical order, drawing the topmost ghosts first to minimize flicker
-; Thanks to Lucas Scharenbroich and Ian Brumby for the sorting algorithm
-
-    jmp oldway
-
-
-      lda #0                            ; build a permutation index
-      ldx ghostPixelY+0                 ; compare 1 and 3
-      cpx ghostPixelY+4
-      rol a
-
-      ldx ghostPixelY+2                 ; compare 2 and 4
-      cpx ghostPixelY+6
-      rol a
-
-      ldx ghostPixelY+0                 ; compare 1 and 2
-      cpx ghostPixelY+2
-      rol a
-
-      ldx ghostPixelY+4                 ; compare 3 and 4
-      cpx ghostPixelY+6
-      rol a
-
-      ldx ghostPixelY+2                 ; compare 2 and 3
-      cpx ghostPixelY+4
-      rol a
-
-      asl a                             ; multiply by 8 here
-      asl a
-      asl a
-      tax                               ; Put permutation index in X
-
-    brk
-      
-      lda sortTable,x
-      ldy #0
-      sta ghostDrawOrder,y
-
-      inx
-      inx
-      
-      lda sortTable,x
-      ldy #2
-      sta ghostDrawOrder,y
-
-      inx
-      inx
-
-      lda sortTable,x
-      ldy #4
-      sta ghostDrawOrder,y
-
-      inx
-      inx
-
-      lda sortTable,x
-      ldy #6
-      sta ghostDrawOrder,y
-      
-
-
-      jmp skipstuff
-
-
-; -------------------
-
-oldway anop
+; Thanks to Lucas Scharenbroich, Ian Brumby, and John Brooks for contributing to the sorting algorithm
 
         lda ghostDrawOrder+0
         sta sort1
@@ -390,9 +325,6 @@ oldway anop
         lda sort2
         sta ghostDrawOrder+4
 
-        
-        
-skipstuff anop
         
         lda #0
         sta ghostCounter
@@ -418,6 +350,7 @@ drawGhostDone anop
 
         rts
         
+
         
 drawGhost entry
 
