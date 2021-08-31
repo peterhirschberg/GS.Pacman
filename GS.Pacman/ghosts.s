@@ -272,7 +272,146 @@ resetAnimationIndex anop
 
 drawGhosts entry
 
+
+    lda ghostDrawOrder+0
+    sta sort1
+    lda ghostDrawOrder+4
+    sta sort2
+    CmpAndSwap
+    lda sort1
+    sta ghostDrawOrder+0
+    lda sort2
+    sta ghostDrawOrder+4
+
+    lda ghostDrawOrder+2
+    sta sort1
+    lda ghostDrawOrder+6
+    sta sort2
+    CmpAndSwap
+    lda sort1
+    sta ghostDrawOrder+2
+    lda sort2
+    sta ghostDrawOrder+6
+    
+    lda ghostDrawOrder+0
+    sta sort1
+    lda ghostDrawOrder+2
+    sta sort2
+    CmpAndSwap
+    lda sort1
+    sta ghostDrawOrder+0
+    lda sort2
+    sta ghostDrawOrder+2
+
+    lda ghostDrawOrder+4
+    sta sort1
+    lda ghostDrawOrder+6
+    sta sort2
+    CmpAndSwap
+    lda sort1
+    sta ghostDrawOrder+4
+    lda sort2
+    sta ghostDrawOrder+6
+    
+    lda ghostDrawOrder+2
+    sta sort1
+    lda ghostDrawOrder+4
+    sta sort2
+    CmpAndSwap
+    lda sort1
+    sta ghostDrawOrder+2
+    lda sort2
+    sta ghostDrawOrder+4
+
+    jmp startSortedDraw
+
+    rts
+
+
+	ldx	#6
+backup	lda	ghostPixelY,x
+	sta	sortedY,x
+	dex
+	dex
+	bpl	backup
+
+	lda	#4
+	sta	remainingGhosts
+findNextGhost anop
+	ldx	#0
+	ldy	sortedY
+	cpy	sortedY+2
+	bcc	c1
+	ldx	#2
+	ldy	sortedY+2
+c1	cpy	sortedY+4
+	bcc	c2
+	ldx	#4
+	ldy	sortedY+4
+c2	cpy	sortedY+6
+	bcc	c3
+	ldx	#6
+	ldy	sortedY+6
+c3	lda	#$FFFF
+	sta	sortedY,x
+	lda	ghostPixelX,x
+    jsr	drawGhost	; x = ghost to draw, a = ghost x pos, y = ghost y pos
+
+	dec	remainingGhosts
+	bne	findNextGhost
+    
+    
+    rts
+
+
+
+
+
+
+
+
+
 ; sort the ghosts in vertical order, drawing the topmost ghosts first
+
+	lda	ghostPixelY
+	sta	sortedY
+	lda	ghostPixelY+2
+	sta	sortedY+2
+	lda	ghostPixelY+4
+	sta	sortedY+4
+	lda	ghostPixelY+6
+	sta	sortedY+6
+sortStart anop
+	stz	swapped
+	ldx	#2
+sortNext anop
+	lda	sortedY,x
+	cmp	sortedY-2,x
+	bcs	keepSorting
+	ldy	sortedY,x
+	lda	sortedY-2,x
+	sta	sortedY,x
+	tya
+	sta	sortedY-2,x
+	ldy	ghostDrawOrder,x
+	lda	ghostDrawOrder-2,x
+	sta	ghostDrawOrder,x
+	tya
+	sta	ghostDrawOrder-2,x
+	inc	swapped
+keepSorting anop
+	inx
+	inx
+	cpx	#8
+	beq	sortStart
+
+	lda	swapped
+	bne	sortNext
+
+sortDone anop
+
+
+startSortedDraw anop
 
         lda #0
         sta ghostCounter
@@ -575,8 +714,27 @@ ghostDrawOrder anop
         dc i2'GHOSTINDEX_PINK'
         dc i2'GHOSTINDEX_BLUE'
         dc i2'GHOSTINDEX_ORANGE'
+        
+sortedY anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
 
 ghostCounter dc i2'0'
+remainingGhosts dc i2'0'
+
+swapped dc i2'0'
+
+temp dc i2'0'
+
+y1 dc i2'0'
+y2 dc i2'0'
+
+sortIndex dc i2'0'
+
+sort1 dc i2'0'
+sort2 dc i2'0'
 
         end
 

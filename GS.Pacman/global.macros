@@ -40,6 +40,19 @@
         asl a
         mend
 
+        macro
+        CmpAndSwap
+        ldx sort1
+        lda ghostPixelY,x
+        ldx sort2
+        cmp ghostPixelY,x
+        bcc noSwap_&SYSCNT
+        lda sort1
+        stx sort1
+        sta sort2
+noSwap_&SYSCNT anop
+        mend
+
 
 ; ORCA/M macros
 

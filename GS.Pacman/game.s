@@ -59,6 +59,7 @@ mainLoop anop
         jsr drawGhosts
 
         jsr drawPac
+        jsr drawPac
 
         
 

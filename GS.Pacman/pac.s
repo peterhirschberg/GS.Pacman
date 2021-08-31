@@ -37,7 +37,7 @@ animatePac entry
         rts
 
 incrementAnimationIndex anop
-        lda #3 ; animation timer duration
+        lda #2 ; animation timer duration
         sta pacAnimationTimer
 
         inc pacAnimationIndex
