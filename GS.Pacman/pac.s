@@ -56,7 +56,7 @@ resetAnimationIndex anop
         
 drawPac entry
 
-   rts
+;   rts
    
    
         lda pacX
@@ -105,7 +105,7 @@ drawDirectionUp anop
         
 erasePac entry
 
-    rts
+;    rts
 
         lda pacOldX
         sta spriteX

@@ -272,21 +272,28 @@ resetAnimationIndex anop
 
 drawGhosts entry
 
-        lda #GHOSTINDEX_RED
+; sort the ghosts in vertical order, drawing the topmost ghosts first
+
+        lda #0
+        sta ghostCounter
+
+drawGhostLoop anop
+
+        lda ghostCounter
+        asl a
+        tax
+        lda ghostDrawOrder,x
+
         sta currentGhost
         jsr drawGhost
 
-        lda #GHOSTINDEX_PINK
-        sta currentGhost
-        jsr drawGhost
-
-        lda #GHOSTINDEX_BLUE
-        sta currentGhost
-        jsr drawGhost
-
-        lda #GHOSTINDEX_ORANGE
-        sta currentGhost
-        jsr drawGhost
+        inc ghostCounter
+        lda ghostCounter
+        cmp #4
+        beq drawGhostDone
+        bra drawGhostLoop
+        
+drawGhostDone anop
 
         rts
         
@@ -563,6 +570,13 @@ ghostAnimationTimer dc i2'0'
 
 availableDirections dc i2'0'
 
+ghostDrawOrder anop
+        dc i2'GHOSTINDEX_RED'
+        dc i2'GHOSTINDEX_PINK'
+        dc i2'GHOSTINDEX_BLUE'
+        dc i2'GHOSTINDEX_ORANGE'
+
+ghostCounter dc i2'0'
 
         end
 
