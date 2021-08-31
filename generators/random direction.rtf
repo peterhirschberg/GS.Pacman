@@ -1,0 +1,56 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 const DIRECTION_RIGHT         = 0\
+const DIRECTION_DOWN          = 1\
+const DIRECTION_LEFT          = 2\
+const DIRECTION_UP            = 3\
+\
+let lastDir = -1\
+\
+let str = '\\n\\nrandomDirectionNotRight anop\\n'\
+for (let i=0; i<256; i++) \{\
+	let dir = parseInt(Math.random() * 4)\
+  while (dir === DIRECTION_RIGHT || dir === lastDir) \{\
+  	dir = parseInt(Math.random() * 4)\
+	\}\
+  lastDir = dir\
+	str += `		dc i2'$\{dir\}'\\n`\
+\}\
+\
+str += '\\n\\nrandomDirectionNotLeft anop\\n'\
+for (i=0; i<256; i++) \{\
+	let dir = parseInt(Math.random() * 4)\
+  while (dir === DIRECTION_LEFT || dir === lastDir) \{\
+  	dir = parseInt(Math.random() * 4)\
+	\}\
+  lastDir = dir\
+	str += `		dc i2'$\{dir\}'\\n`\
+\}\
+\
+str += '\\n\\nrandomDirectionNotUp anop\\n'\
+for (i=0; i<256; i++) \{\
+	let dir = parseInt(Math.random() * 4)\
+  while (dir === DIRECTION_UP || dir === lastDir) \{\
+  	dir = parseInt(Math.random() * 4)\
+	\}\
+  lastDir = dir\
+	str += `		dc i2'$\{dir\}'\\n`\
+\}\
+\
+str += '\\n\\nrandomDirectionNotDown anop\\n'\
+for (i=0; i<256; i++) \{\
+	let dir = parseInt(Math.random() * 4)\
+  while (dir === DIRECTION_DOWN || dir === lastDir) \{\
+  	dir = parseInt(Math.random() * 4)\
+	\}\
+  lastDir = dir\
+	str += `		dc i2'$\{dir\}'\\n`\
+\}\
+\
+\
+console.log(str)}
