@@ -11,7 +11,8 @@
 
 
 game start
-
+        using controlsData
+        
 
 gameInit entry
         jsr setupScreen
@@ -37,6 +38,7 @@ mainLoop anop
         jsr borderStart
         
         
+        jsr checkControls
 
         jsr runMaze
         
@@ -63,6 +65,12 @@ mainLoop anop
         jsr drawPac
         jsr drawPac
 
+        
+        lda #0
+        sta joystickUp
+        sta joystickDown
+        sta joystickLeft
+        sta joystickRight
         
 
         jsr borderDone

@@ -169,14 +169,14 @@ nextWord anop
 ; Modified to read controls while waiting for VBL
 waitForVbl entry
 vblLoop1 anop
-;        jsr checkControls
+        jsr checkControls
 		short m
 		lda #$fe
 		cmp >READ_VBL
         long m
 		bpl vblLoop1
 vblLoop2 anop
-;        jsr checkControls
+        jsr checkControls
         short m
         lda #$fe
 		cmp >READ_VBL

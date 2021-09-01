@@ -12,6 +12,7 @@
 pac start
         using globalData
         using spritesData
+        using controlsData
         using pacData
     
     
@@ -22,11 +23,72 @@ runPac entry
         sta pacOldX
         lda pacY
         sta pacOldY
+        
+        jsr movePac
 
 ; animation
-        jsr animatePac
+;        jsr animatePac
 
         rts
+        
+        
+movePac entry
+
+        lda joystickUp
+        cmp #0
+        bne pacUp
+
+        lda joystickDown
+        cmp #0
+        bne pacDown
+
+        lda joystickLeft
+        cmp #0
+        bne pacLeft
+
+        lda joystickRight
+        cmp #0
+        bne pacRight
+
+        rts
+
+pacUp anop
+
+        lda pacY
+        sec
+        sbc #1
+        sta pacY
+
+        rts
+
+pacDown anop
+        
+        lda pacY
+        clc
+        adc #1
+        sta pacY
+        
+        rts
+
+pacLeft anop
+        
+        lda pacX
+        sec
+        sbc #1
+        sta pacX
+        
+        rts
+
+pacRight anop
+        
+        lda pacX
+        clc
+        adc #1
+        sta pacX
+        
+        rts
+
+        
         
         
 animatePac entry
@@ -126,27 +188,27 @@ pacData data
 
     
 pacRightAnimationSprites anop
-        dc i2'SPRITE_PAC_RIGHT_1'
-        dc i2'SPRITE_PAC_RIGHT_2'
         dc i2'SPRITE_PAC_FULL_1'
+        dc i2'SPRITE_PAC_RIGHT_2'
+        dc i2'SPRITE_PAC_RIGHT_1'
         dc i2'SPRITE_PAC_RIGHT_2'
 
 pacLeftAnimationSprites anop
-        dc i2'SPRITE_PAC_LEFT_1'
-        dc i2'SPRITE_PAC_LEFT_2'
         dc i2'SPRITE_PAC_FULL_2'
+        dc i2'SPRITE_PAC_LEFT_2'
+        dc i2'SPRITE_PAC_LEFT_1'
         dc i2'SPRITE_PAC_LEFT_2'
 
 pacUpAnimationSprites anop
-        dc i2'SPRITE_PAC_UP_1'
-        dc i2'SPRITE_PAC_UP_2'
         dc i2'SPRITE_PAC_FULL_3'
+        dc i2'SPRITE_PAC_UP_2'
+        dc i2'SPRITE_PAC_UP_1'
         dc i2'SPRITE_PAC_UP_2'
 
 pacDownAnimationSprites anop
-        dc i2'SPRITE_PAC_DOWN_1'
-        dc i2'SPRITE_PAC_DOWN_2'
         dc i2'SPRITE_PAC_FULL_1'
+        dc i2'SPRITE_PAC_DOWN_2'
+        dc i2'SPRITE_PAC_DOWN_1'
         dc i2'SPRITE_PAC_DOWN_2'
 
 ; 11 frames for "die" animation
@@ -164,8 +226,8 @@ pacDieAnimationSprites anop
         dc i2'SPRITE_PAC_DIE_11'
 
         
-pacX dc i2'48'
-pacY dc i2'48'
+pacX dc i2'$6c'
+pacY dc i2'$89'
 
 pacOldX dc i2'48'
 pacOldY dc i2'48'
@@ -173,7 +235,7 @@ pacOldY dc i2'48'
 pacAnimationIndex dc i2'0'
 pacAnimationTimer dc i2'0'
 
-pacDirection dc i2'DIRECTION_RIGHT'
+pacDirection dc i2'DIRECTION_LEFT'
 
 
         end
