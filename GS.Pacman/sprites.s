@@ -35,14 +35,6 @@ translateSpritePosToMazePos entry
 
         rts
         
-
-drawSprites entry
-
-; TODO
-
-        rts
-
-
         
 ; Thanks to Ian Brumby and John Brooks for this lookup routine
 drawSpriteByIndex entry

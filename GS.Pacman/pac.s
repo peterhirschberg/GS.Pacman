@@ -13,6 +13,7 @@ pac start
         using globalData
         using spritesData
         using controlsData
+        using mazeExchangeData
         using pacData
     
     
@@ -24,15 +25,38 @@ runPac entry
         lda pacY
         sta pacOldY
         
+        lda pacX
+;        shiftedToPixel
+        jsr getTileXFromPixelX
+        sta tileX
+        lda pacY
+;        shiftedToPixel
+        jsr getTileYFromPixelY
+        sta tileY
+        
+; HERE I NEED TO GET THE NEXT TILE IN THE DIRECTION OF TRAVEL
+        lda pacDirection
+        jsr getNextTileXYAlongDirection
+        
+        jsr getAvailableDirectionsFromTileXY ; modifies tileX/Y
+        sta availableDirections
+
+        
+        jsr controlPac
         jsr movePac
 
 ; animation
-;        jsr animatePac
+        lda pacDirection
+        cmp #DIRECTION_STOP
+        beq dontAnimate
+        jsr animatePac
+
+dontAnimate anop
 
         rts
         
         
-movePac entry
+controlPac entry
 
         lda joystickUp
         cmp #0
@@ -54,40 +78,175 @@ movePac entry
 
 pacUp anop
 
-        lda pacY
-        sec
-        sbc #1
-        sta pacY
+        lda #DIRECTION_UP
+        sta pacIntendedDirection
 
         rts
 
 pacDown anop
-        
-        lda pacY
-        clc
-        adc #1
-        sta pacY
+
+        lda #DIRECTION_DOWN
+        sta pacIntendedDirection
         
         rts
 
 pacLeft anop
-        
-        lda pacX
-        sec
-        sbc #1
-        sta pacX
+
+        lda #DIRECTION_LEFT
+        sta pacIntendedDirection
         
         rts
 
 pacRight anop
+
+        lda #DIRECTION_RIGHT
+        sta pacIntendedDirection
         
+        rts
+
+        
+        
+movePac entry
+
+        lda pacX
+;        shiftedToPixel
+        sta spriteX
+        lda pacY
+;        shiftedToPixel
+        sta spriteY
+        jsr isSpriteCenteredInMazeTile
+        cmp #0
+;        beq keepMoving1 ; TODO this is not correct for Pac
+
+; TODO I think checkDirectionAvailable return value should be checked for equality with pacIntendedDirection
+        lda pacIntendedDirection
+        jsr checkDirectionAvailable
+        cmp #0
+        beq keepMoving1
+        
+        lda pacIntendedDirection
+        sta pacDirection
+
+keepMoving1 anop
+
+        lda pacDirection
+        jsr checkDirectionAvailable
+        cmp #0
+        bne keepMoving2
+        
+        lda #DIRECTION_STOP
+        sta pacDirection
+        
+keepMoving2 anop
+
+        lda pacDirection
+        cmp #DIRECTION_UP
+        beq moveUp
+        cmp #DIRECTION_DOWN
+        beq moveDown
+        cmp #DIRECTION_LEFT
+        beq moveLeft
+        cmp #DIRECTION_RIGHT
+        beq moveRight
+
+        rts
+        
+moveUp entry
+
+        lda pacY
+        sec
+        sbc #1
+        sta pacY
+
+        rts
+
+moveDown entry
+
+        lda pacY
+        clc
+        adc #1
+        sta pacY
+
+        rts
+
+moveLeft entry
+
+        lda pacX
+        sec
+        sbc #1
+        sta pacX
+
+        rts
+
+moveRight entry
+
         lda pacX
         clc
         adc #1
         sta pacX
-        
+
         rts
 
+        
+
+checkDirectionAvailable entry
+
+        cmp #DIRECTION_UP
+        beq checkUpAvailable
+        cmp #DIRECTION_RIGHT
+        beq checkRightAvailable
+        cmp #DIRECTION_DOWN
+        beq checkDownAvailable
+        cmp #DIRECTION_LEFT
+        beq checkLeftAvailable
+        
+        lda #1 ; should never be reached
+        
+        rts
+        
+checkUpAvailable anop
+        lda availableDirections
+        and #AVAILABLEDIR_UP
+        cmp #0
+        beq upNotAvailable
+        lda #1
+        rts
+upNotAvailable anop
+        lda #0
+        rts
+        
+checkRightAvailable anop
+        lda availableDirections
+        and #AVAILABLEDIR_RIGHT
+        cmp #0
+        beq rightNotAvailable
+        lda #1
+        rts
+rightNotAvailable anop
+        lda #0
+        rts
+        
+checkDownAvailable anop
+        lda availableDirections
+        and #AVAILABLEDIR_DOWN
+        cmp #0
+        beq downNotAvailable
+        lda #1
+        rts
+downNotAvailable anop
+        lda #0
+        rts
+        
+checkLeftAvailable anop
+        lda availableDirections
+        and #AVAILABLEDIR_LEFT
+        cmp #0
+        beq leftNotAvailable
+        lda #1
+        rts
+leftNotAvailable anop
+        lda #0
+        rts
         
         
         
@@ -118,9 +277,6 @@ resetAnimationIndex anop
         
 drawPac entry
 
-;   rts
-   
-   
         lda pacX
         sta spriteX
         lda pacY
@@ -139,6 +295,8 @@ drawPac entry
         beq drawDirectionLeft
         cmp #DIRECTION_UP
         beq drawDirectionUp
+        cmp #DIRECTION_STOP
+        beq drawDirectionStop
         
         rts
         
@@ -162,12 +320,15 @@ drawDirectionUp anop
         jsr drawSpriteByIndex
         rts
 
+drawDirectionStop anop
+; TODO - remember last direction and sprite index
+        lda pacLeftAnimationSprites,x
+        jsr drawSpriteByIndex
+        rts
         
         
         
 erasePac entry
-
-;    rts
 
         lda pacOldX
         sta spriteX
@@ -178,7 +339,10 @@ erasePac entry
 
         rts
         
+
         
+availableDirections dc i2'0'
+
     
         end
 
@@ -225,7 +389,8 @@ pacDieAnimationSprites anop
         dc i2'SPRITE_PAC_DIE_10'
         dc i2'SPRITE_PAC_DIE_11'
 
-        
+
+; Initial position in maze is $6c,$89
 pacX dc i2'$6c'
 pacY dc i2'$89'
 
@@ -236,6 +401,7 @@ pacAnimationIndex dc i2'0'
 pacAnimationTimer dc i2'0'
 
 pacDirection dc i2'DIRECTION_LEFT'
+pacIntendedDirection dc i2'DIRECTION_LEFT'
 
 
         end

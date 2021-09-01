@@ -38,7 +38,7 @@ DIRECTION_RIGHT         gequ 0
 DIRECTION_DOWN          gequ 1
 DIRECTION_LEFT          gequ 2
 DIRECTION_UP            gequ 3
-DIRECTION_UNDECIDED     gequ 4
+DIRECTION_STOP          gequ 4
 
 
 reverseDirections anop
@@ -46,7 +46,7 @@ reverseDirections anop
                     dc i2'DIRECTION_UP'
                     dc i2'DIRECTION_RIGHT'
                     dc i2'DIRECTION_DOWN'
-                    dc i2'DIRECTION_UNDECIDED'
+                    dc i2'DIRECTION_STOP'
 
 
 ; table of precomputed screen row offsets
