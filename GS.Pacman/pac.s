@@ -35,8 +35,8 @@ runPac entry
         sta tileY
         
 ; HERE I NEED TO GET THE NEXT TILE IN THE DIRECTION OF TRAVEL
-        lda pacDirection
-        jsr getNextTileXYAlongDirection
+;        lda pacDirection
+;        jsr getNextTileXYAlongDirection
         
         jsr getAvailableDirectionsFromTileXY ; modifies tileX/Y
         sta availableDirections
@@ -46,8 +46,8 @@ runPac entry
         jsr movePac
 
 ; animation
-        lda pacDirection
-        cmp #DIRECTION_STOP
+        lda pacMoving
+        cmp #0
         beq dontAnimate
         jsr animatePac
 
@@ -134,10 +134,15 @@ keepMoving1 anop
         cmp #0
         bne keepMoving2
         
-        lda #DIRECTION_STOP
-        sta pacDirection
+        lda #0
+        sta pacMoving
+        
+        rts
         
 keepMoving2 anop
+
+        lda #1
+        sta pacMoving
 
         lda pacDirection
         cmp #DIRECTION_UP
@@ -295,8 +300,6 @@ drawPac entry
         beq drawDirectionLeft
         cmp #DIRECTION_UP
         beq drawDirectionUp
-        cmp #DIRECTION_STOP
-        beq drawDirectionStop
         
         rts
         
@@ -320,13 +323,6 @@ drawDirectionUp anop
         jsr drawSpriteByIndex
         rts
 
-drawDirectionStop anop
-; TODO - remember last direction and sprite index
-        lda pacLeftAnimationSprites,x
-        jsr drawSpriteByIndex
-        rts
-        
-        
         
 erasePac entry
 
@@ -403,5 +399,6 @@ pacAnimationTimer dc i2'0'
 pacDirection dc i2'DIRECTION_LEFT'
 pacIntendedDirection dc i2'DIRECTION_LEFT'
 
+pacMoving dc i2'0'
 
         end
