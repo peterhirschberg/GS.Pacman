@@ -59,11 +59,9 @@ mainLoop anop
         jsr borderStart
 
         
-        
-        jsr drawGhosts
+        jsr drawPac
 
-        jsr drawPac
-        jsr drawPac
+        jsr drawGhosts
 
         
         lda #0

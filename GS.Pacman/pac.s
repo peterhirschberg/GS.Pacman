@@ -27,17 +27,38 @@ runPac entry
         
         lda pacX
 ;        shiftedToPixel
+
+        lda pacX
+        ldy pacDirection
+        cpy #DIRECTION_LEFT
+        bne notLeft
+        clc
+        adc #7
+
+notLeft anop
+
         jsr getTileXFromPixelX
         sta tileX
+        
         lda pacY
 ;        shiftedToPixel
+
+        ldy pacDirection
+        cpy #DIRECTION_UP
+        bne notUp
+        clc
+        adc #5
+
+notUp anop
+
         jsr getTileYFromPixelY
         sta tileY
         
 ; HERE I NEED TO GET THE NEXT TILE IN THE DIRECTION OF TRAVEL
 ;        lda pacDirection
 ;        jsr getNextTileXYAlongDirection
-        
+
+
         jsr getAvailableDirectionsFromTileXY ; modifies tileX/Y
         sta availableDirections
 
