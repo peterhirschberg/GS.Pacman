@@ -7,6 +7,8 @@
 ;
 
         case on
+        mcopy global.macros
+        keep global
 
 
 pac start
@@ -26,9 +28,8 @@ runPac entry
         sta pacOldY
         
         lda pacX
-;        shiftedToPixel
+        shiftedToPixel
 
-        lda pacX
         ldy pacDirection
         cpy #DIRECTION_LEFT
         bne notLeft
@@ -41,7 +42,7 @@ notLeft anop
         sta tileX
         
         lda pacY
-;        shiftedToPixel
+        shiftedToPixel
 
         ldy pacDirection
         cpy #DIRECTION_UP
@@ -53,18 +54,15 @@ notUp anop
 
         jsr getTileYFromPixelY
         sta tileY
+
         
-; HERE I NEED TO GET THE NEXT TILE IN THE DIRECTION OF TRAVEL
-;        lda pacDirection
-;        jsr getNextTileXYAlongDirection
-
-
         jsr getAvailableDirectionsFromTileXY ; modifies tileX/Y
         sta availableDirections
 
         
         jsr controlPac
         jsr movePac
+        jsr checkTunnel
         jsr checkDots
 
 ; animation
@@ -130,16 +128,6 @@ pacRight anop
         
 movePac entry
 
-        lda pacX
-;        shiftedToPixel
-        sta spriteX
-        lda pacY
-;        shiftedToPixel
-        sta spriteY
-;        jsr isPacCenteredInMazeTile
-;        cmp #0
-;        beq keepMoving1 ; TODO this is not correct for Pac
-
         lda pacIntendedDirection
         jsr checkDirectionAvailable
         cmp #0
@@ -181,7 +169,7 @@ moveUp entry
 
         lda pacY
         sec
-        sbc #1
+        sbc #8
         sta pacY
 
         rts
@@ -190,7 +178,7 @@ moveDown entry
 
         lda pacY
         clc
-        adc #1
+        adc #8
         sta pacY
 
         rts
@@ -199,7 +187,7 @@ moveLeft entry
 
         lda pacX
         sec
-        sbc #1
+        sbc #8
         sta pacX
 
         rts
@@ -208,7 +196,7 @@ moveRight entry
 
         lda pacX
         clc
-        adc #1
+        adc #8
         sta pacX
 
         rts
@@ -304,8 +292,10 @@ resetAnimationIndex anop
 drawPac entry
 
         lda pacX
+        shiftedToPixel
         sta spriteX
         lda pacY
+        shiftedToPixel
         sta spriteY
 
         lda pacAnimationIndex
@@ -348,8 +338,10 @@ drawDirectionUp anop
 erasePac entry
 
         lda pacOldX
+        shiftedToPixel
         sta spriteX
         lda pacOldY
+        shiftedToPixel
         sta spriteY
 
         jsr eraseSpriteRect
@@ -360,11 +352,11 @@ erasePac entry
 checkDots entry
 
         lda pacX
-;        shiftedToPixel
+        shiftedToPixel
         jsr getTileXFromPixelX
         sta tileX
         lda pacY
-;        shiftedToPixel
+        shiftedToPixel
         jsr getTileYFromPixelY
         sta tileY
 
@@ -379,11 +371,11 @@ checkDots entry
 eatDot anop
 
         lda pacX
-;        shiftedToPixel
+        shiftedToPixel
         jsr getTileXFromPixelX
         sta tileX
         lda pacY
-;        shiftedToPixel
+        shiftedToPixel
         jsr getTileYFromPixelY
         sta tileY
 
@@ -391,6 +383,46 @@ eatDot anop
         jsr setTileFromTileXY
 
         rts
+        
+        
+        
+checkTunnel anop
+
+        lda pacX
+        shiftedToPixel
+        jsr getTileXFromPixelX
+        sta tileX
+        lda pacY
+        shiftedToPixel
+        jsr getTileYFromPixelY
+        sta tileY
+
+        jsr getTileFromTileXY
+        cmp #8
+        beq inTunnel
+        rts
+       
+inTunnel anop
+
+; wrap if going through tunnel
+        lda #64
+        cmp pacX
+        bcs resetToRight
+        lda pacX
+        cmp #1728
+        bcs resetToLeft
+        rts
+
+resetToLeft anop
+        lda #64
+        sta pacX
+        rts
+
+resetToRight anop
+        lda #1728
+        sta pacX
+        rts
+
         
         
 availableDirections dc i2'0'
@@ -443,8 +475,8 @@ pacDieAnimationSprites anop
 
 
 ; Initial position in maze is $6c,$89
-pacX dc i2'$6c'
-pacY dc i2'$89'
+pacX dc i2'$360'
+pacY dc i2'$448'
 
 pacOldX dc i2'48'
 pacOldY dc i2'48'
