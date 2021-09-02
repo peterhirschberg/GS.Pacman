@@ -33,7 +33,7 @@ runPac entry
         cpy #DIRECTION_LEFT
         bne notLeft
         clc
-        adc #7
+        adc #7 ; Why do I need this dumb offset for LEFT?
 
 notLeft anop
 
@@ -47,7 +47,7 @@ notLeft anop
         cpy #DIRECTION_UP
         bne notUp
         clc
-        adc #5
+        adc #5 ; Why do I need this dumb offset for UP?
 
 notUp anop
 
@@ -65,6 +65,7 @@ notUp anop
         
         jsr controlPac
         jsr movePac
+        jsr checkDots
 
 ; animation
         lda pacMoving
@@ -135,11 +136,10 @@ movePac entry
         lda pacY
 ;        shiftedToPixel
         sta spriteY
-        jsr isSpriteCenteredInMazeTile
-        cmp #0
+;        jsr isPacCenteredInMazeTile
+;        cmp #0
 ;        beq keepMoving1 ; TODO this is not correct for Pac
 
-; TODO I think checkDirectionAvailable return value should be checked for equality with pacIntendedDirection
         lda pacIntendedDirection
         jsr checkDirectionAvailable
         cmp #0
@@ -357,6 +357,41 @@ erasePac entry
         rts
         
 
+checkDots entry
+
+        lda pacX
+;        shiftedToPixel
+        jsr getTileXFromPixelX
+        sta tileX
+        lda pacY
+;        shiftedToPixel
+        jsr getTileYFromPixelY
+        sta tileY
+
+        jsr getTileFromTileXY
+        cmp #1
+        beq eatDot
+        cmp #2
+        beq eatDot
+
+        rts
+        
+eatDot anop
+
+        lda pacX
+;        shiftedToPixel
+        jsr getTileXFromPixelX
+        sta tileX
+        lda pacY
+;        shiftedToPixel
+        jsr getTileYFromPixelY
+        sta tileY
+
+        lda #0
+        jsr setTileFromTileXY
+
+        rts
+        
         
 availableDirections dc i2'0'
 

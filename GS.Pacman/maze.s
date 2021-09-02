@@ -43,6 +43,30 @@ getTileFromTileXY entry
         lda >mazeTileList,x
 
         rts
+
+setTileFromTileXY entry
+
+        sta newTile
+
+        lda tileX
+        asl a
+        sta temp
+
+        lda tileY
+        asl a
+        tax
+        lda mazeTileRowOffsets,x
+        clc
+        adc temp
+        tax
+        lda newTile
+        lda #0
+        sta >mazeTileList,x
+        
+        jsr updateMazeTile
+
+        rts
+        
         
 getTileXFromPixelX entry
 
@@ -108,6 +132,52 @@ isCentered anop
 
         lda #1
 
+        rts
+        
+isPacCenteredInMazeTile entry
+        
+        lda spriteX
+        and #7
+        sta tileX
+        
+        lda spriteY
+        and #7
+        sta tileY
+        
+        lda tileX
+        cmp #0
+        beq checkPacY
+        cmp #1
+        beq checkPacY
+        cmp #2
+        beq checkPacY
+        cmp #7
+        beq checkPacY
+        cmp #6
+        beq checkPacY
+        lda #0
+        rts
+        
+checkPacY anop
+        
+        lda tileY
+        cmp #0
+        beq isPacCentered
+        cmp #1
+        beq isPacCentered
+        cmp #2
+        beq isPacCentered
+        cmp #7
+        beq isPacCentered
+        cmp #6
+        beq isPacCentered
+        lda #0
+        rts
+        
+isPacCentered anop
+        
+        lda #1
+        
         rts
         
 getNextTileXYAlongDirection entry
@@ -455,7 +525,53 @@ drawMazeDone anop
 
         rts
 
-    
+        
+updateMazeTile entry
+
+        lda tileY
+        sta mazeRow
+
+        lda tileX
+        sta mazeCol
+
+        lda mazeRow
+        asl a
+        tax
+        lda mazeTileRowOffsets,x
+        tax
+        lda >mazeTileList,x
+
+        asl a
+        tax
+        
+    ldx #0
+
+        lda >mazeGraphicsOffsetXList,x
+        sta tileSrcX
+
+        lda >mazeGraphicsOffsetYList,x
+        sta tileSrcY
+
+        lda mazeCol
+        asl a
+        asl a
+        clc
+        adc #MAZE_OFFSET_X
+        sta tileDstX
+
+        lda mazeRow
+        asl a
+        asl a
+        asl a
+        clc
+        adc #MAZE_OFFSET_Y
+        sta tileDstY
+
+        jsr drawMazeTile
+
+        rts
+        
+        
     
 setMazeTileDirty entry
 
@@ -761,6 +877,8 @@ tileLeft dc i2'0'
 
 powerPelletFlashTimer dc i2'0'
 powerPelletFlashState dc i2'0'
+
+newTile dc i2'0'
 
 temp dc i2'0'
 
