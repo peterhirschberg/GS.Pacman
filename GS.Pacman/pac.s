@@ -128,6 +128,14 @@ pacRight anop
         
 movePac entry
 
+        lda pacAteDotDelay
+        cmp #0
+        beq noDelay
+        dec pacAteDotDelay
+        rts
+        
+noDelay anop
+
         lda pacIntendedDirection
         jsr checkDirectionAvailable
         cmp #0
@@ -362,14 +370,20 @@ checkDots entry
 
         jsr getTileFromTileXY
         cmp #1
-        beq eatDot
+        beq eatSmallDot
         cmp #2
-        beq eatDot
+        beq eatLargeDot
 
         rts
         
+eatLargeDot anop
+        lda #3
+        sta pacAteDotDelay
+        bra eatDot
+eatSmallDot anop
+        lda #1
+        sta pacAteDotDelay
 eatDot anop
-
         lda pacX
         shiftedToPixel
         jsr getTileXFromPixelX
@@ -488,5 +502,7 @@ pacDirection dc i2'DIRECTION_LEFT'
 pacIntendedDirection dc i2'DIRECTION_LEFT'
 
 pacMoving dc i2'0'
+
+pacAteDotDelay dc i2'0'
 
         end
