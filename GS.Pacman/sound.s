@@ -124,6 +124,7 @@ soundInit_loop anop
 
 		rts
 
+        
 playEatDotSound entry
 
         lda eatDotTimer
@@ -132,7 +133,7 @@ playEatDotSound entry
         
 doPlayEatDotSound anop
 
-        lda #16
+        lda #17
         sta eatDotTimer
 
         short m
