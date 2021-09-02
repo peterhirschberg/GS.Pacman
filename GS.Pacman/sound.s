@@ -85,6 +85,18 @@ writeRegNoRead entry
 		lda registerValue
 		sta >SOUND_DATA_REG
 		rts
+        
+       
+runSound entry
+
+        lda eatDotTimer
+        bmi eatDotTimerNeg
+        dec eatDotTimer
+
+eatDotTimerNeg anop
+
+        rts
+        
 
 soundInit entry
 		pea EATDOT_SOUND_ADDR
@@ -113,6 +125,15 @@ soundInit_loop anop
 		rts
 
 playEatDotSound entry
+
+        lda eatDotTimer
+        bmi doPlayEatDotSound
+        rts
+        
+doPlayEatDotSound anop
+
+        lda #16
+        sta eatDotTimer
 
         short m
 		_docWait
@@ -159,5 +180,8 @@ soundRegDefaults anop
 
 
 soundRegDefaultsEnd anop
+
+
+eatDotTimer dc i2'0'
 
         end

@@ -48,6 +48,9 @@ mainLoop anop
         
         jsr runGhosts
 
+        jsr runSound
+        
+        
         
 ;        jsr borderStart
 
