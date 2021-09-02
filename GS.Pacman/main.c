@@ -28,7 +28,7 @@ unsigned int randomSeed;
 
 
 boolean shouldQuit;
-int r = 0;
+
 
 void signalQuit(void)
 {
@@ -37,13 +37,6 @@ void signalQuit(void)
 
 word getRandom(range)
 {
-/*
-    ++r;
-    if (r >= 4) {
-        r = 0;
-    }
-    return r;
-*/
     return rand() % range;
 }
 
@@ -55,7 +48,7 @@ word getRandomRange(word lower, word upper)
 
 
 // Sounds
-/*
+
 static void loadSound(Word addr, Word soundNum)
 {
     Handle handle = LoadResource(rRawSound, soundNum);
@@ -64,11 +57,12 @@ static void loadSound(Word addr, Word soundNum)
     HUnlock(handle);
 }
 
-void loadWonSound(word addr)
+void loadEatDotSound(word addr)
 {
-    loadSound(addr, WON_SOUND);
+    loadSound(addr, EATDOT_SOUND);
 }
 
+/*
 void loadRoarSound(word addr)
 {
     loadSound(addr, ROAR_SOUND);

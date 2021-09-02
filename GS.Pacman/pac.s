@@ -76,6 +76,29 @@ dontAnimate anop
         rts
         
         
+alignPacWithTiles entry
+
+        lda pacDirection
+        cmp #DIRECTION_UP
+        beq alignX
+        cmp #DIRECTION_DOWN
+        beq alignX
+        cmp #DIRECTION_LEFT
+        beq alignY
+        cmp #DIRECTION_RIGHT
+        beq alignY
+
+        rts
+
+alignX anop
+        alignXToTile
+        rts
+
+alignY anop
+        alignYToTile
+        rts
+
+        
 controlPac entry
 
         lda joystickUp
@@ -127,6 +150,8 @@ pacRight anop
         
         
 movePac entry
+
+        jsr alignPacWithTiles
 
         lda pacAteDotDelay
         cmp #0
@@ -396,6 +421,8 @@ eatDot anop
         lda #0
         jsr setTileFromTileXY
 
+        jsr playEatDotSound
+        
         rts
         
         
@@ -441,7 +468,7 @@ resetToRight anop
         
 availableDirections dc i2'0'
 
-    
+
         end
 
 
@@ -488,7 +515,7 @@ pacDieAnimationSprites anop
         dc i2'SPRITE_PAC_DIE_11'
 
 
-; Initial position in maze is $6c,$89
+; Initial position in maze is $6c,$89 x 8
 pacX dc i2'$360'
 pacY dc i2'$448'
 

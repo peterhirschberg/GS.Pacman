@@ -1,8 +1,8 @@
 ;
 ;  controls.s
-;  GS.Adventure
+;  GS.Pacman
 ;
-;  Created by Peter Hirschberg on 7/4/21.
+;  Created by Peter Hirschberg on 8/30/21.
 ;Copyright © 2021 Peter Hirschberg. All rights reserved.
 ;
 

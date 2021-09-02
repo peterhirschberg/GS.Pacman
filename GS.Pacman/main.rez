@@ -88,3 +88,7 @@ resource rToolStartup (TOOL_STARTUP) {
         34, $0100       /* TextEdit */
     }
 };
+
+read rRawSound (EATDOT_SOUND) "sounds/eatdot.raw";
+
+

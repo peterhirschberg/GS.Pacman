@@ -13,5 +13,10 @@
 /* Tools */
 #define TOOL_STARTUP 1
 
+/* Sounds */
+#define rRawSound 1
+
+#define EATDOT_SOUND 1
+
 
 #endif /* defined(_GUARD_PROJECTGS_Pacman_FILEmain_) */

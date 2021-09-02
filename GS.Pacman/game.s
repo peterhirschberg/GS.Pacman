@@ -17,6 +17,8 @@ game start
 gameInit entry
         jsr setupScreen
 
+        jsr soundInit
+        
         jsr setColorTable
         
         jsr initMaze
