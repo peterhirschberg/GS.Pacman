@@ -57,47 +57,70 @@ static void loadSound(Word addr, Word soundNum)
     HUnlock(handle);
 }
 
+void loadIntroSound(word addr)
+{
+    loadSound(addr, INTRO_SOUND);
+}
+
+void loadInterSound(word addr)
+{
+    loadSound(addr, INTER_SOUND);
+}
+
+void loadSiren1Sound(word addr)
+{
+    loadSound(addr, SIREN1_SOUND);
+}
+
+void loadSiren2Sound(word addr)
+{
+    loadSound(addr, SIREN2_SOUND);
+}
+
 void loadEatDotSound(word addr)
 {
     loadSound(addr, EATDOT_SOUND);
 }
 
-/*
-void loadRoarSound(word addr)
+void loadExtraLifeSound(word addr)
 {
-    loadSound(addr, ROAR_SOUND);
+    loadSound(addr, EXTRALIFE_SOUND);
 }
 
-void loadDragonDieSound(word addr)
+void loadFruitSound(word addr)
 {
-    loadSound(addr, DRAGONDIE_SOUND);
+    loadSound(addr, FRUIT_SOUND);
 }
 
-void loadEatenSound(word addr)
+void loadGhostScaredSound(word addr)
 {
-    loadSound(addr, EATEN_SOUND);
+    loadSound(addr, GHOSTSCARED_SOUND);
 }
 
-void loadPickupSound(word addr)
+void loadEatGhostSound(word addr)
 {
-    loadSound(addr, PICKUP_SOUND);
+    loadSound(addr, EATGHOST_SOUND);
 }
 
-void loadPutdownSound(word addr)
+void loadDeathSound(word addr)
 {
-    loadSound(addr, PUTDOWN_SOUND);
+    loadSound(addr, DEATH_SOUND);
 }
 
 void preloadSound(void)
 {
-    LoadResource(rRawSound, WON_SOUND);
-    LoadResource(rRawSound, ROAR_SOUND);
-    LoadResource(rRawSound, DRAGONDIE_SOUND);
-    LoadResource(rRawSound, EATEN_SOUND);
-    LoadResource(rRawSound, PICKUP_SOUND);
-    LoadResource(rRawSound, PUTDOWN_SOUND);
+    LoadResource(rRawSound, INTRO_SOUND);
+    LoadResource(rRawSound, INTER_SOUND);
+    LoadResource(rRawSound, SIREN1_SOUND);
+    LoadResource(rRawSound, SIREN2_SOUND);
+    LoadResource(rRawSound, EATDOT_SOUND);
+    LoadResource(rRawSound, EXTRALIFE_SOUND);
+    LoadResource(rRawSound, FRUIT_SOUND);
+    LoadResource(rRawSound, GHOSTSCARED_SOUND);
+    LoadResource(rRawSound, EATGHOST_SOUND);
+    LoadResource(rRawSound, DEATH_SOUND);
 }
-*/
+
 int main(void)
 {
     int event;

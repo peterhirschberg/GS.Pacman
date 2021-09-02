@@ -89,6 +89,17 @@ resource rToolStartup (TOOL_STARTUP) {
     }
 };
 
+read rRawSound (INTRO_SOUND) "sounds/intro.raw";
+read rRawSound (INTER_SOUND) "sounds/inter.raw";
+read rRawSound (SIREN1_SOUND) "sounds/siren1.raw";
+read rRawSound (SIREN2_SOUND) "sounds/siren2.raw";
 read rRawSound (EATDOT_SOUND) "sounds/eatdot.raw";
+read rRawSound (EXTRALIFE_SOUND) "sounds/extralife.raw";
+read rRawSound (FRUIT_SOUND) "sounds/fruit.raw";
+read rRawSound (GHOSTSCARED_SOUND) "sounds/ghostscared.raw";
+read rRawSound (EATGHOST_SOUND) "sounds/eatghost.raw";
+read rRawSound (DEATH_SOUND) "sounds/death.raw";
+
+
 
 
