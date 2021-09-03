@@ -48,16 +48,16 @@ SOUND_SYSTEM_VOLUME        equ $e100ca
 INTRO_SOUND_ADDR     equ $0000
 INTRO_OSC_NUM        equ 0
 INTRO_FREQ_HIGH        equ 0
-INTRO_FREQ_LOW        equ 10
+INTRO_FREQ_LOW        equ 5
 INTRO_CONTROL        equ SOUND_ONE_SHOT_MODE
-INTRO_SIZE            equ $3b
+INTRO_SIZE            equ $3a
 
-INTER_SOUND_ADDR     equ $8000
+INTER_SOUND_ADDR     equ $0000
 INTER_OSC_NUM        equ 2
 INTER_FREQ_HIGH        equ 0
-INTER_FREQ_LOW        equ 40
+INTER_FREQ_LOW        equ 4
 INTER_CONTROL        equ SOUND_ONE_SHOT_MODE
-INTER_SIZE            equ $2b
+INTER_SIZE            equ $3a
 
 SIREN1_SOUND_ADDR     equ $0000
 SIREN1_OSC_NUM        equ 4
@@ -161,13 +161,10 @@ eatDotTimerNeg anop
         rts
         
 
-soundInitMusic entry
+soundInitMusic1 entry
 		pea INTRO_SOUND_ADDR
 		jsl loadIntroSound
 
-        pea INTER_SOUND_ADDR
-        jsl loadInterSound
-        
 ; Set registers
         short m
 		_docWait
@@ -177,7 +174,7 @@ soundInitMusic entry
 		sta >SOUND_CONTROL_REG
 
 		ldx #soundRegDefaults
-soundInitMusic_loop anop
+soundInitMusic1_loop anop
 		lda |$0,x
 		tay
 		lda |$1,x
@@ -185,11 +182,36 @@ soundInitMusic_loop anop
 		inx
 		inx
 		cpx #soundRegDefaultsEnd
-		blt soundInitMusic_loop
+		blt soundInitMusic1_loop
         long m
 
 		rts
 
+soundInitMusic2 entry
+        pea INTER_SOUND_ADDR
+        jsl loadInterSound
+
+; Set registers
+        short m
+		_docWait
+
+		lda >SOUND_SYSTEM_VOLUME
+		and #$0f
+		sta >SOUND_CONTROL_REG
+
+		ldx #soundRegDefaults
+soundInitMusic2_loop anop
+		lda |$0,x
+		tay
+		lda |$1,x
+		jsr writeRegNoRead
+		inx
+		inx
+		cpx #soundRegDefaultsEnd
+		blt soundInitMusic2_loop
+        long m
+
+		rts
 
 soundInitGameSounds entry
  
@@ -241,44 +263,8 @@ soundInitGameSounds_loop anop
         long m
 
 		rts
-        
-        
-        
-playEatDotSound entry
 
-  rts
-
-        lda eatDotTimer
-        bmi doPlayEatDotSound
-        rts
-        
-doPlayEatDotSound anop
-
-        lda #17
-        sta eatDotTimer
-
-        short m
-		_docWait
-
-		lda >SOUND_SYSTEM_VOLUME
-		and #$0f
-		sta >SOUND_CONTROL_REG
-
-		_writeReg #SOUND_REG_CONTROL+EATDOT_OSC_NUM,#EATDOT_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER
-		_writeReg #SOUND_REG_CONTROL+EATDOT_OSC_NUM+1,#EATDOT_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER
-
-		ldy #SOUND_REG_VOLUME+EATDOT_OSC_NUM
-        lda #$ff
-		jsr writeReg
-		iny
-        lda #$ff
-		eor #$ff
-		jsr writeReg
-
-		_writeReg #SOUND_REG_CONTROL+EATDOT_OSC_NUM,#EATDOT_CONTROL+SOUND_RIGHT_SPEAKER
-		_writeReg #SOUND_REG_CONTROL+EATDOT_OSC_NUM+1,#EATDOT_CONTROL+SOUND_LEFT_SPEAKER
-        long m
-		rts
+; MUSIC
 
 playIntroSound entry
 
@@ -330,9 +316,43 @@ playInterSound entry
         long m
 		rts
 
-startSiren1Sound entry
+; GAME SOUNDS
+        
+playEatDotSound entry
 
-  rts
+        lda eatDotTimer
+        bmi doPlayEatDotSound
+        rts
+        
+doPlayEatDotSound anop
+
+        lda #17
+        sta eatDotTimer
+
+        short m
+		_docWait
+
+		lda >SOUND_SYSTEM_VOLUME
+		and #$0f
+		sta >SOUND_CONTROL_REG
+
+		_writeReg #SOUND_REG_CONTROL+EATDOT_OSC_NUM,#EATDOT_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+EATDOT_OSC_NUM+1,#EATDOT_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER
+
+		ldy #SOUND_REG_VOLUME+EATDOT_OSC_NUM
+        lda #$ff
+		jsr writeReg
+		iny
+        lda #$ff
+		eor #$ff
+		jsr writeReg
+
+		_writeReg #SOUND_REG_CONTROL+EATDOT_OSC_NUM,#EATDOT_CONTROL+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+EATDOT_OSC_NUM+1,#EATDOT_CONTROL+SOUND_LEFT_SPEAKER
+        long m
+		rts
+
+startSiren1Sound entry
 
         short m
 		_docWait

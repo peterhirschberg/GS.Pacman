@@ -656,28 +656,28 @@ GHOSTSTATE_LEAVINGPEN   gequ 4
 
 
 ghostPixelX anop
-        dc i2'64'
-        dc i2'64'
-        dc i2'64'
-        dc i2'64'
+        dc i2'$40'  ; upper left
+        dc i2'$680' ; upper right
+        dc i2'$40'  ; lower left
+        dc i2'$680'  ; lower right
 
 ghostPixelY anop
-        dc i2'64'
-        dc i2'64'
-        dc i2'64'
-        dc i2'64'
+        dc i2'$40'  ; upper left
+        dc i2'$40'  ; upper right
+        dc i2'$540' ; lower left
+        dc i2'$540'  ; lower right
 
 ghostPixelOldX anop
-        dc i2'64'
-        dc i2'64'
-        dc i2'64'
-        dc i2'64'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
 
 ghostPixelOldY anop
-        dc i2'64'
-        dc i2'64'
-        dc i2'64'
-        dc i2'64'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
         
 ghostTileX anop
         dc i2'0'
@@ -699,9 +699,9 @@ ghostState anop
 
 ghostDirection anop
         dc i2'DIRECTION_RIGHT'
-        dc i2'DIRECTION_RIGHT'
-        dc i2'DIRECTION_RIGHT'
-        dc i2'DIRECTION_RIGHT'
+        dc i2'DIRECTION_LEFT'
+        dc i2'DIRECTION_UP'
+        dc i2'DIRECTION_UP'
 
 ghostIntendedDirection anop
         dc i2'DIRECTION_RIGHT'

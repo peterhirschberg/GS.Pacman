@@ -17,7 +17,7 @@ game start
 gameInit entry
         jsr setupScreen
 
-        jsr soundInitMusic
+        jsr soundInitMusic1
         
         jsr setColorTable
         
@@ -28,14 +28,33 @@ gameInit entry
 ;        jsr borderInit
 
         jsr playIntroSound
-        
-        jsr startSiren1Sound
+
+        lda #260
+        sta gameIntroTimer
 
         rtl
 
 
 
 runGameTick entry
+
+        jsr drawPac
+        jsr drawGhosts
+
+gameIntro anop
+
+        jsr waitForVbl
+
+        dec gameIntroTimer
+        lda gameIntroTimer
+        bmi startGame
+        bra gameIntro
+
+startGame anop
+
+        jsr soundInitGameSounds
+        jsr startSiren1Sound
+
 
 mainLoop anop
 
@@ -85,6 +104,9 @@ mainLoop anop
         brl mainLoop
         
         rtl
+
+
+gameIntroTimer dc i2'0'
 
 
         end
