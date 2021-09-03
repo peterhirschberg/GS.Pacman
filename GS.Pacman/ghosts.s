@@ -50,10 +50,22 @@ runGhost entry
         sta ghostPixelOldX,x
         lda ghostPixelY,x
         sta ghostPixelOldY,x
+
+        jsr setGhostTarget
         
         lda #0
         sta ghostInTunnel,x
-        
+
+        lda ghostState,x
+        cmp #GHOSTSTATE_PENNED
+        bne ghostNotPenned
+        jsr pickDirection
+        ldx currentGhost
+        sta ghostDirection,x
+        brl dontPickDirection
+
+ghostNotPenned anop
+
         lda ghostPixelX,x
         shiftedToPixel
         sta spriteX
@@ -102,7 +114,7 @@ notInTunnel anop
         jsr getAvailableDirectionsFromTileXY ; modifies tileX/Y
         sta availableDirections
         
-        jsr pickNextDirection
+        jsr pickDirection
         ldx currentGhost
         sta ghostDirection,x
         
@@ -140,10 +152,50 @@ resetToRight anop
 
         rts
 
-        
-pickNextDirection entry
 
-; TEMP: just pick a random direction
+pickDirection entry
+
+        ldx currentGhost
+        lda ghostState,x
+        cmp #GHOSTSTATE_PENNED
+        beq ghostPennedDirection
+        jsr pickRandomDirection
+        rts
+
+ghostPennedDirection anop
+        lda #4
+        sta ghostSpeed,x
+        lda ghostDirection,x
+        cmp #DIRECTION_UP
+        beq checkPennedUpDirection
+        cmp #DIRECTION_DOWN
+        beq checkPennedDownDirection
+        rts
+
+checkPennedUpDirection anop
+        lda ghostPixelY,x
+        cmp #$280
+        bcs ghostPennedContinueUp
+        lda #DIRECTION_DOWN
+        rts
+ghostPennedContinueUp anop
+        lda ghostDirection,x
+        rts
+
+checkPennedDownDirection anop
+        lda #$2c0
+        cmp ghostPixelY,x
+        bcs ghostPennedContinueDown
+        lda #DIRECTION_UP
+        rts
+ghostPennedContinueDown anop
+        lda ghostDirection,x
+        rts
+
+
+pickRandomDirection entry
+
+; Pick a random direction
 ; Note: ghosts cannot reverse direction (except when changing modes)
 
         ldx currentGhost
@@ -268,7 +320,14 @@ resetAnimationIndex anop
         sta ghostAnimationIndex
 
         rts
-        
+
+
+
+setGhostTarget entry
+
+        rts
+
+
 
 drawGhosts entry
 
@@ -656,16 +715,16 @@ GHOSTSTATE_LEAVINGPEN   gequ 4
 
 
 ghostPixelX anop
-        dc i2'$40'  ; upper left
-        dc i2'$680' ; upper right
-        dc i2'$40'  ; lower left
-        dc i2'$680'  ; lower right
+        dc i2'$340'
+        dc i2'$360'
+        dc i2'$2e0'
+        dc i2'$3e0'
 
 ghostPixelY anop
-        dc i2'$40'  ; upper left
-        dc i2'$40'  ; upper right
-        dc i2'$540' ; lower left
-        dc i2'$540'  ; lower right
+        dc i2'$200'
+        dc i2'$280'
+        dc i2'$280'
+        dc i2'$280'
 
 ghostPixelOldX anop
         dc i2'0'
@@ -691,23 +750,29 @@ ghostTileY anop
         dc i2'0'
         dc i2'0'
         
+ghostTargetX anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+
+ghostTargetY anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+
 ghostState anop
         dc i2'GHOSTSTATE_CHASE'
-        dc i2'GHOSTSTATE_CHASE'
-        dc i2'GHOSTSTATE_CHASE'
-        dc i2'GHOSTSTATE_CHASE'
+        dc i2'GHOSTSTATE_PENNED'
+        dc i2'GHOSTSTATE_PENNED'
+        dc i2'GHOSTSTATE_PENNED'
 
 ghostDirection anop
-        dc i2'DIRECTION_RIGHT'
         dc i2'DIRECTION_LEFT'
         dc i2'DIRECTION_UP'
         dc i2'DIRECTION_UP'
-
-ghostIntendedDirection anop
-        dc i2'DIRECTION_RIGHT'
-        dc i2'DIRECTION_RIGHT'
-        dc i2'DIRECTION_RIGHT'
-        dc i2'DIRECTION_RIGHT'
+        dc i2'DIRECTION_UP'
 
 ghostSpeed anop
         dc i2'8'
