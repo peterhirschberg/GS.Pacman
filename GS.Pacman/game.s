@@ -27,6 +27,8 @@ gameInit entry
         
 ;        jsr borderInit
 
+        jsr playIntroSound
+
         rtl
 
 

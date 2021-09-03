@@ -252,6 +252,231 @@ doPlayEatDotSound anop
         long m
 		rts
 
+playIntroSound entry
+
+        short m
+		_docWait
+
+		lda >SOUND_SYSTEM_VOLUME
+		and #$0f
+		sta >SOUND_CONTROL_REG
+
+		_writeReg #SOUND_REG_CONTROL+INTRO_OSC_NUM,#INTRO_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+INTRO_OSC_NUM+1,#INTRO_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER
+
+		ldy #SOUND_REG_VOLUME+INTRO_OSC_NUM
+        lda #$ff
+		jsr writeReg
+		iny
+        lda #$ff
+		eor #$ff
+		jsr writeReg
+
+		_writeReg #SOUND_REG_CONTROL+INTRO_OSC_NUM,#INTRO_CONTROL+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+INTRO_OSC_NUM+1,#INTRO_CONTROL+SOUND_LEFT_SPEAKER
+        long m
+		rts
+
+playInterSound entry
+
+        short m
+		_docWait
+
+		lda >SOUND_SYSTEM_VOLUME
+		and #$0f
+		sta >SOUND_CONTROL_REG
+
+		_writeReg #SOUND_REG_CONTROL+INTER_OSC_NUM,#INTER_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+INTER_OSC_NUM+1,#INTER_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER
+
+		ldy #SOUND_REG_VOLUME+INTER_OSC_NUM
+        lda #$ff
+		jsr writeReg
+		iny
+        lda #$ff
+		eor #$ff
+		jsr writeReg
+
+		_writeReg #SOUND_REG_CONTROL+INTER_OSC_NUM,#INTER_CONTROL+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+INTER_OSC_NUM+1,#INTER_CONTROL+SOUND_LEFT_SPEAKER
+        long m
+		rts
+
+playSiren1Sound entry
+
+        short m
+		_docWait
+
+		lda >SOUND_SYSTEM_VOLUME
+		and #$0f
+		sta >SOUND_CONTROL_REG
+
+		_writeReg #SOUND_REG_CONTROL+SIREN1_OSC_NUM,#SIREN1_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+SIREN1_OSC_NUM+1,#SIREN1_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER
+
+		ldy #SOUND_REG_VOLUME+SIREN1_OSC_NUM
+        lda #$ff
+		jsr writeReg
+		iny
+        lda #$ff
+		eor #$ff
+		jsr writeReg
+
+		_writeReg #SOUND_REG_CONTROL+SIREN1_OSC_NUM,#SIREN1_CONTROL+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+SIREN1_OSC_NUM+1,#SIREN1_CONTROL+SOUND_LEFT_SPEAKER
+        long m
+		rts
+
+playSiren2Sound entry
+
+        short m
+		_docWait
+
+		lda >SOUND_SYSTEM_VOLUME
+		and #$0f
+		sta >SOUND_CONTROL_REG
+
+		_writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM,#SIREN2_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+1,#SIREN2_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER
+
+		ldy #SOUND_REG_VOLUME+SIREN2_OSC_NUM
+        lda #$ff
+		jsr writeReg
+		iny
+        lda #$ff
+		eor #$ff
+		jsr writeReg
+
+		_writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM,#SIREN2_CONTROL+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+1,#SIREN2_CONTROL+SOUND_LEFT_SPEAKER
+        long m
+		rts
+
+playExtraLifeSound entry
+
+        short m
+		_docWait
+
+		lda >SOUND_SYSTEM_VOLUME
+		and #$0f
+		sta >SOUND_CONTROL_REG
+
+		_writeReg #SOUND_REG_CONTROL+EXTRALIFE_OSC_NUM,#EXTRALIFE_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+EXTRALIFE_OSC_NUM+1,#EXTRALIFE_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER
+
+		ldy #SOUND_REG_VOLUME+EXTRALIFE_OSC_NUM
+        lda #$ff
+		jsr writeReg
+		iny
+        lda #$ff
+		eor #$ff
+		jsr writeReg
+
+		_writeReg #SOUND_REG_CONTROL+EXTRALIFE_OSC_NUM,#EXTRALIFE_CONTROL+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+EXTRALIFE_OSC_NUM+1,#EXTRALIFE_CONTROL+SOUND_LEFT_SPEAKER
+        long m
+		rts
+
+playFruitSound entry
+
+        short m
+		_docWait
+
+		lda >SOUND_SYSTEM_VOLUME
+		and #$0f
+		sta >SOUND_CONTROL_REG
+
+		_writeReg #SOUND_REG_CONTROL+FRUIT_OSC_NUM,#FRUIT_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+FRUIT_OSC_NUM+1,#FRUIT_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER
+
+		ldy #SOUND_REG_VOLUME+FRUIT_OSC_NUM
+        lda #$ff
+		jsr writeReg
+		iny
+        lda #$ff
+		eor #$ff
+		jsr writeReg
+
+		_writeReg #SOUND_REG_CONTROL+FRUIT_OSC_NUM,#FRUIT_CONTROL+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+FRUIT_OSC_NUM+1,#FRUIT_CONTROL+SOUND_LEFT_SPEAKER
+        long m
+		rts
+
+playGhostScaredSound entry
+
+        short m
+		_docWait
+
+		lda >SOUND_SYSTEM_VOLUME
+		and #$0f
+		sta >SOUND_CONTROL_REG
+
+		_writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM,#GHOSTSCARED_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM+1,#GHOSTSCARED_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER
+
+		ldy #SOUND_REG_VOLUME+GHOSTSCARED_OSC_NUM
+        lda #$ff
+		jsr writeReg
+		iny
+        lda #$ff
+		eor #$ff
+		jsr writeReg
+
+		_writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM,#GHOSTSCARED_CONTROL+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM+1,#GHOSTSCARED_CONTROL+SOUND_LEFT_SPEAKER
+        long m
+		rts
+
+playEatGhostSound entry
+
+        short m
+		_docWait
+
+		lda >SOUND_SYSTEM_VOLUME
+		and #$0f
+		sta >SOUND_CONTROL_REG
+
+		_writeReg #SOUND_REG_CONTROL+EATGHOST_OSC_NUM,#EATGHOST_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+EATGHOST_OSC_NUM+1,#EATGHOST_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER
+
+		ldy #SOUND_REG_VOLUME+EATGHOST_OSC_NUM
+        lda #$ff
+		jsr writeReg
+		iny
+        lda #$ff
+		eor #$ff
+		jsr writeReg
+
+		_writeReg #SOUND_REG_CONTROL+EATGHOST_OSC_NUM,#EATGHOST_CONTROL+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+EATGHOST_OSC_NUM+1,#EATGHOST_CONTROL+SOUND_LEFT_SPEAKER
+        long m
+		rts
+
+playDeathSound entry
+
+        short m
+		_docWait
+
+		lda >SOUND_SYSTEM_VOLUME
+		and #$0f
+		sta >SOUND_CONTROL_REG
+
+		_writeReg #SOUND_REG_CONTROL+DEATH_OSC_NUM,#DEATH_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+DEATH_OSC_NUM+1,#DEATH_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER
+
+		ldy #SOUND_REG_VOLUME+DEATH_OSC_NUM
+        lda #$ff
+		jsr writeReg
+		iny
+        lda #$ff
+		eor #$ff
+		jsr writeReg
+
+		_writeReg #SOUND_REG_CONTROL+DEATH_OSC_NUM,#DEATH_CONTROL+SOUND_RIGHT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+DEATH_OSC_NUM+1,#DEATH_CONTROL+SOUND_LEFT_SPEAKER
+        long m
+		rts
+
 
 
 
