@@ -17,7 +17,7 @@ game start
 gameInit entry
         jsr setupScreen
 
-        jsr soundInit
+        jsr soundInitMusic
         
         jsr setColorTable
         
@@ -28,6 +28,8 @@ gameInit entry
 ;        jsr borderInit
 
         jsr playIntroSound
+        
+        jsr startSiren1Sound
 
         rtl
 
