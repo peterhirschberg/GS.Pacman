@@ -27,10 +27,10 @@ gameInit entry
         
 ;        jsr borderInit
 
-        jsr playIntroSound
+;        jsr playIntroSound
 
-        lda #260
-        sta gameIntroTimer
+;        lda #260
+;        sta gameIntroTimer
 
         rtl
 

@@ -76,7 +76,7 @@ SIREN2_SIZE            equ $2b
 EATDOT_SOUND_ADDR     equ $4000
 EATDOT_OSC_NUM        equ 12
 EATDOT_FREQ_HIGH        equ 0
-EATDOT_FREQ_LOW        equ 57
+EATDOT_FREQ_LOW        equ 70
 EATDOT_CONTROL        equ SOUND_ONE_SHOT_MODE
 EATDOT_SIZE            equ $2b
 
@@ -326,7 +326,7 @@ playEatDotSound entry
         
 doPlayEatDotSound anop
 
-        lda #17
+        lda #12
         sta eatDotTimer
 
         short m

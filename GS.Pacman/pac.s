@@ -393,6 +393,13 @@ checkDots entry
         jsr getTileYFromPixelY
         sta tileY
 
+        lda pacAnimationIndex
+        cmp #3
+        bne keepCheckingDots
+        rts
+
+keepCheckingDots anop
+
         jsr getTileFromTileXY
         cmp #1
         beq eatSmallDot
