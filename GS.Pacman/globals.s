@@ -38,6 +38,7 @@ DIRECTION_RIGHT         gequ 0
 DIRECTION_DOWN          gequ 1
 DIRECTION_LEFT          gequ 2
 DIRECTION_UP            gequ 3
+DIRECTION_NONE          gequ 4
 
 
 reverseDirections anop

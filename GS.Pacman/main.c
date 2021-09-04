@@ -35,6 +35,12 @@ void signalQuit(void)
     shouldQuit = true;
 }
 
+// Shifted division
+word fpDivide(word a, word b)
+{
+    return floor(((float)a / b) * 64);
+}
+
 word getRandom(range)
 {
     return rand() % range;

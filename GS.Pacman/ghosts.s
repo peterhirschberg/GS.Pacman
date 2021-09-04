@@ -170,7 +170,9 @@ pickDirection entry
         cmp #GHOSTSTATE_LEAVINGPEN
         beq doPickLeavingPenDirection
 ; chase mode
-        jsr pickRandomDirection
+        jsr ghostPathfindToTarget
+; scatter mode
+;        jsr pickRandomDirection
         rts
 doPickPennedDirection anop
         jsr pickPennedDirection
@@ -764,6 +766,204 @@ decDotCounter anop
 decDotCounterDone anop
         rts
 
+
+
+ghostPathfindToTarget entry
+
+        ldx currentGhost
+
+; store the target XY
+
+        lda ghostTargetX,x
+        shiftedToPixel
+        jsr getTileXFromPixelX
+        sta targetX
+        lda ghostTargetY,x
+        shiftedToPixel
+        jsr getTileYFromPixelY
+        sta targetY
+
+; get available directions
+
+        lda ghostPixelX,x
+        shiftedToPixel
+        jsr getTileXFromPixelX
+        sta tileX
+        sta currentTileX
+        lda ghostPixelY,x
+        shiftedToPixel
+        jsr getTileYFromPixelY
+        sta tileY
+        sta currentTileY
+
+        jsr getAvailableDirectionsFromTileXY
+        sta availableDirections
+
+; init available directions table
+
+        ldy #0
+        lda #DIRECTION_NONE
+        sta testTargetDirection,y
+        ldy #2
+        lda #DIRECTION_NONE
+        sta testTargetDirection,y
+        ldy #4
+        lda #DIRECTION_NONE
+        sta testTargetDirection,y
+        ldy #6
+        lda #DIRECTION_NONE
+        sta testTargetDirection,y
+
+; set the tileXY in each direction
+
+; up
+        ldy #0
+        lda currentTileX
+        sta testTargetTileX,y
+        lda currentTileY
+        dec a
+        sta testTargetTileY,y
+
+; down
+        ldy #2
+        lda currentTileX
+        sta testTargetTileX,y
+        lda currentTileY
+        inc a
+        sta testTargetTileY,y
+
+
+; left
+        ldy #4
+        lda currentTileX
+        dec a
+        sta testTargetTileX,y
+        lda currentTileY
+        sta testTargetTileY,y
+
+; right
+        ldy #6
+        lda currentTileX
+        inc a
+        sta testTargetTileX,y
+        lda currentTileY
+        sta testTargetTileY,y
+
+; set availability table for each direction
+
+; up
+        ldy #0
+        lda availableDirections
+        and #AVAILABLEDIR_UP
+        cmp #0
+        beq upNotAvailable
+        lda #DIRECTION_UP
+        sta testTargetDirection,y
+
+upNotAvailable anop
+
+; down
+        ldy #0
+        lda availableDirections
+        and #AVAILABLEDIR_DOWN
+        cmp #0
+        beq downNotAvailable
+        lda #DIRECTION_DOWN
+        sta testTargetDirection,y
+
+downNotAvailable anop
+
+; left
+        ldy #0
+        lda availableDirections
+        and #AVAILABLEDIR_LEFT
+        cmp #0
+        beq leftNotAvailable
+        lda #DIRECTION_LEFT
+        sta testTargetDirection,y
+
+leftNotAvailable anop
+
+; right
+        ldy #0
+        lda availableDirections
+        and #AVAILABLEDIR_RIGHT
+        cmp #0
+        beq rightNotAvailable
+        lda #DIRECTION_RIGHT
+        sta testTargetDirection,y
+
+rightNotAvailable anop
+
+; measure distances in each direction
+
+        lda #$fff0
+        sta smallestDistance
+
+        ldy #0
+
+distanceLoop anop
+
+        lda testTargetTileX,y
+        sta tileX
+        lda testTargetTileY,y
+        sta tileY
+
+; calculate the distance to target from this XY
+
+        lda targetX
+
+        lda targetX
+        sec
+        sbc testTargetTileX,y
+        sta dx
+
+        lda targetY
+        sec
+        sbc testTargetTileY,y
+        sta dy
+
+
+; CALL INTO C FUNCTION TO DO A FIXED POINT DIVISION TO GET THE DISTANCE
+        lda dx
+        pha
+        lda dy
+        pha
+        jsl fpDivide
+        sta distanceXY
+
+        lda smallestDistance
+        cmp distanceXY
+        bcs distanceIsSmaller
+        bra distancIsLarger
+
+distanceIsSmaller anop
+
+; set new smallest value and index
+        lda distanceXY
+        sta smallestDistance
+        tya
+        sta smallestDistanceIndex
+
+distancIsLarger anop
+
+        iny
+        iny
+        tya
+        cmp #6
+        bcc distanceDone
+        bra distanceLoop
+
+distanceDone anop
+
+; get the direction with the smallest distance
+        ldy smallestDistanceIndex
+        lda testTargetDirection,y
+
+        rts
+
+
+
         
 currentGhost dc i2'0'
 
@@ -784,6 +984,58 @@ ghostCounter dc i2'0'
 
 sort1 dc i2'0'
 sort2 dc i2'0'
+
+currentPixelX dc i2'0'
+currentPixelY dc i2'0'
+
+targetX dc i2'0'
+targetY dc i2'0'
+
+currentTileX dc i2'0'
+currentTileY dc i2'0'
+
+testTargetTileX anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+
+testTargetTileY anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+
+testTargetPixelX anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+
+testTargetPixelY anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+
+testTargetDirection anop
+        dc i2'DIRECTION_NONE'
+        dc i2'DIRECTION_NONE'
+        dc i2'DIRECTION_NONE'
+        dc i2'DIRECTION_NONE'
+
+testTargetDistance anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+
+smallestDistance dc i2'0'
+smallestDistanceIndex dc i2'0'
+
+dx dc i2'0'
+dy dc i2'0'
+distanceXY dc i2'0'
 
         end
 
