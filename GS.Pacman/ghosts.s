@@ -52,6 +52,8 @@ runGhost entry
         sta ghostPixelOldY,x
 
         jsr setGhostTarget
+
+        jsr runGhostDotCounter
         
         lda #0
         sta ghostInTunnel,x
@@ -180,6 +182,7 @@ doPickLeavingPenDirection anop
 pickPennedDirection entry
         lda #4
         sta ghostSpeed,x
+
         lda ghostDirection,x
         cmp #DIRECTION_UP
         beq checkPennedUpDirection
@@ -210,12 +213,24 @@ ghostPennedContinueDown anop
 pickLeavingPenDirection entry
         lda #4
         sta ghostSpeed,x
+
+        lda ghostPixelX,x
+        cmp #$360
+        bne pennedGoLeftOrRight
         lda #$200
         cmp ghostPixelY,x
-        bcs ghostPennedStartChase
+        bcs pennedStartChase
         lda #DIRECTION_UP
         rts
-ghostPennedStartChase anop
+pennedGoLeftOrRight anop
+        bcs pennedGoLeft
+; else go right
+        lda #DIRECTION_RIGHT
+        rts
+pennedGoLeft anop
+        lda #DIRECTION_LEFT
+        rts
+pennedStartChase anop
         lda #GHOSTSTATE_CHASE
         sta ghostState,x
         lda #DIRECTION_LEFT
@@ -277,8 +292,27 @@ checkLeftAvailable anop
         lda #DIRECTION_LEFT
         rts
 
-        
-        
+
+runGhostDotCounter entry
+
+        lda ghostDotCounter,x
+        cmp #0
+        beq runDotCounterContinue
+        rts
+
+runDotCounterContinue anop
+
+        lda ghostState,x
+        cmp #GHOSTSTATE_PENNED
+        beq runDotCounterLeavePen
+        rts
+
+runDotCounterLeavePen anop
+        lda #GHOSTSTATE_LEAVINGPEN
+        sta ghostState,x
+        rts
+
+
 moveGhost entry
 
         ldx currentGhost
@@ -813,6 +847,12 @@ ghostInTunnel anop
         dc i2'0'
         dc i2'0'
         dc i2'0'
+
+ghostDotCounter anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'20'
+        dc i2'40'
 
         
 redGhostLeftAnimationSprites anop
