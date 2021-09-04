@@ -778,6 +778,16 @@ ghostPathfindToTarget entry
 
         ldx currentGhost
 
+; ensure ghosts do not reverse directions
+
+        lda ghostDirection,x
+        asl a
+        tax
+        lda reverseDirections,x
+        sta reverseDirection
+
+        ldx currentGhost
+
 ; store the target XY
 
         lda ghostTargetX,x
@@ -863,6 +873,9 @@ ghostPathfindToTarget entry
         and #AVAILABLEDIR_UP
         cmp #0
         beq upNotAvailable
+        lda reverseDirection
+        cmp #DIRECTION_UP
+        beq upNotAvailable
         lda #DIRECTION_UP
         sta testTargetDirection,y
 
@@ -873,6 +886,9 @@ upNotAvailable anop
         lda availableDirections
         and #AVAILABLEDIR_DOWN
         cmp #0
+        beq downNotAvailable
+        lda reverseDirection
+        cmp #DIRECTION_DOWN
         beq downNotAvailable
         lda #DIRECTION_DOWN
         sta testTargetDirection,y
@@ -885,6 +901,9 @@ downNotAvailable anop
         and #AVAILABLEDIR_LEFT
         cmp #0
         beq leftNotAvailable
+        lda reverseDirection
+        cmp #DIRECTION_LEFT
+        beq leftNotAvailable
         lda #DIRECTION_LEFT
         sta testTargetDirection,y
 
@@ -896,6 +915,9 @@ leftNotAvailable anop
         and #AVAILABLEDIR_RIGHT
         cmp #0
         beq rightNotAvailable
+        lda reverseDirection
+        cmp #DIRECTION_RIGHT
+        beq upNotAvailable
         lda #DIRECTION_RIGHT
         sta testTargetDirection,y
 
@@ -909,6 +931,13 @@ rightNotAvailable anop
         ldy #0
 
 distanceLoop anop
+
+        lda testTargetDirection,y
+        cmp #DIRECTION_NONE
+        bne getDistance
+        brl skipDirection
+
+getDistance anop
 
         lda testTargetTileX,y
         sta tileX
@@ -941,7 +970,7 @@ distanceLoop anop
         lda smallestDistance
         cmp distanceXY
         bcs distanceIsSmaller
-        bra distancIsLarger
+        bra distanceIsLarger
 
 distanceIsSmaller anop
 
@@ -951,7 +980,8 @@ distanceIsSmaller anop
         tya
         sta smallestDistanceIndex
 
-distancIsLarger anop
+skipDirection anop
+distanceIsLarger anop
 
         iny
         iny
