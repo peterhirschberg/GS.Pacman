@@ -27,10 +27,10 @@ gameInit entry
         
 ;        jsr borderInit
 
-;        jsr playIntroSound
+        jsr playIntroSound
 
-;        lda #260
-;        sta gameIntroTimer
+        lda #225
+        sta gameIntroTimer
 
         rtl
 
@@ -38,12 +38,20 @@ gameInit entry
 
 runGameTick entry
 
-        jsr drawPac
-        jsr drawGhosts
-
 gameIntro anop
 
         jsr waitForVbl
+
+        lda #120
+        cmp gameIntroTimer
+        bcs drawInitialSprites
+        bra dontDrawInitialSprites
+
+drawInitialSprites anop
+        jsr drawPac
+        jsr drawGhosts
+
+dontDrawInitialSprites anop
 
         dec gameIntroTimer
         lda gameIntroTimer
