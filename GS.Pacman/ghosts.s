@@ -868,7 +868,6 @@ ghostPathfindToTarget entry
 ; set availability table for each direction
 
 ; up
-        ldy #0
         lda availableDirections
         and #AVAILABLEDIR_UP
         cmp #0
@@ -877,12 +876,12 @@ ghostPathfindToTarget entry
         cmp #DIRECTION_UP
         beq upNotAvailable
         lda #DIRECTION_UP
+        ldy #0
         sta testTargetDirection,y
 
 upNotAvailable anop
 
 ; down
-        ldy #2
         lda availableDirections
         and #AVAILABLEDIR_DOWN
         cmp #0
@@ -891,12 +890,12 @@ upNotAvailable anop
         cmp #DIRECTION_DOWN
         beq downNotAvailable
         lda #DIRECTION_DOWN
+        ldy #2
         sta testTargetDirection,y
 
 downNotAvailable anop
 
 ; left
-        ldy #4
         lda availableDirections
         and #AVAILABLEDIR_LEFT
         cmp #0
@@ -905,12 +904,12 @@ downNotAvailable anop
         cmp #DIRECTION_LEFT
         beq leftNotAvailable
         lda #DIRECTION_LEFT
+        ldy #4
         sta testTargetDirection,y
 
 leftNotAvailable anop
 
 ; right
-        ldy #6
         lda availableDirections
         and #AVAILABLEDIR_RIGHT
         cmp #0
@@ -919,13 +918,14 @@ leftNotAvailable anop
         cmp #DIRECTION_RIGHT
         beq rightNotAvailable
         lda #DIRECTION_RIGHT
+        ldy #6
         sta testTargetDirection,y
 
 rightNotAvailable anop
 
 ; measure distances in each direction
 
-        lda #$fff0
+        lda #$8000
         sta smallestDistance
 
         ldy #0
@@ -939,25 +939,25 @@ distanceLoop anop
 
 getDistance anop
 
-; calculate the distance to target from this XY
-
-
+; Calculate the distance to target from this XY
+; Thanks to Bobbi Webber-Manners, Jason Andersen, and John Brooks for the distance algorithm
+;
 ; if (dx>dy)
 ; len = dx + dy*.5;
 ; else
 ; len = dy + dx*.5;
 
-
         lda testTargetTileX,y
         sec
-        sbc currentTileX
+        sbc targetX
+        absoluteValue
         sta dx
 
         lda testTargetTileY,y
         sec
-        sbc currentTileY
+        sbc targetY
+        absoluteValue
         sta dy
-
 
         lda dx
         cmp dy
@@ -989,6 +989,7 @@ skip anop
 distanceIsSmaller anop
 
 ; set new smallest value and index
+
         lda distanceXY
         sta smallestDistance
         tya
@@ -1001,7 +1002,7 @@ distanceNotSmaller anop
         iny
         tya
         cmp #6
-        bcc distanceDone
+        bcs distanceDone
         brl distanceLoop
 
 distanceDone anop
@@ -1010,8 +1011,6 @@ distanceDone anop
         ldy smallestDistanceIndex
         lda testTargetDirection,y
 
-;    tax
-;    brk
 
         rts
 

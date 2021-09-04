@@ -9,6 +9,17 @@
 
 
         macro
+        absoluteValue
+        bmi isNegative_&SYSCNT
+        bra isPositive_&SYSCNT
+isNegative_&SYSCNT anop
+        eor #$ffff
+        inc a
+isPositive_&SYSCNT anop
+        mend
+
+
+        macro
         spriteGetDrawAddress
         lda >spriteY
         asl a

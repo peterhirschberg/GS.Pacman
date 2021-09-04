@@ -38,6 +38,8 @@ gameInit entry
 
 runGameTick entry
 
+    bra startGame
+
 gameIntro anop
 
         jsr waitForVbl
