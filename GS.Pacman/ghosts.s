@@ -15,6 +15,7 @@ ghosts start
         using globalData
         using spritesData
         using mazeExchangeData
+        using pacData
         using ghostData
         
 
@@ -158,8 +159,6 @@ resetToRight anop
         rts
 
 
-        rts
-
 
 pickDirection entry
 
@@ -170,6 +169,11 @@ pickDirection entry
         cmp #GHOSTSTATE_LEAVINGPEN
         beq doPickLeavingPenDirection
 ; chase mode
+; TEMP: just target pac directly <<<<<<
+        lda pacX
+        sta ghostTargetX,x
+        lda pacY
+        sta ghostTargetY,x
         jsr ghostPathfindToTarget
 ; scatter mode
 ;        jsr pickRandomDirection
@@ -180,6 +184,8 @@ doPickPennedDirection anop
 doPickLeavingPenDirection anop
         jsr pickLeavingPenDirection
         rts
+
+
 
 pickPennedDirection entry
         lda #4
