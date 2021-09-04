@@ -882,7 +882,7 @@ ghostPathfindToTarget entry
 upNotAvailable anop
 
 ; down
-        ldy #0
+        ldy #2
         lda availableDirections
         and #AVAILABLEDIR_DOWN
         cmp #0
@@ -896,7 +896,7 @@ upNotAvailable anop
 downNotAvailable anop
 
 ; left
-        ldy #0
+        ldy #4
         lda availableDirections
         and #AVAILABLEDIR_LEFT
         cmp #0
@@ -910,14 +910,14 @@ downNotAvailable anop
 leftNotAvailable anop
 
 ; right
-        ldy #0
+        ldy #6
         lda availableDirections
         and #AVAILABLEDIR_RIGHT
         cmp #0
         beq rightNotAvailable
         lda reverseDirection
         cmp #DIRECTION_RIGHT
-        beq upNotAvailable
+        beq rightNotAvailable
         lda #DIRECTION_RIGHT
         sta testTargetDirection,y
 
@@ -939,33 +939,48 @@ distanceLoop anop
 
 getDistance anop
 
-        lda testTargetTileX,y
-        sta tileX
-        lda testTargetTileY,y
-        sta tileY
-
 ; calculate the distance to target from this XY
 
-        lda targetX
 
-        lda targetX
+; if (dx>dy)
+; len = dx + dy*3/8;
+; else
+; len = dy + dx*3/8;
+
+
+        lda testTargetTileX,y
         sec
-        sbc testTargetTileX,y
+        sbc currentTileX
         sta dx
 
-        lda targetY
+        lda testTargetTileY,y
         sec
-        sbc testTargetTileY,y
+        sbc currentTileY
         sta dy
 
 
-; CALL INTO C FUNCTION TO DO A FIXED POINT DIVISION TO GET THE DISTANCE
         lda dx
-        pha
+        cmp dy
+        bcc dxGreater
+; dy greater
+
         lda dy
-        pha
-        jsl fpDivide
+        lsr a
+        clc
+        adc dx
         sta distanceXY
+        brl skip
+
+dxGreater anop
+
+        lda dx
+        lsr a
+        clc
+        adc dy
+        sta distanceXY
+        brl skip
+
+skip anop
 
         lda smallestDistance
         cmp distanceXY
@@ -988,13 +1003,16 @@ distanceIsLarger anop
         tya
         cmp #6
         bcc distanceDone
-        bra distanceLoop
+        brl distanceLoop
 
 distanceDone anop
 
 ; get the direction with the smallest distance
         ldy smallestDistanceIndex
         lda testTargetDirection,y
+
+;    tax
+;    brk
 
         rts
 
@@ -1072,6 +1090,9 @@ smallestDistanceIndex dc i2'0'
 dx dc i2'0'
 dy dc i2'0'
 distanceXY dc i2'0'
+
+savex dc i2'0'
+savey dc i2'0'
 
         end
 
