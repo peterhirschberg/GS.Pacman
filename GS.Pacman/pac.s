@@ -428,6 +428,8 @@ eatDot anop
         lda #0
         jsr setTileFromTileXY
 
+        jsr decrementGhostDotCounters
+
         jsr playEatDotSound
         
         rts

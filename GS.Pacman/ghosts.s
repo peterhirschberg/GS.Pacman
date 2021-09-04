@@ -734,7 +734,36 @@ getNotUp anop
         tax
         lda randomDirectionNotUp,x
         rts
-        
+
+
+decrementGhostDotCounters entry
+
+        ldy #GHOSTINDEX_BLUE
+        lda ghostState,y
+        cmp #GHOSTSTATE_PENNED
+        beq decDotCounter
+
+        ldy #GHOSTINDEX_ORANGE
+        lda ghostState,y
+        cmp #GHOSTSTATE_PENNED
+        beq decDotCounter
+
+        rts
+
+decDotCounter anop
+
+        lda ghostDotCounter,y
+        cmp #0
+        beq decDotCounterDone
+        lda ghostDotCounter,y
+        sec
+        sbc #1
+        sta ghostDotCounter,y
+        rts
+
+decDotCounterDone anop
+        rts
+
         
 currentGhost dc i2'0'
 
