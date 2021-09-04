@@ -58,7 +58,13 @@ runGhost entry
 
         lda ghostState,x
         cmp #GHOSTSTATE_PENNED
-        bne ghostNotPenned
+        beq ghostPenned
+        cmp #GHOSTSTATE_LEAVINGPEN
+        beq ghostPenned
+        bra ghostNotPenned
+
+ghostPenned anop
+
         jsr pickDirection
         ldx currentGhost
         sta ghostDirection,x
@@ -158,11 +164,20 @@ pickDirection entry
         ldx currentGhost
         lda ghostState,x
         cmp #GHOSTSTATE_PENNED
-        beq ghostPennedDirection
+        beq doPickPennedDirection
+        cmp #GHOSTSTATE_LEAVINGPEN
+        beq doPickLeavingPenDirection
+; chase mode
         jsr pickRandomDirection
         rts
+doPickPennedDirection anop
+        jsr pickPennedDirection
+        rts
+doPickLeavingPenDirection anop
+        jsr pickLeavingPenDirection
+        rts
 
-ghostPennedDirection anop
+pickPennedDirection entry
         lda #4
         sta ghostSpeed,x
         lda ghostDirection,x
@@ -192,6 +207,19 @@ ghostPennedContinueDown anop
         lda ghostDirection,x
         rts
 
+pickLeavingPenDirection entry
+        lda #4
+        sta ghostSpeed,x
+        lda #$200
+        cmp ghostPixelY,x
+        bcs ghostPennedStartChase
+        lda #DIRECTION_UP
+        rts
+ghostPennedStartChase anop
+        lda #GHOSTSTATE_CHASE
+        sta ghostState,x
+        lda #DIRECTION_LEFT
+        rts
 
 pickRandomDirection entry
 
@@ -711,7 +739,7 @@ GHOSTSTATE_SCATTER      gequ 1
 GHOSTSTATE_FRIGHTENED   gequ 2
 GHOSTSTATE_EATEN        gequ 3
 GHOSTSTATE_PENNED       gequ 4
-GHOSTSTATE_LEAVINGPEN   gequ 4
+GHOSTSTATE_LEAVINGPEN   gequ 5
 
 
 ghostPixelX anop
@@ -764,7 +792,7 @@ ghostTargetY anop
 
 ghostState anop
         dc i2'GHOSTSTATE_CHASE'
-        dc i2'GHOSTSTATE_PENNED'
+        dc i2'GHOSTSTATE_LEAVINGPEN'
         dc i2'GHOSTSTATE_PENNED'
         dc i2'GHOSTSTATE_PENNED'
 
