@@ -943,9 +943,9 @@ getDistance anop
 
 
 ; if (dx>dy)
-; len = dx + dy*3/8;
+; len = dx + dy*.5;
 ; else
-; len = dy + dx*3/8;
+; len = dy + dx*.5;
 
 
         lda testTargetTileX,y
@@ -969,7 +969,7 @@ getDistance anop
         clc
         adc dx
         sta distanceXY
-        brl skip
+        bra skip
 
 dxGreater anop
 
@@ -978,14 +978,13 @@ dxGreater anop
         clc
         adc dy
         sta distanceXY
-        brl skip
 
 skip anop
 
         lda smallestDistance
         cmp distanceXY
         bcs distanceIsSmaller
-        bra distanceIsLarger
+        bra distanceNotSmaller
 
 distanceIsSmaller anop
 
@@ -996,7 +995,7 @@ distanceIsSmaller anop
         sta smallestDistanceIndex
 
 skipDirection anop
-distanceIsLarger anop
+distanceNotSmaller anop
 
         iny
         iny
