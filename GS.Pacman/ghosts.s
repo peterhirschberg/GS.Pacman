@@ -1177,7 +1177,10 @@ orangeCheckDistance anop
         lsr a
         lsr a
         cmp #8
-        bcs orangeTargetPac
+        bcs orangeDontTargetPac
+        bra orangeTargetPac
+
+orangeDontTargetPac anop
 
 ; go to preferred corner
 
@@ -1195,6 +1198,8 @@ orangeCheckDistance anop
         rts
 
 orangeTargetPac anop
+
+    brk
 
 ; target pac
 
@@ -1352,16 +1357,16 @@ GHOSTSTATE_LEAVINGPEN   gequ 5
 
 
 ghostPixelX anop
-        dc i2'$340'
+        dc i2'$360'
         dc i2'$360'
         dc i2'$2e0'
         dc i2'$3e0'
 
 ghostPixelY anop
         dc i2'$200'
-        dc i2'$280'
-        dc i2'$280'
-        dc i2'$280'
+        dc i2'$2c0'
+        dc i2'$2c0'
+        dc i2'$2c0'
 
 ghostPixelOldX anop
         dc i2'0'
