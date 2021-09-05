@@ -120,9 +120,16 @@ notInTunnel anop
         jsr getTileYFromPixelY
         sta tileY
 
-        jsr getAvailableDirectionsFromTileXY ; modifies tileX/Y
+        jsr getAvailableDirectionsFromTileXY
         sta availableDirections
-        
+
+        jsr countNumAvailableDirections
+        cmp #1
+        bcs doPickDirection
+        bra dontPickDirection
+
+doPickDirection anop
+
         jsr pickDirection
         ldx currentGhost
         sta ghostDirection,x
@@ -1011,9 +1018,56 @@ distanceDone anop
         ldy smallestDistanceIndex
         lda testTargetDirection,y
 
-
         rts
 
+
+
+countNumAvailableDirections entry
+
+        ldx currentGhost
+        lda ghostDirection,x
+        asl a
+        tay
+        lda reverseDirections,y
+        sta reverseDirection
+
+        ldy #0
+
+        lda availableDirections
+        and #AVAILABLEDIR_UP
+        cmp #0
+        beq dontCountUp
+        cmp reverseDirection
+        beq dontCountUp
+        iny
+dontCountUp anop
+        lda availableDirections
+        and #AVAILABLEDIR_DOWN
+        cmp #0
+        beq dontCountDown
+        cmp reverseDirection
+        beq dontCountDown
+        iny
+dontCountDown anop
+        lda availableDirections
+        and #AVAILABLEDIR_LEFT
+        cmp #0
+        beq dontCountLeft
+        cmp reverseDirection
+        beq dontCountLeft
+        iny
+dontCountLeft anop
+        lda availableDirections
+        and #AVAILABLEDIR_RIGHT
+        cmp #0
+        beq dontCountRight
+        cmp reverseDirection
+        beq dontCountRight
+        iny
+dontCountRight anop
+        tya
+
+        rts
 
 
         

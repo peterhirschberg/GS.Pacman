@@ -25,7 +25,7 @@ gameInit entry
 
         jsr drawMaze
         
-        jsr borderInit
+;        jsr borderInit
 
         jsr playIntroSound
 
@@ -37,8 +37,6 @@ gameInit entry
 
 
 runGameTick entry
-
-    bra startGame
 
 gameIntro anop
 
