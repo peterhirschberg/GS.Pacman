@@ -1088,7 +1088,7 @@ bluePickTarget anop
 
 ; get the XY distance between the red ghost and 2 tiles ahead of pac
 
-        ldy GHOSTINDEX_RED
+        ldy #GHOSTINDEX_RED
 
         lda #0
         sta dxIsNeg
@@ -1136,21 +1136,21 @@ getBlueTarget anop
         cmp #0
         bne doBlueXNeg
 
-        lda ghostPixelX,x
+        lda ghostPixelX,y
         clc
         adc dx
-;        clc
-;        adc dx
+        clc
+        adc dx
         sta ghostTargetX,x
         bra doBlueYTarget
 
 doBlueXNeg anop
 
-        lda ghostPixelX,x
+        lda ghostPixelX,y
         sec
         sbc dx
-;        sec
-;        sbc dx
+        sec
+        sbc dx
         sta ghostTargetX,x
 
 doBlueYTarget anop
@@ -1159,32 +1159,24 @@ doBlueYTarget anop
         cmp #0
         bne doBlueYNeg
 
-        lda ghostPixelY,x
+        lda ghostPixelY,y
         clc
         adc dy
-;        clc
-;        adc dy
+        clc
+        adc dy
         sta ghostTargetY,x
         bra blueTargetDone
 
 doBlueYNeg anop
 
-        lda ghostPixelY,x
+        lda ghostPixelY,y
         sec
         sbc dy
-;        sec
-;        sbc dy
+        sec
+        sbc dy
         sta ghostTargetY,x
 
 blueTargetDone anop
-
-;       lda ghostTargetX,x
-;        sta spriteX
-;        lda ghostTargetY,x
-;        sta spriteY
-
-;        lda #SPRITE_200
-;        jsr drawSpriteByIndex
 
         rts
 
