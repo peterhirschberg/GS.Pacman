@@ -1045,6 +1045,7 @@ pickTargetOrange anop
         rts
 
 
+
 redGhostPickTarget entry
 
 ; target pac directly
@@ -1056,10 +1057,65 @@ redGhostPickTarget entry
 
         rts
 
+
+
 blueGhostPickTarget entry
         rts
 
+
+
 pinkGhostPickTarget entry
+
+; target 4 tiles ahead of pac (with the exception of up, which targets 4 up and 4 left of pacman)
+
+        ldx currentGhost
+        lda ghostDirection,x
+        cmp #DIRECTION_DOWN
+        beq pinkPickTargetDown
+        cmp #DIRECTION_LEFT
+        beq pinkPickTargetLeft
+        cmp #DIRECTION_RIGHT
+        beq pinkPickTargetRight
+        cmp #DIRECTION_UP
+        beq pinkPickTargetUp
+        rts
+
+pinkPickTargetDown anop
+        lda pacX
+        sta ghostTargetX,x
+        lda pacY
+        clc
+        adc #$100
+        sta ghostTargetY,x
+        rts
+
+pinkPickTargetLeft anop
+        lda pacX
+        sec
+        sbc #$100
+        sta ghostTargetX,x
+        lda pacY
+        sta ghostTargetY,x
+        rts
+
+pinkPickTargetRight anop
+        lda pacX
+        clc
+        adc #$100
+        sta ghostTargetX,x
+        lda pacY
+        sta ghostTargetY,x
+        rts
+
+pinkPickTargetUp anop
+        lda pacX
+        sec
+        sbc #$100
+        sta ghostTargetX,x
+        lda pacY
+        sec
+        sbc #$100
+        sta ghostTargetY,x
         rts
 
 orangeGhostPickTarget entry
