@@ -1066,7 +1066,7 @@ blueGhostPickTarget entry
 
 pinkGhostPickTarget entry
 
-; target 4 tiles ahead of pac (with the exception of up, which targets 4 up and 4 left of pacman)
+; target 4 tiles ahead of pac (with the exception of up, which targets 4 up and 4 left of pac)
 
         ldx currentGhost
         lda ghostDirection,x
@@ -1085,14 +1085,14 @@ pinkPickTargetDown anop
         sta ghostTargetX,x
         lda pacY
         clc
-        adc #$100
+        adc #$100 ; CONVERT TO TILES <<<<<
         sta ghostTargetY,x
         rts
 
 pinkPickTargetLeft anop
         lda pacX
         sec
-        sbc #$100
+        sbc #$100 ; CONVERT TO TILES <<<<<
         sta ghostTargetX,x
         lda pacY
         sta ghostTargetY,x
@@ -1101,7 +1101,7 @@ pinkPickTargetLeft anop
 pinkPickTargetRight anop
         lda pacX
         clc
-        adc #$100
+        adc #$100 ; CONVERT TO TILES <<<<<
         sta ghostTargetX,x
         lda pacY
         sta ghostTargetY,x
@@ -1110,15 +1110,88 @@ pinkPickTargetRight anop
 pinkPickTargetUp anop
         lda pacX
         sec
-        sbc #$100
+        sbc #$100 ; CONVERT TO TILES <<<<<
         sta ghostTargetX,x
         lda pacY
         sec
-        sbc #$100
+        sbc #$100 ; CONVERT TO TILES <<<<<
         sta ghostTargetY,x
         rts
 
+
 orangeGhostPickTarget entry
+
+; if pac is less than 8 tiles away from the orange ghost then scatter, otherwise target pac
+
+        lda ghostPixelX,x
+        shiftedToPixel
+        jsr getTileXFromPixelX
+        sta tileX
+        sta currentTileX
+        lda ghostPixelY,x
+        shiftedToPixel
+        jsr getTileYFromPixelY
+        sta tileY
+
+        lda tileX
+        sec
+        sbc pacX
+        absoluteValue
+        sta dx
+
+        lda tileY
+        sec
+        sbc pacY
+        absoluteValue
+        sta dy
+
+        lda dx
+        cmp dy
+        bcc dxGreater
+
+; dy greater
+
+        lda dy
+        lsr a
+        clc
+        adc dx
+        sta distanceXY
+        bra skip
+
+dxGreaterOrange anop
+
+        lda dx
+        lsr a
+        clc
+        adc dy
+        sta distanceXY
+
+        lda distanceXY
+        cmp #8
+        bcs orangeTargetPac
+
+; go to preferred corner
+
+        lda #0
+        jsr getPixelXFromTileX
+        sta ghostTargetX,x
+
+        lda #22
+        sta tileY
+        jsr getPixelYFromTileY
+        sta ghostTargetY,x
+
+        rts
+
+orangeTargetPac anop
+
+; target pac
+
+        lda pacX
+        sta ghostTargetX,x
+        lda pacY
+        sta ghostTargetY,x
+
         rts
 
 
