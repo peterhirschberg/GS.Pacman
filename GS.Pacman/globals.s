@@ -46,6 +46,7 @@ reverseDirections anop
                     dc i2'DIRECTION_UP'
                     dc i2'DIRECTION_RIGHT'
                     dc i2'DIRECTION_DOWN'
+                    dc i2'DIRECTION_NONE'
 
 
 ; table of precomputed screen row offsets

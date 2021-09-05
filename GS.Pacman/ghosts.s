@@ -1001,7 +1001,7 @@ distanceNotSmaller anop
         iny
         iny
         tya
-        cmp #6
+        cmp #8
         bcs distanceDone
         brl distanceLoop
 
