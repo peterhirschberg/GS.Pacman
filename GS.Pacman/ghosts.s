@@ -175,10 +175,19 @@ pickDirection entry
         beq doPickPennedDirection
         cmp #GHOSTSTATE_LEAVINGPEN
         beq doPickLeavingPenDirection
-; chase mode
+        cmp #GHOSTSTATE_CHASE
+        beq doChaseState
+        cmp #GHOSTSTATE_FRIGHTENED
+        beq doFrightenedState
+        rts
+doChaseState anop
         jsr ghostPathfindToTarget
-; scatter mode
-;        jsr pickRandomDirection
+        rts
+doScatter anop
+; TODO - head for the preferred corners
+        rts
+doFrightenedState anop
+        jsr pickRandomDirection
         rts
 doPickPennedDirection anop
         jsr pickPennedDirection
@@ -485,8 +494,7 @@ drawGhostDone anop
         
 drawGhost entry
 
-        lda currentGhost
-        tax
+        ldx currentGhost
 
         lda ghostPixelX,x
         shiftedToPixel
@@ -494,7 +502,11 @@ drawGhost entry
         lda ghostPixelY,x
         shiftedToPixel
         sta spriteY
-        
+
+        lda ghostState,x
+        cmp #GHOSTSTATE_FRIGHTENED
+        beq drawFrightened
+
         lda ghostDirection,x
         cmp #DIRECTION_RIGHT
         beq drawDirectionRight
@@ -506,7 +518,12 @@ drawGhost entry
         beq drawDirectionUp
         
         rts
-        
+
+drawFrightened anop
+        lda #SPRITE_FLEEGHOST_1 ; TODO USE ANIMATION TABLE
+        jsr drawSpriteByIndex
+        rts
+
 drawDirectionRight anop
         jsr doDrawDirectionRight
         rts
@@ -743,7 +760,39 @@ getNotUp anop
         rts
 
 
-decrementGhostDotCounters entry
+pacAteDot entry
+
+        cmp #2
+        bne ateSmallDot
+
+; ate large dot / power pellet
+
+        ldx #0
+atePowerPelletLoop anop
+
+; TODO: CHECK HERE TO LEAVE PENNED GHOSTS ALONE
+
+; set the state
+        lda #GHOSTSTATE_FRIGHTENED
+        sta ghostState,x
+; reverse direction
+        lda ghostDirection,x
+        asl a
+        tay
+        lda reverseDirections,y
+        sta ghostDirection,x
+
+        lda #200 ; TODO - MAKE THIS DYNAMIC
+        sta ghostStateTimer,x
+
+        inx
+        inx
+        txa
+        cmp #8
+        beq ateSmallDot
+        bra atePowerPelletLoop
+
+ateSmallDot anop
 
         ldy #GHOSTINDEX_BLUE
         lda ghostState,y
@@ -1560,6 +1609,12 @@ ghostState anop
         dc i2'GHOSTSTATE_LEAVINGPEN'
         dc i2'GHOSTSTATE_PENNED'
         dc i2'GHOSTSTATE_PENNED'
+
+ghostStateTimer anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
 
 ghostDirection anop
         dc i2'DIRECTION_LEFT'

@@ -409,10 +409,14 @@ keepCheckingDots anop
         rts
         
 eatLargeDot anop
+        lda #2
+        sta temp
         lda #3
         sta pacAteDotDelay
         bra eatDot
 eatSmallDot anop
+        lda #1
+        sta temp
         lda #1
         sta pacAteDotDelay
 eatDot anop
@@ -428,7 +432,10 @@ eatDot anop
         lda #0
         jsr setTileFromTileXY
 
-        jsr decrementGhostDotCounters
+        lda temp
+        stx savex
+        jsr pacAteDot
+        ldx savex
 
         jsr playEatDotSound
         
@@ -476,6 +483,8 @@ resetToRight anop
         
         
 availableDirections dc i2'0'
+
+savex dc i4'0'
 
 
         end
@@ -540,5 +549,7 @@ pacIntendedDirection dc i2'DIRECTION_LEFT'
 pacMoving dc i2'0'
 
 pacAteDotDelay dc i2'0'
+
+temp dc i2'0'
 
         end
