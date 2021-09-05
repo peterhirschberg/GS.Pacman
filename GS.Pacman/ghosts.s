@@ -712,9 +712,6 @@ dontResetRandomDirIndex anop
         beq getNotRight
         cmp #DIRECTION_UP
         beq getNotDown
-        
-        tax
-        brk
         rts
 
 getNotRight anop
@@ -1093,17 +1090,51 @@ bluePickTarget anop
 
         ldy GHOSTINDEX_RED
 
+        lda #0
+        sta dxIsNeg
         lda ghostPixelX,y
         sec
         sbc bluePacTargetX
         sta dx
+        bmi dxNeg
+        bra getYDiff
 
+dxNeg anop
+
+        lda #1
+        sta dxIsNeg
+
+        lda dx
+        absoluteValue
+        sta dx
+
+getYDiff anop
+
+        lda #0
+        sta dyIsNeg
         lda ghostPixelY,y
         sec
         sbc bluePacTargetY
         sta dy
+        bmi dyNeg
+        bra getBlueTarget
+
+dyNeg anop
+
+        lda #1
+        sta dyIsNeg
+
+        lda dy
+        absoluteValue
+        sta dy
+
+getBlueTarget anop
 
 ; target is twice the XY distance from red ghost to 2 tiles ahead of pac
+
+        lda dxIsNeg
+        cmp #0
+        bne doBlueXNeg
 
         lda ghostPixelX,y
         clc
@@ -1111,6 +1142,22 @@ bluePickTarget anop
         clc
         adc dx
         sta ghostTargetX,x
+        bra doBlueYTarget
+
+doBlueXNeg anop
+
+        lda ghostPixelX,y
+        sec
+        sbc dx
+        sec
+        sbc dx
+        sta ghostTargetX,x
+
+doBlueYTarget anop
+
+        lda dyIsNeg
+        cmp #0
+        bne doBlueYNeg
 
         lda ghostPixelY,y
         clc
@@ -1118,7 +1165,18 @@ bluePickTarget anop
         clc
         adc dy
         sta ghostTargetY,x
+        bra blueTargetDone
 
+doBlueYNeg anop
+
+        lda ghostPixelY,y
+        sec
+        sbc dy
+        sec
+        sbc dy
+        sta ghostTargetY,x
+
+blueTargetDone anop
         rts
 
 getBluePacTargetDown entry
@@ -1416,6 +1474,8 @@ smallestDistanceIndex dc i2'0'
 
 dx dc i2'0'
 dy dc i2'0'
+dxIsNeg dc i2'0'
+dyIsNeg dc i2'0'
 distanceXY dc i2'0'
 
 bluePacTargetX dc i2'0'
