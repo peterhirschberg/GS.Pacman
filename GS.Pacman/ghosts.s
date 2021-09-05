@@ -1060,7 +1060,105 @@ redGhostPickTarget entry
 
 
 blueGhostPickTarget entry
+
+; first get 2 tiles ahead of pac
+
+        ldx currentGhost
+        lda pacDirection
+        cmp #DIRECTION_DOWN
+        beq bluePickTargetDown
+        cmp #DIRECTION_LEFT
+        beq bluePickTargetLeft
+        cmp #DIRECTION_RIGHT
+        beq bluePickTargetRight
+        cmp #DIRECTION_UP
+        beq bluePickTargetUp
+
+bluePickTargetDown anop
+        jsr getBluePacTargetDown
+        bra bluePickTarget
+bluePickTargetLeft anop
+        jsr getBluePacTargetLeft
+        bra bluePickTarget
+bluePickTargetRight anop
+        jsr getBluePacTargetRight
+        bra bluePickTarget
+bluePickTargetUp anop
+        jsr getBluePacTargetUp
+        bra bluePickTarget
+
+bluePickTarget anop
+
+; get the XY distance between the red ghost and 2 tiles ahead of pac
+
+        ldy GHOSTINDEX_RED
+
+        lda ghostPixelX,y
+        sec
+        sbc bluePacTargetX
+        sta dx
+
+        lda ghostPixelY,y
+        sec
+        sbc bluePacTargetY
+        sta dy
+
+; target is twice the XY distance from red ghost to 2 tiles ahead of pac
+
+        lda ghostPixelX,y
+        clc
+        adc dx
+        clc
+        adc dx
+        sta ghostTargetX,x
+
+        lda ghostPixelY,y
+        clc
+        adc dy
+        clc
+        adc dy
+        sta ghostTargetY,x
+
         rts
+
+getBluePacTargetDown entry
+        lda pacX
+        sta bluePacTargetX
+        lda pacY
+        clc
+        adc #$80 ; CONVERT TO TILES <<<<<
+        sta bluePacTargetY
+        rts
+
+getBluePacTargetLeft entry
+        lda pacX
+        sec
+        sbc #$80 ; CONVERT TO TILES <<<<<
+        sta bluePacTargetX
+        lda pacY
+        sta bluePacTargetY
+        rts
+
+getBluePacTargetRight entry
+        lda pacX
+        clc
+        adc #$80 ; CONVERT TO TILES <<<<<
+        sta bluePacTargetX
+        lda pacY
+        sta bluePacTargetY
+        rts
+
+getBluePacTargetUp entry
+        lda pacX
+        sec
+        sbc #$80 ; CONVERT TO TILES <<<<<
+        sta bluePacTargetX
+        lda pacY
+        sec
+        sbc #$80 ; CONVERT TO TILES <<<<<
+        sta bluePacTargetY
+        rts
+
 
 
 
@@ -1069,7 +1167,7 @@ pinkGhostPickTarget entry
 ; target 4 tiles ahead of pac (with the exception of up, which targets 4 up and 4 left of pac)
 
         ldx currentGhost
-        lda ghostDirection,x
+        lda pacDirection
         cmp #DIRECTION_DOWN
         beq pinkPickTargetDown
         cmp #DIRECTION_LEFT
@@ -1121,26 +1219,21 @@ pinkPickTargetUp anop
 
 orangeGhostPickTarget entry
 
-; if pac is less than 8 tiles away from the orange ghost then scatter, otherwise target pac
+; if pac is less than 8 tiles away from the orange ghost then target preferred corner (lower left), otherwise target pac
 
         ldx currentGhost
 
+; CONVERT TO TILES <<<<<
         lda ghostPixelX,x
         shiftedToPixel
-        jsr getTileXFromPixelX
-        sta tileX
-        lda ghostPixelY,x
-        shiftedToPixel
-        jsr getTileYFromPixelY
-        sta tileY
-
-        lda tileX
         sec
         sbc pacX
         absoluteValue
         sta dx
 
-        lda tileY
+; CONVERT TO TILES <<<<<
+        lda ghostPixelY,x
+        shiftedToPixel
         sec
         sbc pacY
         absoluteValue
@@ -1171,8 +1264,8 @@ orangeCheckDistance anop
 
         lda distanceXY
         cmp #$620 ; approx 8 tiles
-        bcs orangeDontTargetPac
-        bra orangeTargetPac
+        bcs orangeTargetPac
+        bra orangeDontTargetPac
 
 orangeDontTargetPac anop
 
@@ -1324,6 +1417,11 @@ smallestDistanceIndex dc i2'0'
 dx dc i2'0'
 dy dc i2'0'
 distanceXY dc i2'0'
+
+bluePacTargetX dc i2'0'
+bluePacTargetY dc i2'0'
+blueRedTargetX dc i2'0'
+blueRedTargetY dc i2'0'
 
 savex dc i2'0'
 savey dc i2'0'
