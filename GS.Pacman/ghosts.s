@@ -1136,21 +1136,21 @@ getBlueTarget anop
         cmp #0
         bne doBlueXNeg
 
-        lda ghostPixelX,y
+        lda ghostPixelX,x
         clc
         adc dx
-        clc
-        adc dx
+;        clc
+;        adc dx
         sta ghostTargetX,x
         bra doBlueYTarget
 
 doBlueXNeg anop
 
-        lda ghostPixelX,y
+        lda ghostPixelX,x
         sec
         sbc dx
-        sec
-        sbc dx
+;        sec
+;        sbc dx
         sta ghostTargetX,x
 
 doBlueYTarget anop
@@ -1159,24 +1159,33 @@ doBlueYTarget anop
         cmp #0
         bne doBlueYNeg
 
-        lda ghostPixelY,y
+        lda ghostPixelY,x
         clc
         adc dy
-        clc
-        adc dy
+;        clc
+;        adc dy
         sta ghostTargetY,x
         bra blueTargetDone
 
 doBlueYNeg anop
 
-        lda ghostPixelY,y
+        lda ghostPixelY,x
         sec
         sbc dy
-        sec
-        sbc dy
+;        sec
+;        sbc dy
         sta ghostTargetY,x
 
 blueTargetDone anop
+
+;       lda ghostTargetX,x
+;        sta spriteX
+;        lda ghostTargetY,x
+;        sta spriteY
+
+;        lda #SPRITE_200
+;        jsr drawSpriteByIndex
+
         rts
 
 getBluePacTargetDown entry
