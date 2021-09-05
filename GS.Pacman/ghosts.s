@@ -1123,11 +1123,12 @@ orangeGhostPickTarget entry
 
 ; if pac is less than 8 tiles away from the orange ghost then scatter, otherwise target pac
 
+        ldx currentGhost
+
         lda ghostPixelX,x
         shiftedToPixel
         jsr getTileXFromPixelX
         sta tileX
-        sta currentTileX
         lda ghostPixelY,x
         shiftedToPixel
         jsr getTileYFromPixelY
@@ -1169,14 +1170,7 @@ dxGreaterOrange anop
 orangeCheckDistance anop
 
         lda distanceXY
-        lsr a
-        lsr a
-        lsr a
-        lsr a
-        lsr a
-        lsr a
-        lsr a
-        cmp #8
+        cmp #$620 ; approx 8 tiles
         bcs orangeDontTargetPac
         bra orangeTargetPac
 
@@ -1198,8 +1192,6 @@ orangeDontTargetPac anop
         rts
 
 orangeTargetPac anop
-
-    brk
 
 ; target pac
 
