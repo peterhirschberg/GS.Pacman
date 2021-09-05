@@ -111,6 +111,15 @@ notInTunnel anop
         lda #8
         sta ghostSpeed,x
 
+        lda ghostState,x
+        cmp #GHOSTSTATE_FRIGHTENED
+        bne notFrightened
+
+        lda #4
+        sta ghostSpeed,x
+
+notFrightened anop
+
         lda ghostPixelX,x
         shiftedToPixel
         jsr getTileXFromPixelX
@@ -520,7 +529,10 @@ drawGhost entry
         rts
 
 drawFrightened anop
-        lda #SPRITE_FLEEGHOST_1 ; TODO USE ANIMATION TABLE
+        lda ghostAnimationIndex
+        asl a
+        tax
+        lda ghostFrightenedAnimationSprites,x
         jsr drawSpriteByIndex
         rts
 
@@ -770,7 +782,13 @@ pacAteDot entry
         ldx #0
 atePowerPelletLoop anop
 
-; TODO: CHECK HERE TO LEAVE PENNED GHOSTS ALONE
+; do not frighten ghosts still in the pen
+
+        lda ghostState,x
+        cmp #GHOSTSTATE_PENNED
+        beq skipGhost
+        cmp #GHOSTSTATE_LEAVINGPEN
+        beq skipGhost
 
 ; set the state
         lda #GHOSTSTATE_FRIGHTENED
@@ -782,8 +800,10 @@ atePowerPelletLoop anop
         lda reverseDirections,y
         sta ghostDirection,x
 
-        lda #200 ; TODO - MAKE THIS DYNAMIC
+        lda #200 ; TODO - MAKE THIS TIMER DYNAMIC
         sta ghostStateTimer,x
+
+skipGhost anop
 
         inx
         inx
@@ -1707,8 +1727,12 @@ orangeGhostUpAnimationSprites anop
 orangeGhostDownAnimationSprites anop
         dc i2'SPRITE_ORANGEGHOST_DOWN_1'
         dc i2'SPRITE_ORANGEGHOST_DOWN_2'
-        
-        
+
+
+ghostFrightenedAnimationSprites anop
+        dc i2'SPRITE_FLEEGHOST_1'
+        dc i2'SPRITE_FLEEGHOST_2'
+
         
 sortTable anop
         dc i2'6,4,2,0'
