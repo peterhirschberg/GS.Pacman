@@ -803,6 +803,9 @@ atePowerPelletLoop anop
         lda #200 ; TODO - MAKE THIS TIMER DYNAMIC
         sta ghostStateTimer,x
 
+        jsr stopSiren1Sound
+        jsr playGhostScaredSound
+
 skipGhost anop
 
         inx

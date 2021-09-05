@@ -97,7 +97,7 @@ FRUIT_SIZE            equ $2b
 GHOSTSCARED_SOUND_ADDR     equ $a000
 GHOSTSCARED_OSC_NUM        equ 18
 GHOSTSCARED_FREQ_HIGH        equ 0
-GHOSTSCARED_FREQ_LOW        equ 40
+GHOSTSCARED_FREQ_LOW        equ 50
 GHOSTSCARED_CONTROL        equ SOUND_SWAP_MODE
 GHOSTSCARED_SIZE            equ $2b
 
@@ -354,6 +354,19 @@ doPlayEatDotSound anop
 
 startSiren1Sound entry
 
+        lda siren1SoundPlaying
+        cmp #1
+        beq siren1SoundAlreadyPlaying
+        bra doStartSiren1Sound
+
+siren1SoundAlreadyPlaying anop
+        rts
+
+doStartSiren1Sound anop
+
+        lda #1
+        sta siren1SoundPlaying
+
         short m
 		_docWait
 
@@ -387,6 +400,43 @@ startSiren1Sound entry
         _writeReg #SOUND_REG_CONTROL+SIREN1_OSC_NUM+3,#SIREN1_CONTROL+SOUND_LEFT_SPEAKER
         long m
 		rts
+
+stopSiren1Sound entry
+
+        lda siren1SoundPlaying
+        cmp #0
+        beq siren1SoundNotPlaying
+        bra doStopSiren1Sound
+
+siren1SoundNotPlaying anop
+        rts
+
+doStopSiren1Sound anop
+
+        short m
+        _docWait
+        lda >SOUND_SYSTEM_VOLUME
+        and #$0f
+        sta >SOUND_CONTROL_REG
+
+        _writeReg #SOUND_REG_VOLUME+SIREN1_OSC_NUM,#0
+        _writeReg #SOUND_REG_VOLUME+SIREN1_OSC_NUM+1,#0
+        _writeReg #SOUND_REG_VOLUME+SIREN1_OSC_NUM+1,#0
+        _writeReg #SOUND_REG_VOLUME+SIREN1_OSC_NUM+1,#0
+
+        _writeReg #SOUND_REG_CONTROL+SIREN1_OSC_NUM,#SOUND_ONE_SHOT_MODE+SOUND_RIGHT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+SIREN1_OSC_NUM+1,#SOUND_ONE_SHOT_MODE+SOUND_RIGHT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+SIREN1_OSC_NUM+2,#SOUND_ONE_SHOT_MODE+SOUND_LEFT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+SIREN1_OSC_NUM+3,#SOUND_ONE_SHOT_MODE+SOUND_LEFT_SPEAKER
+
+        _writeReg #SOUND_REG_CONTROL+SIREN1_OSC_NUM,#SOUND_ONE_SHOT_MODE+SOUND_HALTED+SOUND_RIGHT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+SIREN1_OSC_NUM+1,#SOUND_ONE_SHOT_MODE+SOUND_HALTED+SOUND_RIGHT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+SIREN1_OSC_NUM+2,#SOUND_ONE_SHOT_MODE+SOUND_HALTED+SOUND_LEFT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+SIREN1_OSC_NUM+3,#SOUND_ONE_SHOT_MODE+SOUND_HALTED+SOUND_LEFT_SPEAKER
+
+        long m
+
+        rts
 
 startSiren2Sound entry
 
@@ -473,18 +523,29 @@ playGhostScaredSound entry
 		sta >SOUND_CONTROL_REG
 
 		_writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM,#GHOSTSCARED_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER
-		_writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM+1,#GHOSTSCARED_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM+1,#GHOSTSCARED_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM+2,#GHOSTSCARED_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM+3,#GHOSTSCARED_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER
 
 		ldy #SOUND_REG_VOLUME+GHOSTSCARED_OSC_NUM
+        lda #$fff
+        jsr writeReg
+        iny
         lda #$ff
-		jsr writeReg
-		iny
+        jsr writeReg
+        iny
         lda #$ff
-		eor #$ff
-		jsr writeReg
+        eor #$ff
+        jsr writeReg
+        iny
+        lda #$ff
+        eor #$ff
+        jsr writeReg
 
 		_writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM,#GHOSTSCARED_CONTROL+SOUND_RIGHT_SPEAKER
-		_writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM+1,#GHOSTSCARED_CONTROL+SOUND_LEFT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM+1,#GHOSTSCARED_CONTROL+SOUND_RIGHT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM+2,#GHOSTSCARED_CONTROL+SOUND_LEFT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM+3,#GHOSTSCARED_CONTROL+SOUND_LEFT_SPEAKER
         long m
 		rts
 
@@ -542,6 +603,9 @@ playDeathSound entry
 
 
 registerValue dc i2'0'
+
+siren1SoundPlaying dc i2'0'
+siren2SoundPlaying dc i2'0'
 
 soundRegDefaults anop
 
