@@ -12,6 +12,7 @@
 
 game start
         using controlsData
+        using pacData
         
 
 gameInit entry

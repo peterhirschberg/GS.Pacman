@@ -176,11 +176,6 @@ pickDirection entry
         cmp #GHOSTSTATE_LEAVINGPEN
         beq doPickLeavingPenDirection
 ; chase mode
-; TEMP: just target pac directly <<<<<<
-        lda pacX
-        sta ghostTargetX,x
-        lda pacY
-        sta ghostTargetY,x
         jsr ghostPathfindToTarget
 ; scatter mode
 ;        jsr pickRandomDirection
@@ -783,6 +778,8 @@ decDotCounterDone anop
 
 ghostPathfindToTarget entry
 
+        jsr ghostPickTarget
+
         ldx currentGhost
 
 ; ensure ghosts do not reverse directions
@@ -950,9 +947,9 @@ getDistance anop
 ; Thanks to Bobbi Webber-Manners, Jason Andersen, and John Brooks for the distance algorithm
 ;
 ; if (dx>dy)
-; len = dx + dy*.5;
+;   len = dx + dy*.5;
 ; else
-; len = dy + dx*.5;
+;   len = dy + dx*.5;
 
         lda testTargetTileX,y
         sec
@@ -969,6 +966,7 @@ getDistance anop
         lda dx
         cmp dy
         bcc dxGreater
+
 ; dy greater
 
         lda dy
@@ -1018,6 +1016,53 @@ distanceDone anop
         ldy smallestDistanceIndex
         lda testTargetDirection,y
 
+        rts
+
+
+ghostPickTarget entry
+
+        lda currentGhost
+        cmp #GHOSTINDEX_RED
+        beq pickTargetRed
+        cmp #GHOSTINDEX_BLUE
+        beq pickTargetBlue
+        cmp #GHOSTINDEX_PINK
+        beq pickTargetPink
+        cmp #GHOSTINDEX_ORANGE
+        beq pickTargetOrange
+
+pickTargetRed anop
+        jsr redGhostPickTarget
+        rts
+pickTargetBlue anop
+        jsr blueGhostPickTarget
+        rts
+pickTargetPink anop
+        jsr pinkGhostPickTarget
+        rts
+pickTargetOrange anop
+        jsr orangeGhostPickTarget
+        rts
+
+
+redGhostPickTarget entry
+
+; target pac directly
+
+        lda pacX
+        sta ghostTargetX,x
+        lda pacY
+        sta ghostTargetY,x
+
+        rts
+
+blueGhostPickTarget entry
+        rts
+
+pinkGhostPickTarget entry
+        rts
+
+orangeGhostPickTarget entry
         rts
 
 
