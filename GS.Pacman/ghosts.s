@@ -1147,7 +1147,7 @@ orangeGhostPickTarget entry
 
         lda dx
         cmp dy
-        bcc dxGreater
+        bcc dxGreaterOrange
 
 ; dy greater
 
@@ -1156,7 +1156,7 @@ orangeGhostPickTarget entry
         clc
         adc dx
         sta distanceXY
-        bra skip
+        bra orangeCheckDistance
 
 dxGreaterOrange anop
 
@@ -1166,7 +1166,16 @@ dxGreaterOrange anop
         adc dy
         sta distanceXY
 
+orangeCheckDistance anop
+
         lda distanceXY
+        lsr a
+        lsr a
+        lsr a
+        lsr a
+        lsr a
+        lsr a
+        lsr a
         cmp #8
         bcs orangeTargetPac
 
@@ -1174,11 +1183,13 @@ dxGreaterOrange anop
 
         lda #0
         jsr getPixelXFromTileX
+        pixelToShifted
         sta ghostTargetX,x
 
-        lda #22
+        lda #20
         sta tileY
         jsr getPixelYFromTileY
+        pixelToShifted
         sta ghostTargetY,x
 
         rts
