@@ -62,11 +62,17 @@ timerNotRunning anop
         sta ghostInTunnel,x
 
         lda ghostState,x
+        cmp #GHOSTSTATE_EATEN
+        beq ghostEaten
         cmp #GHOSTSTATE_PENNED
         beq ghostPenned
         cmp #GHOSTSTATE_LEAVINGPEN
         beq ghostPenned
         bra ghostNotPenned
+
+ghostEaten anop
+
+        brl ghostNotPenned
 
 ghostPenned anop
 
@@ -165,7 +171,6 @@ resetToRight anop
         rts
 
 
-
 pickDirection entry
 
         ldx currentGhost
@@ -178,6 +183,8 @@ pickDirection entry
         beq doChaseState
         cmp #GHOSTSTATE_FRIGHTENED
         beq doFrightenedState
+        cmp #GHOSTSTATE_EATEN
+        beq doEatenState
         rts
 doChaseState anop
         jsr ghostPathfindToTarget
@@ -187,6 +194,9 @@ doScatterState anop
         rts
 doFrightenedState anop
         jsr pickRandomDirection
+        rts
+doEatenState anop
+        jsr ghostPathfindToTarget
         rts
 doPickPennedDirection anop
         jsr pickPennedDirection
@@ -610,6 +620,8 @@ drawGhost entry
         beq drawFrightened
         cmp #GHOSTSTATE_POINTS
         beq drawPoints
+        cmp #GHOSTSTATE_EATEN
+        beq drawEaten
 
         lda ghostDirection,x
         cmp #DIRECTION_RIGHT
@@ -629,6 +641,10 @@ drawFrightened anop
         tax
         lda ghostFrightenedAnimationSprites,x
         jsr drawSpriteByIndex
+        rts
+
+drawEaten anop
+        jsr doDrawEaten
         rts
 
 drawPoints anop
@@ -806,7 +822,41 @@ getGhostDirectionUpSprite3 anop
         rts
 getGhostDirectionUpSprite4 anop
         rts
-        
+
+
+
+doDrawEaten entry
+
+        lda ghostDirection,x
+        cmp #DIRECTION_UP
+        beq drawEatenUp
+        cmp #DIRECTION_DOWN
+        beq drawEatenDown
+        cmp #DIRECTION_LEFT
+        beq drawEatenLeft
+        cmp #DIRECTION_RIGHT
+        beq drawEatenRight
+
+        rts
+
+drawEatenUp anop
+        lda #SPRITE_EYES_UP
+        jsr drawSpriteByIndex
+        rts
+drawEatenDown anop
+        lda #SPRITE_EYES_DOWN
+        jsr drawSpriteByIndex
+        rts
+drawEatenLeft anop
+        lda #SPRITE_EYES_LEFT
+        jsr drawSpriteByIndex
+        rts
+drawEatenRight anop
+        lda #SPRITE_EYES_RIGHT
+        jsr drawSpriteByIndex
+        rts
+
+
         
 eraseGhosts entry
 
@@ -1228,6 +1278,10 @@ distanceDone anop
 
 ghostPickTarget entry
 
+        lda ghostState,x
+        cmp #GHOSTSTATE_EATEN
+        beq pickTargetEaten
+
         lda currentGhost
         cmp #GHOSTINDEX_RED
         beq pickTargetRed
@@ -1237,6 +1291,18 @@ ghostPickTarget entry
         beq pickTargetPink
         cmp #GHOSTINDEX_ORANGE
         beq pickTargetOrange
+
+pickTargetEaten anop
+        lda #13
+        shiftedToPixel
+        jsr getTileXFromPixelX
+        sta ghostTargetX,x
+
+        lda #11
+        shiftedToPixel
+        jsr getTileXFromPixelX
+        sta ghostTargetX,x
+        rts
 
 pickTargetRed anop
         jsr redGhostPickTarget
@@ -1569,11 +1635,19 @@ setGhostSpeed entry
 
 		ldx currentGhost
 
+        lda ghostState,x
+        cmp #GHOSTSTATE_EATEN
+        beq speedEaten
+
         lda ghostInTunnel,x
         cmp #0
         beq speedNotInTunnel
         lda #4
         sta ghostSpeed,x
+        rts
+
+speedEaten anop
+        lda #16
         rts
 
 speedNotInTunnel anop
