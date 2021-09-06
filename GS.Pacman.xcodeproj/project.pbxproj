@@ -12,6 +12,7 @@
 		D03234D826D79DBE009E2D7E /* pac.s in Sources */ = {isa = PBXBuildFile; fileRef = D03234D726D79DBE009E2D7E /* pac.s */; };
 		D03234DA26DEF5CA009E2D7E /* controls.s in Sources */ = {isa = PBXBuildFile; fileRef = D03234D926DEF5CA009E2D7E /* controls.s */; };
 		D03234DC26E08B1F009E2D7E /* sound.s in Sources */ = {isa = PBXBuildFile; fileRef = D03234DB26E08B1F009E2D7E /* sound.s */; };
+		D049B68D26E6437800EBB157 /* collision.s in Sources */ = {isa = PBXBuildFile; fileRef = D049B68C26E6437800EBB157 /* collision.s */; };
 		D0865C7626CC890F00690A79 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = D0865C7526CC890F00690A79 /* main.c */; };
 		D0865C7926CC890F00690A79 /* main.rez in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0865C7826CC890F00690A79 /* main.rez */; };
 		D0865C7B26CC890F00690A79 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = D0865C7A26CC890F00690A79 /* Makefile */; };
@@ -70,6 +71,7 @@
 		D03234D726D79DBE009E2D7E /* pac.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = pac.s; sourceTree = "<group>"; };
 		D03234D926DEF5CA009E2D7E /* controls.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = controls.s; sourceTree = "<group>"; };
 		D03234DB26E08B1F009E2D7E /* sound.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = sound.s; sourceTree = "<group>"; };
+		D049B68C26E6437800EBB157 /* collision.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = collision.s; sourceTree = "<group>"; };
 		D0865C6926CC890F00690A79 /* GS.Pacman */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GS.Pacman; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0865C6C26CC890F00690A79 /* GS.Pacman.2mg */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GS.Pacman.2mg; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0865C6E26CC890F00690A79 /* GS.Pacman.shk */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GS.Pacman.shk; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +155,7 @@
 				D03234D726D79DBE009E2D7E /* pac.s */,
 				D03234D926DEF5CA009E2D7E /* controls.s */,
 				D03234DB26E08B1F009E2D7E /* sound.s */,
+				D049B68C26E6437800EBB157 /* collision.s */,
 			);
 			path = GS.Pacman;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				D0865CAD26CF3F3B00690A79 /* screen.s in Sources */,
 				D03234D626D79D8E009E2D7E /* ghosts.s in Sources */,
 				D0865C7B26CC890F00690A79 /* Makefile in Sources */,
+				D049B68D26E6437800EBB157 /* collision.s in Sources */,
 				D03234D826D79DBE009E2D7E /* pac.s in Sources */,
 				D03234DC26E08B1F009E2D7E /* sound.s in Sources */,
 				D0865CAF26CF3F5300690A79 /* global.macros in Sources */,

@@ -130,9 +130,7 @@ doPickDirection anop
         
 dontPickDirection anop
 
-; set the ghost's speed
-        jsr getGhostSpeed
-        sta ghostSpeed,x
+        jsr setGhostSpeed
 
         ldx currentGhost
         jsr moveGhost
@@ -145,6 +143,7 @@ dontPickDirection anop
 checkTunnel anop
 
 ; wrap if going through tunnel
+; these hardcoded values work for the standard maze but may need some thought if maze customization is added
         lda #64
         cmp ghostPixelX,x
         bcs resetToRight
@@ -1457,33 +1456,27 @@ orangeTargetPac anop
         rts
 
 
-getGhostSpeed entry
+setGhostSpeed entry
 
 		ldx currentGhost
+
+        lda ghostInTunnel,x
+        cmp #0
+        beq speedNotInTunnel
+        lda #4
+        sta ghostSpeed,x
+        rts
+
+speedNotInTunnel anop
 
 		lda ghostState,x
 		cmp #GHOSTSTATE_FRIGHTENED
 		bne speedNotFrightened
-
-        lda ghostInTunnel,x
-        cmp #0
-        beq speedNotInTunnel1
-        lda #4
-        rts
-
-speedNotInTunnel1 anop
 		lda #5
+        sta ghostSpeed,x
 		rts
 
 speedNotFrightened anop
-
-		lda ghostInTunnel,x
-		cmp #0
-		beq speedNotInTunnel2
-		lda #4
-  		rts
-
-speedNotInTunnel2 anop
 
         lda ghostState,x
         cmp #GHOSTSTATE_PENNED
@@ -1494,10 +1487,12 @@ speedNotInTunnel2 anop
 
 speedGhostPenned anop
         lda #4
+        sta ghostSpeed,x
         rts
 
 speedGhostNotPenned anop
 		lda #8
+        sta ghostSpeed,x
 		rts
 
 
@@ -1649,9 +1644,10 @@ GHOSTINDEX_ORANGE       gequ 3*2
 GHOSTSTATE_CHASE        gequ 0
 GHOSTSTATE_SCATTER      gequ 1
 GHOSTSTATE_FRIGHTENED   gequ 2
-GHOSTSTATE_EATEN        gequ 3
-GHOSTSTATE_PENNED       gequ 4
-GHOSTSTATE_LEAVINGPEN   gequ 5
+GHOSTSTATE_POINTS       gequ 3
+GHOSTSTATE_EATEN        gequ 4
+GHOSTSTATE_PENNED       gequ 5
+GHOSTSTATE_LEAVINGPEN   gequ 6
 
 
 ghostPixelX anop

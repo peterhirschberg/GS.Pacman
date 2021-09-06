@@ -13,7 +13,9 @@
 game start
         using controlsData
         using pacData
-        
+        using gameData
+
+
 
 gameInit entry
         jsr setupScreen
@@ -70,8 +72,15 @@ mainLoop anop
         jsr waitForVbl
         
         jsr borderStart
-        
-        
+
+        lda eatGhostTimer
+        cmp #0
+        beq notEatingGhost
+        dec eatGhostTimer
+        bra eatingGhostSkipToHere
+
+notEatingGhost anop
+
         jsr checkControls
 
         jsr runMaze
@@ -82,9 +91,13 @@ mainLoop anop
 
         jsr runSound
         
-        
+        jsr collisionCheckActors
+
         
         jsr borderStart
+
+
+eatingGhostSkipToHere anop
 
 
         jsr eraseGhosts
@@ -115,7 +128,13 @@ mainLoop anop
         rtl
 
 
+        end
+
+
+gameData data
+
 gameIntroTimer dc i2'0'
 
+eatGhostTimer dc i2'0'
 
         end
