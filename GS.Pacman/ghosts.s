@@ -102,10 +102,26 @@ ghostNotPenned anop
         lda ghostPixelY,x
         shiftedToPixel
         sta spriteY
+
+;        lda ghostState,x
+;        cmp #GHOSTSTATE_EATEN
+;        beq stateIsEaten
+;        bra stateIsNotEaten
+
+;stateIsEaten anop
+
+;        jsr isSpriteCenteredInMazeTileFast
+;        bra centeringCheckComplete
+
+;stateIsNotEaten anop
+
         jsr isSpriteCenteredInMazeTile
+
+;centeringCheckComplete anop
+
         cmp #0
         beq dontPickDirection
-        
+
         lda ghostPixelX,x
         shiftedToPixel
         jsr getTileXFromPixelX
@@ -523,14 +539,17 @@ eatenGhostLoop anop
         lda #GHOSTSTATE_EATEN
         sta ghostState,x
 
-        stx savex
-        jsr ghostPickTarget
-        ldx savex
+; Since the "eyes" move very fast, unless they start centered on tile boundries the centering
+; check at each intersection will fail unless we reposition them here to tile boundries
 
-        stx savex
-        jsr pickDirection
-        sta ghostDirection,x
-        ldx savex
+        lda ghostPixelX,x
+        and #$fff0
+        sta ghostPixelX,x
+
+        lda ghostPixelY,x
+        and #$fff0
+        sta ghostPixelY,x
+
 
         jsr stopScaredSound
         jsr startSiren2Sound

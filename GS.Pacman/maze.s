@@ -18,15 +18,6 @@ maze start
         using mazeExchangeData
         
     
-getPixelXFromTile entry
-; TODO
-        rts
-        
-        
-getPixelYFromTile entry
-; TODO
-        rts
-
 getTileFromTileXY entry
 
         lda tileX
