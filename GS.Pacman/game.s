@@ -73,31 +73,7 @@ mainLoop anop
         
         jsr borderStart
 
-        lda eatGhostTimer
-        cmp #0
-        beq notEatingGhost1
-        dec eatGhostTimer
-        bra eatingGhostSkipToHere
 
-notEatingGhost1 anop
-
-        jsr checkControls
-
-        jsr runMaze
-        
-        jsr runPac
-        
-        jsr runGhosts
-
-        jsr runSound
-        
-        jsr collisionCheckActors
-
-        
-        jsr borderStart
-
-
-eatingGhostSkipToHere anop
 
 
         jsr eraseGhosts
@@ -118,6 +94,35 @@ notEatingGhost2 anop
 
         jsr drawGhosts
 
+
+        lda eatGhostTimer
+        cmp #0
+        beq notEatingGhost1
+        dec eatGhostTimer
+        bra eatingGhostSkipToHere
+
+notEatingGhost1 anop
+
+        jsr borderStart
+
+
+        jsr checkControls
+
+        jsr runMaze
+
+        jsr runPac
+
+        jsr runGhosts
+
+        jsr runSound
+
+        jsr collisionCheckActors
+
+
+        jsr borderStart
+
+
+eatingGhostSkipToHere anop
         
         lda #0
         sta joystickUp
