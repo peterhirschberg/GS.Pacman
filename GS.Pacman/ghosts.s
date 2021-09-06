@@ -504,6 +504,9 @@ eatenGhostLoop anop
         cmp #GHOSTSTATE_POINTS
         bne eatenNextGhost
 
+        lda #0
+        sta ghostStateTimer,x
+
         lda #GHOSTSTATE_EATEN
         sta ghostState,x
 
