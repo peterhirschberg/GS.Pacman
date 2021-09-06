@@ -1666,7 +1666,7 @@ counter dc i2'0'
 ghostData data
 
 
-ghostPointValue dc i2'200'
+ghostPointValue dc i2'0'
 
 
 GHOSTINDEX_RED          gequ 0*2

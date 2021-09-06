@@ -71,6 +71,8 @@ ghostLoop anop
         sta eatGhostTimer
 
         lda ghostPointValue
+        cmp #0
+        beq points0
         cmp #200
         beq points200
         cmp #400
@@ -81,6 +83,10 @@ ghostLoop anop
         beq points1600
         bra nextGhost
 
+points0 anop
+        lda #200
+        sta ghostPointValue
+        bra nextGhost
 points200 anop
         lda #400
         sta ghostPointValue
