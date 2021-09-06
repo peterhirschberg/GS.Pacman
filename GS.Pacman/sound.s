@@ -413,6 +413,9 @@ siren1SoundNotPlaying anop
 
 doStopSiren1Sound anop
 
+        lda #0
+        sta siren1SoundPlaying
+
         short m
         _docWait
         lda >SOUND_SYSTEM_VOLUME
@@ -440,6 +443,19 @@ doStopSiren1Sound anop
 
 startSiren2Sound entry
 
+        lda siren2SoundPlaying
+        cmp #1
+        beq siren2SoundAlreadyPlaying
+        bra doStartSiren2Sound
+
+siren2SoundAlreadyPlaying anop
+        rts
+
+doStartSiren2Sound anop
+
+        lda #1
+        sta siren1SoundPlaying
+
         short m
 		_docWait
 
@@ -448,7 +464,9 @@ startSiren2Sound entry
 		sta >SOUND_CONTROL_REG
 
 		_writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM,#SIREN2_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER
-		_writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+1,#SIREN2_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+1,#SIREN2_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+2,#SIREN2_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+3,#SIREN2_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER
 
 		ldy #SOUND_REG_VOLUME+SIREN2_OSC_NUM
         lda #$ff
@@ -460,8 +478,50 @@ startSiren2Sound entry
 
 		_writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM,#SIREN2_CONTROL+SOUND_RIGHT_SPEAKER
 		_writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+1,#SIREN2_CONTROL+SOUND_LEFT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+2,#SIREN2_CONTROL+SOUND_LEFT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+3,#SIREN2_CONTROL+SOUND_LEFT_SPEAKER
         long m
 		rts
+
+stopSiren2Sound entry
+
+        lda siren2SoundPlaying
+        cmp #0
+        beq siren2SoundNotPlaying
+        bra doStopSiren2Sound
+
+siren2SoundNotPlaying anop
+        rts
+
+doStopSiren2Sound anop
+
+        lda #0
+        sta siren2SoundPlaying
+
+        short m
+        _docWait
+        lda >SOUND_SYSTEM_VOLUME
+        and #$0f
+        sta >SOUND_CONTROL_REG
+
+        _writeReg #SOUND_REG_VOLUME+SIREN2_OSC_NUM,#0
+        _writeReg #SOUND_REG_VOLUME+SIREN2_OSC_NUM+1,#0
+        _writeReg #SOUND_REG_VOLUME+SIREN2_OSC_NUM+1,#0
+        _writeReg #SOUND_REG_VOLUME+SIREN2_OSC_NUM+1,#0
+
+        _writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM,#SOUND_ONE_SHOT_MODE+SOUND_RIGHT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+1,#SOUND_ONE_SHOT_MODE+SOUND_RIGHT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+2,#SOUND_ONE_SHOT_MODE+SOUND_LEFT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+3,#SOUND_ONE_SHOT_MODE+SOUND_LEFT_SPEAKER
+
+        _writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM,#SOUND_ONE_SHOT_MODE+SOUND_HALTED+SOUND_RIGHT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+1,#SOUND_ONE_SHOT_MODE+SOUND_HALTED+SOUND_RIGHT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+2,#SOUND_ONE_SHOT_MODE+SOUND_HALTED+SOUND_LEFT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+3,#SOUND_ONE_SHOT_MODE+SOUND_HALTED+SOUND_LEFT_SPEAKER
+
+        long m
+
+        rts
 
 playExtraLifeSound entry
 
@@ -515,6 +575,19 @@ playFruitSound entry
 
 playGhostScaredSound entry
 
+        lda scaredSoundPlaying
+        cmp #1
+        beq scaredSoundAlreadyPlaying
+        bra doStartScaredSound
+
+scaredSoundAlreadyPlaying anop
+        rts
+
+doStartScaredSound anop
+
+        lda #1
+        sta siren1SoundPlaying
+
         short m
 		_docWait
 
@@ -548,6 +621,46 @@ playGhostScaredSound entry
         _writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM+3,#GHOSTSCARED_CONTROL+SOUND_LEFT_SPEAKER
         long m
 		rts
+
+stopScaredSound entry
+
+        lda scaredSoundPlaying
+        cmp #0
+        beq scaredSoundNotPlaying
+        bra doStopScaredSound
+
+scaredSoundNotPlaying anop
+        rts
+
+doStopScaredSound anop
+
+        lda #0
+        sta scaredSoundPlaying
+
+        short m
+        _docWait
+        lda >SOUND_SYSTEM_VOLUME
+        and #$0f
+        sta >SOUND_CONTROL_REG
+
+        _writeReg #SOUND_REG_VOLUME+GHOSTSCARED_OSC_NUM,#0
+        _writeReg #SOUND_REG_VOLUME+GHOSTSCARED_OSC_NUM+1,#0
+        _writeReg #SOUND_REG_VOLUME+GHOSTSCARED_OSC_NUM+1,#0
+        _writeReg #SOUND_REG_VOLUME+GHOSTSCARED_OSC_NUM+1,#0
+
+        _writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM,#SOUND_ONE_SHOT_MODE+SOUND_RIGHT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM+1,#SOUND_ONE_SHOT_MODE+SOUND_RIGHT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM+2,#SOUND_ONE_SHOT_MODE+SOUND_LEFT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM+3,#SOUND_ONE_SHOT_MODE+SOUND_LEFT_SPEAKER
+
+        _writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM,#SOUND_ONE_SHOT_MODE+SOUND_HALTED+SOUND_RIGHT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM+1,#SOUND_ONE_SHOT_MODE+SOUND_HALTED+SOUND_RIGHT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM+2,#SOUND_ONE_SHOT_MODE+SOUND_HALTED+SOUND_LEFT_SPEAKER
+        _writeReg #SOUND_REG_CONTROL+GHOSTSCARED_OSC_NUM+3,#SOUND_ONE_SHOT_MODE+SOUND_HALTED+SOUND_LEFT_SPEAKER
+
+        long m
+
+        rts
 
 playEatGhostSound entry
 
@@ -606,6 +719,8 @@ registerValue dc i2'0'
 
 siren1SoundPlaying dc i2'0'
 siren2SoundPlaying dc i2'0'
+scaredSoundPlaying dc i2'0'
+
 
 soundRegDefaults anop
 
