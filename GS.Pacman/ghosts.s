@@ -461,6 +461,9 @@ timerGhostLoop anop
         cmp #0
         bne nextGhost
 
+        lda ghostState,x
+        cmp #GHOSTSTATE_EATEN
+        bne nextGhost
         lda #GHOSTSTATE_CHASE
         sta ghostState,x
 
