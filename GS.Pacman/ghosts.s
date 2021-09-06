@@ -64,11 +64,28 @@ timerNotRunning anop
         lda ghostState,x
         cmp #GHOSTSTATE_EATEN
         beq ghostNotPenned
+        cmp #GHOSTSTATE_REVIVING
+        beq ghostReviving
         cmp #GHOSTSTATE_PENNED
         beq ghostPenned
         cmp #GHOSTSTATE_LEAVINGPEN
         beq ghostPenned
         bra ghostNotPenned
+
+ghostReviving anop
+        lda ghostPixelY,x
+        adc #4
+        sta ghostPixelY,x
+        cmp #$2c0
+        bcs ghostRevived
+        rts
+
+ghostRevived anop
+        lda #0
+        sta ghostDotCounter,x
+        lda #GHOSTSTATE_PENNED
+        sta ghostState,x
+        rts
 
 ghostPenned anop
 
@@ -1300,6 +1317,22 @@ pickTargetEaten anop
         sta ghostTargetX,x
         lda #$200
         sta ghostTargetY,x
+
+; see if the ghost has reached the top of the monster pit. If so, enter the pit
+        lda ghostPixelX,x
+        cmp #$360
+        bne notReachedPit
+        lda ghostPixelY,x
+        cmp #$200
+        bne notReachedPit
+
+; reached the pit entrance
+
+        lda #GHOSTSTATE_REVIVING
+        sta ghostState,x
+        rts
+
+notReachedPit anop
         rts
 
 pickTargetRed anop
@@ -1833,8 +1866,9 @@ GHOSTSTATE_SCATTER      gequ 1
 GHOSTSTATE_FRIGHTENED   gequ 2
 GHOSTSTATE_POINTS       gequ 3
 GHOSTSTATE_EATEN        gequ 4
-GHOSTSTATE_PENNED       gequ 5
-GHOSTSTATE_LEAVINGPEN   gequ 6
+GHOSTSTATE_REVIVING     gequ 5
+GHOSTSTATE_PENNED       gequ 6
+GHOSTSTATE_LEAVINGPEN   gequ 7
 
 
 ghostPixelX anop
