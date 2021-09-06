@@ -502,6 +502,8 @@ stopFrightenedSound anop
 
         jsr stopScaredSound
 
+; TODO: NEED TO CHECK TO SEE IF WE SHOULD RESTART THE SIREN2 SOUND HERE <<<<<<<
+
         rts
 
 
@@ -520,6 +522,12 @@ eatenGhostLoop anop
 
         lda #GHOSTSTATE_EATEN
         sta ghostState,x
+
+        jsr ghostPickTarget
+
+        stx savex
+        jsr pickDirection
+        ldx savex
 
         jsr stopScaredSound
         jsr startSiren2Sound
@@ -1319,20 +1327,43 @@ pickTargetEaten anop
         sta ghostTargetY,x
 
 ; see if the ghost has reached the top of the monster pit. If so, enter the pit
-        lda ghostPixelX,x
-        cmp #$360
-        bne notReachedPit
+
         lda ghostPixelY,x
-        cmp #$200
+        shiftedToPixel
+        jsr getTileYFromPixelY
+        cmp #8
         bne notReachedPit
+
+        lda ghostPixelX,x
+        shiftedToPixel
+        jsr getTileXFromPixelX
+        cmp #13
+        beq notReachedPit
+
+    bra notReachedPit
+
+        lda ghostPixelX,x
+        cmp #$35e
+        beq reachedPit
+        cmp #$35f
+        beq reachedPit
+        cmp #$360
+        beq reachedPit
+        cmp #$361
+        beq reachedPit
+        cmp #$362
+        beq reachedPit
+
+notReachedPit anop
+
+        rts
+
+reachedPit anop
 
 ; reached the pit entrance
 
         lda #GHOSTSTATE_REVIVING
         sta ghostState,x
-        rts
-
-notReachedPit anop
         rts
 
 pickTargetRed anop

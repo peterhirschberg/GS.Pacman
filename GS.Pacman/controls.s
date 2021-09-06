@@ -14,7 +14,8 @@
 controls start
         using globalData
         using controlsData
-        using pacData
+
+        using ghostData
 
 
 checkControls entry
@@ -112,8 +113,11 @@ onDisableJoystick anop
         rts
 
 onQuit anop
-        ldx pacX
-        ldy pacY
+
+        ldx #0
+        lda ghostPixelY,x
+        jsr getTileYFromPixelY
+        tax
         brk
 
         lda >BUTTON1
