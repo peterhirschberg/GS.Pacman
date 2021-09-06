@@ -63,16 +63,12 @@ timerNotRunning anop
 
         lda ghostState,x
         cmp #GHOSTSTATE_EATEN
-        beq ghostEaten
+        beq ghostNotPenned
         cmp #GHOSTSTATE_PENNED
         beq ghostPenned
         cmp #GHOSTSTATE_LEAVINGPEN
         beq ghostPenned
         bra ghostNotPenned
-
-ghostEaten anop
-
-        brl ghostNotPenned
 
 ghostPenned anop
 
@@ -488,8 +484,6 @@ stopFrightenedSound anop
 ; No ghosts frightened so stop the frightened sound loop
 
         jsr stopScaredSound
-
-; Restart the scared sound -- TODO
 
         rts
 
@@ -1284,6 +1278,8 @@ distanceDone anop
 
 ghostPickTarget entry
 
+        ldx currentGhost
+
         lda ghostState,x
         cmp #GHOSTSTATE_EATEN
         beq pickTargetEaten
@@ -1299,15 +1295,11 @@ ghostPickTarget entry
         beq pickTargetOrange
 
 pickTargetEaten anop
-        lda #13
-        shiftedToPixel
-        jsr getTileXFromPixelX
-        sta ghostTargetX,x
 
-        lda #11
-        shiftedToPixel
-        jsr getTileXFromPixelX
+        lda #$360
         sta ghostTargetX,x
+        lda #$200
+        sta ghostTargetY,x
         rts
 
 pickTargetRed anop
@@ -1654,6 +1646,7 @@ setGhostSpeed entry
 
 speedEaten anop
         lda #16
+        sta ghostSpeed,x
         rts
 
 speedNotInTunnel anop
