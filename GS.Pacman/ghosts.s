@@ -23,6 +23,7 @@ ghosts start
 runGhosts entry
 
         jsr animateGhosts
+        jsr runGhostStateTimers
 
         lda #GHOSTINDEX_RED
         sta currentGhost
@@ -52,7 +53,7 @@ runGhost entry
         lda ghostPixelY,x
         sta ghostPixelOldY,x
 
-        jsr setGhostTarget
+timerNotRunning anop
 
         jsr runGhostDotCounter
         
@@ -426,8 +427,55 @@ resetAnimationIndex anop
         rts
 
 
+runGhostStateTimers entry
 
-setGhostTarget entry
+        lda #0
+        sta ghostsFrightened
+
+        ldx #0
+
+timerGhostLoop anop
+
+        lda ghostStateTimer,x
+        cmp #0
+        beq nextGhost
+        sec
+        sbc #1
+        sta ghostStateTimer,x
+
+        lda #1
+        sta ghostsFrightened
+
+        lda ghostStateTimer,x
+        cmp #0
+        bne nextGhost
+
+        lda #GHOSTSTATE_CHASE
+        sta ghostState,x
+
+nextGhost anop
+
+        inx
+        inx
+        txa
+        cmp #8
+        bcs timersDone
+        bra timerGhostLoop
+
+timersDone anop
+
+        lda ghostsFrightened
+        cmp #0
+        beq stopFrightenedSound
+        rts
+
+stopFrightenedSound anop
+
+; No ghosts frightened so stop the frightened sound loop
+
+        jsr stopScaredSound
+
+; Restart the scared sound -- TODO
 
         rts
 
@@ -1502,7 +1550,7 @@ speedNotInTunnel anop
 		lda ghostState,x
 		cmp #GHOSTSTATE_FRIGHTENED
 		bne speedNotFrightened
-		lda #5
+		lda #4
         sta ghostSpeed,x
 		rts
 
@@ -1665,6 +1713,8 @@ counter dc i2'0'
 
 ghostData data
 
+
+ghostsFrightened dc i2'0'
 
 ghostPointValue dc i2'0'
 

@@ -586,7 +586,7 @@ scaredSoundAlreadyPlaying anop
 doStartScaredSound anop
 
         lda #1
-        sta siren1SoundPlaying
+        sta scaredSoundPlaying
 
         short m
 		_docWait
