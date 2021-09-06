@@ -74,7 +74,7 @@ timerNotRunning anop
 
 ghostReviving anop
         lda ghostPixelY,x
-        adc #4
+        adc #16
         sta ghostPixelY,x
         cmp #$2c0
         bcs ghostRevived
