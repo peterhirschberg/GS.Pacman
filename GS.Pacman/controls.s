@@ -115,8 +115,9 @@ onDisableJoystick anop
 onQuit anop
 
         ldx #0
-        lda ghostPixelY,x
-        jsr getTileYFromPixelY
+        lda ghostPixelX,x
+        shiftedToPixel
+        jsr getTileXFromPixelX
         tax
         brk
 

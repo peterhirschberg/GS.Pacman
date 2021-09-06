@@ -523,10 +523,13 @@ eatenGhostLoop anop
         lda #GHOSTSTATE_EATEN
         sta ghostState,x
 
+        stx savex
         jsr ghostPickTarget
+        ldx savex
 
         stx savex
         jsr pickDirection
+        sta ghostDirection,x
         ldx savex
 
         jsr stopScaredSound
@@ -1338,7 +1341,7 @@ pickTargetEaten anop
         shiftedToPixel
         jsr getTileXFromPixelX
         cmp #13
-        beq notReachedPit
+        beq reachedPit
 
     bra notReachedPit
 
