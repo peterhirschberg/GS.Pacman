@@ -75,11 +75,11 @@ mainLoop anop
 
         lda eatGhostTimer
         cmp #0
-        beq notEatingGhost
+        beq notEatingGhost1
         dec eatGhostTimer
         bra eatingGhostSkipToHere
 
-notEatingGhost anop
+notEatingGhost1 anop
 
         jsr checkControls
 
@@ -108,8 +108,13 @@ eatingGhostSkipToHere anop
 
         jsr borderStart
 
-        
+        lda eatGhostTimer
+        cmp #0
+        bne notEatingGhost2
+
         jsr drawPac
+
+notEatingGhost2 anop
 
         jsr drawGhosts
 

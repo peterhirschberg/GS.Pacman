@@ -529,6 +529,8 @@ drawGhost entry
         lda ghostState,x
         cmp #GHOSTSTATE_FRIGHTENED
         beq drawFrightened
+        cmp #GHOSTSTATE_POINTS
+        beq drawPoints
 
         lda ghostDirection,x
         cmp #DIRECTION_RIGHT
@@ -548,6 +550,34 @@ drawFrightened anop
         tax
         lda ghostFrightenedAnimationSprites,x
         jsr drawSpriteByIndex
+        rts
+
+drawPoints anop
+        lda ghostPointValue
+        cmp #200
+        beq draw200
+        cmp #400
+        beq draw400
+        cmp #800
+        beq draw800
+        cmp #1600
+        beq draw1600
+        rts
+draw200 anop
+        lda #SPRITE_200
+        jsr drawSpriteByIndex
+        rts
+draw400 anop
+        lda #SPRITE_400
+        jsr drawSpriteByIndex
+        rts
+draw800 anop
+        lda #SPRITE_800
+        jsr drawSpriteByIndex
+        rts
+draw1600 anop
+;        lda #SPRITE_1600
+;        jsr drawSpriteByIndex
         rts
 
 drawDirectionRight anop
@@ -1634,7 +1664,10 @@ counter dc i2'0'
 
 
 ghostData data
-    
+
+
+ghostPointValue dc i2'200'
+
 
 GHOSTINDEX_RED          gequ 0*2
 GHOSTINDEX_PINK         gequ 1*2
