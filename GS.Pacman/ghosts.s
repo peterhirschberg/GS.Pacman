@@ -650,6 +650,8 @@ drawGhost entry
         beq drawPoints
         cmp #GHOSTSTATE_EATEN
         beq drawEaten
+        cmp #GHOSTSTATE_REVIVING
+        beq drawEaten
 
         lda ghostDirection,x
         cmp #DIRECTION_RIGHT
@@ -1343,20 +1345,6 @@ pickTargetEaten anop
         cmp #13
         beq reachedPit
 
-    bra notReachedPit
-
-        lda ghostPixelX,x
-        cmp #$35e
-        beq reachedPit
-        cmp #$35f
-        beq reachedPit
-        cmp #$360
-        beq reachedPit
-        cmp #$361
-        beq reachedPit
-        cmp #$362
-        beq reachedPit
-
 notReachedPit anop
 
         rts
@@ -1364,6 +1352,9 @@ notReachedPit anop
 reachedPit anop
 
 ; reached the pit entrance
+
+        lda #$360
+        sta ghostPixelX,x
 
         lda #GHOSTSTATE_REVIVING
         sta ghostState,x
