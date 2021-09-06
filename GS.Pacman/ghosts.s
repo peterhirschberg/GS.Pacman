@@ -99,26 +99,11 @@ ghostNotPenned anop
         cmp #8
         bne notInTunnel
 
-        lda #4 ; ghosts travel half speed when in tunnel
-        sta ghostSpeed,x
-        
         lda #1
         sta ghostInTunnel,x
         bra dontPickDirection
         
 notInTunnel anop
-
-        lda #8
-        sta ghostSpeed,x
-
-        lda ghostState,x
-        cmp #GHOSTSTATE_FRIGHTENED
-        bne notFrightened
-
-        lda #6 ; go slower when frightened
-        sta ghostSpeed,x
-
-notFrightened anop
 
         lda ghostPixelX,x
         shiftedToPixel
@@ -144,6 +129,10 @@ doPickDirection anop
         sta ghostDirection,x
         
 dontPickDirection anop
+
+; set the ghost's speed
+        jsr getGhostSpeed
+        sta ghostSpeed,x
 
         ldx currentGhost
         jsr moveGhost
@@ -208,8 +197,6 @@ doPickLeavingPenDirection anop
 
 
 pickPennedDirection entry
-        lda #4
-        sta ghostSpeed,x
 
         lda ghostDirection,x
         cmp #DIRECTION_UP
@@ -239,9 +226,6 @@ ghostPennedContinueDown anop
         rts
 
 pickLeavingPenDirection entry
-        lda #4
-        sta ghostSpeed,x
-
         lda ghostPixelX,x
         cmp #$360
         bne pennedGoLeftOrRight
@@ -271,10 +255,24 @@ pickRandomDirection entry
 
         ldx currentGhost
 
+        lda ghostPixelX,x
+        shiftedToPixel
+        jsr getTileXFromPixelX
+        sta tileX
+        lda ghostPixelY,x
+        shiftedToPixel
+        jsr getTileYFromPixelY
+        sta tileY
+
+        jsr getAvailableDirectionsFromTileXY
+        sta availableDirections
+
         lda #0
         sta counter
 
 directionLoop anop
+
+; If more than 4 iterations, allow ghosts to reverse direction. This keeps the game from hanging.
 
         lda counter
         cmp #4
@@ -1458,6 +1456,49 @@ orangeTargetPac anop
 
         rts
 
+
+getGhostSpeed entry
+
+		ldx currentGhost
+
+		lda ghostState,x
+		cmp #GHOSTSTATE_FRIGHTENED
+		bne speedNotFrightened
+
+        lda ghostInTunnel,x
+        cmp #0
+        beq speedNotInTunnel1
+        lda #4
+        rts
+
+speedNotInTunnel1 anop
+		lda #5
+		rts
+
+speedNotFrightened anop
+
+		lda ghostInTunnel,x
+		cmp #0
+		beq speedNotInTunnel2
+		lda #4
+  		rts
+
+speedNotInTunnel2 anop
+
+        lda ghostState,x
+        cmp #GHOSTSTATE_PENNED
+        beq speedGhostPenned
+        cmp #GHOSTSTATE_LEAVINGPEN
+        beq speedGhostPenned
+        bra speedGhostNotPenned
+
+speedGhostPenned anop
+        lda #4
+        rts
+
+speedGhostNotPenned anop
+		lda #8
+		rts
 
 
 countNumAvailableDirections entry
