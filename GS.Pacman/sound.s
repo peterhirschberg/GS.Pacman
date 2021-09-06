@@ -69,7 +69,7 @@ SIREN1_SIZE            equ $2b
 SIREN2_SOUND_ADDR     equ $2000
 SIREN2_OSC_NUM        equ 8
 SIREN2_FREQ_HIGH        equ 0
-SIREN2_FREQ_LOW        equ 40
+SIREN2_FREQ_LOW        equ 50
 SIREN2_CONTROL        equ SOUND_SWAP_MODE
 SIREN2_SIZE            equ $2b
 
@@ -469,15 +469,22 @@ doStartSiren2Sound anop
         _writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+3,#SIREN2_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER
 
 		ldy #SOUND_REG_VOLUME+SIREN2_OSC_NUM
+        lda #$fff
+        jsr writeReg
+        iny
         lda #$ff
-		jsr writeReg
-		iny
+        jsr writeReg
+        iny
         lda #$ff
-		eor #$ff
-		jsr writeReg
+        eor #$ff
+        jsr writeReg
+        iny
+        lda #$ff
+        eor #$ff
+        jsr writeReg
 
 		_writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM,#SIREN2_CONTROL+SOUND_RIGHT_SPEAKER
-		_writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+1,#SIREN2_CONTROL+SOUND_LEFT_SPEAKER
+		_writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+1,#SIREN2_CONTROL+SOUND_RIGHT_SPEAKER
         _writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+2,#SIREN2_CONTROL+SOUND_LEFT_SPEAKER
         _writeReg #SOUND_REG_CONTROL+SIREN2_OSC_NUM+3,#SIREN2_CONTROL+SOUND_LEFT_SPEAKER
         long m

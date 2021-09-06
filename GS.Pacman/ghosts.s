@@ -24,6 +24,7 @@ runGhosts entry
 
         jsr animateGhosts
         jsr runGhostStateTimers
+        jsr checkEatenGhosts
 
         lda #GHOSTINDEX_RED
         sta currentGhost
@@ -476,6 +477,36 @@ stopFrightenedSound anop
         jsr stopScaredSound
 
 ; Restart the scared sound -- TODO
+
+        rts
+
+
+checkEatenGhosts entry
+
+        ldx #0
+
+eatenGhostLoop anop
+
+        lda ghostState,x
+        cmp #GHOSTSTATE_POINTS
+        bne eatenNextGhost
+
+        lda #GHOSTSTATE_EATEN
+        sta ghostState,x
+
+        jsr stopScaredSound
+        jsr startSiren2Sound
+
+eatenNextGhost anop
+
+        inx
+        inx
+        txa
+        cmp #8
+        bcs eatenDone
+        bra eatenGhostLoop
+
+eatenDone anop
 
         rts
 
