@@ -26,7 +26,7 @@ gameInit entry
 
         jsr drawMaze
         
-;        jsr borderInit
+        jsr borderInit
 
         jsr playIntroSound
 
@@ -69,7 +69,7 @@ mainLoop anop
 
         jsr waitForVbl
         
-;        jsr borderStart
+        jsr borderStart
         
         
         jsr checkControls
@@ -84,7 +84,7 @@ mainLoop anop
         
         
         
-;        jsr borderStart
+        jsr borderStart
 
 
         jsr eraseGhosts
@@ -93,7 +93,7 @@ mainLoop anop
         
         
 
-;        jsr borderStart
+        jsr borderStart
 
         
         jsr drawPac
@@ -108,7 +108,7 @@ mainLoop anop
         sta joystickRight
         
 
-;        jsr borderDone
+        jsr borderDone
         
         brl mainLoop
         

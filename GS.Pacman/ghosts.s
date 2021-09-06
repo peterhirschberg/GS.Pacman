@@ -115,7 +115,7 @@ notInTunnel anop
         cmp #GHOSTSTATE_FRIGHTENED
         bne notFrightened
 
-        lda #4
+        lda #6 ; go slower when frightened
         sta ghostSpeed,x
 
 notFrightened anop
@@ -192,7 +192,7 @@ pickDirection entry
 doChaseState anop
         jsr ghostPathfindToTarget
         rts
-doScatter anop
+doScatterState anop
 ; TODO - head for the preferred corners
         rts
 doFrightenedState anop
@@ -271,12 +271,29 @@ pickRandomDirection entry
 
         ldx currentGhost
 
+        lda #0
+        sta counter
+
 directionLoop anop
 
+        lda counter
+        cmp #4
+        bcs allowReverse
+        bra dontAllowReverse
+
+allowReverse anop
+
+        jsr getRandomDirAll
+        bra checkDirection
+
+dontAllowReverse anop
+
         jsr getRandomDir
-        
+
+checkDirection anop
+
         ldx currentGhost
-        
+
         cmp #DIRECTION_UP
         beq checkUpAvailable
         cmp #DIRECTION_RIGHT
@@ -285,9 +302,9 @@ directionLoop anop
         beq checkDownAvailable
         cmp #DIRECTION_LEFT
         beq checkLeftAvailable
-        
+
         rts
-        
+
 checkUpAvailable anop
         lda availableDirections
         and #AVAILABLEDIR_UP
@@ -295,7 +312,7 @@ checkUpAvailable anop
         beq directionLoop
         lda #DIRECTION_UP
         rts
-        
+
 checkRightAvailable anop
         lda availableDirections
         and #AVAILABLEDIR_RIGHT
@@ -303,7 +320,7 @@ checkRightAvailable anop
         beq directionLoop
         lda #DIRECTION_RIGHT
         rts
-        
+
 checkDownAvailable anop
         lda availableDirections
         and #AVAILABLEDIR_DOWN
@@ -311,7 +328,7 @@ checkDownAvailable anop
         beq directionLoop
         lda #DIRECTION_DOWN
         rts
-        
+
 checkLeftAvailable anop
         lda availableDirections
         and #AVAILABLEDIR_LEFT
@@ -771,6 +788,19 @@ getNotUp anop
         lda randomDirectionNotUp,x
         rts
 
+getRandomDirAll entry
+        inc randomDirIndex
+        lda randomDirIndex
+        cmp #255
+        bne dontResetRandomDirIndex2
+        lda #0
+        sta randomDirIndex
+dontResetRandomDirIndex2 anop
+        asl a
+        tax
+        lda randomDirectionAll,x
+        rts
+
 
 pacAteDot entry
 
@@ -782,12 +812,14 @@ pacAteDot entry
         ldx #0
 atePowerPelletLoop anop
 
-; do not frighten ghosts still in the pen
+; do not frighten ghosts still in the pen (or those already in frightened mode)
 
         lda ghostState,x
         cmp #GHOSTSTATE_PENNED
         beq skipGhost
         cmp #GHOSTSTATE_LEAVINGPEN
+        beq skipGhost
+        cmp #GHOSTSTATE_FRIGHTENED
         beq skipGhost
 
 ; set the state
@@ -1558,6 +1590,8 @@ blueRedTargetY dc i2'0'
 
 savex dc i2'0'
 savey dc i2'0'
+
+counter dc i2'0'
 
         end
 
@@ -2808,5 +2842,262 @@ randomDirectionNotDown anop
         dc i2'0'
         dc i2'2'
 
-        
+randomDirectionAll anop
+        dc i2'2'
+        dc i2'3'
+        dc i2'2'
+        dc i2'0'
+        dc i2'1'
+        dc i2'2'
+        dc i2'1'
+        dc i2'0'
+        dc i2'3'
+        dc i2'1'
+        dc i2'3'
+        dc i2'0'
+        dc i2'3'
+        dc i2'2'
+        dc i2'0'
+        dc i2'2'
+        dc i2'3'
+        dc i2'1'
+        dc i2'0'
+        dc i2'2'
+        dc i2'0'
+        dc i2'1'
+        dc i2'0'
+        dc i2'3'
+        dc i2'1'
+        dc i2'0'
+        dc i2'3'
+        dc i2'2'
+        dc i2'3'
+        dc i2'2'
+        dc i2'1'
+        dc i2'2'
+        dc i2'0'
+        dc i2'2'
+        dc i2'0'
+        dc i2'2'
+        dc i2'3'
+        dc i2'2'
+        dc i2'1'
+        dc i2'2'
+        dc i2'0'
+        dc i2'1'
+        dc i2'0'
+        dc i2'2'
+        dc i2'1'
+        dc i2'2'
+        dc i2'0'
+        dc i2'1'
+        dc i2'2'
+        dc i2'3'
+        dc i2'2'
+        dc i2'3'
+        dc i2'0'
+        dc i2'2'
+        dc i2'1'
+        dc i2'2'
+        dc i2'1'
+        dc i2'2'
+        dc i2'0'
+        dc i2'3'
+        dc i2'0'
+        dc i2'2'
+        dc i2'3'
+        dc i2'2'
+        dc i2'0'
+        dc i2'1'
+        dc i2'2'
+        dc i2'3'
+        dc i2'0'
+        dc i2'3'
+        dc i2'1'
+        dc i2'3'
+        dc i2'1'
+        dc i2'2'
+        dc i2'1'
+        dc i2'3'
+        dc i2'2'
+        dc i2'0'
+        dc i2'1'
+        dc i2'3'
+        dc i2'0'
+        dc i2'2'
+        dc i2'0'
+        dc i2'2'
+        dc i2'3'
+        dc i2'0'
+        dc i2'1'
+        dc i2'2'
+        dc i2'0'
+        dc i2'3'
+        dc i2'0'
+        dc i2'1'
+        dc i2'2'
+        dc i2'0'
+        dc i2'1'
+        dc i2'3'
+        dc i2'1'
+        dc i2'0'
+        dc i2'1'
+        dc i2'0'
+        dc i2'1'
+        dc i2'2'
+        dc i2'1'
+        dc i2'2'
+        dc i2'0'
+        dc i2'3'
+        dc i2'1'
+        dc i2'0'
+        dc i2'1'
+        dc i2'3'
+        dc i2'0'
+        dc i2'3'
+        dc i2'1'
+        dc i2'0'
+        dc i2'3'
+        dc i2'1'
+        dc i2'2'
+        dc i2'3'
+        dc i2'1'
+        dc i2'3'
+        dc i2'1'
+        dc i2'0'
+        dc i2'2'
+        dc i2'3'
+        dc i2'0'
+        dc i2'1'
+        dc i2'2'
+        dc i2'1'
+        dc i2'0'
+        dc i2'2'
+        dc i2'3'
+        dc i2'0'
+        dc i2'2'
+        dc i2'0'
+        dc i2'3'
+        dc i2'0'
+        dc i2'3'
+        dc i2'1'
+        dc i2'2'
+        dc i2'1'
+        dc i2'0'
+        dc i2'1'
+        dc i2'2'
+        dc i2'0'
+        dc i2'2'
+        dc i2'0'
+        dc i2'1'
+        dc i2'2'
+        dc i2'3'
+        dc i2'0'
+        dc i2'3'
+        dc i2'1'
+        dc i2'0'
+        dc i2'1'
+        dc i2'0'
+        dc i2'1'
+        dc i2'3'
+        dc i2'2'
+        dc i2'1'
+        dc i2'3'
+        dc i2'1'
+        dc i2'3'
+        dc i2'1'
+        dc i2'3'
+        dc i2'0'
+        dc i2'1'
+        dc i2'3'
+        dc i2'1'
+        dc i2'0'
+        dc i2'2'
+        dc i2'3'
+        dc i2'2'
+        dc i2'3'
+        dc i2'1'
+        dc i2'2'
+        dc i2'0'
+        dc i2'1'
+        dc i2'0'
+        dc i2'1'
+        dc i2'3'
+        dc i2'2'
+        dc i2'3'
+        dc i2'2'
+        dc i2'0'
+        dc i2'3'
+        dc i2'0'
+        dc i2'3'
+        dc i2'1'
+        dc i2'3'
+        dc i2'2'
+        dc i2'0'
+        dc i2'1'
+        dc i2'0'
+        dc i2'3'
+        dc i2'0'
+        dc i2'1'
+        dc i2'0'
+        dc i2'1'
+        dc i2'0'
+        dc i2'2'
+        dc i2'1'
+        dc i2'2'
+        dc i2'3'
+        dc i2'1'
+        dc i2'2'
+        dc i2'3'
+        dc i2'1'
+        dc i2'0'
+        dc i2'2'
+        dc i2'1'
+        dc i2'2'
+        dc i2'3'
+        dc i2'0'
+        dc i2'3'
+        dc i2'0'
+        dc i2'1'
+        dc i2'2'
+        dc i2'1'
+        dc i2'3'
+        dc i2'2'
+        dc i2'1'
+        dc i2'0'
+        dc i2'1'
+        dc i2'3'
+        dc i2'2'
+        dc i2'0'
+        dc i2'2'
+        dc i2'1'
+        dc i2'2'
+        dc i2'1'
+        dc i2'2'
+        dc i2'0'
+        dc i2'3'
+        dc i2'2'
+        dc i2'0'
+        dc i2'3'
+        dc i2'2'
+        dc i2'0'
+        dc i2'3'
+        dc i2'2'
+        dc i2'0'
+        dc i2'1'
+        dc i2'2'
+        dc i2'0'
+        dc i2'2'
+        dc i2'1'
+        dc i2'3'
+        dc i2'2'
+        dc i2'1'
+        dc i2'0'
+        dc i2'1'
+        dc i2'2'
+        dc i2'1'
+        dc i2'3'
+        dc i2'2'
+        dc i2'3'
+
         end

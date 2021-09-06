@@ -52,5 +52,15 @@ for (i=0; i<256; i++) \{\
 	str += `		dc i2'$\{dir\}'\\n`\
 \}\
 \
+str += '\\n\\nrandomDirectionAll anop\\n'\
+for (i=0; i<256; i++) \{\
+	let dir = parseInt(Math.random() * 4)\
+  while (dir === lastDir) \{\
+  	dir = parseInt(Math.random() * 4)\
+	\}\
+  lastDir = dir\
+	str += `		dc i2'$\{dir\}'\\n`\
+\}\
+\
 \
 console.log(str)}
