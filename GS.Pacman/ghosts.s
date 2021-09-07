@@ -352,7 +352,7 @@ pickLeavingPenDirection entry
         bne pennedGoLeftOrRight
         lda #$200
         cmp ghostPixelY,x
-        bcs pennedStartScatter
+        bcs pennedStartPickMode
         lda #DIRECTION_UP
         rts
 pennedGoLeftOrRight anop
@@ -363,7 +363,7 @@ pennedGoLeftOrRight anop
 pennedGoLeft anop
         lda #DIRECTION_LEFT
         rts
-pennedStartScatter anop
+pennedStartPickMode anop
 
         lda ghostPixelX,x
         and #$fff0
@@ -373,7 +373,7 @@ pennedStartScatter anop
         and #$fff0
         sta ghostPixelY,x
 
-        lda #GHOSTSTATE_SCATTER
+        lda newMode
         sta ghostState,x
 
         lda #DIRECTION_LEFT
