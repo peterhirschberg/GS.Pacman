@@ -27,6 +27,8 @@ gameInit entry
         jsr initMaze
 
         jsr drawMaze
+
+        jsr initGhosts
         
         jsr borderInit
 

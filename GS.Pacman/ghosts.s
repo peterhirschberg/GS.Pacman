@@ -19,6 +19,27 @@ ghosts start
         using ghostData
         
 
+initGhosts entry
+
+; TODO: Assume level 1
+
+        ldx #0
+        lda level1GhostModeTimes,x
+        sta ghostModeTimer
+
+        lda level1GhostModes
+
+;        ldx #0
+;        sta ghostMode,x
+;        ldx #2
+;        sta ghostMode,x
+;        ldx #4
+;        sta ghostMode,x
+;        ldx #6
+;        sta ghostMode,x
+
+        rts
+
         
 runGhosts entry
 
@@ -221,7 +242,7 @@ doChaseState anop
         jsr ghostPathfindToTarget
         rts
 doScatterState anop
-; TODO - head for the preferred corners
+        jsr ghostPathfindToTarget
         rts
 doFrightenedState anop
         jsr pickRandomDirection
@@ -273,7 +294,7 @@ pickLeavingPenDirection entry
         bne pennedGoLeftOrRight
         lda #$200
         cmp ghostPixelY,x
-        bcs pennedStartChase
+        bcs pennedStartScatter
         lda #DIRECTION_UP
         rts
 pennedGoLeftOrRight anop
@@ -284,8 +305,8 @@ pennedGoLeftOrRight anop
 pennedGoLeft anop
         lda #DIRECTION_LEFT
         rts
-pennedStartChase anop
-        lda #GHOSTSTATE_CHASE
+pennedStartScatter anop
+        lda #GHOSTSTATE_SCATTER
         sta ghostState,x
         lda #DIRECTION_LEFT
         rts
@@ -1405,15 +1426,19 @@ ghostPickTarget entry
         cmp #GHOSTSTATE_EATEN
         beq pickTargetEaten
 
-        lda currentGhost
-        cmp #GHOSTINDEX_RED
-        beq pickTargetRed
-        cmp #GHOSTINDEX_BLUE
-        beq pickTargetBlue
-        cmp #GHOSTINDEX_PINK
-        beq pickTargetPink
-        cmp #GHOSTINDEX_ORANGE
-        beq pickTargetOrange
+        cmp #GHOSTSTATE_SCATTER
+        bne chaseTarget
+
+        jsr pickScatterTarget
+
+        rts
+
+chaseTarget anop
+
+        jsr pickChaseTarget
+
+        rts
+
 
 pickTargetEaten anop
 
@@ -1451,16 +1476,80 @@ reachedPit anop
         sta ghostState,x
         rts
 
-pickTargetRed anop
+
+pickScatterTarget entry
+
+        lda currentGhost
+        cmp #GHOSTINDEX_RED
+        beq pickScatterTargetRed
+        cmp #GHOSTINDEX_BLUE
+        beq pickScatterTargetBlue
+        cmp #GHOSTINDEX_PINK
+        beq pickScatterTargetPink
+        cmp #GHOSTINDEX_ORANGE
+        beq pickScatterTargetOrange
+
+pickScatterTargetRed anop
+        lda #27*8
+        pixelToShifted
+        sta ghostTargetX,x
+        lda #0*8
+        pixelToShifted
+        sta ghostTargetY,x
+        rts
+
+pickScatterTargetBlue anop
+        lda #27*8
+        pixelToShifted
+        sta ghostTargetX,x
+        lda #23*8
+        pixelToShifted
+        sta ghostTargetY,x
+        rts
+
+pickScatterTargetPink anop
+        lda #0*8
+        pixelToShifted
+        sta ghostTargetX,x
+        lda #0*8
+        pixelToShifted
+        sta ghostTargetY,x
+        rts
+
+pickScatterTargetOrange anop
+        lda #0*8
+        pixelToShifted
+        sta ghostTargetX,x
+        lda #23*8
+        pixelToShifted
+        sta ghostTargetY,x
+        rts
+
+
+pickChaseTarget entry
+
+        lda currentGhost
+        cmp #GHOSTINDEX_RED
+        beq pickScatterTargetRed
+        cmp #GHOSTINDEX_BLUE
+        beq pickScatterTargetBlue
+        cmp #GHOSTINDEX_PINK
+        beq pickScatterTargetPink
+        cmp #GHOSTINDEX_ORANGE
+        beq pickScatterTargetOrange
+
+        rts
+
+pickChaseTargetRed anop
         jsr redGhostPickTarget
         rts
-pickTargetBlue anop
+pickChaseTargetBlue anop
         jsr blueGhostPickTarget
         rts
-pickTargetPink anop
+pickChaseTargetPink anop
         jsr pinkGhostPickTarget
         rts
-pickTargetOrange anop
+pickChaseTargetOrange anop
         jsr orangeGhostPickTarget
         rts
 
@@ -2223,33 +2312,29 @@ ghostFrightenedAnimationSprites anop
 ghostFrightenedBlinkAnimationSprites anop
         dc i2'SPRITE_FLEEBLINKGHOST_1'
         dc i2'SPRITE_FLEEBLINKGHOST_2'
-        
-sortTable anop
-        dc i2'6,4,2,0'
-        dc i2'6,4,0,2'
-        dc i2'6,2,0,4'
-        dc i2'4,2,0,6'
-        dc i2'6,2,4,0'
-        dc i2'2,0,4,6'
-        dc i2'4,0,6,2'
-        dc i2'2,4,6,0'
-        dc i2'4,2,6,0'
-        dc i2'4,6,0,2'
-        dc i2'0,2,4,6'
-        dc i2'0,6,2,4'
-        dc i2'4,0,2,6'
-        dc i2'6,0,2,4'
-        dc i2'2,0,6,4'
-        dc i2'0,2,6,4'
-        dc i2'2,6,4,0'
-        dc i2'0,4,6,2'
-        dc i2'0,4,2,6'
-        dc i2'4,6,2,0'
-        dc i2'6,0,4,2'
-        dc i2'2,4,0,6'
-        dc i2'2,6,0,4'
-        dc i2'0,6,4,2'
-        
+
+
+level1GhostModeTimes anop
+		dc i2'420' ; scatter
+		dc i2'1200' ; chase
+		dc i2'420' ; scatter
+		dc i2'1200' ; chase
+		dc i2'500' ; scatter
+		dc i2'1200' ; chase
+		dc i2'500' ; scatter
+		dc i2'-1' ; chase
+
+level1GhostModes anop
+		dc i2'GHOSTSTATE_SCATTER'
+		dc i2'GHOSTSTATE_CHASE'
+		dc i2'GHOSTSTATE_SCATTER'
+		dc i2'GHOSTSTATE_CHASE'
+		dc i2'GHOSTSTATE_SCATTER'
+		dc i2'GHOSTSTATE_CHASE'
+		dc i2'GHOSTSTATE_SCATTER'
+		dc i2'GHOSTSTATE_CHASE'
+
+ghostModeTimer dc i2'0'
         
         
 ; Precalculated pseudo-random directions -
