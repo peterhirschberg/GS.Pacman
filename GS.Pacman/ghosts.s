@@ -82,7 +82,8 @@ switchMode anop
         lda ghostMode
         asl a
         tax
-        ldy level1GhostModes,x
+        lda level1GhostModes,x
+        sta newMode
         lda level1GhostModeTimes,x
         sta ghostModeTimer
 
@@ -104,7 +105,7 @@ switchModeContinue anop
 
 ; set the new mode
 
-        tya
+        lda newMode
         sta ghostState,x
 
 ; reverse directions
@@ -1593,13 +1594,13 @@ pickChaseTarget entry
 
         lda currentGhost
         cmp #GHOSTINDEX_RED
-        beq pickScatterTargetRed
+        beq pickChaseTargetRed
         cmp #GHOSTINDEX_BLUE
-        beq pickScatterTargetBlue
+        beq pickChaseTargetBlue
         cmp #GHOSTINDEX_PINK
-        beq pickScatterTargetPink
+        beq pickChaseTargetPink
         cmp #GHOSTINDEX_ORANGE
-        beq pickScatterTargetOrange
+        beq pickChaseTargetOrange
 
         rts
 
@@ -2186,6 +2187,8 @@ savex dc i2'0'
 savey dc i2'0'
 
 counter dc i2'0'
+
+newMode dc i2'0'
 
         end
 
