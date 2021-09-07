@@ -29,27 +29,14 @@ initGhosts entry
 
         lda level1GhostModes
 
-; hack for red ghost
-
-        lda #20
-        sta ghostDontTurnTimer,x
-
-
-;        ldx #0
-;        sta ghostMode,x
-;        ldx #2
-;        sta ghostMode,x
-;        ldx #4
-;        sta ghostMode,x
-;        ldx #6
-;        sta ghostMode,x
-
         rts
 
         
 runGhosts entry
 
         jsr runSirenSounds
+
+        jsr runModeTimer
 
         jsr animateGhosts
         jsr runGhostStateTimers
@@ -72,7 +59,80 @@ runGhosts entry
         jsr runGhost
         
         rts
-        
+
+
+runModeTimer entry
+
+        lda ghostModeTimer
+        cmp #0
+        beq switchMode
+        dec ghostModeTimer
+        rts
+
+switchMode anop
+
+    jsr playFruitSound ; TEST ONLY
+
+        inc ghostMode
+
+        lda ghostMode
+        cmp #8
+        bcs switchModeMaxed
+
+        lda ghostMode
+        asl a
+        tax
+        ldy level1GhostModes,x
+        lda level1GhostModeTimes,x
+        sta ghostModeTimer
+
+        ldx #0
+
+switchModeLoop anop
+
+; TODO - this probably isn't quite right. Might need a "ghostDefaultState" variable for ghosts that are frightened, for instance
+; This would allow them to return to the desired state after they are no longer frightened. Not sure...
+
+        lda ghostState,x
+        cmp #GHOSTSTATE_CHASE
+        beq switchModeContinue
+        cmp #GHOSTSTATE_SCATTER
+        beq switchModeContinue
+        bra switchModeNext
+
+switchModeContinue anop
+
+; set the new mode
+
+        tya
+        sta ghostState,x
+
+; reverse directions
+
+        lda ghostDirection,x
+        asl a
+        tay
+        lda reverseDirections,y
+        sta ghostDirection,x
+
+switchModeNext anop
+
+        inx
+        inx
+        txa
+        cmp #8
+        bcs switchModeDone
+        bra switchModeLoop
+
+switchModeMaxed anop
+
+        lda #8
+        sta ghostMode
+
+switchModeDone anop
+
+        rts
+
         
 runGhost entry
 
@@ -131,16 +191,6 @@ ghostNotPenned anop
         lda ghostPixelY,x
         shiftedToPixel
         sta spriteY
-
-;        lda ghostDontTurnTimer,x
-;        cmp #0
-;        beq ignoreTurnTimer
-;        dec a
-;        sta ghostDontTurnTimer,x
-;        cmp #0
-;        bne dontPickDirection
-
-;ignoreTurnTimer anop
 
         jsr isSpriteCenteredInMazeTile
 
@@ -318,9 +368,6 @@ pennedStartScatter anop
         lda ghostPixelY,x
         and #$fff0
         sta ghostPixelY,x
-
-        lda #20
-        sta ghostDontTurnTimer,x
 
         lda #GHOSTSTATE_SCATTER
         sta ghostState,x
@@ -2252,12 +2299,6 @@ ghostDotCounter anop
         dc i2'20'
         dc i2'40'
 
-ghostDontTurnTimer anop
-        dc i2'0'
-        dc i2'0'
-        dc i2'0'
-        dc i2'0'
-
 
         
 redGhostLeftAnimationSprites anop
@@ -2358,7 +2399,9 @@ level1GhostModes anop
 		dc i2'GHOSTSTATE_CHASE'
 
 ghostModeTimer dc i2'0'
-        
+
+ghostMode dc i2'0'
+
         
 ; Precalculated pseudo-random directions -
 ; For performance reasons the values are calculated to be non-repeating and each
