@@ -454,7 +454,7 @@ siren2SoundAlreadyPlaying anop
 doStartSiren2Sound anop
 
         lda #1
-        sta siren1SoundPlaying
+        sta siren2SoundPlaying
 
         short m
 		_docWait
@@ -580,7 +580,7 @@ playFruitSound entry
         long m
 		rts
 
-playGhostScaredSound entry
+startScaredSound entry
 
         lda scaredSoundPlaying
         cmp #1

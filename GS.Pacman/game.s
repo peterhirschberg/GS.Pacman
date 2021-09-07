@@ -64,8 +64,6 @@ dontDrawInitialSprites anop
 startGame anop
 
         jsr soundInitGameSounds
-        jsr startSiren1Sound
-
 
 mainLoop anop
 

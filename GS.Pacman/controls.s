@@ -15,8 +15,6 @@ controls start
         using globalData
         using controlsData
 
-        using ghostData
-
 
 checkControls entry
 
@@ -114,18 +112,12 @@ onDisableJoystick anop
 
 onQuit anop
 
-        ldx #0
-        lda ghostPixelX,x
-        shiftedToPixel
-        jsr getTileXFromPixelX
-        tax
-        brk
-
         lda >BUTTON1
         and #$80
         cmp #0
         beq dontQuit
         jsl signalQuit
+
 dontQuit anop
         rts
 

@@ -22,6 +22,8 @@ ghosts start
         
 runGhosts entry
 
+        jsr runSirenSounds
+
         jsr animateGhosts
         jsr runGhostStateTimers
         jsr checkEatenGhosts
@@ -469,9 +471,6 @@ resetAnimationIndex anop
 
 runGhostStateTimers entry
 
-        lda #0
-        sta ghostsFrightened
-
         ldx #0
 
 timerGhostLoop anop
@@ -483,16 +482,14 @@ timerGhostLoop anop
         sbc #1
         sta ghostStateTimer,x
 
-        lda #1
-        sta ghostsFrightened
-
         lda ghostStateTimer,x
         cmp #0
         bne nextGhost
 
         lda ghostState,x
         cmp #GHOSTSTATE_EATEN
-        bne nextGhost
+        beq nextGhost
+
         lda #GHOSTSTATE_CHASE
         sta ghostState,x
 
@@ -506,20 +503,6 @@ nextGhost anop
         bra timerGhostLoop
 
 timersDone anop
-
-        lda ghostsFrightened
-        cmp #0
-        beq stopFrightenedSound
-        rts
-
-stopFrightenedSound anop
-
-; No ghosts frightened so stop the frightened sound loop
-
-        jsr stopScaredSound
-
-; TODO: NEED TO CHECK TO SEE IF WE SHOULD RESTART THE SIREN2 SOUND HERE <<<<<<<
-
         rts
 
 
@@ -539,6 +522,7 @@ eatenGhostLoop anop
         lda #GHOSTSTATE_EATEN
         sta ghostState,x
 
+
 ; Since the "eyes" move very fast, unless they start centered on tile boundries the centering
 ; check at each intersection will fail unless we reposition them here to tile boundries
 
@@ -549,10 +533,6 @@ eatenGhostLoop anop
         lda ghostPixelY,x
         and #$fff0
         sta ghostPixelY,x
-
-
-        jsr stopScaredSound
-        jsr startSiren2Sound
 
 eatenNextGhost anop
 
@@ -1037,11 +1017,8 @@ atePowerPelletLoop anop
         lda reverseDirections,y
         sta ghostDirection,x
 
-        lda #200 ; TODO - MAKE THIS TIMER DYNAMIC
+        lda #300 ; TODO - MAKE THIS TIMER DYNAMIC
         sta ghostStateTimer,x
-
-        jsr stopSiren1Sound
-        jsr playGhostScaredSound
 
 skipGhost anop
 
@@ -1803,6 +1780,75 @@ dontCountRight anop
         rts
 
 
+
+runSirenSounds entry
+
+        lda #0
+        sta ghostsFrightened
+        sta ghostsEaten
+
+        ldx #0
+
+sirenLoop anop
+
+        lda ghostState,x
+        cmp #GHOSTSTATE_FRIGHTENED
+        bne sirenCheckEaten
+
+        lda #1
+        sta ghostsFrightened
+
+sirenCheckEaten anop
+
+        lda ghostState,x
+        cmp #GHOSTSTATE_EATEN
+        bne sirenNext
+
+        lda #1
+        sta ghostsEaten
+
+sirenNext anop
+
+        inx
+        inx
+        txa
+        cmp #8
+        bcs sirenDone
+        bra sirenLoop
+
+sirenDone anop
+
+        lda ghostsEaten
+        cmp #0
+        bne sirenGhostsEaten
+
+        lda ghostsFrightened
+        cmp #0
+        bne sirenGhostsFrightened
+
+        jsr stopScaredSound
+        jsr stopSiren2Sound
+        jsr startSiren1Sound
+
+        rts
+
+sirenGhostsEaten anop
+
+        jsr stopScaredSound
+        jsr startSiren2Sound
+        jsr stopSiren1Sound
+
+        rts
+
+sirenGhostsFrightened anop
+
+        jsr startScaredSound
+        jsr stopSiren2Sound
+        jsr stopSiren1Sound
+
+        rts
+
+
         
 currentGhost dc i2'0'
 
@@ -1896,6 +1942,7 @@ ghostData data
 
 
 ghostsFrightened dc i2'0'
+ghostsEaten dc i2'0'
 
 ghostPointValue dc i2'0'
 
