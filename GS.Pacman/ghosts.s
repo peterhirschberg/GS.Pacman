@@ -71,8 +71,6 @@ runModeTimer entry
 
 switchMode anop
 
-    jsr playFruitSound ; TEST ONLY
-
         inc ghostMode
 
         lda ghostMode
@@ -90,9 +88,6 @@ switchMode anop
         ldx #0
 
 switchModeLoop anop
-
-; TODO - this probably isn't quite right. Might need a "ghostDefaultState" variable for ghosts that are frightened, for instance
-; This would allow them to return to the desired state after they are no longer frightened. Not sure...
 
         lda ghostState,x
         cmp #GHOSTSTATE_CHASE
@@ -579,7 +574,9 @@ timerGhostLoop anop
         cmp #GHOSTSTATE_EATEN
         beq nextGhost
 
-        lda #GHOSTSTATE_SCATTER ; THIS IS WRONG XXXXXXXXX SHOULD RETURN TO STATE HELD PREVIOUS TO BEING FRIGHTENED
+; no longer frightened
+
+        lda newMode
         sta ghostState,x
 
 nextGhost anop
