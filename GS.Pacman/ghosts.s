@@ -132,15 +132,15 @@ ghostNotPenned anop
         shiftedToPixel
         sta spriteY
 
-        lda ghostDontTurnTimer,x
-        cmp #0
-        beq ignoreTurnTimer
-        dec a
-        sta ghostDontTurnTimer,x
-        cmp #0
-        bne dontPickDirection
+;        lda ghostDontTurnTimer,x
+;        cmp #0
+;        beq ignoreTurnTimer
+;        dec a
+;        sta ghostDontTurnTimer,x
+;        cmp #0
+;        bne dontPickDirection
 
-ignoreTurnTimer anop
+;ignoreTurnTimer anop
 
         jsr isSpriteCenteredInMazeTile
 
@@ -235,6 +235,8 @@ pickDirection entry
         beq doPickLeavingPenDirection
         cmp #GHOSTSTATE_CHASE
         beq doChaseState
+        cmp #GHOSTSTATE_SCATTER
+        beq doScatterState
         cmp #GHOSTSTATE_FRIGHTENED
         beq doFrightenedState
         cmp #GHOSTSTATE_EATEN
@@ -322,6 +324,7 @@ pennedStartScatter anop
 
         lda #GHOSTSTATE_SCATTER
         sta ghostState,x
+
         lda #DIRECTION_LEFT
         rts
 
@@ -525,7 +528,7 @@ timerGhostLoop anop
         cmp #GHOSTSTATE_EATEN
         beq nextGhost
 
-        lda #GHOSTSTATE_CHASE
+        lda #GHOSTSTATE_SCATTER ; THIS IS WRONG XXXXXXXXX SHOULD RETURN TO STATE HELD PREVIOUS TO BEING FRIGHTENED
         sta ghostState,x
 
 nextGhost anop
@@ -594,7 +597,6 @@ eatenGhostLoop anop
 
 
 not1600 anop
-
 
 ; Since the "eyes" move very fast, unless they start centered on tile boundries the centering
 ; check at each intersection will fail unless we reposition them here to tile boundries
@@ -1504,10 +1506,10 @@ pickScatterTarget entry
         beq pickScatterTargetOrange
 
 pickScatterTargetRed anop
-        lda #27*8
+        lda #24*8
         pixelToShifted
         sta ghostTargetX,x
-        lda #0*8
+        lda #2*8
         pixelToShifted
         sta ghostTargetY,x
         rts
@@ -1522,10 +1524,10 @@ pickScatterTargetBlue anop
         rts
 
 pickScatterTargetPink anop
-        lda #0*8
+        lda #3*8
         pixelToShifted
         sta ghostTargetX,x
-        lda #0*8
+        lda #2*8
         pixelToShifted
         sta ghostTargetY,x
         rts
@@ -2215,7 +2217,7 @@ ghostTargetY anop
         dc i2'0'
 
 ghostState anop
-        dc i2'GHOSTSTATE_CHASE'
+        dc i2'GHOSTSTATE_SCATTER'
         dc i2'GHOSTSTATE_LEAVINGPEN'
         dc i2'GHOSTSTATE_PENNED'
         dc i2'GHOSTSTATE_PENNED'
