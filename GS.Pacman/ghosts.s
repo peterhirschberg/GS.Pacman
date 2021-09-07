@@ -522,6 +522,44 @@ eatenGhostLoop anop
         lda #GHOSTSTATE_EATEN
         sta ghostState,x
 
+        lda ghostPointValue
+        cmp #1600
+        bne not1600
+
+; Handle the special case of the 1600pts sprite - which is actually comprised of 2 sprites.
+; Here we need to erase more than just the single tile that the ghost sprite normally occupies.
+
+        lda ghostPixelX,x
+        shiftedToPixel
+        sec
+        sbc #8
+        sta spriteX
+
+        lda ghostPixelY,x
+        shiftedToPixel
+        sta spriteY
+
+        stx savex
+        jsr eraseSpriteRect
+        ldx savex
+
+        lda ghostPixelX,x
+        shiftedToPixel
+        clc
+        adc #8
+        sta spriteX
+
+        lda ghostPixelY,x
+        shiftedToPixel
+        sta spriteY
+
+        stx savex
+        jsr eraseSpriteRect
+        ldx savex
+
+
+not1600 anop
+
 
 ; Since the "eyes" move very fast, unless they start centered on tile boundries the centering
 ; check at each intersection will fail unless we reposition them here to tile boundries
@@ -699,10 +737,8 @@ draw800 anop
         lda #SPRITE_800
         jsr drawSpriteByIndex
         rts
-draw1600 anop
-;        lda #SPRITE_1600
-;        jsr drawSpriteByIndex
-        rts
+; see below for the 1600pt draw routine
+
 
 drawDirectionRight anop
         jsr doDrawDirectionRight
@@ -718,6 +754,41 @@ drawDirectionLeft anop
 
 drawDirectionUp anop
         jsr doDrawDirectionUp
+        rts
+
+
+draw1600 anop
+
+        lda ghostPixelX,x
+        shiftedToPixel
+        sec
+        sbc #8
+        sta spriteX
+
+        lda ghostPixelY,x
+        shiftedToPixel
+        sta spriteY
+
+        stx savex
+        lda #SPRITE_1600L
+        jsr drawSpriteByIndex
+        ldx savex
+
+        lda ghostPixelX,x
+        shiftedToPixel
+        clc
+        adc #8
+        sta spriteX
+
+        lda ghostPixelY,x
+        shiftedToPixel
+        sta spriteY
+
+        stx savex
+        lda #SPRITE_1600R
+        jsr drawSpriteByIndex
+        ldx savex
+
         rts
 
         
@@ -1017,7 +1088,7 @@ atePowerPelletLoop anop
         lda reverseDirections,y
         sta ghostDirection,x
 
-        lda #300 ; TODO - MAKE THIS TIMER DYNAMIC
+        lda #1000 ; TODO - MAKE THIS TIMER DYNAMIC
         sta ghostStateTimer,x
 
 skipGhost anop
@@ -1829,6 +1900,12 @@ sirenDone anop
         jsr stopScaredSound
         jsr stopSiren2Sound
         jsr startSiren1Sound
+
+; Man, this is a stupid place to put this but I've already done all the necessary tests here. <_<
+; This resets the ghost point values after all ghosts have returned to normal state.
+
+        lda #0
+        sta ghostPointValue
 
         rts
 
