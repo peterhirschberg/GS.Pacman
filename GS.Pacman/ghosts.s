@@ -29,6 +29,12 @@ initGhosts entry
 
         lda level1GhostModes
 
+; hack for red ghost
+
+        lda #20
+        sta ghostDontTurnTimer,x
+
+
 ;        ldx #0
 ;        sta ghostMode,x
 ;        ldx #2
@@ -126,21 +132,17 @@ ghostNotPenned anop
         shiftedToPixel
         sta spriteY
 
-;        lda ghostState,x
-;        cmp #GHOSTSTATE_EATEN
-;        beq stateIsEaten
-;        bra stateIsNotEaten
+        lda ghostDontTurnTimer,x
+        cmp #0
+        beq ignoreTurnTimer
+        dec a
+        sta ghostDontTurnTimer,x
+        cmp #0
+        bne dontPickDirection
 
-;stateIsEaten anop
-
-;        jsr isSpriteCenteredInMazeTileFast
-;        bra centeringCheckComplete
-
-;stateIsNotEaten anop
+ignoreTurnTimer anop
 
         jsr isSpriteCenteredInMazeTile
-
-;centeringCheckComplete anop
 
         cmp #0
         beq dontPickDirection
@@ -306,6 +308,18 @@ pennedGoLeft anop
         lda #DIRECTION_LEFT
         rts
 pennedStartScatter anop
+
+        lda ghostPixelX,x
+        and #$fff0
+        sta ghostPixelX,x
+
+        lda ghostPixelY,x
+        and #$fff0
+        sta ghostPixelY,x
+
+        lda #20
+        sta ghostDontTurnTimer,x
+
         lda #GHOSTSTATE_SCATTER
         sta ghostState,x
         lda #DIRECTION_LEFT
@@ -2235,6 +2249,13 @@ ghostDotCounter anop
         dc i2'0'
         dc i2'20'
         dc i2'40'
+
+ghostDontTurnTimer anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+
 
         
 redGhostLeftAnimationSprites anop
