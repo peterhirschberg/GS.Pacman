@@ -214,9 +214,14 @@ ghostNotPenned anop
 
         lda #1
         sta ghostInTunnel,x
-        bra dontPickDirection
-        
+
 notInTunnel anop
+
+        jsr setGhostSpeed
+
+        lda ghostInTunnel,x
+        cmp #0
+        bne dontPickDirection
 
         lda ghostPixelX,x
         shiftedToPixel
@@ -242,8 +247,6 @@ doPickDirection anop
         sta ghostDirection,x
         
 dontPickDirection anop
-
-        jsr setGhostSpeed
 
         ldx currentGhost
         jsr moveGhost
