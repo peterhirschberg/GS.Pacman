@@ -703,10 +703,34 @@ drawGhost entry
         rts
 
 drawFrightened anop
+
+        lda ghostStateTimer,x
+        lsr a
+        lsr a
+        lsr a
+        lsr a
+        and #1
+        cmp #0
+        beq drawFrightenedNonBlink
+
+        lda #100
+        cmp ghostStateTimer,x
+        bcs drawBlinkState
+
+drawFrightenedNonBlink anop
+
         lda ghostAnimationIndex
         asl a
         tax
         lda ghostFrightenedAnimationSprites,x
+        jsr drawSpriteByIndex
+        rts
+
+drawBlinkState anop
+        lda ghostAnimationIndex
+        asl a
+        tax
+        lda ghostFrightenedBlinkAnimationSprites,x
         jsr drawSpriteByIndex
         rts
 
@@ -1088,7 +1112,7 @@ atePowerPelletLoop anop
         lda reverseDirections,y
         sta ghostDirection,x
 
-        lda #1000 ; TODO - MAKE THIS TIMER DYNAMIC
+        lda #500 ; TODO - MAKE THIS TIMER DYNAMIC
         sta ghostStateTimer,x
 
 skipGhost anop
@@ -2196,6 +2220,9 @@ ghostFrightenedAnimationSprites anop
         dc i2'SPRITE_FLEEGHOST_1'
         dc i2'SPRITE_FLEEGHOST_2'
 
+ghostFrightenedBlinkAnimationSprites anop
+        dc i2'SPRITE_FLEEBLINKGHOST_1'
+        dc i2'SPRITE_FLEEBLINKGHOST_2'
         
 sortTable anop
         dc i2'6,4,2,0'
