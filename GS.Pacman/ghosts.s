@@ -139,13 +139,11 @@ runGhost entry
         lda ghostPixelY,x
         sta ghostPixelOldY,x
 
-timerNotRunning anop
+
+        jsr setGhostSpeed
 
         jsr runGhostDotCounter
         
-        lda #0
-        sta ghostInTunnel,x
-
         lda ghostState,x
         cmp #GHOSTSTATE_EATEN
         beq ghostNotPenned
@@ -193,28 +191,7 @@ ghostNotPenned anop
         cmp #0
         beq dontPickDirection
 
-        lda ghostPixelX,x
-        shiftedToPixel
-        jsr getTileXFromPixelX
-        sta tileX
-        lda ghostPixelY,x
-        shiftedToPixel
-        jsr getTileYFromPixelY
-        sta tileY
-        
-        jsr getTileFromTileXY
-        ldx currentGhost
-        cmp #8
-        bne notInTunnel
-
-        lda #1
-        sta ghostInTunnel,x
-
-notInTunnel anop
-
-        jsr setGhostSpeed
-
-        lda ghostInTunnel,x
+        jsr isGhostInTunnel
         cmp #0
         bne dontPickDirection
 
@@ -245,8 +222,8 @@ dontPickDirection anop
 
         ldx currentGhost
         jsr moveGhost
-        
-        lda ghostInTunnel,x
+
+        jsr isGhostInTunnel
         cmp #0
         bne checkTunnel
         rts
@@ -406,6 +383,15 @@ directionLoop anop
         bra dontAllowReverse
 
 allowReverse anop
+
+    ldx currentGhost
+
+    lda ghostPixelY,x
+    tay
+    lda ghostPixelX,x
+    tax
+    brk
+
 
         jsr getRandomDirAll
         bra checkDirection
@@ -1951,6 +1937,33 @@ orangeTargetPac anop
         rts
 
 
+isGhostInTunnel entry
+
+        ldx currentGhost
+
+        lda ghostPixelX,x
+        shiftedToPixel
+        jsr getTileXFromPixelX
+        sta tileX
+        lda ghostPixelY,x
+        shiftedToPixel
+        jsr getTileYFromPixelY
+        sta tileY
+
+        jsr getTileFromTileXY
+        ldx currentGhost
+        cmp #8
+        bne notInTunnel
+
+        lda #1
+        rts
+
+notInTunnel anop
+
+        lda #0
+        rts
+
+
 setGhostSpeed entry
 
 		ldx currentGhost
@@ -1959,7 +1972,7 @@ setGhostSpeed entry
         cmp #GHOSTSTATE_EATEN
         beq speedEaten
 
-        lda ghostInTunnel,x
+        jsr isGhostInTunnel
         cmp #0
         beq speedNotInTunnel
         lda #4
@@ -1990,6 +2003,7 @@ speedNotFrightened anop
         bra speedGhostNotPenned
 
 speedGhostPenned anop
+
         lda #4
         sta ghostSpeed,x
         rts
@@ -2309,12 +2323,6 @@ ghostSpeed anop
         dc i2'8'
         dc i2'8'
         dc i2'8'
-        
-ghostInTunnel anop
-        dc i2'0'
-        dc i2'0'
-        dc i2'0'
-        dc i2'0'
 
 ghostDotCounter anop
         dc i2'0'
