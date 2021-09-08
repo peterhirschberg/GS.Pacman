@@ -842,6 +842,8 @@ SPRITE_800              gequ 72*4
 SPRITE_1600L            gequ 73*4
 SPRITE_1600R            gequ 74*4
 SPRITE_PAC_FULL_3       gequ 75*4
+SPRITE_FLEEGHOST_ODD_1  gequ 76*4
+SPRITE_FLEEGHOST_ODD_2  gequ 77*4
 
 
 spriteX dc i2'0'
@@ -925,6 +927,8 @@ drawSpriteTable anop
         dc i4'drawSprite73'
         dc i4'drawSprite74'
         dc i4'drawSprite75'
+        dc i4'drawSprite76'
+        dc i4'drawSprite77'
 
-        
+
         end

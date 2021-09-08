@@ -769,7 +769,7 @@ drawGhost entry
         cmp #GHOSTSTATE_FRIGHTENED
         beq drawFrightened
         cmp #GHOSTSTATE_POINTS
-        beq drawPoints
+        beq drawPointsShort
         cmp #GHOSTSTATE_EATEN
         beq drawEaten
         cmp #GHOSTSTATE_REVIVING
@@ -786,6 +786,29 @@ drawGhost entry
         beq drawDirectionUp
         
         rts
+
+
+drawPointsShort anop
+        brl drawPoints
+        rts
+
+
+drawDirectionRight anop
+        jsr doDrawDirectionRight
+        rts
+
+drawDirectionDown anop
+        jsr doDrawDirectionDown
+        rts
+
+drawDirectionLeft anop
+        jsr doDrawDirectionLeft
+        rts
+
+drawDirectionUp anop
+        jsr doDrawDirectionUp
+        rts
+
 
 drawFrightened anop
 
@@ -804,10 +827,23 @@ drawFrightened anop
 
 drawFrightenedNonBlink anop
 
+        lda spriteX
+        and #1
+        cmp #0
+        beq drawFrightenedNonBlinkOdd
+
         lda ghostAnimationIndex
         asl a
         tax
         lda ghostFrightenedAnimationSprites,x
+        jsr drawSpriteByIndex
+        rts
+
+drawFrightenedNonBlinkOdd anop
+        lda ghostAnimationIndex
+        asl a
+        tax
+        lda ghostFrightenedAnimationOddSprites,x
         jsr drawSpriteByIndex
         rts
 
@@ -848,22 +884,6 @@ draw800 anop
         rts
 ; see below for the 1600pt draw routine
 
-
-drawDirectionRight anop
-        jsr doDrawDirectionRight
-        rts
-
-drawDirectionDown anop
-        jsr doDrawDirectionDown
-        rts
-
-drawDirectionLeft anop
-        jsr doDrawDirectionLeft
-        rts
-
-drawDirectionUp anop
-        jsr doDrawDirectionUp
-        rts
 
 
 draw1600 anop
@@ -2375,6 +2395,10 @@ orangeGhostDownAnimationSprites anop
 ghostFrightenedAnimationSprites anop
         dc i2'SPRITE_FLEEGHOST_1'
         dc i2'SPRITE_FLEEGHOST_2'
+
+ghostFrightenedAnimationOddSprites anop
+        dc i2'SPRITE_FLEEGHOST_ODD_1'
+        dc i2'SPRITE_FLEEGHOST_ODD_2'
 
 ghostFrightenedBlinkAnimationSprites anop
         dc i2'SPRITE_FLEEBLINKGHOST_1'
