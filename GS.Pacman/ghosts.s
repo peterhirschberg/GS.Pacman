@@ -111,6 +111,11 @@ switchModeContinue anop
         lda reverseDirections,y
         sta ghostDirection,x
 
+        lda ghostPixelX,x
+        sta ghostDirChangeX,x
+        lda ghostPixelY,x
+        sta ghostDirChangeY,x
+
 switchModeNext anop
 
         inx
@@ -220,14 +225,14 @@ doPickDirection anop
         sec
         sbc ghostPixelX,x
         absoluteValue
-        cmp #$40
+        cmp #$10
         bcs okayToChangeDirections
 
         lda ghostDirChangeY,x
         sec
         sbc ghostPixelY,x
         absoluteValue
-        cmp #$40
+        cmp #$10
         bcs okayToChangeDirections
 
         bra dontPickDirection
@@ -1221,6 +1226,11 @@ atePowerPelletLoop anop
         lda reverseDirections,y
         sta ghostDirection,x
 
+        lda ghostPixelX,x
+        sta ghostDirChangeX,x
+        lda ghostPixelY,x
+        sta ghostDirChangeY,x
+
         lda #500 ; TODO - MAKE THIS TIMER DYNAMIC
         sta ghostStateTimer,x
 
@@ -2026,7 +2036,7 @@ speedGhostPenned anop
         rts
 
 speedGhostNotPenned anop
-        lda #4 ; 8
+        lda #8
         sta ghostSpeed,x
 		rts
 
