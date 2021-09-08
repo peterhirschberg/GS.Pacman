@@ -214,10 +214,37 @@ ghostNotPenned anop
 
 doPickDirection anop
 
+; keep track of where the ghost changes direction and only allow changing direction again after travelling at least one tile's distance
+
+        lda ghostDirChangeX,x
+        sec
+        sbc ghostPixelX,x
+        absoluteValue
+        cmp #$40
+        bcs okayToChangeDirections
+
+        lda ghostDirChangeY,x
+        sec
+        sbc ghostPixelY,x
+        absoluteValue
+        cmp #$40
+        bcs okayToChangeDirections
+
+        bra dontPickDirection
+
+okayToChangeDirections anop
+
         jsr pickDirection
         ldx currentGhost
         sta ghostDirection,x
-        
+
+; changing direction here so save the XY position where we changed
+
+        lda ghostPixelX,x
+        sta ghostDirChangeX,x
+        lda ghostPixelY,x
+        sta ghostDirChangeY,x
+
 dontPickDirection anop
 
         ldx currentGhost
@@ -383,15 +410,6 @@ directionLoop anop
         bra dontAllowReverse
 
 allowReverse anop
-
-    ldx currentGhost
-
-    lda ghostPixelY,x
-    tay
-    lda ghostPixelX,x
-    tax
-    brk
-
 
         jsr getRandomDirAll
         bra checkDirection
@@ -1321,7 +1339,6 @@ ghostPathfindToTarget entry
         inc a
         sta testTargetTileY,y
 
-
 ; left
         ldy #4
         lda currentTileX
@@ -2009,7 +2026,7 @@ speedGhostPenned anop
         rts
 
 speedGhostNotPenned anop
-		lda #8
+        lda #4 ; 8
         sta ghostSpeed,x
 		rts
 
@@ -2275,7 +2292,19 @@ ghostPixelOldY anop
         dc i2'0'
         dc i2'0'
         dc i2'0'
-        
+
+ghostDirChangeX anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+
+ghostDirChangeY anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+
 ghostTileX anop
         dc i2'0'
         dc i2'0'
