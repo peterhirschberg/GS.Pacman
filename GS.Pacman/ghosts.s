@@ -211,6 +211,7 @@ ghostNotPenned anop
 
         jsr getAvailableDirectionsFromTileXY
         sta availableDirections
+        jsr excludeForbiddenUpTurns
 
         jsr countNumAvailableDirections
         cmp #1
@@ -219,7 +220,7 @@ ghostNotPenned anop
 
 doPickDirection anop
 
-; keep track of where the ghost changes direction and only allow changing direction again after travelling at least one tile's distance
+; keep track of where the ghost changes direction and only allow changing direction again after travelling at least 2px
 
         lda ghostDirChangeX,x
         sec
@@ -401,6 +402,7 @@ pickRandomDirection entry
 
         jsr getAvailableDirectionsFromTileXY
         sta availableDirections
+        jsr excludeForbiddenUpTurns
 
         lda #0
         sta counter
@@ -1315,6 +1317,7 @@ ghostPathfindToTarget entry
 
         jsr getAvailableDirectionsFromTileXY
         sta availableDirections
+        jsr excludeForbiddenUpTurns
 
 ; init available directions table
 
@@ -1341,20 +1344,20 @@ ghostPathfindToTarget entry
         dec a
         sta testTargetTileY,y
 
-; down
-        ldy #2
-        lda currentTileX
-        sta testTargetTileX,y
-        lda currentTileY
-        inc a
-        sta testTargetTileY,y
-
 ; left
-        ldy #4
+        ldy #2
         lda currentTileX
         dec a
         sta testTargetTileX,y
         lda currentTileY
+        sta testTargetTileY,y
+
+; down
+        ldy #4
+        lda currentTileX
+        sta testTargetTileX,y
+        lda currentTileY
+        inc a
         sta testTargetTileY,y
 
 ; right
@@ -1381,20 +1384,6 @@ ghostPathfindToTarget entry
 
 upNotAvailable anop
 
-; down
-        lda availableDirections
-        and #AVAILABLEDIR_DOWN
-        cmp #0
-        beq downNotAvailable
-        lda reverseDirection
-        cmp #DIRECTION_DOWN
-        beq downNotAvailable
-        lda #DIRECTION_DOWN
-        ldy #2
-        sta testTargetDirection,y
-
-downNotAvailable anop
-
 ; left
         lda availableDirections
         and #AVAILABLEDIR_LEFT
@@ -1404,10 +1393,24 @@ downNotAvailable anop
         cmp #DIRECTION_LEFT
         beq leftNotAvailable
         lda #DIRECTION_LEFT
-        ldy #4
+        ldy #2
         sta testTargetDirection,y
 
 leftNotAvailable anop
+
+; down
+        lda availableDirections
+        and #AVAILABLEDIR_DOWN
+        cmp #0
+        beq downNotAvailable
+        lda reverseDirection
+        cmp #DIRECTION_DOWN
+        beq downNotAvailable
+        lda #DIRECTION_DOWN
+        ldy #4
+        sta testTargetDirection,y
+
+downNotAvailable anop
 
 ; right
         lda availableDirections
@@ -1509,6 +1512,7 @@ distanceNotSmaller anop
 distanceDone anop
 
 ; get the direction with the smallest distance
+
         ldy smallestDistanceIndex
         lda testTargetDirection,y
 
@@ -2039,6 +2043,79 @@ speedGhostNotPenned anop
         lda #8
         sta ghostSpeed,x
 		rts
+
+
+excludeForbiddenUpTurns entry
+
+; ghosts are forbidden from turning "up" at certain locations in the maze
+
+        ldx currentGhost
+
+        lda ghostPixelX,x
+        shiftedToPixel
+        jsr getTileXFromPixelX
+        sta tileX
+
+        lda ghostPixelY,x
+        shiftedToPixel
+        jsr getTileYFromPixelY
+        sta tileY
+
+        lda tileX
+        cmp #$C
+        beq keepChecking1
+        bra nextCheck2
+keepChecking1 anop
+        lda tileY
+        cmp #$8
+        beq removeUpDirection
+
+nextCheck2 anop
+
+        lda tileX
+        cmp #$F
+        beq keepChecking2
+        bra nextCheck3
+keepChecking2 anop
+        lda tileY
+        cmp #$8
+        beq removeUpDirection
+
+nextCheck3 anop
+
+        lda tileX
+        cmp #$9
+        beq keepChecking3
+        bra nextCheck4
+keepChecking3 anop
+        lda tileY
+        cmp #$F
+        beq removeUpDirection
+
+nextCheck4 anop
+
+        lda tileX
+        cmp #$12
+        beq keepChecking4
+        bra checkingDone
+keepChecking4 anop
+        lda tileY
+        cmp #$F
+        beq removeUpDirection
+
+checkingDone anop
+
+        rts
+
+removeUpDirection anop
+
+        lda availableDirections
+        and #$FFFE
+        sta availableDirections
+
+        rts
+
+
 
 
 countNumAvailableDirections entry

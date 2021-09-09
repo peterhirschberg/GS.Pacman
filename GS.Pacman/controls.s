@@ -14,6 +14,7 @@
 controls start
         using globalData
         using controlsData
+        using pacData
 
 
 checkControls entry
@@ -112,12 +113,22 @@ onDisableJoystick anop
 
 onQuit anop
 
+        ldx #0
+        lda pacY
+        shiftedToPixel
+        jsr getTileYFromPixelY
+        tay
+        lda pacX
+        shiftedToPixel
+        jsr getTileXFromPixelX
+        tax
+        brk
+
         lda >BUTTON1
         and #$80
         cmp #0
         beq dontQuit
         jsl signalQuit
-
 dontQuit anop
         rts
 
