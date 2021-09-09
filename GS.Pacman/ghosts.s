@@ -220,20 +220,20 @@ ghostNotPenned anop
 
 doPickDirection anop
 
-; keep track of where the ghost changes direction and only allow changing direction again after travelling at least 2px
+; keep track of where the ghost changes direction and only allow changing direction again after travelling at least 1px
 
         lda ghostDirChangeX,x
         sec
         sbc ghostPixelX,x
         absoluteValue
-        cmp #$10
+        cmp #$8
         bcs okayToChangeDirections
 
         lda ghostDirChangeY,x
         sec
         sbc ghostPixelY,x
         absoluteValue
-        cmp #$10
+        cmp #$8
         bcs okayToChangeDirections
 
         bra dontPickDirection
@@ -1590,6 +1590,8 @@ pickScatterTarget entry
         cmp #GHOSTINDEX_ORANGE
         beq pickScatterTargetOrange
 
+        rts
+
 pickScatterTargetRed anop
 
         lda fakeTargetTimer
@@ -2345,7 +2347,7 @@ savey dc i2'0'
 
 counter dc i2'0'
 
-newMode dc i2'0'
+newMode dc i2'GHOSTSTATE_SCATTER'
 
 fakeTargetTimer dc i2'20'
 
