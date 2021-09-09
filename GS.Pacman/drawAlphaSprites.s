@@ -7,8 +7,13 @@
 ;
 
         case on
+        mcopy global.macros
+        keep global
 
 drawAlphaSprites start
+        using globalData
+        using spritesData
+
 
 drawAlphaSprite0 entry
 
@@ -144,7 +149,7 @@ drawAlphaSprite0 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite1 entry
 
@@ -273,7 +278,7 @@ drawAlphaSprite1 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite2 entry
 
@@ -403,7 +408,7 @@ drawAlphaSprite2 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite3 entry
 
@@ -532,7 +537,7 @@ drawAlphaSprite3 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite4 entry
 
@@ -663,7 +668,7 @@ drawAlphaSprite4 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite5 entry
 
@@ -791,7 +796,7 @@ drawAlphaSprite5 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite6 entry
 
@@ -923,7 +928,7 @@ drawAlphaSprite6 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite7 entry
 
@@ -1055,7 +1060,7 @@ drawAlphaSprite7 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite8 entry
 
@@ -1186,7 +1191,7 @@ drawAlphaSprite8 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite9 entry
 
@@ -1315,7 +1320,7 @@ drawAlphaSprite9 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite10 entry
 
@@ -1449,7 +1454,7 @@ drawAlphaSprite10 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite11 entry
 
@@ -1582,7 +1587,7 @@ drawAlphaSprite11 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite12 entry
 
@@ -1715,7 +1720,7 @@ drawAlphaSprite12 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite13 entry
 
@@ -1849,7 +1854,7 @@ drawAlphaSprite13 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite14 entry
 
@@ -1976,7 +1981,7 @@ drawAlphaSprite14 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite15 entry
 
@@ -2104,7 +2109,7 @@ drawAlphaSprite15 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite16 entry
 
@@ -2236,7 +2241,7 @@ drawAlphaSprite16 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite17 entry
 
@@ -2370,7 +2375,7 @@ drawAlphaSprite17 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite18 entry
 
@@ -2497,7 +2502,7 @@ drawAlphaSprite18 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite19 entry
 
@@ -2622,7 +2627,7 @@ drawAlphaSprite19 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite20 entry
 
@@ -2757,7 +2762,7 @@ drawAlphaSprite20 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite21 entry
 
@@ -2886,7 +2891,7 @@ drawAlphaSprite21 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite22 entry
 
@@ -3017,7 +3022,7 @@ drawAlphaSprite22 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite23 entry
 
@@ -3150,7 +3155,7 @@ drawAlphaSprite23 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite24 entry
 
@@ -3284,7 +3289,7 @@ drawAlphaSprite24 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite25 entry
 
@@ -3416,7 +3421,7 @@ drawAlphaSprite25 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite26 entry
 
@@ -3549,7 +3554,7 @@ drawAlphaSprite26 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite27 entry
 
@@ -3683,7 +3688,7 @@ drawAlphaSprite27 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite28 entry
 
@@ -3813,7 +3818,7 @@ drawAlphaSprite28 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite29 entry
 
@@ -3941,7 +3946,7 @@ drawAlphaSprite29 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite30 entry
 
@@ -4076,7 +4081,7 @@ drawAlphaSprite30 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite31 entry
 
@@ -4210,7 +4215,7 @@ drawAlphaSprite31 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite32 entry
 
@@ -4341,7 +4346,7 @@ drawAlphaSprite32 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite33 entry
 
@@ -4475,7 +4480,7 @@ drawAlphaSprite33 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite34 entry
 
@@ -4608,7 +4613,7 @@ drawAlphaSprite34 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite35 entry
 
@@ -4737,7 +4742,7 @@ drawAlphaSprite35 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite36 entry
 
@@ -4866,7 +4871,7 @@ drawAlphaSprite36 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite37 entry
 
@@ -4999,7 +5004,7 @@ drawAlphaSprite37 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite38 entry
 
@@ -5122,7 +5127,7 @@ drawAlphaSprite38 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite39 entry
 
@@ -5249,7 +5254,7 @@ drawAlphaSprite39 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite40 entry
 
@@ -5366,7 +5371,7 @@ drawAlphaSprite40 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite41 entry
 
@@ -5492,7 +5497,7 @@ drawAlphaSprite41 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite42 entry
 
@@ -5610,7 +5615,7 @@ drawAlphaSprite42 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite43 entry
 
@@ -5732,7 +5737,7 @@ drawAlphaSprite43 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite44 entry
 
@@ -5854,7 +5859,7 @@ drawAlphaSprite44 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite45 entry
 
@@ -5976,7 +5981,7 @@ drawAlphaSprite45 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite46 entry
 
@@ -6098,7 +6103,7 @@ drawAlphaSprite46 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite47 entry
 
@@ -6225,7 +6230,7 @@ drawAlphaSprite47 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite48 entry
 
@@ -6340,7 +6345,7 @@ drawAlphaSprite48 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
 
 drawAlphaSprite49 entry
 
@@ -6455,6 +6460,10 @@ drawAlphaSprite49 entry
         long m
 
         _spriteFooter
-        rtl
+        rts
+
+
+drawAddress dc i4'0'
+
 
         end

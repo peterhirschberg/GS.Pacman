@@ -155,13 +155,13 @@
 				D0865CB426CF435100690A79 /* maze.s */,
 				D0865CB826D1EA6700690A79 /* sprites.s */,
 				D03234D126D38B40009E2D7E /* drawSprite.s */,
+				D049B68E26EA081A00EBB157 /* alphaSprites.s */,
+				D049B69026EA083600EBB157 /* drawAlphaSprites.s */,
 				D03234D526D79D8E009E2D7E /* ghosts.s */,
 				D03234D726D79DBE009E2D7E /* pac.s */,
 				D03234D926DEF5CA009E2D7E /* controls.s */,
 				D03234DB26E08B1F009E2D7E /* sound.s */,
 				D049B68C26E6437800EBB157 /* collision.s */,
-				D049B68E26EA081A00EBB157 /* alphaSprites.s */,
-				D049B69026EA083600EBB157 /* drawAlphaSprites.s */,
 			);
 			path = GS.Pacman;
 			sourceTree = "<group>";

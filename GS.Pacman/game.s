@@ -32,6 +32,8 @@ gameInit entry
 
         jsr normalColorTable
 
+        jsr drawAlphaReady
+
         jsr borderInit
 
         jsr playIntroSound
