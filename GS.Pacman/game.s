@@ -22,14 +22,16 @@ gameInit entry
 
         jsr soundInitMusic1
         
-        jsr setColorTable
-        
+        jsr blackColorTable
+
         jsr initMaze
 
         jsr drawMaze
 
         jsr initGhosts
-        
+
+        jsr normalColorTable
+
         jsr borderInit
 
         jsr playIntroSound
