@@ -34,7 +34,7 @@ gameInit entry
 
         jsr playIntroSound
 
-        lda #225
+        lda #235
         sta gameIntroTimer
 
         rtl

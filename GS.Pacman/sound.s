@@ -48,16 +48,16 @@ SOUND_SYSTEM_VOLUME        equ $e100ca
 INTRO_SOUND_ADDR     equ $0000
 INTRO_OSC_NUM        equ 0
 INTRO_FREQ_HIGH        equ 0
-INTRO_FREQ_LOW        equ 5
+INTRO_FREQ_LOW        equ 9
 INTRO_CONTROL        equ SOUND_ONE_SHOT_MODE
-INTRO_SIZE            equ $3a
+INTRO_SIZE            equ $3b
 
 INTER_SOUND_ADDR     equ $0000
 INTER_OSC_NUM        equ 2
 INTER_FREQ_HIGH        equ 0
-INTER_FREQ_LOW        equ 4
+INTER_FREQ_LOW        equ 9
 INTER_CONTROL        equ SOUND_ONE_SHOT_MODE
-INTER_SIZE            equ $3a
+INTER_SIZE            equ $3b
 
 SIREN1_SOUND_ADDR     equ $0000
 SIREN1_OSC_NUM        equ 4
