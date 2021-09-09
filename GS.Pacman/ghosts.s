@@ -1591,6 +1591,25 @@ pickScatterTarget entry
         beq pickScatterTargetOrange
 
 pickScatterTargetRed anop
+
+        lda fakeTargetTimer
+        cmp #0
+        beq useNormalTarget
+
+useFakeTarget anop
+
+        dec fakeTargetTimer
+
+        lda #8*8
+        pixelToShifted
+        sta ghostTargetX,x
+        lda #2*8
+        pixelToShifted
+        sta ghostTargetY,x
+        rts
+
+useNormalTarget anop
+
         lda #24*8
         pixelToShifted
         sta ghostTargetX,x
@@ -2327,6 +2346,8 @@ savey dc i2'0'
 counter dc i2'0'
 
 newMode dc i2'0'
+
+fakeTargetTimer dc i2'20'
 
         end
 
