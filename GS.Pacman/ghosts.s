@@ -2385,9 +2385,9 @@ ghostPixelX anop
 
 ghostPixelY anop
         dc i2'$200'
-        dc i2'$2c0'
-        dc i2'$2c0'
-        dc i2'$2c0'
+        dc i2'$2a0'
+        dc i2'$2a0'
+        dc i2'$2a0'
 
 ghostPixelOldX anop
         dc i2'0'
