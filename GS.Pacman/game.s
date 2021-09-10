@@ -14,6 +14,7 @@ game start
         using controlsData
         using pacData
         using spritesData
+        using scoreData
         using gameData
 
 
@@ -53,6 +54,73 @@ gameInit entry
 
         lda #235
         sta gameIntroTimer
+
+
+
+;        jsr U32TOBCD
+
+         jsr u32tobcd
+
+
+;        jsr updateScore
+;        jsr updateScore
+;        jsr updateScore
+
+;        ldx #2
+;        lda dloc,x
+
+
+
+        lda bcdout+2
+        tax
+        brk
+
+
+        rtl
+
+        lda #0
+        sta spriteX
+        sta spriteY
+
+        ldx #0
+;        lda dloc,x
+        jsr drawAlphaSpriteByIndex
+        lda spriteX
+        clc
+        adc #8
+        sta spriteX
+
+        ldx #2
+;        lda dloc,x
+        jsr drawAlphaSpriteByIndex
+        lda spriteX
+        clc
+        adc #8
+        sta spriteX
+
+        ldx #4
+;        lda dloc,x
+        jsr drawAlphaSpriteByIndex
+        lda spriteX
+        clc
+        adc #8
+        sta spriteX
+
+        ldx #6
+;        lda dloc,x
+        jsr drawAlphaSpriteByIndex
+        lda spriteX
+        clc
+        adc #8
+        sta spriteX
+
+        ldx #8
+;        lda dloc,x
+        jsr drawAlphaSpriteByIndex
+
+
+
+
 
         rtl
 

@@ -14,7 +14,6 @@
 
 hardware start
         using globalData
-        using screenData
 
 
 

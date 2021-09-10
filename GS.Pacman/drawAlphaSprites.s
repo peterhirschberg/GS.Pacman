@@ -10,7 +10,7 @@
         mcopy global.macros
         keep global
 
-drawAlphaSprites start
+drawAlphaSprites start drawAlphaSpritesSeg
         using globalData
         using spritesData
 
@@ -29,9 +29,9 @@ drawAlphaSprite0 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -45,11 +45,11 @@ drawAlphaSprite0 entry
         short m
         lda #$00
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -59,13 +59,13 @@ drawAlphaSprite0 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -75,13 +75,13 @@ drawAlphaSprite0 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -91,13 +91,13 @@ drawAlphaSprite0 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -109,11 +109,11 @@ drawAlphaSprite0 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -125,9 +125,9 @@ drawAlphaSprite0 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -166,7 +166,7 @@ drawAlphaSprite1 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -180,9 +180,9 @@ drawAlphaSprite1 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -197,7 +197,7 @@ drawAlphaSprite1 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -212,7 +212,7 @@ drawAlphaSprite1 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -227,7 +227,7 @@ drawAlphaSprite1 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -242,7 +242,7 @@ drawAlphaSprite1 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -256,7 +256,7 @@ drawAlphaSprite1 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -294,10 +294,10 @@ drawAlphaSprite2 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -307,13 +307,13 @@ drawAlphaSprite2 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -326,9 +326,9 @@ drawAlphaSprite2 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -340,11 +340,11 @@ drawAlphaSprite2 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -356,7 +356,7 @@ drawAlphaSprite2 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         lda #$00
@@ -369,9 +369,9 @@ drawAlphaSprite2 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
@@ -384,9 +384,9 @@ drawAlphaSprite2 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -424,7 +424,7 @@ drawAlphaSprite3 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -439,9 +439,9 @@ drawAlphaSprite3 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -454,7 +454,7 @@ drawAlphaSprite3 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -468,11 +468,11 @@ drawAlphaSprite3 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -486,7 +486,7 @@ drawAlphaSprite3 entry
         sta 0
         sta 1
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -496,13 +496,13 @@ drawAlphaSprite3 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -514,10 +514,10 @@ drawAlphaSprite3 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -554,9 +554,9 @@ drawAlphaSprite4 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -568,11 +568,11 @@ drawAlphaSprite4 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -584,11 +584,11 @@ drawAlphaSprite4 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -598,13 +598,13 @@ drawAlphaSprite4 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -614,9 +614,9 @@ drawAlphaSprite4 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -631,9 +631,9 @@ drawAlphaSprite4 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -646,9 +646,9 @@ drawAlphaSprite4 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -682,12 +682,12 @@ drawAlphaSprite5 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -697,9 +697,9 @@ drawAlphaSprite5 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
@@ -712,12 +712,12 @@ drawAlphaSprite5 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -731,7 +731,7 @@ drawAlphaSprite5 entry
         sta 0
         sta 1
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -745,7 +745,7 @@ drawAlphaSprite5 entry
         sta 0
         sta 1
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -755,13 +755,13 @@ drawAlphaSprite5 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -773,10 +773,10 @@ drawAlphaSprite5 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -812,11 +812,11 @@ drawAlphaSprite6 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -828,7 +828,7 @@ drawAlphaSprite6 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
@@ -841,9 +841,9 @@ drawAlphaSprite6 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
@@ -856,12 +856,12 @@ drawAlphaSprite6 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -871,13 +871,13 @@ drawAlphaSprite6 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -887,13 +887,13 @@ drawAlphaSprite6 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -905,10 +905,10 @@ drawAlphaSprite6 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -942,9 +942,9 @@ drawAlphaSprite7 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -956,13 +956,13 @@ drawAlphaSprite7 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -975,9 +975,9 @@ drawAlphaSprite7 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -990,7 +990,7 @@ drawAlphaSprite7 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -1004,9 +1004,9 @@ drawAlphaSprite7 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 2
         lda #$00
         sta 3
@@ -1020,9 +1020,9 @@ drawAlphaSprite7 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 2
         lda #$00
         sta 3
@@ -1036,9 +1036,9 @@ drawAlphaSprite7 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 2
         lda #$00
         sta 3
@@ -1076,7 +1076,7 @@ drawAlphaSprite8 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         lda #$00
@@ -1089,13 +1089,13 @@ drawAlphaSprite8 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -1105,13 +1105,13 @@ drawAlphaSprite8 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -1123,7 +1123,7 @@ drawAlphaSprite8 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         lda #$00
@@ -1136,11 +1136,11 @@ drawAlphaSprite8 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
         lda #$00
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         sta 3
         long m
@@ -1151,12 +1151,12 @@ drawAlphaSprite8 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
         lda #$00
         sta 1
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -1168,10 +1168,10 @@ drawAlphaSprite8 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -1207,10 +1207,10 @@ drawAlphaSprite9 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -1220,13 +1220,13 @@ drawAlphaSprite9 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -1236,13 +1236,13 @@ drawAlphaSprite9 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -1254,7 +1254,7 @@ drawAlphaSprite9 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -1270,7 +1270,7 @@ drawAlphaSprite9 entry
         sta 0
         sta 1
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -1283,9 +1283,9 @@ drawAlphaSprite9 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -1297,7 +1297,7 @@ drawAlphaSprite9 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         lda #$00
@@ -1336,9 +1336,9 @@ drawAlphaSprite10 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -1352,11 +1352,11 @@ drawAlphaSprite10 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -1366,13 +1366,13 @@ drawAlphaSprite10 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -1382,13 +1382,13 @@ drawAlphaSprite10 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -1398,9 +1398,9 @@ drawAlphaSprite10 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -1412,13 +1412,13 @@ drawAlphaSprite10 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -1428,13 +1428,13 @@ drawAlphaSprite10 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -1468,12 +1468,12 @@ drawAlphaSprite11 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -1483,13 +1483,13 @@ drawAlphaSprite11 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -1499,13 +1499,13 @@ drawAlphaSprite11 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -1515,12 +1515,12 @@ drawAlphaSprite11 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -1530,13 +1530,13 @@ drawAlphaSprite11 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -1546,13 +1546,13 @@ drawAlphaSprite11 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -1562,12 +1562,12 @@ drawAlphaSprite11 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -1603,11 +1603,11 @@ drawAlphaSprite12 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -1619,11 +1619,11 @@ drawAlphaSprite12 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -1633,9 +1633,9 @@ drawAlphaSprite12 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
@@ -1648,9 +1648,9 @@ drawAlphaSprite12 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
@@ -1663,9 +1663,9 @@ drawAlphaSprite12 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
@@ -1680,11 +1680,11 @@ drawAlphaSprite12 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -1696,11 +1696,11 @@ drawAlphaSprite12 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -1734,9 +1734,9 @@ drawAlphaSprite13 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         lda #$00
@@ -1749,13 +1749,13 @@ drawAlphaSprite13 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -1765,13 +1765,13 @@ drawAlphaSprite13 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -1781,13 +1781,13 @@ drawAlphaSprite13 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -1797,13 +1797,13 @@ drawAlphaSprite13 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -1813,13 +1813,13 @@ drawAlphaSprite13 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -1829,9 +1829,9 @@ drawAlphaSprite13 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         lda #$00
@@ -1870,7 +1870,7 @@ drawAlphaSprite14 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -1884,7 +1884,7 @@ drawAlphaSprite14 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
@@ -1899,7 +1899,7 @@ drawAlphaSprite14 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
@@ -1914,10 +1914,10 @@ drawAlphaSprite14 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -1929,7 +1929,7 @@ drawAlphaSprite14 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
@@ -1944,7 +1944,7 @@ drawAlphaSprite14 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
@@ -1959,7 +1959,7 @@ drawAlphaSprite14 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -1995,9 +1995,9 @@ drawAlphaSprite15 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -2009,9 +2009,9 @@ drawAlphaSprite15 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
@@ -2024,9 +2024,9 @@ drawAlphaSprite15 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
@@ -2039,12 +2039,12 @@ drawAlphaSprite15 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -2054,9 +2054,9 @@ drawAlphaSprite15 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
@@ -2069,9 +2069,9 @@ drawAlphaSprite15 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
@@ -2084,9 +2084,9 @@ drawAlphaSprite15 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
@@ -2125,9 +2125,9 @@ drawAlphaSprite16 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         sta 3
         long m
@@ -2140,7 +2140,7 @@ drawAlphaSprite16 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
@@ -2153,9 +2153,9 @@ drawAlphaSprite16 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
@@ -2168,13 +2168,13 @@ drawAlphaSprite16 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2184,13 +2184,13 @@ drawAlphaSprite16 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2202,11 +2202,11 @@ drawAlphaSprite16 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2218,9 +2218,9 @@ drawAlphaSprite16 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         sta 3
         long m
@@ -2255,13 +2255,13 @@ drawAlphaSprite17 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2271,13 +2271,13 @@ drawAlphaSprite17 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2287,13 +2287,13 @@ drawAlphaSprite17 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2303,9 +2303,9 @@ drawAlphaSprite17 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -2317,13 +2317,13 @@ drawAlphaSprite17 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2333,13 +2333,13 @@ drawAlphaSprite17 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2349,13 +2349,13 @@ drawAlphaSprite17 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2391,7 +2391,7 @@ drawAlphaSprite18 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -2406,7 +2406,7 @@ drawAlphaSprite18 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -2421,7 +2421,7 @@ drawAlphaSprite18 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -2436,7 +2436,7 @@ drawAlphaSprite18 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -2451,7 +2451,7 @@ drawAlphaSprite18 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -2466,7 +2466,7 @@ drawAlphaSprite18 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -2480,7 +2480,7 @@ drawAlphaSprite18 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -2520,7 +2520,7 @@ drawAlphaSprite19 entry
         sta 0
         sta 1
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2534,7 +2534,7 @@ drawAlphaSprite19 entry
         sta 0
         sta 1
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2548,7 +2548,7 @@ drawAlphaSprite19 entry
         sta 0
         sta 1
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2562,7 +2562,7 @@ drawAlphaSprite19 entry
         sta 0
         sta 1
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2576,7 +2576,7 @@ drawAlphaSprite19 entry
         sta 0
         sta 1
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2586,13 +2586,13 @@ drawAlphaSprite19 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2604,10 +2604,10 @@ drawAlphaSprite19 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -2641,13 +2641,13 @@ drawAlphaSprite20 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2657,13 +2657,13 @@ drawAlphaSprite20 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -2673,11 +2673,11 @@ drawAlphaSprite20 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -2689,11 +2689,11 @@ drawAlphaSprite20 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 2
         lda #$00
         sta 3
@@ -2705,9 +2705,9 @@ drawAlphaSprite20 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         lda #$00
@@ -2720,13 +2720,13 @@ drawAlphaSprite20 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -2736,13 +2736,13 @@ drawAlphaSprite20 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2778,7 +2778,7 @@ drawAlphaSprite21 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
@@ -2793,7 +2793,7 @@ drawAlphaSprite21 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
@@ -2808,7 +2808,7 @@ drawAlphaSprite21 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
@@ -2823,7 +2823,7 @@ drawAlphaSprite21 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
@@ -2838,7 +2838,7 @@ drawAlphaSprite21 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
@@ -2853,7 +2853,7 @@ drawAlphaSprite21 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
@@ -2868,10 +2868,10 @@ drawAlphaSprite21 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -2905,13 +2905,13 @@ drawAlphaSprite22 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2921,13 +2921,13 @@ drawAlphaSprite22 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2937,9 +2937,9 @@ drawAlphaSprite22 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -2951,9 +2951,9 @@ drawAlphaSprite22 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -2965,12 +2965,12 @@ drawAlphaSprite22 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2980,13 +2980,13 @@ drawAlphaSprite22 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -2996,13 +2996,13 @@ drawAlphaSprite22 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3036,13 +3036,13 @@ drawAlphaSprite23 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3052,13 +3052,13 @@ drawAlphaSprite23 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3068,13 +3068,13 @@ drawAlphaSprite23 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3084,9 +3084,9 @@ drawAlphaSprite23 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -3098,11 +3098,11 @@ drawAlphaSprite23 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         sta 3
         long m
@@ -3113,13 +3113,13 @@ drawAlphaSprite23 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3129,13 +3129,13 @@ drawAlphaSprite23 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3171,10 +3171,10 @@ drawAlphaSprite24 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -3184,13 +3184,13 @@ drawAlphaSprite24 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3200,13 +3200,13 @@ drawAlphaSprite24 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3216,13 +3216,13 @@ drawAlphaSprite24 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3232,13 +3232,13 @@ drawAlphaSprite24 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3248,13 +3248,13 @@ drawAlphaSprite24 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3266,10 +3266,10 @@ drawAlphaSprite24 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -3303,12 +3303,12 @@ drawAlphaSprite25 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -3318,13 +3318,13 @@ drawAlphaSprite25 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3334,13 +3334,13 @@ drawAlphaSprite25 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3350,13 +3350,13 @@ drawAlphaSprite25 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3366,12 +3366,12 @@ drawAlphaSprite25 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -3381,9 +3381,9 @@ drawAlphaSprite25 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
@@ -3396,9 +3396,9 @@ drawAlphaSprite25 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
@@ -3437,10 +3437,10 @@ drawAlphaSprite26 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -3450,13 +3450,13 @@ drawAlphaSprite26 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3466,13 +3466,13 @@ drawAlphaSprite26 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3482,13 +3482,13 @@ drawAlphaSprite26 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3498,11 +3498,11 @@ drawAlphaSprite26 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         sta 3
         long m
@@ -3513,13 +3513,13 @@ drawAlphaSprite26 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -3531,10 +3531,10 @@ drawAlphaSprite26 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -3568,12 +3568,12 @@ drawAlphaSprite27 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -3583,13 +3583,13 @@ drawAlphaSprite27 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3599,13 +3599,13 @@ drawAlphaSprite27 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3615,13 +3615,13 @@ drawAlphaSprite27 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3631,9 +3631,9 @@ drawAlphaSprite27 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         lda #$00
@@ -3646,13 +3646,13 @@ drawAlphaSprite27 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -3662,13 +3662,13 @@ drawAlphaSprite27 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3704,7 +3704,7 @@ drawAlphaSprite28 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         lda #$00
@@ -3717,13 +3717,13 @@ drawAlphaSprite28 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -3733,9 +3733,9 @@ drawAlphaSprite28 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
@@ -3750,10 +3750,10 @@ drawAlphaSprite28 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -3767,7 +3767,7 @@ drawAlphaSprite28 entry
         sta 0
         sta 1
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3777,13 +3777,13 @@ drawAlphaSprite28 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3795,10 +3795,10 @@ drawAlphaSprite28 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -3834,7 +3834,7 @@ drawAlphaSprite29 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -3849,7 +3849,7 @@ drawAlphaSprite29 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -3864,7 +3864,7 @@ drawAlphaSprite29 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -3879,7 +3879,7 @@ drawAlphaSprite29 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -3894,7 +3894,7 @@ drawAlphaSprite29 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -3909,7 +3909,7 @@ drawAlphaSprite29 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -3924,7 +3924,7 @@ drawAlphaSprite29 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -3960,13 +3960,13 @@ drawAlphaSprite30 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3976,13 +3976,13 @@ drawAlphaSprite30 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -3992,13 +3992,13 @@ drawAlphaSprite30 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4008,13 +4008,13 @@ drawAlphaSprite30 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4024,13 +4024,13 @@ drawAlphaSprite30 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4040,13 +4040,13 @@ drawAlphaSprite30 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4058,10 +4058,10 @@ drawAlphaSprite30 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -4095,13 +4095,13 @@ drawAlphaSprite31 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4111,13 +4111,13 @@ drawAlphaSprite31 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4127,13 +4127,13 @@ drawAlphaSprite31 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4143,13 +4143,13 @@ drawAlphaSprite31 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4161,10 +4161,10 @@ drawAlphaSprite31 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -4176,9 +4176,9 @@ drawAlphaSprite31 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -4193,7 +4193,7 @@ drawAlphaSprite31 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 2
         lda #$00
         sta 3
@@ -4229,13 +4229,13 @@ drawAlphaSprite32 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4245,13 +4245,13 @@ drawAlphaSprite32 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4261,12 +4261,12 @@ drawAlphaSprite32 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4276,9 +4276,9 @@ drawAlphaSprite32 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -4290,9 +4290,9 @@ drawAlphaSprite32 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -4304,13 +4304,13 @@ drawAlphaSprite32 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4320,13 +4320,13 @@ drawAlphaSprite32 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4360,13 +4360,13 @@ drawAlphaSprite33 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4376,13 +4376,13 @@ drawAlphaSprite33 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4394,10 +4394,10 @@ drawAlphaSprite33 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -4409,9 +4409,9 @@ drawAlphaSprite33 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -4425,10 +4425,10 @@ drawAlphaSprite33 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -4438,13 +4438,13 @@ drawAlphaSprite33 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4454,13 +4454,13 @@ drawAlphaSprite33 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4496,11 +4496,11 @@ drawAlphaSprite34 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4512,11 +4512,11 @@ drawAlphaSprite34 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4528,11 +4528,11 @@ drawAlphaSprite34 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4544,11 +4544,11 @@ drawAlphaSprite34 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -4561,7 +4561,7 @@ drawAlphaSprite34 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -4576,7 +4576,7 @@ drawAlphaSprite34 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -4591,7 +4591,7 @@ drawAlphaSprite34 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -4627,9 +4627,9 @@ drawAlphaSprite35 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -4644,9 +4644,9 @@ drawAlphaSprite35 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -4659,9 +4659,9 @@ drawAlphaSprite35 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -4673,9 +4673,9 @@ drawAlphaSprite35 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -4689,9 +4689,9 @@ drawAlphaSprite35 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 2
         lda #$00
         sta 3
@@ -4703,9 +4703,9 @@ drawAlphaSprite35 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         lda #$00
         sta 2
@@ -4718,9 +4718,9 @@ drawAlphaSprite35 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         sta 3
@@ -4759,9 +4759,9 @@ drawAlphaSprite36 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -4774,9 +4774,9 @@ drawAlphaSprite36 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -4788,9 +4788,9 @@ drawAlphaSprite36 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -4804,9 +4804,9 @@ drawAlphaSprite36 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 2
         lda #$00
         sta 3
@@ -4820,7 +4820,7 @@ drawAlphaSprite36 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
         lda #$00
         sta 2
@@ -4848,7 +4848,7 @@ drawAlphaSprite36 entry
         short m
         lda #$00
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
@@ -4887,7 +4887,7 @@ drawAlphaSprite37 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         lda #$00
@@ -4900,12 +4900,12 @@ drawAlphaSprite37 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
         lda #$00
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -4915,13 +4915,13 @@ drawAlphaSprite37 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -4931,12 +4931,12 @@ drawAlphaSprite37 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         sta 1
         lda #$00
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -4946,12 +4946,12 @@ drawAlphaSprite37 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         sta 1
         lda #$00
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -4961,13 +4961,13 @@ drawAlphaSprite37 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -4977,12 +4977,12 @@ drawAlphaSprite37 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
         lda #$00
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -4994,7 +4994,7 @@ drawAlphaSprite37 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
         sta 2
         lda #$00
@@ -5044,12 +5044,12 @@ drawAlphaSprite38 entry
         tcd
 
         short m
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 0
         sta 1
         lda #$00
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -5059,11 +5059,11 @@ drawAlphaSprite38 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 2
         lda #$00
         sta 3
@@ -5075,7 +5075,7 @@ drawAlphaSprite38 entry
         tcd
 
         short m
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 0
         sta 1
         lda #$00
@@ -5089,7 +5089,7 @@ drawAlphaSprite38 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
@@ -5103,7 +5103,7 @@ drawAlphaSprite38 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
@@ -5167,13 +5167,13 @@ drawAlphaSprite39 entry
         tcd
 
         short m
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -5183,11 +5183,11 @@ drawAlphaSprite39 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 2
         lda #$00
         sta 3
@@ -5199,13 +5199,13 @@ drawAlphaSprite39 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 3
         long m
 
@@ -5215,7 +5215,7 @@ drawAlphaSprite39 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
@@ -5229,11 +5229,11 @@ drawAlphaSprite39 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         sta 3
         long m
@@ -5294,7 +5294,7 @@ drawAlphaSprite40 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
@@ -5334,7 +5334,7 @@ drawAlphaSprite40 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
@@ -5389,7 +5389,7 @@ drawAlphaSprite41 entry
         sta 0
         sta 1
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -5403,7 +5403,7 @@ drawAlphaSprite41 entry
         sta 0
         sta 1
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -5416,7 +5416,7 @@ drawAlphaSprite41 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
         lda #$00
         sta 3
@@ -5431,7 +5431,7 @@ drawAlphaSprite41 entry
         lda #$00
         sta 0
         sta 1
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 2
         lda #$00
         sta 3
@@ -5445,7 +5445,7 @@ drawAlphaSprite41 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
         lda #$00
         sta 2
@@ -5460,7 +5460,7 @@ drawAlphaSprite41 entry
         short m
         lda #$00
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
         lda #$00
         sta 2
@@ -5473,7 +5473,7 @@ drawAlphaSprite41 entry
         tcd
 
         short m
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 0
         lda #$00
         sta 1
@@ -5552,9 +5552,9 @@ drawAlphaSprite42 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 2
         lda #$00
         sta 3
@@ -5629,7 +5629,7 @@ drawAlphaSprite43 entry
         tcd
 
         short m
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 0
         sta 1
         sta 2
@@ -5646,7 +5646,7 @@ drawAlphaSprite43 entry
         sta 0
         sta 1
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -5660,7 +5660,7 @@ drawAlphaSprite43 entry
         sta 0
         sta 1
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -5674,7 +5674,7 @@ drawAlphaSprite43 entry
         sta 0
         sta 1
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -5688,7 +5688,7 @@ drawAlphaSprite43 entry
         sta 0
         sta 1
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -5702,7 +5702,7 @@ drawAlphaSprite43 entry
         sta 0
         sta 1
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -5716,7 +5716,7 @@ drawAlphaSprite43 entry
         sta 0
         sta 1
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -5730,7 +5730,7 @@ drawAlphaSprite43 entry
         sta 0
         sta 1
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -5755,7 +5755,7 @@ drawAlphaSprite44 entry
         sta 0
         sta 1
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -5769,7 +5769,7 @@ drawAlphaSprite44 entry
         sta 0
         sta 1
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -5783,7 +5783,7 @@ drawAlphaSprite44 entry
         sta 0
         sta 1
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -5797,7 +5797,7 @@ drawAlphaSprite44 entry
         sta 0
         sta 1
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -5811,7 +5811,7 @@ drawAlphaSprite44 entry
         sta 0
         sta 1
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -5825,7 +5825,7 @@ drawAlphaSprite44 entry
         sta 0
         sta 1
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -5839,7 +5839,7 @@ drawAlphaSprite44 entry
         sta 0
         sta 1
         sta 2
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 3
         long m
 
@@ -5849,7 +5849,7 @@ drawAlphaSprite44 entry
         tcd
 
         short m
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 0
         sta 1
         sta 2
@@ -5873,7 +5873,7 @@ drawAlphaSprite45 entry
         tcd
 
         short m
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 0
         sta 1
         sta 2
@@ -5886,7 +5886,7 @@ drawAlphaSprite45 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
@@ -5900,7 +5900,7 @@ drawAlphaSprite45 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
@@ -5914,7 +5914,7 @@ drawAlphaSprite45 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
@@ -5928,7 +5928,7 @@ drawAlphaSprite45 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
@@ -5942,7 +5942,7 @@ drawAlphaSprite45 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
@@ -5956,7 +5956,7 @@ drawAlphaSprite45 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
@@ -5970,7 +5970,7 @@ drawAlphaSprite45 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
@@ -5995,7 +5995,7 @@ drawAlphaSprite46 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
@@ -6009,7 +6009,7 @@ drawAlphaSprite46 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
@@ -6023,7 +6023,7 @@ drawAlphaSprite46 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
@@ -6037,7 +6037,7 @@ drawAlphaSprite46 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
@@ -6051,7 +6051,7 @@ drawAlphaSprite46 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
@@ -6065,7 +6065,7 @@ drawAlphaSprite46 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
@@ -6079,7 +6079,7 @@ drawAlphaSprite46 entry
         tcd
 
         short m
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 0
         lda #$00
         sta 1
@@ -6093,7 +6093,7 @@ drawAlphaSprite46 entry
         tcd
 
         short m
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 0
         sta 1
         sta 2
@@ -6119,11 +6119,11 @@ drawAlphaSprite47 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -6135,11 +6135,11 @@ drawAlphaSprite47 entry
         short m
         lda #$00
         sta 0
-        lda spriteBothColor
+        lda >spriteBothColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -6151,11 +6151,11 @@ drawAlphaSprite47 entry
         short m
         lda #$00
         sta 0
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 1
         lda #$00
         sta 2
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 3
         long m
 
@@ -6167,9 +6167,9 @@ drawAlphaSprite47 entry
         short m
         lda #$00
         sta 0
-        lda spriteHighColor
+        lda >spriteHighColor
         sta 1
-        lda spriteLowColor
+        lda >spriteLowColor
         sta 2
         lda #$00
         sta 3
