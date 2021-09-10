@@ -651,6 +651,8 @@ SPRITE_FLEEGHOST_ODD_2  gequ 77*4
 
 spriteX dc i2'0'
 spriteY dc i2'0'
+
+spriteColor dc i2'0'
 spriteLowColor dc i2'0'
 spriteHighColor dc i2'0'
 spriteBothColor dc i2'0'

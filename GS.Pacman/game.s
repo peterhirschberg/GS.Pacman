@@ -32,8 +32,6 @@ gameInit entry
 
         jsr normalColorTable
 
-        jsr drawAlphaReady
-
         jsr borderInit
 
         jsr playIntroSound
@@ -57,8 +55,11 @@ gameIntro anop
         bra dontDrawInitialSprites
 
 drawInitialSprites anop
+
         jsr drawPac
         jsr drawGhosts
+
+        jsr drawAlphaReady
 
 dontDrawInitialSprites anop
 
@@ -70,6 +71,8 @@ dontDrawInitialSprites anop
 startGame anop
 
         jsr soundInitGameSounds
+
+        jsr eraseAlphaReady
 
 mainLoop anop
 
