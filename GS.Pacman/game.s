@@ -13,6 +13,7 @@
 game start
         using controlsData
         using pacData
+        using spritesData
         using gameData
 
 
@@ -32,7 +33,21 @@ gameInit entry
 
         jsr normalColorTable
 
-        jsr borderInit
+;        jsr borderInit
+
+
+        jsr drawAlphaScoreTitles
+        jsr drawAlphaScore1
+        jsr drawAlphaHighScore
+
+
+        lda #232
+        sta spriteX
+        lda #174
+        sta spriteY
+        lda #SPRITE_CHERRY
+        jsr drawSpriteByIndex
+
 
         jsr playIntroSound
 
@@ -78,7 +93,7 @@ mainLoop anop
 
         jsr waitForVbl
         
-        jsr borderStart
+;        jsr borderStart
 
 
 
@@ -89,7 +104,7 @@ mainLoop anop
         
         
 
-        jsr borderStart
+;        jsr borderStart
 
         lda eatGhostTimer
         cmp #0
@@ -110,7 +125,8 @@ notEatingGhost2 anop
 
 notEatingGhost1 anop
 
-        jsr borderStart
+
+;        jsr borderStart
 
 
         jsr checkControls
@@ -126,7 +142,7 @@ notEatingGhost1 anop
         jsr collisionCheckActors
 
 
-        jsr borderStart
+;        jsr borderStart
 
 
 eatingGhostSkipToHere anop
@@ -138,7 +154,7 @@ eatingGhostSkipToHere anop
         sta joystickRight
         
 
-        jsr borderDone
+;        jsr borderDone
         
         brl mainLoop
         

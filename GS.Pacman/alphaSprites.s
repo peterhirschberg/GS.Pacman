@@ -109,6 +109,80 @@ readyEraseDone anop
         rts
 
 
+drawAlphaScoreTitles entry
+
+        lda #$ff
+        sta spriteColor
+
+        jsr parseColor
+
+        lda #66
+        sta spriteX
+        lda #0
+        sta spriteY
+
+        ldy #0
+
+scoreTitleLoop anop
+
+        lda alphaStringScoreTitle,y
+
+        cmp #-1
+        beq scoreTitleDone
+
+        jsr drawAlphaSpriteByIndex
+
+        lda spriteX
+        clc
+        adc #8
+        sta spriteX
+
+        iny
+        iny
+        iny
+        iny
+        bra scoreTitleLoop
+
+scoreTitleDone anop
+
+        rts
+
+
+drawAlphaScore1 entry
+
+        lda #$ff
+        sta spriteColor
+
+        jsr parseColor
+
+        lda #90
+        sta spriteX
+        lda #9
+        sta spriteY
+
+        lda #ALPHAINDEX_0
+        jsr drawAlphaSpriteByIndex
+
+        rts
+
+
+drawAlphaHighScore entry
+
+        lda #$ff
+        sta spriteColor
+
+        jsr parseColor
+
+        lda #174
+        sta spriteX
+        lda #9
+        sta spriteY
+
+        lda #ALPHAINDEX_0
+        jsr drawAlphaSpriteByIndex
+
+
+        rts
 
 
 ; Thanks to Ian Brumby and John Brooks for this lookup routine
@@ -243,6 +317,26 @@ alphaEraseStringReady anop
         dc i4'ALPHAINDEX_SPACE'
         dc i4'ALPHAINDEX_SPACE'
         dc i4'ALPHAINDEX_SPACE'
+        dc i4'-1'
+
+alphaStringScoreTitle anop
+        dc i4'ALPHAINDEX_1'
+        dc i4'ALPHAINDEX_U'
+        dc i4'ALPHAINDEX_P'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_H'
+        dc i4'ALPHAINDEX_I'
+        dc i4'ALPHAINDEX_G'
+        dc i4'ALPHAINDEX_H'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_S'
+        dc i4'ALPHAINDEX_C'
+        dc i4'ALPHAINDEX_O'
+        dc i4'ALPHAINDEX_R'
+        dc i4'ALPHAINDEX_E'
         dc i4'-1'
 
         end
