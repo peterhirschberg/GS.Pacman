@@ -48,17 +48,41 @@ ghostLoop anop
 
         lda pacTileX
         cmp ghostTileX
-        bne nextGhost
+        bne nextGhostShort
 
         lda pacTileY
         cmp ghostTileY
-        bne nextGhost
+        bne nextGhostShort
+
+        bra pacGhostCollision
+
+nextGhostShort anop
+        brl nextGhost
+
+pacGhostCollision anop
 
 ; collision
 
         lda ghostState,x
         cmp #GHOSTSTATE_FRIGHTENED
-        bne nextGhost
+        beq eatGhost
+
+; pac gets eaten
+
+        lda pacEaten
+        cmp #0
+        beq startEatPac
+        rts
+
+startEatPac anop
+
+        jsr playDeathSound
+
+        lda #1
+        sta pacEaten
+        rts
+
+eatGhost anop
 
 ; eat the ghost
 

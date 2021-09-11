@@ -120,7 +120,13 @@ mainLoop anop
         cmp #0
         bne notEatingGhost2
 
+
         jsr drawPac
+
+
+        lda pacEaten
+        cmp #0
+        bne doPacEaten
 
 notEatingGhost2 anop
 
@@ -152,6 +158,13 @@ notEatingGhost1 anop
 
 
 ;        jsr borderStart
+
+
+        bra eatingGhostSkipToHere
+
+doPacEaten anop
+
+        jsr runPac
 
 
 eatingGhostSkipToHere anop

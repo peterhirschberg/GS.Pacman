@@ -22,6 +22,16 @@ pac start
     
 runPac entry
 
+        lda pacEaten
+        cmp #0
+        beq notEaten
+
+        jsr animatePacEaten
+
+        rts
+
+notEaten anop
+
         lda pacX
         sta pacOldX
         lda pacY
@@ -65,7 +75,8 @@ notUp anop
         jsr checkTunnel
         jsr checkDots
 
-; animation
+animate anop
+
         lda pacMoving
         cmp #0
         beq dontAnimate
@@ -295,7 +306,29 @@ leftNotAvailable anop
         lda #0
         rts
         
-        
+
+
+animatePacEaten entry
+
+        dec pacAnimationTimer
+        lda pacAnimationTimer
+        bmi incrementEatenAnimationIndex
+        rts
+
+incrementEatenAnimationIndex anop
+        lda #8 ; animation timer duration
+        sta pacAnimationTimer
+
+        inc pacAnimationIndex
+        lda pacAnimationIndex
+        cmp #16 ; num animation frames
+        bcs eatenAnimationFinished
+        rts
+
+eatenAnimationFinished anop
+
+        rts
+
         
 animatePac entry
 
@@ -496,6 +529,8 @@ savex dc i4'0'
 
 pacData data
 
+pacEaten dc i2'0'
+
     
 pacRightAnimationSprites anop
         dc i2'SPRITE_PAC_FULL_1'
@@ -533,7 +568,13 @@ pacDieAnimationSprites anop
         dc i2'SPRITE_PAC_DIE_8'
         dc i2'SPRITE_PAC_DIE_9'
         dc i2'SPRITE_PAC_DIE_10'
+        dc i2'SPRITE_BLANK'
         dc i2'SPRITE_PAC_DIE_11'
+        dc i2'SPRITE_PAC_DIE_11'
+        dc i2'SPRITE_BLANK'
+        dc i2'SPRITE_BLANK'
+        dc i2'SPRITE_BLANK'
+
 
 
 ; Initial position in maze is $6c,$89 x 8

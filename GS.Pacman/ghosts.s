@@ -2190,6 +2190,18 @@ dontCountRight anop
 
 runSirenSounds entry
 
+        lda pacEaten
+        cmp #0
+        beq pacNotEaten
+
+        jsr stopScaredSound
+        jsr stopSiren2Sound
+        jsr stopSiren1Sound
+
+        rts
+
+pacNotEaten anop
+
         lda #0
         sta ghostsFrightened
         sta ghostsEaten
