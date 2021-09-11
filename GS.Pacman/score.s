@@ -163,6 +163,14 @@ doDrawScore anop
         lda #ALPHAINDEX_0
         jsr drawAlphaSpriteByIndex
 
+        lda spriteX
+        sec
+        sbc #8
+        sta spriteX
+
+        lda #ALPHAINDEX_0
+        jsr drawAlphaSpriteByIndex
+
         lda #0
         sta scoreDirty
 
@@ -226,7 +234,7 @@ SCOREINDEX_10000000       gequ    2*7
 
 scoreDigits anop
         dc i2'0'
-        dc i2'-1'
+        dc i2'0'
         dc i2'-1'
         dc i2'-1'
         dc i2'-1'

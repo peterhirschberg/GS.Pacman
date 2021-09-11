@@ -148,26 +148,6 @@ scoreTitleDone anop
         rts
 
 
-drawAlphaScore1 entry
-
-    rts
-
-        lda #$ff
-        sta spriteColor
-
-        jsr parseColor
-
-        lda #90
-        sta spriteX
-        lda #9
-        sta spriteY
-
-        lda #ALPHAINDEX_0
-        jsr drawAlphaSpriteByIndex
-
-        rts
-
-
 drawAlphaHighScore entry
 
         lda #$ff
@@ -179,6 +159,14 @@ drawAlphaHighScore entry
         sta spriteX
         lda #9
         sta spriteY
+
+        lda #ALPHAINDEX_0
+        jsr drawAlphaSpriteByIndex
+
+        lda spriteX
+        sec
+        sbc #8
+        sta spriteX
 
         lda #ALPHAINDEX_0
         jsr drawAlphaSpriteByIndex
