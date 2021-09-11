@@ -20,6 +20,7 @@ game start
 
 
 gameInit entry
+
         jsr setupScreen
 
         jsr soundInitMusic1
@@ -37,8 +38,13 @@ gameInit entry
 ;        jsr borderInit
 
 
+        lda #0
+        sta currentScore
+        sta currentScore+2
+
+
         jsr drawAlphaScoreTitles
-        jsr drawAlphaScore1
+        jsr drawScore
         jsr drawAlphaHighScore
 
 
@@ -54,73 +60,6 @@ gameInit entry
 
         lda #235
         sta gameIntroTimer
-
-
-
-;        jsr U32TOBCD
-
-         jsr u32tobcd
-
-
-;        jsr updateScore
-;        jsr updateScore
-;        jsr updateScore
-
-;        ldx #2
-;        lda dloc,x
-
-
-
-        lda bcdout+2
-        tax
-        brk
-
-
-        rtl
-
-        lda #0
-        sta spriteX
-        sta spriteY
-
-        ldx #0
-;        lda dloc,x
-        jsr drawAlphaSpriteByIndex
-        lda spriteX
-        clc
-        adc #8
-        sta spriteX
-
-        ldx #2
-;        lda dloc,x
-        jsr drawAlphaSpriteByIndex
-        lda spriteX
-        clc
-        adc #8
-        sta spriteX
-
-        ldx #4
-;        lda dloc,x
-        jsr drawAlphaSpriteByIndex
-        lda spriteX
-        clc
-        adc #8
-        sta spriteX
-
-        ldx #6
-;        lda dloc,x
-        jsr drawAlphaSpriteByIndex
-        lda spriteX
-        clc
-        adc #8
-        sta spriteX
-
-        ldx #8
-;        lda dloc,x
-        jsr drawAlphaSpriteByIndex
-
-
-
-
 
         rtl
 
@@ -192,6 +131,8 @@ notEatingGhost2 anop
         bra eatingGhostSkipToHere
 
 notEatingGhost1 anop
+
+        jsr drawScore
 
 
 ;        jsr borderStart

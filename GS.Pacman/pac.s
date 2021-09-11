@@ -414,11 +414,15 @@ eatLargeDot anop
         lda #3
         sta pacAteDotDelay
         bra eatDot
+        lda #20
+        jsr addToScore
 eatSmallDot anop
         lda #1
         sta temp
         lda #1
         sta pacAteDotDelay
+        lda #10
+        jsr addToScore
 eatDot anop
         lda pacX
         shiftedToPixel

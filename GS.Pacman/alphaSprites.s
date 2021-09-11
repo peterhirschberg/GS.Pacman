@@ -150,6 +150,8 @@ scoreTitleDone anop
 
 drawAlphaScore1 entry
 
+    rts
+
         lda #$ff
         sta spriteColor
 
