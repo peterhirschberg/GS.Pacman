@@ -7,6 +7,9 @@
 ;
 
         case on
+        mcopy global.macros
+        keep global
+
 
 score start
         using spritesData
@@ -36,34 +39,25 @@ add10ToScore entry
         adc #10
         sta currentScore
 
+        ldx #1
         ldy #SCOREINDEX_10
+        addToScore
 
-loop10 anop
+        lda #1
+        sta scoreDirty
 
-        lda scoreDigits,y
-        cmp #-1
-        bne add10Continue
-        inc a
-add10Continue anop
-        inc a
-        sta scoreDigits,y
-        cmp #10
-        bcs carry10
-        bra add10Done
+        rts
 
-carry10 anop
+add50ToScore entry
 
-        sec
-        sbc #10
-        sta scoreDigits,y
-        iny
-        iny
-        tya
-        cmp #10*2
-        bcs add10Done
-        bra loop10
+        lda currentScore
+        clc
+        adc #50
+        sta currentScore
 
-add10Done anop
+        ldx #5
+        ldy #SCOREINDEX_10
+        addToScore
 
         lda #1
         sta scoreDirty

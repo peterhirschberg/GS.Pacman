@@ -413,8 +413,8 @@ eatLargeDot anop
         sta temp
         lda #3
         sta pacAteDotDelay
+        jsr add50ToScore
         bra eatDot
-        jsr add10ToScore ; TODO: 30pts
 eatSmallDot anop
         lda #1
         sta temp

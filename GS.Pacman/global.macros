@@ -19,6 +19,39 @@ isPositive_&SYSCNT anop
         mend
 
 
+
+        macro
+        addToScore
+scoreLoop_&SYSCNT anop
+        lda scoreDigits,y
+        cmp #-1
+        bne addContinue_&SYSCNT
+        lda #0
+        sta scoreDigits,y
+addContinue_&SYSCNT anop
+        txa
+        clc
+        adc scoreDigits,y
+        sta scoreDigits,y
+        cmp #10
+        bcs doCarry_&SYSCNT
+        bra addDone_&SYSCNT
+doCarry_&SYSCNT anop
+        sec
+        sbc #10
+        sta scoreDigits,y
+        iny
+        iny
+        tya
+        cmp #10*2
+        bcs addDone_&SYSCNT
+        ldx #1
+        bra scoreLoop_&SYSCNT
+addDone_&SYSCNT anop
+        mend
+
+
+
         macro
         spriteGetDrawAddress
         lda >spriteY
