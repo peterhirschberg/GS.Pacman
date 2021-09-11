@@ -148,33 +148,6 @@ scoreTitleDone anop
         rts
 
 
-drawAlphaHighScore entry
-
-        lda #$ff
-        sta spriteColor
-
-        jsr parseColor
-
-        lda #174
-        sta spriteX
-        lda #9
-        sta spriteY
-
-        lda #ALPHAINDEX_0
-        jsr drawAlphaSpriteByIndex
-
-        lda spriteX
-        sec
-        sbc #8
-        sta spriteX
-
-        lda #ALPHAINDEX_0
-        jsr drawAlphaSpriteByIndex
-
-
-        rts
-
-
 ; Thanks to Ian Brumby and John Brooks for this lookup routine
 drawAlphaSpriteByIndex entry
         tax

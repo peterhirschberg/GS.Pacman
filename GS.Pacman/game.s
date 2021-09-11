@@ -45,7 +45,7 @@ gameInit entry
 
         jsr drawAlphaScoreTitles
         jsr drawScore
-        jsr drawAlphaHighScore
+        jsr drawHighScore
 
 
         lda #232
@@ -154,6 +154,7 @@ notEatingGhost1 anop
 eatingGhostSkipToHere anop
 
         jsr drawScore
+        jsr drawHighScore
 
 
         lda #0

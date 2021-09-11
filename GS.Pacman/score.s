@@ -43,6 +43,8 @@ add10ToScore entry
         ldy #SCOREINDEX_10
         addToScore
 
+        jsr checkHighScore
+
         lda #1
         sta scoreDirty
 
@@ -58,6 +60,8 @@ add50ToScore entry
         ldx #5
         ldy #SCOREINDEX_10
         addToScore
+
+        jsr checkHighScore
 
         lda #1
         sta scoreDirty
@@ -75,6 +79,8 @@ add200ToScore entry
         ldy #SCOREINDEX_100
         addToScore
 
+        jsr checkHighScore
+
         lda #1
         sta scoreDirty
 
@@ -91,6 +97,8 @@ add400ToScore entry
         ldy #SCOREINDEX_100
         addToScore
 
+        jsr checkHighScore
+
         lda #1
         sta scoreDirty
 
@@ -106,6 +114,8 @@ add800ToScore entry
         ldx #8
         ldy #SCOREINDEX_100
         addToScore
+
+        jsr checkHighScore
 
         lda #1
         sta scoreDirty
@@ -127,11 +137,62 @@ add1600ToScore entry
         ldy #SCOREINDEX_1000
         addToScore
 
+        jsr checkHighScore
+
         lda #1
         sta scoreDirty
 
         rts
 
+
+checkHighScore entry
+
+        lda currentScore
+        cmp highScore
+        bcs updateHighScore
+        rts
+
+updateHighScore anop
+
+        ldx #0
+        lda scoreDigits,x
+        sta highScoreDigits,x
+        inx
+        inx
+        lda scoreDigits,x
+        sta highScoreDigits,x
+        inx
+        inx
+        lda scoreDigits,x
+        sta highScoreDigits,x
+        inx
+        inx
+        lda scoreDigits,x
+        sta highScoreDigits,x
+        inx
+        inx
+        lda scoreDigits,x
+        sta highScoreDigits,x
+        inx
+        inx
+        lda scoreDigits,x
+        sta highScoreDigits,x
+        inx
+        inx
+        lda scoreDigits,x
+        sta highScoreDigits,x
+        inx
+        inx
+        lda scoreDigits,x
+        sta highScoreDigits,x
+
+        lda currentScore
+        sta highScore
+
+        lda #1
+        sta highScoreDirty
+
+        rts
 
 
 
@@ -222,6 +283,92 @@ drawScoreDone anop
         rts
 
 
+drawHighScore entry
+
+        lda highScoreDirty
+        cmp #0
+        bne doDrawHighScore
+        rts
+
+doDrawHighScore anop
+
+        lda highScore
+        cmp #0
+        bne highScoreNotZero
+
+        lda #$ff
+        sta spriteColor
+
+        jsr parseColor
+
+        lda #174
+        sta spriteX
+        lda #9
+        sta spriteY
+
+        lda #ALPHAINDEX_0
+        jsr drawAlphaSpriteByIndex
+
+        lda spriteX
+        sec
+        sbc #8
+        sta spriteX
+
+        lda #ALPHAINDEX_0
+        jsr drawAlphaSpriteByIndex
+
+        lda #0
+        sta highScoreDirty
+
+        rts
+
+highScoreNotZero anop
+
+        lda #$ff
+        sta spriteColor
+
+        jsr parseColor
+
+        lda #174
+        sta spriteX
+        lda #9
+        sta spriteY
+
+        lda #0
+        sta digitIndex
+
+drawHighScoreLoop anop
+
+        lda digitIndex
+        asl a
+        tay
+        lda highScoreDigits,y
+        bmi drawHighScoreDone
+        asl a
+        asl a
+        jsr drawAlphaSpriteByIndex
+
+        inc digitIndex
+        lda digitIndex
+        cmp #8
+        beq drawHighScoreDone
+
+        lda spriteX
+        sec
+        sbc #8
+        sta spriteX
+
+        bra drawHighScoreLoop
+
+drawHighScoreDone anop
+
+        lda #0
+        sta highScoreDirty
+
+        rts
+
+
+
 SCOREINDEX_1       gequ    2*0
 SCOREINDEX_10       gequ    2*1
 SCOREINDEX_100       gequ    2*2
@@ -242,9 +389,20 @@ scoreDigits anop
         dc i2'-1'
         dc i2'-1'
 
-digitIndex dc i2'0'
+highScoreDigits anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'-1'
+        dc i2'-1'
+        dc i2'-1'
+        dc i2'-1'
+        dc i2'-1'
+        dc i2'-1'
 
 scoreDirty dc i2'1'
+highScoreDirty dc i2'1'
+
+digitIndex dc i2'0'
 
         end
 
@@ -252,6 +410,7 @@ scoreDirty dc i2'1'
 
 scoreData data
 
-currentScore dc i4'$1234'
+currentScore dc i4'0'
+highScore dc i4'0'
 
         end
