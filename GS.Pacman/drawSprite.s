@@ -14199,6 +14199,10 @@ drawSprite83 entry
         _spriteFooter
         rtl
 
+drawSprite84 entry
+; WHAT GOES HERE?
+        rtl
+
 drawSprite85 entry
 
         spriteGetDrawAddress
