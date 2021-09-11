@@ -12049,19 +12049,135 @@ drawSprite68 entry
 
         lda drawAddress
         clc
-        adc #1760
+        adc #480
         tcd
 
         short m
-        lda #$bb
-        sta 0
+        lda #$0a
+        sta 2
+        lda #$aa
+        sta 3
+        sta 4
+        long m
+
+        lda drawAddress
+        clc
+        adc #640
+        tcd
+
+        short m
+        lda #$aa
+        sta 2
+        sta 3
+        sta 4
+        lda #$a0
+        sta 5
+        long m
+
+        lda drawAddress
+        clc
+        adc #800
+        tcd
+
+        short m
+        lda #$0a
         sta 1
+        lda #$aa
         sta 2
         sta 3
         sta 4
         sta 5
+        long m
+
+        lda drawAddress
+        clc
+        adc #960
+        tcd
+
+        short m
+        lda #$0a
+        sta 2
+        lda #$aa
+        sta 3
+        sta 4
+        sta 5
+        lda #$a0
         sta 6
-        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1120
+        tcd
+
+        short m
+        lda #$0a
+        sta 3
+        lda #$aa
+        sta 4
+        sta 5
+        lda #$a0
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #1280
+        tcd
+
+        short m
+        lda #$0a
+        sta 4
+        lda #$aa
+        sta 5
+        lda #$a0
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #1440
+        tcd
+
+        short m
+        lda #$0a
+        sta 3
+        lda #$aa
+        sta 4
+        sta 5
+        lda #$a0
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #1600
+        tcd
+
+        short m
+        lda #$0a
+        sta 2
+        lda #$aa
+        sta 3
+        sta 4
+        sta 5
+        lda #$a0
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #1760
+        tcd
+
+        short m
+        lda #$0a
+        sta 1
+        lda #$aa
+        sta 2
+        sta 3
+        sta 4
+        sta 5
         long m
 
         lda drawAddress
@@ -12070,15 +12186,25 @@ drawSprite68 entry
         tcd
 
         short m
-        lda #$bb
-        sta 0
-        sta 1
+        lda #$aa
         sta 2
         sta 3
         sta 4
+        lda #$a0
         sta 5
-        sta 6
-        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #2080
+        tcd
+
+        short m
+        lda #$0a
+        sta 2
+        lda #$aa
+        sta 3
+        sta 4
         long m
 
         long m
@@ -13329,6 +13455,755 @@ drawSprite77 entry
         lda #$40
         sta 6
         long m
+
+        long m
+
+        _spriteFooter
+        rtl
+
+drawSprite78 entry
+
+        spriteGetDrawAddress
+        _spriteHeader
+
+
+        lda drawAddress
+        clc
+        adc #800
+        tcd
+
+        short m
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #960
+        tcd
+
+        short m
+        lda #$0b
+        sta 6
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1120
+        tcd
+
+        short m
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1280
+        tcd
+
+        short m
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1440
+        tcd
+
+        short m
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1600
+        tcd
+
+        short m
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1760
+        tcd
+
+        short m
+        lda #$0b
+        sta 6
+        lda #$bb
+        sta 7
+        long m
+
+        long m
+
+        _spriteFooter
+        rtl
+
+drawSprite79 entry
+
+        spriteGetDrawAddress
+        _spriteHeader
+
+
+        lda drawAddress
+        clc
+        adc #800
+        tcd
+
+        short m
+        lda #$bb
+        sta 1
+        lda #$0b
+        sta 3
+        lda #$b0
+        sta 4
+        lda #$bb
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #960
+        tcd
+
+        short m
+        lda #$0b
+        sta 0
+        lda #$b0
+        sta 2
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1120
+        tcd
+
+        short m
+        lda #$0b
+        sta 0
+        lda #$b0
+        sta 2
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1280
+        tcd
+
+        short m
+        lda #$0b
+        sta 0
+        lda #$b0
+        sta 2
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1440
+        tcd
+
+        short m
+        lda #$0b
+        sta 0
+        lda #$b0
+        sta 2
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1600
+        tcd
+
+        short m
+        lda #$0b
+        sta 0
+        lda #$b0
+        sta 2
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1760
+        tcd
+
+        short m
+        lda #$bb
+        sta 1
+        lda #$0b
+        sta 3
+        lda #$b0
+        sta 4
+        lda #$bb
+        sta 6
+        long m
+
+        long m
+
+        _spriteFooter
+        rtl
+
+drawSprite80 entry
+
+        spriteGetDrawAddress
+        _spriteHeader
+
+
+        lda drawAddress
+        clc
+        adc #800
+        tcd
+
+        short m
+        lda #$0b
+        sta 1
+        sta 3
+        lda #$b0
+        sta 4
+        lda #$bb
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #960
+        tcd
+
+        short m
+        lda #$bb
+        sta 1
+        lda #$b0
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1120
+        tcd
+
+        short m
+        lda #$0b
+        sta 1
+        lda #$b0
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1280
+        tcd
+
+        short m
+        lda #$0b
+        sta 1
+        lda #$b0
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1440
+        tcd
+
+        short m
+        lda #$0b
+        sta 1
+        lda #$b0
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1600
+        tcd
+
+        short m
+        lda #$0b
+        sta 1
+        lda #$b0
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1760
+        tcd
+
+        short m
+        lda #$bb
+        sta 1
+        lda #$b0
+        sta 2
+        lda #$0b
+        sta 3
+        lda #$b0
+        sta 4
+        lda #$bb
+        sta 6
+        long m
+
+        long m
+
+        _spriteFooter
+        rtl
+
+drawSprite81 entry
+
+        spriteGetDrawAddress
+        _spriteHeader
+
+
+        lda drawAddress
+        clc
+        adc #800
+        tcd
+
+        short m
+        lda #$bb
+        sta 0
+        sta 1
+        lda #$b0
+        sta 2
+        lda #$0b
+        sta 3
+        lda #$b0
+        sta 4
+        lda #$bb
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #960
+        tcd
+
+        short m
+        lda #$0b
+        sta 1
+        lda #$b0
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1120
+        tcd
+
+        short m
+        lda #$b0
+        sta 1
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1280
+        tcd
+
+        short m
+        lda #$0b
+        sta 1
+        lda #$b0
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1440
+        tcd
+
+        short m
+        lda #$b0
+        sta 2
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1600
+        tcd
+
+        short m
+        lda #$b0
+        sta 0
+        sta 2
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1760
+        tcd
+
+        short m
+        lda #$0b
+        sta 0
+        lda #$bb
+        sta 1
+        lda #$0b
+        sta 3
+        lda #$b0
+        sta 4
+        lda #$bb
+        sta 6
+        long m
+
+        long m
+
+        _spriteFooter
+        rtl
+
+drawSprite82 entry
+
+        spriteGetDrawAddress
+        _spriteHeader
+
+
+        lda drawAddress
+        clc
+        adc #800
+        tcd
+
+        short m
+        lda #$bb
+        sta 0
+        sta 1
+        lda #$b0
+        sta 2
+        lda #$0b
+        sta 3
+        lda #$b0
+        sta 4
+        lda #$bb
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #960
+        tcd
+
+        short m
+        lda #$b0
+        sta 0
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1120
+        tcd
+
+        short m
+        lda #$bb
+        sta 0
+        sta 1
+        lda #$b0
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1280
+        tcd
+
+        short m
+        lda #$b0
+        sta 2
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1440
+        tcd
+
+        short m
+        lda #$b0
+        sta 2
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1600
+        tcd
+
+        short m
+        lda #$b0
+        sta 0
+        sta 2
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1760
+        tcd
+
+        short m
+        lda #$0b
+        sta 0
+        lda #$bb
+        sta 1
+        lda #$0b
+        sta 3
+        lda #$b0
+        sta 4
+        lda #$bb
+        sta 6
+        long m
+
+        long m
+
+        _spriteFooter
+        rtl
+
+drawSprite83 entry
+
+        spriteGetDrawAddress
+        _spriteHeader
+
+
+        lda drawAddress
+        clc
+        adc #800
+        tcd
+
+        short m
+        lda #$bb
+        sta 0
+        sta 1
+        lda #$b0
+        sta 2
+        lda #$0b
+        sta 3
+        lda #$b0
+        sta 4
+        lda #$bb
+        sta 6
+        long m
+
+        lda drawAddress
+        clc
+        adc #960
+        tcd
+
+        short m
+        lda #$b0
+        sta 0
+        sta 2
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1120
+        tcd
+
+        short m
+        lda #$0b
+        sta 1
+        lda #$b0
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1280
+        tcd
+
+        short m
+        lda #$0b
+        sta 1
+        lda #$b0
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1440
+        tcd
+
+        short m
+        lda #$b0
+        sta 1
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1600
+        tcd
+
+        short m
+        lda #$b0
+        sta 1
+        sta 3
+        lda #$0b
+        sta 4
+        sta 5
+        lda #$b0
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1760
+        tcd
+
+        short m
+        lda #$b0
+        sta 1
+        lda #$0b
+        sta 3
+        lda #$b0
+        sta 4
+        lda #$bb
+        sta 6
+        long m
+
+        long m
+
+        _spriteFooter
+        rtl
+
+drawSprite84 entry
+
+        spriteGetDrawAddress
+        _spriteHeader
+
 
         long m
 

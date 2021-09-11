@@ -56,6 +56,14 @@ gameInit entry
         jsr drawSpriteByIndex
 
 
+        lda #-14
+        sta spriteX
+        lda #174
+        sta spriteY
+        lda #SPRITE_LIFE
+        jsr drawSpriteByIndex
+
+
         jsr playIntroSound
 
         lda #235

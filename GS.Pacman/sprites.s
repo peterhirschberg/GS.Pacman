@@ -633,11 +633,11 @@ SPRITE_CHERRY           gequ 60*4
 SPRITE_STRAWBERRY       gequ 61*4
 SPRITE_PEACH            gequ 62*4
 SPRITE_APPLE            gequ 63*4
-SPRITE_PINAPPLE         gequ 64*4
+SPRITE_MELON            gequ 64*4
 SPRITE_GALAX            gequ 65*4
 SPRITE_BELL             gequ 66*4
 SPRITE_KEY              gequ 67*4
-SPRITE_MAZEDOOR         gequ 68*4
+SPRITE_LIFE             gequ 68*4
 SPRITE_PAC_DIE_11       gequ 69*4
 SPRITE_200              gequ 70*4
 SPRITE_400              gequ 71*4
@@ -647,6 +647,14 @@ SPRITE_1600R            gequ 74*4
 SPRITE_PAC_FULL_3       gequ 75*4
 SPRITE_FLEEGHOST_ODD_1  gequ 76*4
 SPRITE_FLEEGHOST_ODD_2  gequ 77*4
+; SPRITE_BLANK            gequ 78*4
+SPRITE_1000L            gequ 79*4
+SPRITE_1000R            gequ 80*4
+SPRITE_100            gequ 81*4
+SPRITE_300            gequ 82*4
+SPRITE_500            gequ 83*4
+SPRITE_700            gequ 84*4
+; SPRITE_BLANK            gequ 85*4
 
 
 spriteX dc i2'0'
@@ -737,6 +745,14 @@ drawSpriteTable anop
         dc i4'drawSprite75'
         dc i4'drawSprite76'
         dc i4'drawSprite77'
+        dc i4'drawSprite78'
+        dc i4'drawSprite79'
+        dc i4'drawSprite80'
+        dc i4'drawSprite81'
+        dc i4'drawSprite82'
+        dc i4'drawSprite83'
+        dc i4'drawSprite84'
+
 
 
         end
