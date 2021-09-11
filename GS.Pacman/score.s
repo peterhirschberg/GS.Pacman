@@ -77,6 +77,7 @@ drawScoreLoop anop
         asl a
         tay
         lda scoreDigits,y
+        bmi drawScoreDone
         asl a
         asl a
         jsr drawAlphaSpriteByIndex
@@ -106,10 +107,10 @@ scoreDigits anop
         dc i2'2'
         dc i2'3'
         dc i2'4'
-        dc i2'0'
-        dc i2'0'
-        dc i2'0'
-        dc i2'0'
+        dc i2'-1'
+        dc i2'-1'
+        dc i2'-1'
+        dc i2'-1'
 
 digitIndex dc i2'0'
 
