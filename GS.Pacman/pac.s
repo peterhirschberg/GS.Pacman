@@ -316,7 +316,7 @@ animatePacEaten entry
         rts
 
 incrementEatenAnimationIndex anop
-        lda #8 ; animation timer duration
+        lda #6 ; animation timer duration
         sta pacAnimationTimer
 
         inc pacAnimationIndex
@@ -367,6 +367,10 @@ drawPac entry
         lda pacAnimationIndex
         asl a
         tax
+
+        lda pacEaten
+        cmp #0
+        bne drawPacEaten
         
         lda pacDirection
         cmp #DIRECTION_RIGHT
@@ -379,7 +383,12 @@ drawPac entry
         beq drawDirectionUp
         
         rts
-        
+
+drawPacEaten anop
+        lda pacDieAnimationSprites,x
+        jsr drawSpriteByIndex
+        rts
+
 drawDirectionRight anop
         lda pacRightAnimationSprites,x
         jsr drawSpriteByIndex
@@ -568,12 +577,12 @@ pacDieAnimationSprites anop
         dc i2'SPRITE_PAC_DIE_8'
         dc i2'SPRITE_PAC_DIE_9'
         dc i2'SPRITE_PAC_DIE_10'
-        dc i2'SPRITE_BLANK'
+        dc i2'SPRITE_NOP'
         dc i2'SPRITE_PAC_DIE_11'
         dc i2'SPRITE_PAC_DIE_11'
-        dc i2'SPRITE_BLANK'
-        dc i2'SPRITE_BLANK'
-        dc i2'SPRITE_BLANK'
+        dc i2'SPRITE_NOP'
+        dc i2'SPRITE_NOP'
+        dc i2'SPRITE_NOP'
 
 
 

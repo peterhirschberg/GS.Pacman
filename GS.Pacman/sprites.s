@@ -655,6 +655,7 @@ SPRITE_300            gequ 82*4
 SPRITE_500            gequ 83*4
 SPRITE_700            gequ 84*4
 SPRITE_BLANK            gequ 85*4
+SPRITE_NOP             gequ 86*4
 
 
 spriteX dc i2'0'
@@ -753,6 +754,7 @@ drawSpriteTable anop
         dc i4'drawSprite83'
         dc i4'drawSprite84'
         dc i4'drawSprite85'
+        dc i4'drawSpriteNop'
 
 
         end

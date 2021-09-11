@@ -80,8 +80,8 @@ startEatPac anop
         jsr stopSiren2Sound
         jsr stopSiren1Sound
 
-        jsr soundInitDeathSound
-        jsr playDeathSound
+        lda #60
+        sta eatPacTimer
 
         lda #1
         sta pacEaten

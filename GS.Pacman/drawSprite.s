@@ -14485,6 +14485,10 @@ drawSprite85 entry
 
         _spriteFooter
         rtl
+
+
+drawSpriteNop entry
+        rtl
     
 drawAddress dc i4'0'
 

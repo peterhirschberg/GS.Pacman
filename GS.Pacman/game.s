@@ -102,10 +102,36 @@ startGame anop
 mainLoop anop
 
         jsr waitForVbl
+
+
+        lda eatPacTimer
+        cmp #0
+        beq pacEatenTimerZero
+
+        dec eatPacTimer
+
+        lda eatPacTimer
+        cmp #1
+        beq startPacEatenSound
+        bra dontStartPacEatenSound
+
+startPacEatenSound anop
+
+        jsr soundInitDeathSound
+        jsr playDeathSound
+
+        lda #0
+        sta pacAnimationIndex
+
+dontStartPacEatenSound anop
+
+        bra mainLoop
+
+
+pacEatenTimerZero anop
+
         
 ;        jsr borderStart
-
-
 
 
         jsr eraseGhosts
@@ -120,13 +146,15 @@ mainLoop anop
         cmp #0
         bne notEatingGhost2
 
-
-        jsr drawPac
-
-
         lda pacEaten
         cmp #0
         bne doPacEaten
+
+
+
+
+        jsr drawPac
+
 
 notEatingGhost2 anop
 
@@ -162,10 +190,11 @@ notEatingGhost1 anop
 
         bra eatingGhostSkipToHere
 
+
 doPacEaten anop
 
         jsr runPac
-
+        jsr drawPac
 
 eatingGhostSkipToHere anop
 
@@ -236,6 +265,8 @@ gameData data
 gameIntroTimer dc i2'0'
 
 eatGhostTimer dc i2'0'
+
+eatPacTimer dc i2'0'
 
 numLives dc i2'3'
 
