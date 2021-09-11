@@ -321,11 +321,14 @@ incrementEatenAnimationIndex anop
 
         inc pacAnimationIndex
         lda pacAnimationIndex
-        cmp #16 ; num animation frames
+        cmp #15 ; num animation frames
         bcs eatenAnimationFinished
         rts
 
 eatenAnimationFinished anop
+
+        lda #0
+        sta pacAnimationIndex
 
         rts
 
