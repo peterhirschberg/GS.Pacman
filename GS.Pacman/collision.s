@@ -76,6 +76,11 @@ pacGhostCollision anop
 
 startEatPac anop
 
+        jsr stopScaredSound
+        jsr stopSiren2Sound
+        jsr stopSiren1Sound
+
+        jsr soundInitDeathSound
         jsr playDeathSound
 
         lda #1

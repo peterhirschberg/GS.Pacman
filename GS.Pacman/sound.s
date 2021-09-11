@@ -53,67 +53,67 @@ INTRO_CONTROL        equ SOUND_ONE_SHOT_MODE
 INTRO_SIZE            equ $3b
 
 INTER_SOUND_ADDR     equ $0000
-INTER_OSC_NUM        equ 2
+INTER_OSC_NUM        equ 0
 INTER_FREQ_HIGH        equ 0
 INTER_FREQ_LOW        equ 9
 INTER_CONTROL        equ SOUND_ONE_SHOT_MODE
 INTER_SIZE            equ $3b
 
 SIREN1_SOUND_ADDR     equ $0000
-SIREN1_OSC_NUM        equ 4
+SIREN1_OSC_NUM        equ 2
 SIREN1_FREQ_HIGH        equ 0
 SIREN1_FREQ_LOW        equ 40
 SIREN1_CONTROL        equ SOUND_SWAP_MODE
 SIREN1_SIZE            equ $2b
 
 SIREN2_SOUND_ADDR     equ $2000
-SIREN2_OSC_NUM        equ 8
+SIREN2_OSC_NUM        equ 6
 SIREN2_FREQ_HIGH        equ 0
 SIREN2_FREQ_LOW        equ 50
 SIREN2_CONTROL        equ SOUND_SWAP_MODE
 SIREN2_SIZE            equ $2b
 
 EATDOT_SOUND_ADDR     equ $4000
-EATDOT_OSC_NUM        equ 12
+EATDOT_OSC_NUM        equ 10
 EATDOT_FREQ_HIGH        equ 0
 EATDOT_FREQ_LOW        equ 70
 EATDOT_CONTROL        equ SOUND_ONE_SHOT_MODE
 EATDOT_SIZE            equ $2b
 
 EXTRALIFE_SOUND_ADDR     equ $6000
-EXTRALIFE_OSC_NUM        equ 14
+EXTRALIFE_OSC_NUM        equ 12
 EXTRALIFE_FREQ_HIGH        equ 0
 EXTRALIFE_FREQ_LOW        equ 40
 EXTRALIFE_CONTROL        equ SOUND_ONE_SHOT_MODE
 EXTRALIFE_SIZE            equ $2b
 
 FRUIT_SOUND_ADDR     equ $8000
-FRUIT_OSC_NUM        equ 16
+FRUIT_OSC_NUM        equ 14
 FRUIT_FREQ_HIGH        equ 0
 FRUIT_FREQ_LOW        equ 40
 FRUIT_CONTROL        equ SOUND_ONE_SHOT_MODE
 FRUIT_SIZE            equ $2b
 
 GHOSTSCARED_SOUND_ADDR     equ $a000
-GHOSTSCARED_OSC_NUM        equ 18
+GHOSTSCARED_OSC_NUM        equ 16
 GHOSTSCARED_FREQ_HIGH        equ 0
 GHOSTSCARED_FREQ_LOW        equ 50
 GHOSTSCARED_CONTROL        equ SOUND_SWAP_MODE
 GHOSTSCARED_SIZE            equ $2b
 
 EATGHOST_SOUND_ADDR     equ $c000
-EATGHOST_OSC_NUM        equ 22
+EATGHOST_OSC_NUM        equ 20
 EATGHOST_FREQ_HIGH        equ 0
 EATGHOST_FREQ_LOW        equ 40
 EATGHOST_CONTROL        equ SOUND_ONE_SHOT_MODE
 EATGHOST_SIZE            equ $2b
 
-DEATH_SOUND_ADDR     equ $d000
-DEATH_OSC_NUM        equ 24
+DEATH_SOUND_ADDR     equ $0000
+DEATH_OSC_NUM        equ 22
 DEATH_FREQ_HIGH        equ 0
-DEATH_FREQ_LOW        equ 40
+DEATH_FREQ_LOW        equ 12
 DEATH_CONTROL        equ SOUND_ONE_SHOT_MODE
-DEATH_SIZE            equ $2b
+DEATH_SIZE            equ $3b
 
 
 ; Y has the register to write to (16 bit mode)
@@ -238,10 +238,7 @@ soundInitGameSounds entry
         
         pea EATGHOST_SOUND_ADDR
         jsl loadEatGhostSound
-        
-        pea DEATH_SOUND_ADDR
-        jsl loadDeathSound
-        
+
 ; Set registers
         short m
 		_docWait
@@ -260,6 +257,33 @@ soundInitGameSounds_loop anop
 		inx
 		cpx #soundRegDefaultsEnd
 		blt soundInitGameSounds_loop
+        long m
+
+		rts
+
+soundInitDeathSound entry
+
+        pea DEATH_SOUND_ADDR
+        jsl loadDeathSound
+
+; Set registers
+        short m
+		_docWait
+
+		lda >SOUND_SYSTEM_VOLUME
+		and #$0f
+		sta >SOUND_CONTROL_REG
+
+		ldx #soundRegDefaults
+soundInitDeathSound_loop anop
+		lda |$0,x
+		tay
+		lda |$1,x
+		jsr writeRegNoRead
+		inx
+		inx
+		cpx #soundRegDefaultsEnd
+		blt soundInitDeathSound_loop
         long m
 
 		rts
