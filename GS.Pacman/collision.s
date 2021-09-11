@@ -84,22 +84,27 @@ ghostLoop anop
         bra nextGhost
 
 points0 anop
+        jsr add200ToScore
         lda #200
         sta ghostPointValue
         bra nextGhost
 points200 anop
+        jsr add400ToScore
         lda #400
         sta ghostPointValue
         bra nextGhost
 points400 anop
+        jsr add800ToScore
         lda #800
         sta ghostPointValue
         bra nextGhost
 points800 anop
+        jsr add1600ToScore
         lda #1600
         sta ghostPointValue
         bra nextGhost
 points1600 anop
+        jsr add1600ToScore
         lda #1600
         sta ghostPointValue
 

@@ -64,6 +64,78 @@ add50ToScore entry
 
         rts
 
+add200ToScore entry
+
+        lda currentScore
+        clc
+        adc #200
+        sta currentScore
+
+        ldx #2
+        ldy #SCOREINDEX_100
+        addToScore
+
+        lda #1
+        sta scoreDirty
+
+        rts
+
+add400ToScore entry
+
+        lda currentScore
+        clc
+        adc #400
+        sta currentScore
+
+        ldx #4
+        ldy #SCOREINDEX_100
+        addToScore
+
+        lda #1
+        sta scoreDirty
+
+        rts
+
+add800ToScore entry
+
+        lda currentScore
+        clc
+        adc #800
+        sta currentScore
+
+        ldx #8
+        ldy #SCOREINDEX_100
+        addToScore
+
+        lda #1
+        sta scoreDirty
+
+        rts
+
+add1600ToScore entry
+
+        lda currentScore
+        clc
+        adc #1600
+        sta currentScore
+
+        ldx #6
+        ldy #SCOREINDEX_100
+        addToScore
+
+        ldx #1
+        ldy #SCOREINDEX_1000
+        addToScore
+
+        lda #1
+        sta scoreDirty
+
+        rts
+
+
+
+
+
 
 drawScore entry
 

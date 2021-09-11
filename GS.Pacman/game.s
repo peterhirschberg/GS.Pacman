@@ -132,9 +132,6 @@ notEatingGhost2 anop
 
 notEatingGhost1 anop
 
-        jsr drawScore
-
-
 ;        jsr borderStart
 
 
@@ -155,7 +152,10 @@ notEatingGhost1 anop
 
 
 eatingGhostSkipToHere anop
-        
+
+        jsr drawScore
+
+
         lda #0
         sta joystickUp
         sta joystickDown
