@@ -14199,17 +14199,288 @@ drawSprite83 entry
         _spriteFooter
         rtl
 
-drawSprite84 entry
+drawSprite85 entry
 
         spriteGetDrawAddress
         _spriteHeader
 
 
+        lda drawAddress
+        clc
+        adc #0
+        tcd
+
+        short m
+        lda #$00
+        sta 0
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #160
+        tcd
+
+        short m
+        lda #$00
+        sta 0
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #320
+        tcd
+
+        short m
+        lda #$00
+        sta 0
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #480
+        tcd
+
+        short m
+        lda #$00
+        sta 0
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #640
+        tcd
+
+        short m
+        lda #$00
+        sta 0
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #800
+        tcd
+
+        short m
+        lda #$00
+        sta 0
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #960
+        tcd
+
+        short m
+        lda #$00
+        sta 0
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1120
+        tcd
+
+        short m
+        lda #$00
+        sta 0
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1280
+        tcd
+
+        short m
+        lda #$00
+        sta 0
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1440
+        tcd
+
+        short m
+        lda #$00
+        sta 0
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1600
+        tcd
+
+        short m
+        lda #$00
+        sta 0
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1760
+        tcd
+
+        short m
+        lda #$00
+        sta 0
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #1920
+        tcd
+
+        short m
+        lda #$00
+        sta 0
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #2080
+        tcd
+
+        short m
+        lda #$00
+        sta 0
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #2240
+        tcd
+
+        short m
+        lda #$00
+        sta 0
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        sta 7
+        long m
+
+        lda drawAddress
+        clc
+        adc #2400
+        tcd
+
+        short m
+        lda #$00
+        sta 0
+        sta 1
+        sta 2
+        sta 3
+        sta 4
+        sta 5
+        sta 6
+        sta 7
+        long m
+
         long m
 
         _spriteFooter
         rtl
-
     
 drawAddress dc i4'0'
 
