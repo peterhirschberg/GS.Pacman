@@ -56,32 +56,7 @@ gameInit entry
         jsr drawSpriteByIndex
 
 
-        lda #-14
-        sta spriteX
-        lda #174
-        sta spriteY
-        lda #SPRITE_LIFE
-        jsr drawSpriteByIndex
-
-
-        lda #-14
-        sta spriteX
-        lda spriteY
-        sec
-        sbc #28
-        sta spriteY
-        lda #SPRITE_LIFE
-        jsr drawSpriteByIndex
-
-
-        lda #-14
-        sta spriteX
-        lda spriteY
-        sec
-        sbc #28
-        sta spriteY
-        lda #SPRITE_LIFE
-        jsr drawSpriteByIndex
+        jsr drawLives
 
 
         jsr playIntroSound
@@ -199,6 +174,47 @@ eatingGhostSkipToHere anop
         rtl
 
 
+drawLives entry
+
+        ldy numLives
+        cmp #1
+        bcs doDrawLives
+        rts
+
+doDrawLives anop
+
+        dey
+
+        lda #-14
+        sta spriteX
+        lda #174
+        sta spriteY
+
+livesLoop anop
+
+        dey
+        tya
+        bmi livesDone
+
+        lda #SPRITE_LIFE
+        jsr drawSpriteByIndex
+
+        lda #-14
+        sta spriteX
+        lda spriteY
+        sec
+        sbc #28
+        sta spriteY
+
+
+        bra livesLoop
+
+livesDone anop
+
+        rts
+
+
+
         end
 
 
@@ -207,5 +223,7 @@ gameData data
 gameIntroTimer dc i2'0'
 
 eatGhostTimer dc i2'0'
+
+numLives dc i2'3'
 
         end
