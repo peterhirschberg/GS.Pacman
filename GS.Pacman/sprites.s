@@ -647,14 +647,14 @@ SPRITE_1600R            gequ 74*4
 SPRITE_PAC_FULL_3       gequ 75*4
 SPRITE_FLEEGHOST_ODD_1  gequ 76*4
 SPRITE_FLEEGHOST_ODD_2  gequ 77*4
-; SPRITE_BLANK            gequ 78*4
+SPRITE_WHITE            gequ 78*4
 SPRITE_1000L            gequ 79*4
 SPRITE_1000R            gequ 80*4
 SPRITE_100            gequ 81*4
 SPRITE_300            gequ 82*4
 SPRITE_500            gequ 83*4
 SPRITE_700            gequ 84*4
-; SPRITE_BLANK            gequ 85*4
+SPRITE_BLACK            gequ 85*4
 
 
 spriteX dc i2'0'
