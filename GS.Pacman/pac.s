@@ -45,7 +45,7 @@ notEaten anop
         cpy #DIRECTION_LEFT
         bne notLeft
         clc
-        adc #7 ; Why do I need this dumb offset for LEFT?
+        adc #7 ; PDHTODO Why do I need this dumb offset for LEFT?
 
 notLeft anop
 
@@ -59,7 +59,7 @@ notLeft anop
         cpy #DIRECTION_UP
         bne notUp
         clc
-        adc #5 ; Why do I need this dumb offset for UP?
+        adc #5 ; PDHTODO Why do I need this dumb offset for UP?
 
 notUp anop
 
@@ -439,12 +439,12 @@ checkDots entry
         jsr getTileYFromPixelY
         sta tileY
 
-        lda pacAnimationIndex
-        cmp #3
-        bne keepCheckingDots
-        rts
-
-keepCheckingDots anop
+;        lda pacAnimationIndex
+;        cmp #2 ; PDHTODO - I DON'T THINK THIS IS WORKING RIGHT
+;        bne keepCheckingDots
+;        rts
+;
+;keepCheckingDots anop
 
         jsr getTileFromTileXY
         cmp #1

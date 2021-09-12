@@ -201,38 +201,61 @@ getTileLeft anop
         rts
         
         
-; precalcualate all available paths for each tile of the maze
+; precalcualate all available paths for each tile of the maze, get dot counts, etc
 ; 28 tiles wide
 ; 23 tiles high
 initMaze entry
 
         lda #0
-        sta tileX
-        sta tileY
+        sta initTileX
+        sta initTileY
+        sta totalDotCount
 
 initVLoop anop
 
         lda #0
-        sta tileX
+        sta initTileX
 
 initHLoop anop
 
+        lda initTileX
+        asl a
+        sta temp
+
+        lda initTileY
+        asl a
+        tax
+        lda mazeTileRowOffsets,x
+        clc
+        adc temp
+        tax
+        lda >mazeTileList,x
+        cmp #1
+        bne notADot
+        inc totalDotCount
+
+notADot anop
+
+        lda initTileX
+        sta tileX
+        lda initTileY
+        sta tileY
         jsr getAvailableDirectionsFromTileXY
         
-        inc tileX
-        lda tileX
+        inc initTileX
+        lda initTileX
         cmp #28
         bcs initNextRow
         bra initHLoop
         
 initDone anop
-        
+        ldx totalDotCount
         rts
         
 initNextRow anop
 
-        inc tileY
-        lda tileY
+        inc initTileY
+        lda initTileY
         cmp #23
         bcs initDone
         bra initVLoop
@@ -535,7 +558,7 @@ updateMazeTile entry
         asl a
         tax
         
-    ldx #0
+    ldx #0 ; PDHTODO <<<<<<<
 
         lda >mazeGraphicsOffsetXList,x
         sta tileSrcX
@@ -559,125 +582,6 @@ updateMazeTile entry
         sta tileDstY
 
         jsr drawMazeTile
-
-        rts
-        
-        
-    
-setMazeTileDirty entry
-
-        lda >dirtyMazeTileX
-;        sec
-;        sbc #MAZE_OFFSET_X
-        lsr a
-        lsr a
-;        lsr a
-        sta >dirtyMazeTileX
-
-        lda >dirtyMazeTileY
-;        sec
-;        sbc #MAZE_OFFSET_Y
-        lsr a
-        lsr a
-;        lsr a
-        sta >dirtyMazeTileY
-
-; ---------------------------------
-
-;        asl a
-        tax
-        lda mazeTileRowOffsets,x
-        sta rowAddress
-
-        lda >dirtyMazeTileX
-        asl a
-        clc
-        adc rowAddress
-        tax
-        lda #1
-        sta >dirtyMazeTiles,x
-        
-        rts
-        
-
-cleanMaze entry
-
-        lda #0
-        sta mazeRow
-
-cleanMazeVLoop anop
-
-        lda #0
-        sta mazeCol
-
-        lda mazeRow
-        asl a
-        tax
-        lda mazeTileRowOffsets,x
-        sta rowAddress
-
-cleanMazeHLoop anop
-
-        lda rowAddress
-        tax
-        lda >dirtyMazeTiles,x
-        cmp #0
-        beq nextClean
-        
-        lda #0
-        sta >dirtyMazeTiles,x ; mark the tile as clean
-        
-        lda >mazeTileList,x
-
-        asl a
-        tax
-
-        lda >mazeGraphicsOffsetXList,x
-        sta tileSrcX
-
-        lda >mazeGraphicsOffsetYList,x
-        sta tileSrcY
-
-
-        lda mazeCol
-        asl a
-        asl a
-        clc
-        adc #MAZE_OFFSET_X
-        sta tileDstX
-
-        lda mazeRow
-        asl a
-        asl a
-        asl a
-        clc
-        adc #MAZE_OFFSET_Y
-        sta tileDstY
-        
-
-        jsr blitBufferMazeTile
-        
-nextClean anop
-
-        inc rowAddress
-        inc rowAddress
-
-        inc mazeCol
-        lda mazeCol
-        cmp #28
-        beq cleanMazeRowDone
-        brl cleanMazeHLoop
-
-cleanMazeRowDone anop
-
-        inc mazeRow
-        lda mazeRow
-        cmp #23
-        beq cleanMazeDone
-
-        brl cleanMazeVLoop
-
-cleanMazeDone anop
 
         rts
         
@@ -828,7 +732,10 @@ fillDone2 anop
 
         rts
         
-        
+
+
+initTileX dc i2'0'
+initTileY dc i2'0'
 
 mazeRow dc i2'0'
 mazeCol dc i2'0'
@@ -955,18 +862,19 @@ mazeTileRowOffsets anop
 
 
 mazeExchangeData data
+
 tileX dc i2'0'
 tileY dc i2'0'
+
+totalDotCount dc i2'0' ; for a standard maze this will be 206 dots
+currentDotCount dc i2'0'
+
         end
 
 
 mazeData data mazeDataSeg
 
     
-dirtyMazeTileX dc i2'0'
-dirtyMazeTileY dc i2'0'
-
-
 AVAILABLEDIR_UNCOMPUTED gequ -1
 AVAILABLEDIR_NONE   gequ 0
 AVAILABLEDIR_UP     gequ 1
@@ -1057,32 +965,6 @@ mazeTileList anop
         dc i2'$12,$01,$24,$25,$25,$25,$25,$06,$07,$25,$25,$26,$01,$29,$2a,$01,$24,$25,$25,$06,$07,$25,$25,$25,$25,$26,$01,$16'
         dc i2'$12,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$01,$16'
         dc i2'$1b,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$25,$1f'
-
-
-dirtyMazeTiles anop
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
-        dc i2'$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00'
 
 
 mazeAvailableDirections anop
