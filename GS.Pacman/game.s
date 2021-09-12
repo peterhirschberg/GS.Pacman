@@ -8,6 +8,8 @@
 
 
         case on
+        mcopy global.macros
+        keep global
 
 
 game start
@@ -38,6 +40,10 @@ gameInit entry
         jsr normalColorTable
 
 ;        jsr borderInit
+
+
+        alignXToTile
+        alignYToTile
 
 
         lda #0
@@ -376,6 +382,11 @@ resetPac anop
         sta pacX
         lda #$448
         sta pacY
+
+; ensure pac is aligned to the tile boundries
+
+        alignXToTile
+        alignYToTile
 
         lda #0
         sta joystickUp

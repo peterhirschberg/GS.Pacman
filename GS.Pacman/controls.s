@@ -113,9 +113,6 @@ onDisableJoystick anop
 
 onQuit anop
 
-        jsr playDeathSound
-        rts
-
         ldx #0
         lda pacY
         shiftedToPixel

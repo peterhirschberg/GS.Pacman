@@ -44,8 +44,8 @@ notEaten anop
         ldy pacDirection
         cpy #DIRECTION_LEFT
         bne notLeft
-        clc
-        adc #7 ; PDHTODO Why do I need this dumb offset for LEFT?
+;        clc
+;        adc #7 ; PDHTODO Why do I need this dumb offset for LEFT?
 
 notLeft anop
 
@@ -58,8 +58,8 @@ notLeft anop
         ldy pacDirection
         cpy #DIRECTION_UP
         bne notUp
-        clc
-        adc #5 ; PDHTODO Why do I need this dumb offset for UP?
+;        clc
+;        adc #5 ; PDHTODO Why do I need this dumb offset for UP?
 
 notUp anop
 
@@ -70,7 +70,70 @@ notUp anop
         jsr getAvailableDirectionsFromTileXY ; modifies tileX/Y
         sta availableDirections
 
-        
+
+        lda #0
+        sta spriteX
+        lda #20
+        sta spriteY
+        lda availableDirections
+        and #AVAILABLEDIR_LEFT
+        cmp #0
+        beq noLeft
+        lda #ALPHAINDEX_L
+        jsr drawAlphaSpriteByIndex
+        bra checkRight
+noLeft anop
+        lda #ALPHAINDEX_SPACE
+        jsr drawAlphaSpriteByIndex
+checkRight anop
+        lda #0
+        sta spriteX
+        lda #28
+        sta spriteY
+        lda availableDirections
+        and #AVAILABLEDIR_RIGHT
+        cmp #0
+        beq noRight
+        lda #ALPHAINDEX_R
+        jsr drawAlphaSpriteByIndex
+        bra checkUp
+noRight anop
+        lda #ALPHAINDEX_SPACE
+        jsr drawAlphaSpriteByIndex
+checkUp anop
+        lda #0
+        sta spriteX
+        lda #36
+        sta spriteY
+        lda availableDirections
+        and #AVAILABLEDIR_UP
+        cmp #0
+        beq noUp
+        lda #ALPHAINDEX_U
+        jsr drawAlphaSpriteByIndex
+        bra checkDown
+noUp anop
+        lda #ALPHAINDEX_SPACE
+        jsr drawAlphaSpriteByIndex
+checkDown anop
+        lda #0
+        sta spriteX
+        lda #44
+        sta spriteY
+        lda availableDirections
+        and #AVAILABLEDIR_DOWN
+        cmp #0
+        beq noDown
+        lda #ALPHAINDEX_D
+        jsr drawAlphaSpriteByIndex
+        bra checkNothing
+noDown anop
+        lda #ALPHAINDEX_SPACE
+        jsr drawAlphaSpriteByIndex
+checkNothing anop
+
+
+
         jsr controlPac
         jsr movePac
         jsr checkTunnel
@@ -86,8 +149,8 @@ animate anop
 dontAnimate anop
 
         rts
-        
-        
+
+
 alignPacWithTiles entry
 
         lda pacDirection
@@ -182,6 +245,7 @@ noDelay anop
 
 ; PDHTODO - fix pac getting stuck against walls
 ;        jsr isPacCenteredInMazeTile
+;        jsr isSpriteCenteredInMazeTile
 ;        cmp #0
 ;        bne keepMoving1
 
