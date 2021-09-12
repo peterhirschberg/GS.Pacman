@@ -89,6 +89,13 @@ startEatPac anop
 
 eatGhost anop
 
+        lda ghostState,x
+        cmp #GHOSTSTATE_FRIGHTENED
+        beq ghostIsEdible
+        rts
+
+ghostIsEdible anop
+
 ; eat the ghost
 
         lda #GHOSTSTATE_POINTS
