@@ -63,8 +63,8 @@ pacGhostCollision anop
 
 ; collision
 
-        lda ghostState,x
-        cmp #GHOSTSTATE_FRIGHTENED
+        jsr ghostIsLethal
+        cmp #0
         beq eatGhost
 
 ; pac gets eaten
@@ -147,6 +147,23 @@ nextGhost anop
         brl ghostLoop
 
 collisionDone anop
+        rts
+
+
+
+ghostIsLethal entry
+
+        lda ghostState,x
+        cmp #GHOSTSTATE_CHASE
+        beq isLethal
+        cmp #GHOSTSTATE_SCATTER
+        beq isLethal
+
+        lda #0
+        rts
+
+isLethal anop
+        lda #1
         rts
 
 
