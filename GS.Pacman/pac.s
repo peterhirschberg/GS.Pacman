@@ -462,6 +462,7 @@ eatLargeDot anop
         jsr add50ToScore
         bra eatDot
 eatSmallDot anop
+        inc eatenDotCount
         lda #1
         sta temp
         lda #1

@@ -867,7 +867,7 @@ tileX dc i2'0'
 tileY dc i2'0'
 
 totalDotCount dc i2'0' ; for a standard maze this will be 206 dots
-currentDotCount dc i2'0'
+eatenDotCount dc i2'0'
 
         end
 

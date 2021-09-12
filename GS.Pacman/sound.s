@@ -19,8 +19,11 @@
         mcopy global.macros
         keep global
 
+
 sound start
+        using mazeExchangeData
         using globalData
+
 
 SOUND_REG_FREQ_LOW    equ $0000
 SOUND_REG_FREQ_HIGH    equ $0020
@@ -151,6 +154,8 @@ writeRegNoRead entry
         
        
 runSound entry
+
+        jsr updateSounds
 
         lda eatDotTimer
         bmi eatDotTimerNeg
@@ -744,6 +749,79 @@ playDeathSound entry
 		rts
 
 
+updateSounds entry
+
+; The pitch increases at the following eaten dot counts
+; 82
+; 148
+; 180
+; 196
+
+        lda eatenDotCount
+        cmp #196
+        bcs level4
+        cmp #180
+        bcs level3
+        cmp #148
+        bcs level2
+        cmp #82
+        bcs level1
+
+level0 anop
+        ldy #0
+        bra levelDone
+
+level1 anop
+        ldy #2
+        bra levelDone
+
+level2 anop
+        ldy #4
+        bra levelDone
+
+level3 anop
+        ldy #6
+        bra levelDone
+
+level4 anop
+        ldy #8
+        bra levelDone
+
+
+levelDone anop
+
+		short m
+		lda >SOUND_SYSTEM_VOLUME
+		and #$0f
+		ora #$20
+		sta >SOUND_CONTROL_REG
+
+		lda #SOUND_REG_FREQ_LOW+SIREN1_OSC_NUM
+		sta >SOUND_ADDR_LOW
+		lda sirenFreqs,y
+		sta >SOUND_DATA_REG
+		sta >SOUND_DATA_REG
+		sta >SOUND_DATA_REG
+		sta >SOUND_DATA_REG
+
+		lda #SOUND_REG_FREQ_HIGH+SIREN1_OSC_NUM
+		sta >SOUND_ADDR_LOW
+		lda sirenFreqs+1,y
+		sta >SOUND_DATA_REG
+		sta >SOUND_DATA_REG
+		sta >SOUND_DATA_REG
+		sta >SOUND_DATA_REG
+		long m
+
+        rts
+
+
+sirenFreqs anop
+        dc i2'40'
+        dc i2'44'
+        dc i2'48'
+        dc i2'52'
+        dc i2'54'
 
 
 registerValue dc i2'0'

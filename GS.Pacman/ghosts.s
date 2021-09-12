@@ -2231,6 +2231,8 @@ sirenDone anop
         cmp #0
         bne sirenGhostsFrightened
 
+; Play normal siren sound
+
         jsr stopScaredSound
         jsr stopSiren2Sound
         jsr startSiren1Sound
