@@ -13,6 +13,7 @@
 
 pac start
         using globalData
+        using gameData
         using spritesData
         using controlsData
         using mazeExchangeData
@@ -327,8 +328,11 @@ incrementEatenAnimationIndex anop
 
 eatenAnimationFinished anop
 
-        lda #0
-        sta pacAnimationIndex
+;        lda #0
+;        sta pacAnimationIndex
+
+        lda #100
+        sta postLifeTimer
 
         rts
 

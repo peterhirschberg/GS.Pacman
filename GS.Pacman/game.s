@@ -103,6 +103,13 @@ mainLoop anop
 
         jsr waitForVbl
 
+        lda postLifeTimer
+        cmp #0
+        beq notPostLife
+
+        bra mainLoop
+
+notPostLife anop
 
         lda eatPacTimer
         cmp #0
@@ -267,6 +274,8 @@ gameIntroTimer dc i2'0'
 eatGhostTimer dc i2'0'
 
 eatPacTimer dc i2'0'
+
+postLifeTimer dc i2'0'
 
 numLives dc i2'3'
 
