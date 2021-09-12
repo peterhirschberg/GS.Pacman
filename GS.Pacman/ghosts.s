@@ -27,8 +27,6 @@ initGhosts entry
         lda level1GhostModeTimes,x
         sta ghostModeTimer
 
-        lda level1GhostModes
-
         rts
 
         
@@ -2347,10 +2345,6 @@ savey dc i2'0'
 
 counter dc i2'0'
 
-newMode dc i2'GHOSTSTATE_SCATTER'
-
-fakeTargetTimer dc i2'20'
-
         end
 
 
@@ -2403,6 +2397,18 @@ ghostPixelOldY anop
         dc i2'0'
         dc i2'0'
 
+ghostInitialPixelX anop
+        dc i2'$360'
+        dc i2'$360'
+        dc i2'$2e0'
+        dc i2'$3e0'
+
+ghostInitialPixelY anop
+        dc i2'$200'
+        dc i2'$2a0'
+        dc i2'$2a0'
+        dc i2'$2a0'
+
 ghostDirChangeX anop
         dc i2'0'
         dc i2'0'
@@ -2445,6 +2451,12 @@ ghostState anop
         dc i2'GHOSTSTATE_PENNED'
         dc i2'GHOSTSTATE_PENNED'
 
+ghostInitialState anop
+        dc i2'GHOSTSTATE_SCATTER'
+        dc i2'GHOSTSTATE_LEAVINGPEN'
+        dc i2'GHOSTSTATE_PENNED'
+        dc i2'GHOSTSTATE_PENNED'
+
 ghostStateTimer anop
         dc i2'0'
         dc i2'0'
@@ -2452,6 +2464,12 @@ ghostStateTimer anop
         dc i2'0'
 
 ghostDirection anop
+        dc i2'DIRECTION_LEFT'
+        dc i2'DIRECTION_UP'
+        dc i2'DIRECTION_UP'
+        dc i2'DIRECTION_UP'
+
+ghostInitialDirection anop
         dc i2'DIRECTION_LEFT'
         dc i2'DIRECTION_UP'
         dc i2'DIRECTION_UP'
@@ -2469,6 +2487,11 @@ ghostDotCounter anop
         dc i2'20'
         dc i2'40'
 
+ghostInitialDotCounter anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'20'
+        dc i2'40'
 
         
 redGhostLeftAnimationSprites anop
@@ -2576,6 +2599,9 @@ ghostModeTimer dc i2'0'
 
 ghostMode dc i2'0'
 
+newMode dc i2'GHOSTSTATE_SCATTER'
+
+fakeTargetTimer dc i2'20'
         
 ; Precalculated pseudo-random directions -
 ; For performance reasons the values are calculated to be non-repeating and each

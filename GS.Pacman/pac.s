@@ -328,9 +328,6 @@ incrementEatenAnimationIndex anop
 
 eatenAnimationFinished anop
 
-;        lda #0
-;        sta pacAnimationIndex
-
         lda #100
         sta postLifeTimer
 
@@ -597,8 +594,8 @@ pacDieAnimationSprites anop
 pacX dc i2'$360'
 pacY dc i2'$448'
 
-pacOldX dc i2'48'
-pacOldY dc i2'48'
+pacOldX dc i2'0'
+pacOldY dc i2'0'
 
 pacAnimationIndex dc i2'0'
 pacAnimationTimer dc i2'0'

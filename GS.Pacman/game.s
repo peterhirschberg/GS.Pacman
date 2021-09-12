@@ -13,6 +13,7 @@
 game start
         using controlsData
         using pacData
+        using ghostData
         using spritesData
         using scoreData
         using gameData
@@ -107,7 +108,15 @@ mainLoop anop
         cmp #0
         beq notPostLife
 
+        dec postLifeTimer
+        lda postLifeTimer
+        cmp #0
+        beq postLifeTimerExpired
         bra mainLoop
+
+postLifeTimerExpired anop
+        jsr startNewLife
+        bra gameIntro
 
 notPostLife anop
 
@@ -262,6 +271,68 @@ livesDone anop
 
         rts
 
+
+startNewLife entry
+
+; reset game
+        lda #0
+        sta pacEaten
+
+        lda #100
+        sta gameIntroTimer
+
+; reset the ghosts
+
+        lda #GHOSTSTATE_SCATTER
+        sta newMode
+
+        lda #20
+        sta fakeTargetTimer
+
+        jsr initGhosts
+
+        ldx #0
+
+initGhostLoop anop
+
+        lda ghostInitialPixelX,x
+        sta ghostPixelX,x
+        lda ghostInitialPixelY,x
+        sta ghostPixelY,x
+        lda ghostInitialState,x
+        sta ghostState,x
+        stz ghostStateTimer,x
+        lda ghostInitialDotCounter,x
+        sta ghostDotCounter,x
+        lda ghostInitialDirection,x
+        sta ghostDirection,x
+
+        inx
+        inx
+        txa
+        cmp #8
+        bcs resetPac
+        bra initGhostLoop
+
+resetPac anop
+
+; reset pac
+
+        lda #0
+        sta pacAnimationIndex
+        sta pacAnimationTimer
+
+        lda #DIRECTION_LEFT
+        sta pacDirection
+        sta pacIntendedDirection
+
+; Initial position in maze is $6c,$89 x 8
+        lda #$360
+        sta pacX
+        lda #$448
+        sta pacY
+
+        rts
 
 
         end
