@@ -16,6 +16,7 @@ ghosts start
         using spritesData
         using mazeExchangeData
         using pacData
+        using gameData
         using ghostData
         
 
@@ -2187,6 +2188,13 @@ dontCountRight anop
 
 
 runSirenSounds entry
+
+        lda levelCompleteTimer
+        cmp #0
+        beq sirenContinue
+        rts
+
+sirenContinue anop
 
         lda #0
         sta ghostsFrightened

@@ -441,7 +441,7 @@ siren1SoundNotPlaying anop
         rts
 
 doStopSiren1Sound anop
-
+  
         lda #0
         sta siren1SoundPlaying
 

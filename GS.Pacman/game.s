@@ -16,6 +16,7 @@ game start
         using ghostData
         using spritesData
         using scoreData
+        using mazeExchangeData
         using gameData
 
 
@@ -184,6 +185,9 @@ normalMazeColor anop
 
 
 startNextLevel anop
+
+        jsr startNewLevel
+        brl gameIntro
 
 levelNotComplete anop
 
@@ -376,6 +380,27 @@ resetPac anop
         rts
 
 
+startNewLevel entry
+
+        jsr blackColorTable
+
+        inc levelNum
+        stz eatenDotCount
+
+        jsr initMaze
+
+        jsr startNewLife
+
+        jsr drawMaze
+
+        jsr normalColorTable
+
+        lda #100
+        sta gameIntroTimer
+
+        rts
+
+
         end
 
 
@@ -392,5 +417,6 @@ postLifeTimer dc i2'0'
 levelCompleteTimer dc i2'0'
 
 numLives dc i2'3'
+levelNum dc i2'0'
 
         end

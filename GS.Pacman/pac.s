@@ -493,7 +493,7 @@ eatDot anop
 
 ; check for level complete
         lda eatenDotCount
-        cmp #10 ; totalDotCount
+        cmp totalDotCount
         beq levelDone
 
         rts
