@@ -462,6 +462,8 @@ eatLargeDot anop
         jsr add50ToScore
         bra eatDot
 eatSmallDot anop
+; keep track of how many dots have been eaten
+; when all the dots are gone, the level is complete
         inc eatenDotCount
         lda #1
         sta temp
@@ -488,9 +490,26 @@ eatDot anop
         ldx savex
 
         jsr playEatDotSound
-        
+
+; check for level complete
+        lda eatenDotCount
+        cmp #10 ; totalDotCount
+        beq levelDone
+
         rts
-        
+
+levelDone anop
+
+; level is complete
+
+        jsr stopScaredSound
+        jsr stopSiren2Sound
+        jsr stopSiren1Sound
+
+        lda #240
+        sta levelCompleteTimer
+
+        rts
         
         
 checkTunnel anop

@@ -112,6 +112,8 @@ mainLoop anop
         lda postLifeTimer
         cmp #0
         beq postLifeTimerExpired
+        jsr erasePac
+        jsr drawPac
         bra mainLoop
 
 postLifeTimerExpired anop
@@ -143,8 +145,47 @@ dontStartPacEatenSound anop
 
         bra mainLoop
 
-
 pacEatenTimerZero anop
+
+        lda levelCompleteTimer
+        cmp #0
+        beq levelNotComplete
+
+        dec levelCompleteTimer
+        lda levelCompleteTimer
+        cmp #0
+        beq startNextLevel
+        jsr erasePac
+        jsr drawPac
+
+        lda levelCompleteTimer
+        cmp #240-100
+        bcs normalMazeColor
+        lsr a
+        lsr a
+        lsr a
+        lsr a
+        and #1
+        cmp #0
+        bne flashMazeColor
+        bra normalMazeColor
+
+flashMazeColor anop
+        ldx #8
+        lda #$0fff
+        sta >COLOR_TABLE,x
+        brl mainLoop
+
+normalMazeColor anop
+        ldx #8
+        lda #$022e
+        sta >COLOR_TABLE,x
+        brl mainLoop
+
+
+startNextLevel anop
+
+levelNotComplete anop
 
         
 ;        jsr borderStart
@@ -347,6 +388,8 @@ eatGhostTimer dc i2'0'
 eatPacTimer dc i2'0'
 
 postLifeTimer dc i2'0'
+
+levelCompleteTimer dc i2'0'
 
 numLives dc i2'3'
 

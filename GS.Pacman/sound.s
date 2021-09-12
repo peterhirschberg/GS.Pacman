@@ -759,31 +759,31 @@ updateSounds entry
 
         lda eatenDotCount
         cmp #196
-        bcs level4
+        bcs pitch4
         cmp #180
-        bcs level3
+        bcs pitch3
         cmp #148
-        bcs level2
+        bcs pitch2
         cmp #82
-        bcs level1
+        bcs pitch1
 
-level0 anop
+pitch0 anop
         ldy #0
         bra levelDone
 
-level1 anop
+pitch1 anop
         ldy #2
         bra levelDone
 
-level2 anop
+pitch2 anop
         ldy #4
         bra levelDone
 
-level3 anop
+pitch3 anop
         ldy #6
         bra levelDone
 
-level4 anop
+pitch4 anop
         ldy #8
         bra levelDone
 
