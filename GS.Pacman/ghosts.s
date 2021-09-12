@@ -1215,7 +1215,7 @@ atePowerPelletLoop anop
         cmp #GHOSTSTATE_LEAVINGPEN
         beq skipGhost
         cmp #GHOSTSTATE_FRIGHTENED
-        beq skipGhost
+        beq setStateTimer
 
 ; set the state
         lda #GHOSTSTATE_FRIGHTENED
@@ -1231,6 +1231,8 @@ atePowerPelletLoop anop
         sta ghostDirChangeX,x
         lda ghostPixelY,x
         sta ghostDirChangeY,x
+
+setStateTimer anop
 
         lda #500 ; TODO - MAKE THIS TIMER DYNAMIC
         sta ghostStateTimer,x

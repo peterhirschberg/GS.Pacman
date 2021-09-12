@@ -377,6 +377,12 @@ resetPac anop
         lda #$448
         sta pacY
 
+        lda #0
+        sta joystickUp
+        sta joystickDown
+        sta joystickLeft
+        sta joystickRight
+
         rts
 
 

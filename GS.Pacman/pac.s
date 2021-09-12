@@ -173,6 +173,20 @@ movePac entry
         
 noDelay anop
 
+        lda pacX
+        shiftedToPixel
+        sta spriteX
+        lda pacY
+        shiftedToPixel
+        sta spriteY
+
+; PDHTODO - fix pac getting stuck against walls
+;        jsr isPacCenteredInMazeTile
+;        cmp #0
+;        bne keepMoving1
+
+; test to see if we can go the intended direction
+
         lda pacIntendedDirection
         jsr checkDirectionAvailable
         cmp #0
@@ -182,6 +196,8 @@ noDelay anop
         sta pacDirection
 
 keepMoving1 anop
+
+; test to see if we can go in the current direction
 
         lda pacDirection
         jsr checkDirectionAvailable
