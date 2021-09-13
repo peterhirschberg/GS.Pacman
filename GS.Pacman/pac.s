@@ -142,8 +142,7 @@ checkNothing anop
 ; ------------ DEBUG -------------
 
 
-        jsr getAvailableDirectionsFromTileXY ; modifies tileX/Y
-        sta availableDirections
+        jsr getPacAvailableDirections
 
         jsr controlPac
         jsr movePac
@@ -255,29 +254,33 @@ noDelay anop
         shiftedToPixel
         sta spriteY
 
+;        jsr doPacTurning
+
 ; only allow turning if centered on tile boundry (PDHTODO - allow turning early/late)
-
-        jsr isSpriteCenteredInMazeTile
-        cmp #0
-        beq turnNotAllowed
-        bra turnAllowed
-
-turnNotAllowed anop
-
-        bra keepMoving2
-
-turnAllowed anop
+;
+;        jsr isSpriteCenteredInMazeTile
+;        cmp #0
+;        beq turnNotAllowed
+;        bra turnAllowed
+;
+;turnNotAllowed anop
+;
+;        bra keepMoving2
+;
+;turnAllowed anop
 
 
 ; test to see if we can go the intended direction
+
+    lda #1
+    sta turningOnTime
 
         lda pacIntendedDirection
         jsr checkDirectionAvailable
         cmp #0
         beq keepMoving1
-        
-        lda pacIntendedDirection
-        sta pacDirection
+
+        jsr pacTurnToIntendedDirection
 
 keepMoving1 anop
 
@@ -287,6 +290,10 @@ keepMoving1 anop
         jsr checkDirectionAvailable
         cmp #0
         bne keepMoving2
+
+        jsr isSpriteCenteredInMazeTile
+        cmp #0
+        beq keepMoving2
         
         lda #0
         sta pacMoving
@@ -652,12 +659,305 @@ resetToRight anop
         sta pacX
         rts
 
+
+
+
+
+
+pacTurnToIntendedDirection entry
+
+        lda pacIntendedDirection
+        sta pacDirection
+
+        lda pacDirection
+
+        cmp #DIRECTION_DOWN
+        beq pacAlignX
+        cmp #DIRECTION_UP
+        beq pacAlignX
+
+        cmp #DIRECTION_RIGHT
+        beq pacAlignY
+        cmp #DIRECTION_LEFT
+        beq pacAlignY
+
+        rts
+
+pacAlignX anop
+
+        lda turningOnTime
+        cmp #0
+        bne alignXOnTime
+        lda turningEarly
+        cmp #0
+        bne alignXEarly
+        lda turningLate
+        cmp #0
+        bne alignXLate
+
+        rts
+
+alignXOnTime anop
+        lda turnOnTimeX
+        asl a
+        asl a
+        asl a
+        sta pacX
+        rts
+alignXEarly anop
+        lda turnEarlyX
+        asl a
+        asl a
+        asl a
+        sta pacX
+        rts
+alignXLate anop
+        lda turnLateX
+        asl a
+        asl a
+        asl a
+        sta pacX
+        rts
+
+
+pacAlignY anop
+
+        lda turningOnTime
+        cmp #0
+        bne alignYOnTime
+        lda turningEarly
+        cmp #0
+        bne alignYEarly
+        lda turningLate
+        cmp #0
+        bne alignYLate
+
+        rts
+
+alignYOnTime anop
+        lda turnOnTimeY
+        asl a
+        asl a
+        asl a
+        sta pacY
+        rts
+alignYEarly anop
+        lda turnEarlyY
+        asl a
+        asl a
+        asl a
+        sta pacY
+        rts
+alignYLate anop
+        lda turnLateY
+        asl a
+        asl a
+        asl a
+        sta pacY
+        rts
+
+
+
+
+
+getPacAvailableDirections entry
+
+; get available directions for current tile
+
+        lda pacX
+        shiftedToPixel
+        and #$fff8
+        sta turnOnTimeX
+        lda pacX
+        shiftedToPixel
+        jsr getTileXFromPixelX
+        sta tileX
+
+        lda pacY
+        shiftedToPixel
+        and #$fff8
+        sta turnOnTimeY
+        lda pacY
+        shiftedToPixel
+        jsr getTileYFromPixelY
+        sta tileY
+
+        jsr getAvailableDirectionsFromTileXY
+        sta availableDirections
+
+; get available directions for one tile ahead
+
+        jsr getTileXYAhead
+        jsr getAvailableDirectionsFromTileXY
+        sta availableDirectionsAhead
+
+; get available directions for one tile behind
+
+
+        rts
+
+
+getTileXYAhead entry
+
+        lda pacDirection
+        cmp #DIRECTION_LEFT
+        beq getTileXYAheadLeftShort
+        cmp #DIRECTION_RIGHT
+        beq getTileXYAheadRightShort
+        cmp #DIRECTION_UP
+        beq getTileXYAheadUpShort
+        cmp #DIRECTION_DOWN
+        beq getTileXYAheadDownShort
+
+        rts
+
+getTileXYAheadLeftShort anop
+        brl getTileXYAheadLeft
+getTileXYAheadRightShort anop
+        brl getTileXYAheadRight
+getTileXYAheadUpShort anop
+        brl getTileXYAheadUp
+getTileXYAheadDownShort anop
+        brl getTileXYAheadDown
+
+getTileXYAheadLeft anop
+
+        lda pacX
+        shiftedToPixel
+        sec
+        sbc #4
+        and #$fff8
+        sta turnEarlyX
+        lda pacX
+        shiftedToPixel
+        sec
+        sbc #4
+        sta turnEarlyX
+        jsr getTileXFromPixelX
+        sta tileX
+
+        lda pacY
+        shiftedToPixel
+        and #$fff8
+        sta turnEarlyY
+        lda pacY
+        shiftedToPixel
+        jsr getTileYFromPixelY
+        sta tileY
+
+        rts
+
+getTileXYAheadRight anop
+
+        lda pacX
+        shiftedToPixel
+        clc
+        adc #4
+        and #$fff8
+        sta turnEarlyX
+        lda pacX
+        shiftedToPixel
+        clc
+        adc #4
+        sta turnEarlyX
+        jsr getTileXFromPixelX
+        sta tileX
+
+        lda pacY
+        shiftedToPixel
+        and #$fff8
+        sta turnEarlyY
+        lda pacY
+        shiftedToPixel
+        jsr getTileYFromPixelY
+        sta tileY
+
+        rts
+
+getTileXYAheadUp anop
+
+        lda pacX
+        shiftedToPixel
+        and #$fff8
+        sta turnEarlyX
+        lda pacX
+        shiftedToPixel
+        jsr getTileXFromPixelX
+        sta tileX
+
+        lda pacY
+        shiftedToPixel
+        sec
+        sbc #4
+        and #$fff8
+        sta turnEarlyY
+        lda pacY
+        shiftedToPixel
+        sec
+        sbc #4
+        sta turnEarlyY
+        jsr getTileYFromPixelY
+        sta tileY
+
+        rts
+
+getTileXYAheadDown anop
+
+        lda pacX
+        shiftedToPixel
+        and #$fff8
+        sta turnEarlyX
+        lda pacX
+        shiftedToPixel
+        jsr getTileXFromPixelX
+        sta tileX
+
+        lda pacY
+        shiftedToPixel
+        clc
+        adc #4
+        and #$fff8
+        sta turnEarlyY
+        lda pacY
+        shiftedToPixel
+        clc
+        adc #4
+        sta turnEarlyY
+        jsr getTileYFromPixelY
+        sta tileY
+
+        rts
+
+
+
+
+
+
+
+
+
+
         
         
 availableDirections dc i2'0'
+availableDirectionsAhead dc i2'0'
+availableDirectionsBehind dc i2'0'
+
 
 savex dc i4'0'
 
+turnOnTimeX dc i2'0'
+turnOnTimeY dc i2'0'
+
+turnEarlyX dc i2'0'
+turnEarlyY dc i2'0'
+
+turnLateX dc i2'0'
+turnLateY dc i2'0'
+
+turningOnTime dc i2'0'
+turningEarly dc i2'0'
+turningLate dc i2'0'
 
         end
 
