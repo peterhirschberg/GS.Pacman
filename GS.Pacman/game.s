@@ -373,10 +373,10 @@ resetPac anop
         sta pacDirection
         sta pacIntendedDirection
 
-; Initial position in maze is $6c,$89 x 8
+; Initial position in maze is $6c,$88 x 8
         lda #$360
         sta pacX
-        lda #$448
+        lda #$440
         sta pacY
 
         lda #0

@@ -76,8 +76,18 @@ notEaten anop
         sta spriteX
         lda #150
         sta spriteY
-
         lda pacX
+        shiftedToPixel
+        and #7
+        asl a
+        asl a
+        jsr drawAlphaSpriteByIndex
+
+        lda #0
+        sta spriteX
+        lda #158
+        sta spriteY
+        lda pacY
         shiftedToPixel
         and #7
         asl a
@@ -772,9 +782,9 @@ pacDieAnimationSprites anop
 
 
 
-; Initial position in maze is $6c,$89 x 8
+; Initial position in maze is $6c,$88 x 8
 pacX dc i2'$360'
-pacY dc i2'$448'
+pacY dc i2'$440'
 
 pacOldX dc i2'0'
 pacOldY dc i2'0'
