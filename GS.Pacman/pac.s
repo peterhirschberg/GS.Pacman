@@ -75,50 +75,6 @@ notEaten anop
 
 ; ------------ DEBUG -------------
 
-        
-        jsr getAvailableDirectionsFromTileXY ; modifies tileX/Y
-        sta availableDirections
-
-
-; adjust for left
-
-        lda availableDirections
-        and #AVAILABLEDIR_LEFT
-        cmp #0
-        bne dontAdjustForLeft
-
-        lda pacX
-        shiftedToPixel
-        and #7
-        cmp #0
-        beq dontAdjustForLeft
-
-        lda availableDirections
-        ora #AVAILABLEDIR_LEFT
-        sta availableDirections
-
-dontAdjustForLeft anop
-
-; adjust for up
-
-        lda availableDirections
-        and #AVAILABLEDIR_UP
-        cmp #0
-        bne dontAdjustForUp
-
-        lda pacY
-        shiftedToPixel
-        and #7
-        cmp #0
-        beq dontAdjustForUp
-
-        lda availableDirections
-        ora #AVAILABLEDIR_UP
-        sta availableDirections
-
-dontAdjustForUp anop
-
-
 
 ; ------------ DEBUG -------------
 
@@ -186,8 +142,12 @@ checkNothing anop
 ; ------------ DEBUG -------------
 
 
+        jsr getAvailableDirectionsFromTileXY ; modifies tileX/Y
+        sta availableDirections
+
         jsr controlPac
         jsr movePac
+
         jsr checkTunnel
         jsr checkDots
 
@@ -294,6 +254,20 @@ noDelay anop
         lda pacY
         shiftedToPixel
         sta spriteY
+
+; only allow turning if centered on tile boundry (PDHTODO - allow turning early/late)
+
+        jsr isSpriteCenteredInMazeTile
+        cmp #0
+        beq turnNotAllowed
+        bra turnAllowed
+
+turnNotAllowed anop
+
+        bra keepMoving2
+
+turnAllowed anop
+
 
 ; test to see if we can go the intended direction
 
@@ -604,9 +578,12 @@ eatLargeDot anop
         sta pacAteDotDelay
         jsr add50ToScore
         bra eatDot
+
 eatSmallDot anop
+
 ; keep track of how many dots have been eaten
 ; when all the dots are gone, the level is complete
+
         inc eatenDotCount
         lda #1
         sta temp
@@ -614,7 +591,9 @@ eatSmallDot anop
         sta pacAteDotDelay
         lda #10
         jsr add10ToScore
+
 eatDot anop
+
         lda pacX
         shiftedToPixel
         jsr getTileXFromPixelX
