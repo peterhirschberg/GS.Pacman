@@ -43,34 +43,14 @@ notEaten anop
         jsr getTileXFromPixelX
         sta tileX
 
-;        ldy pacDirection
-;        cpy #DIRECTION_LEFT
-;        bne notLeft
-;        clc
-;        adc #4 ; PDHTODO Why do I need this dumb offset for LEFT?
-
-
-;        and #$fff8
-
-
-;notLeft anop
-
-
-        
         lda pacY
         shiftedToPixel
         jsr getTileYFromPixelY
         sta tileY
 
 
-;        ldy pacDirection
-;        cpy #DIRECTION_UP
-;        bne notUp
-;        clc
-;        adc #4 ; PDHTODO Why do I need this dumb offset for UP?
 
-;notUp anop
-
+; ------------ DEBUG -------------
 
         lda #0
         sta spriteX
@@ -82,7 +62,6 @@ notEaten anop
         asl a
         asl a
         jsr drawAlphaSpriteByIndex
-
         lda #0
         sta spriteX
         lda #158
@@ -94,12 +73,11 @@ notEaten anop
         asl a
         jsr drawAlphaSpriteByIndex
 
+; ------------ DEBUG -------------
 
         
         jsr getAvailableDirectionsFromTileXY ; modifies tileX/Y
         sta availableDirections
-
-
 
         lda availableDirections
         and #AVAILABLEDIR_LEFT
@@ -137,8 +115,7 @@ dontAdjustForUp anop
 
 
 
-
-
+; ------------ DEBUG -------------
 
         lda #0
         sta spriteX
@@ -201,6 +178,7 @@ noDown anop
         jsr drawAlphaSpriteByIndex
 checkNothing anop
 
+; ------------ DEBUG -------------
 
 
         jsr controlPac
