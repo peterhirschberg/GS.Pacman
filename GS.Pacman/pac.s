@@ -470,15 +470,6 @@ drawPac entry
         adc #1
         sta spriteY
 
-;    lda spriteX
-;    sec
-;    sbc #4
-;    sta spriteX
-;    lda spriteY
-;    sec
-;    sbc #4
-;    sta spriteY
-
         lda pacAnimationIndex
         asl a
         tax
@@ -535,16 +526,6 @@ erasePac entry
         clc
         adc #1
         sta spriteY
-
-
-;    lda spriteX
-;    sec
-;    sbc #4
-;    sta spriteX
-;    lda spriteY
-;    sec
-;    sbc #4
-;    sta spriteY
 
         jsr eraseSpriteRect
 
