@@ -79,6 +79,9 @@ notEaten anop
         jsr getAvailableDirectionsFromTileXY ; modifies tileX/Y
         sta availableDirections
 
+
+; adjust for left
+
         lda availableDirections
         and #AVAILABLEDIR_LEFT
         cmp #0
@@ -95,6 +98,8 @@ notEaten anop
         sta availableDirections
 
 dontAdjustForLeft anop
+
+; adjust for up
 
         lda availableDirections
         and #AVAILABLEDIR_UP
@@ -290,12 +295,6 @@ noDelay anop
         shiftedToPixel
         sta spriteY
 
-; PDHTODO - fix pac getting stuck against walls
-;        jsr isPacCenteredInMazeTile
-;        jsr isSpriteCenteredInMazeTile
-;        cmp #0
-;        bne keepMoving1
-
 ; test to see if we can go the intended direction
 
         lda pacIntendedDirection
@@ -308,7 +307,7 @@ noDelay anop
 
 keepMoving1 anop
 
-; test to see if we can go in the current direction
+; test to see if we can continue moving in the current direction
 
         lda pacDirection
         jsr checkDirectionAvailable
@@ -589,12 +588,6 @@ checkDots entry
         jsr getTileYFromPixelY
         sta tileY
 
-;        lda pacAnimationIndex
-;        cmp #2 ; PDHTODO - I DON'T THINK THIS IS WORKING RIGHT
-;        bne keepCheckingDots
-;        rts
-;
-;keepCheckingDots anop
 
         jsr getTileFromTileXY
         cmp #1
