@@ -22,6 +22,7 @@ translateSpritePosToMazePos entry
         asl a
         clc
         adc spriteX
+; PDHTODO is this 4 pixel offset correct?
         sec
         sbc #4
         sta spriteX
@@ -29,6 +30,7 @@ translateSpritePosToMazePos entry
         lda spriteY
         clc
         adc #MAZE_OFFSET_Y
+; PDHTODO is this 4 pixel offset correct?
         sec
         sbc #4
         sta spriteY

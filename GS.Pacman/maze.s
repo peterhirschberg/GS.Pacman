@@ -80,6 +80,7 @@ getPixelXFromTileX entry
         asl a
         asl a
         asl a
+; PDHTODO is this 4 pixel offset correct?
         clc
         adc #4
 
@@ -90,6 +91,7 @@ getPixelYFromTileY entry
         asl a
         asl a
         asl a
+; PDHTODO is this 4 pixel offset correct?
         clc
         adc #4
 
