@@ -42,10 +42,6 @@ gameInit entry
 ;        jsr borderInit
 
 
-        alignXToTile
-        alignYToTile
-
-
         lda #0
         sta currentScore
         sta currentScore+2
@@ -382,11 +378,6 @@ resetPac anop
         sta pacX
         lda #$448
         sta pacY
-
-; ensure pac is aligned to the tile boundries
-
-        alignXToTile
-        alignYToTile
 
         lda #0
         sta joystickUp

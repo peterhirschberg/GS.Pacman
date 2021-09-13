@@ -40,35 +40,94 @@ notEaten anop
         
         lda pacX
         shiftedToPixel
-
-        ldy pacDirection
-        cpy #DIRECTION_LEFT
-        bne notLeft
-;        clc
-;        adc #7 ; PDHTODO Why do I need this dumb offset for LEFT?
-
-notLeft anop
-
         jsr getTileXFromPixelX
         sta tileX
+
+;        ldy pacDirection
+;        cpy #DIRECTION_LEFT
+;        bne notLeft
+;        clc
+;        adc #4 ; PDHTODO Why do I need this dumb offset for LEFT?
+
+
+;        and #$fff8
+
+
+;notLeft anop
+
+
         
         lda pacY
         shiftedToPixel
-
-        ldy pacDirection
-        cpy #DIRECTION_UP
-        bne notUp
-;        clc
-;        adc #5 ; PDHTODO Why do I need this dumb offset for UP?
-
-notUp anop
-
         jsr getTileYFromPixelY
         sta tileY
+
+
+;        ldy pacDirection
+;        cpy #DIRECTION_UP
+;        bne notUp
+;        clc
+;        adc #4 ; PDHTODO Why do I need this dumb offset for UP?
+
+;notUp anop
+
+
+        lda #0
+        sta spriteX
+        lda #150
+        sta spriteY
+
+        lda pacX
+        shiftedToPixel
+        and #7
+        asl a
+        asl a
+        jsr drawAlphaSpriteByIndex
+
 
         
         jsr getAvailableDirectionsFromTileXY ; modifies tileX/Y
         sta availableDirections
+
+
+
+        lda availableDirections
+        and #AVAILABLEDIR_LEFT
+        cmp #0
+        bne dontAdjustForLeft
+
+        lda pacX
+        shiftedToPixel
+        and #7
+        cmp #0
+        beq dontAdjustForLeft
+
+        lda availableDirections
+        ora #AVAILABLEDIR_LEFT
+        sta availableDirections
+
+dontAdjustForLeft anop
+
+        lda availableDirections
+        and #AVAILABLEDIR_UP
+        cmp #0
+        bne dontAdjustForUp
+
+        lda pacY
+        shiftedToPixel
+        and #7
+        cmp #0
+        beq dontAdjustForUp
+
+        lda availableDirections
+        ora #AVAILABLEDIR_UP
+        sta availableDirections
+
+dontAdjustForUp anop
+
+
+
+
 
 
         lda #0
@@ -446,7 +505,18 @@ drawPac entry
         sta spriteX
         lda pacY
         shiftedToPixel
+        clc
+        adc #1
         sta spriteY
+
+;    lda spriteX
+;    sec
+;    sbc #4
+;    sta spriteX
+;    lda spriteY
+;    sec
+;    sbc #4
+;    sta spriteY
 
         lda pacAnimationIndex
         asl a
@@ -501,7 +571,19 @@ erasePac entry
         sta spriteX
         lda pacOldY
         shiftedToPixel
+        clc
+        adc #1
         sta spriteY
+
+
+;    lda spriteX
+;    sec
+;    sbc #4
+;    sta spriteX
+;    lda spriteY
+;    sec
+;    sbc #4
+;    sta spriteY
 
         jsr eraseSpriteRect
 
