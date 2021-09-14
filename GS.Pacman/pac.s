@@ -291,6 +291,8 @@ keepMoving1 anop
         cmp #0
         bne keepMoving2
 
+; continue moving along current direction until we are at a maze tile boundry
+
         jsr isSpriteCenteredInMazeTile
         cmp #0
         beq keepMoving2
@@ -357,27 +359,51 @@ moveRight entry
 
 checkDirectionAvailable entry
 
+        stz turningOnTime
+        stz turningEarly
+        stz turningLate
+
         cmp #DIRECTION_UP
-        beq checkUpAvailable
+        beq checkUpAvailableShort
         cmp #DIRECTION_RIGHT
-        beq checkRightAvailable
+        beq checkRightAvailableShort
         cmp #DIRECTION_DOWN
-        beq checkDownAvailable
+        beq checkDownAvailableShort
         cmp #DIRECTION_LEFT
-        beq checkLeftAvailable
+        beq checkLeftAvailableShort
         
         lda #1 ; should never be reached
         
         rts
-        
+
+checkUpAvailableShort anop
+        brl checkUpAvailable
+checkRightAvailableShort anop
+        brl checkRightAvailable
+checkDownAvailableShort anop
+        brl checkDownAvailable
+checkLeftAvailableShort anop
+        brl checkLeftAvailable
+
 checkUpAvailable anop
         lda availableDirections
         and #AVAILABLEDIR_UP
         cmp #0
-        beq upNotAvailable
+        beq upNotAvailable1
+        lda #1
+        sta turningOnTime
         lda #1
         rts
-upNotAvailable anop
+upNotAvailable1 anop
+        lda availableDirectionsAhead
+        and #AVAILABLEDIR_UP
+        cmp #0
+        beq upNotAvailable2
+        lda #1
+        sta turningEarly
+        lda #1
+        rts
+upNotAvailable2 anop
         lda #0
         rts
         
@@ -385,10 +411,19 @@ checkRightAvailable anop
         lda availableDirections
         and #AVAILABLEDIR_RIGHT
         cmp #0
-        beq rightNotAvailable
+        beq rightNotAvailable1
         lda #1
         rts
-rightNotAvailable anop
+rightNotAvailable1 anop
+        lda availableDirectionsAhead
+        and #AVAILABLEDIR_RIGHT
+        cmp #0
+        beq rightNotAvailable2
+        lda #1
+        sta turningEarly
+        lda #1
+        rts
+rightNotAvailable2 anop
         lda #0
         rts
         
@@ -396,10 +431,19 @@ checkDownAvailable anop
         lda availableDirections
         and #AVAILABLEDIR_DOWN
         cmp #0
-        beq downNotAvailable
+        beq downNotAvailable1
         lda #1
         rts
-downNotAvailable anop
+downNotAvailable1 anop
+        lda availableDirectionsAhead
+        and #AVAILABLEDIR_DOWN
+        cmp #0
+        beq downNotAvailable2
+        lda #1
+        sta turningEarly
+        lda #1
+        rts
+downNotAvailable2 anop
         lda #0
         rts
         
@@ -407,10 +451,19 @@ checkLeftAvailable anop
         lda availableDirections
         and #AVAILABLEDIR_LEFT
         cmp #0
-        beq leftNotAvailable
+        beq leftNotAvailable1
         lda #1
         rts
-leftNotAvailable anop
+leftNotAvailable1 anop
+        lda availableDirectionsAhead
+        and #AVAILABLEDIR_LEFT
+        cmp #0
+        beq leftNotAvailable2
+        lda #1
+        sta turningEarly
+        lda #1
+        rts
+leftNotAvailable2 anop
         lda #0
         rts
         
@@ -824,14 +877,14 @@ getTileXYAheadLeft anop
 
         lda pacX
         shiftedToPixel
-        sec
-        sbc #4
+;        sec
+;        sbc #2
         and #$fff8
         sta turnEarlyX
         lda pacX
         shiftedToPixel
-        sec
-        sbc #4
+;        sec
+;        sbc #2
         sta turnEarlyX
         jsr getTileXFromPixelX
         sta tileX
@@ -852,13 +905,13 @@ getTileXYAheadRight anop
         lda pacX
         shiftedToPixel
         clc
-        adc #4
+        adc #6
         and #$fff8
         sta turnEarlyX
         lda pacX
         shiftedToPixel
         clc
-        adc #4
+        adc #6
         sta turnEarlyX
         jsr getTileXFromPixelX
         sta tileX
@@ -887,14 +940,14 @@ getTileXYAheadUp anop
 
         lda pacY
         shiftedToPixel
-        sec
-        sbc #4
+; sec
+;        sbc #1
         and #$fff8
         sta turnEarlyY
         lda pacY
         shiftedToPixel
-        sec
-        sbc #4
+;        sec
+;        sbc #1
         sta turnEarlyY
         jsr getTileYFromPixelY
         sta tileY
@@ -915,13 +968,13 @@ getTileXYAheadDown anop
         lda pacY
         shiftedToPixel
         clc
-        adc #4
+        adc #6
         and #$fff8
         sta turnEarlyY
         lda pacY
         shiftedToPixel
         clc
-        adc #4
+        adc #6
         sta turnEarlyY
         jsr getTileYFromPixelY
         sta tileY
