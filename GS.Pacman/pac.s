@@ -392,14 +392,14 @@ checkUpAvailable anop
         lda #1
         rts
 upNotAvailable1 anop
-;        lda availableDirectionsAhead
-;        and #AVAILABLEDIR_UP
-;        cmp #0
-;        beq upNotAvailable2
-;        lda #1
-;        sta turningEarly
-;        lda #1
-;        rts
+        lda availableDirectionsAhead
+        and #AVAILABLEDIR_UP
+        cmp #0
+        beq upNotAvailable2
+        lda #1
+        sta turningEarly
+        lda #1
+        rts
 upNotAvailable2 anop
         lda availableDirectionsBehind
         and #AVAILABLEDIR_UP
@@ -485,7 +485,7 @@ leftNotAvailable1 anop
         cmp #0
         beq leftNotAvailable2
         lda #1
-        sta turningLate
+        sta turningEarly
         lda #1
         rts
 leftNotAvailable2 anop
