@@ -272,9 +272,6 @@ noDelay anop
 
 ; test to see if we can go the intended direction
 
-    lda #1
-    sta turningOnTime
-
         lda pacIntendedDirection
         jsr checkDirectionAvailable
         cmp #0
@@ -395,15 +392,24 @@ checkUpAvailable anop
         lda #1
         rts
 upNotAvailable1 anop
-        lda availableDirectionsAhead
+;        lda availableDirectionsAhead
+;        and #AVAILABLEDIR_UP
+;        cmp #0
+;        beq upNotAvailable2
+;        lda #1
+;        sta turningEarly
+;        lda #1
+;        rts
+upNotAvailable2 anop
+        lda availableDirectionsBehind
         and #AVAILABLEDIR_UP
         cmp #0
-        beq upNotAvailable2
+        beq upNotAvailable3
         lda #1
-        sta turningEarly
+        sta turningLate
         lda #1
         rts
-upNotAvailable2 anop
+upNotAvailable3 anop
         lda #0
         rts
         
@@ -424,6 +430,15 @@ rightNotAvailable1 anop
         lda #1
         rts
 rightNotAvailable2 anop
+        lda availableDirectionsBehind
+        and #AVAILABLEDIR_RIGHT
+        cmp #0
+        beq rightNotAvailable3
+        lda #1
+        sta turningLate
+        lda #1
+        rts
+rightNotAvailable3 anop
         lda #0
         rts
         
@@ -444,6 +459,15 @@ downNotAvailable1 anop
         lda #1
         rts
 downNotAvailable2 anop
+        lda availableDirectionsBehind
+        and #AVAILABLEDIR_DOWN
+        cmp #0
+        beq downNotAvailable3
+        lda #1
+        sta turningLate
+        lda #1
+        rts
+downNotAvailable3 anop
         lda #0
         rts
         
@@ -455,15 +479,25 @@ checkLeftAvailable anop
         lda #1
         rts
 leftNotAvailable1 anop
+; PDHTODO - fix getting stuck on a wall (specific tile number is 26)
         lda availableDirectionsAhead
         and #AVAILABLEDIR_LEFT
         cmp #0
         beq leftNotAvailable2
         lda #1
-        sta turningEarly
+        sta turningLate
         lda #1
         rts
 leftNotAvailable2 anop
+        lda availableDirectionsBehind
+        and #AVAILABLEDIR_LEFT
+        cmp #0
+        beq leftNotAvailable3
+        lda #1
+        sta turningLate
+        lda #1
+        rts
+leftNotAvailable3 anop
         lda #0
         rts
         
@@ -747,7 +781,6 @@ pacAlignX anop
         lda turningLate
         cmp #0
         bne alignXLate
-
         rts
 
 alignXOnTime anop
@@ -784,7 +817,6 @@ pacAlignY anop
         lda turningLate
         cmp #0
         bne alignYLate
-
         rts
 
 alignYOnTime anop
@@ -846,6 +878,9 @@ getPacAvailableDirections entry
 
 ; get available directions for one tile behind
 
+        jsr getTileXYBehind
+        jsr getAvailableDirectionsFromTileXY
+        sta availableDirectionsBehind
 
         rts
 
@@ -981,6 +1016,137 @@ getTileXYAheadDown anop
 
         rts
 
+
+getTileXYBehind entry
+
+        lda pacDirection
+        cmp #DIRECTION_LEFT
+        beq getTileXYBehindLeftShort
+        cmp #DIRECTION_RIGHT
+        beq getTileXYBehindRightShort
+        cmp #DIRECTION_UP
+        beq getTileXYBehindUpShort
+        cmp #DIRECTION_DOWN
+        beq getTileXYBehindDownShort
+
+        rts
+
+getTileXYBehindLeftShort anop
+        brl getTileXYBehindLeft
+getTileXYBehindRightShort anop
+        brl getTileXYBehindRight
+getTileXYBehindUpShort anop
+        brl getTileXYBehindUp
+getTileXYBehindDownShort anop
+        brl getTileXYBehindDown
+
+getTileXYBehindLeft anop
+
+        lda pacX
+        shiftedToPixel
+        clc
+        adc #6
+        and #$fff8
+        sta turnLateX
+        lda pacX
+        shiftedToPixel
+        clc
+        adc #6
+        sta turnLateX
+        jsr getTileXFromPixelX
+        sta tileX
+
+        lda pacY
+        shiftedToPixel
+        and #$fff8
+        sta turnLateY
+        lda pacY
+        shiftedToPixel
+        jsr getTileYFromPixelY
+        sta tileY
+
+        rts
+
+getTileXYBehindRight anop
+
+        lda pacX
+        shiftedToPixel
+;        sec
+;        sbc #1
+        and #$fff8
+        sta turnLateX
+        lda pacX
+        shiftedToPixel
+;        sec
+;        sbc #1
+        sta turnLateX
+        jsr getTileXFromPixelX
+        sta tileX
+
+        lda pacY
+        shiftedToPixel
+        and #$fff8
+        sta turnLateY
+        lda pacY
+        shiftedToPixel
+        jsr getTileYFromPixelY
+        sta tileY
+
+        rts
+
+getTileXYBehindUp anop
+
+        lda pacX
+        shiftedToPixel
+        and #$fff8
+        sta turnLateX
+        lda pacX
+        shiftedToPixel
+        jsr getTileXFromPixelX
+        sta tileX
+
+        lda pacY
+        shiftedToPixel
+        clc
+        adc #6
+        and #$fff8
+        sta turnLateY
+        lda pacY
+        shiftedToPixel
+        clc
+        adc #6
+        sta turnLateY
+        jsr getTileYFromPixelY
+        sta tileY
+
+        rts
+
+getTileXYBehindDown anop
+
+        lda pacX
+        shiftedToPixel
+        and #$fff8
+        sta turnLateX
+        lda pacX
+        shiftedToPixel
+        jsr getTileXFromPixelX
+        sta tileX
+
+        lda pacY
+        shiftedToPixel
+;        sec
+;        sbc #1
+        and #$fff8
+        sta turnLateY
+        lda pacY
+        shiftedToPixel
+;        sec
+;        sbc #1
+        sta turnLateY
+        jsr getTileYFromPixelY
+        sta tileY
+
+        rts
 
 
 
