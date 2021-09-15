@@ -76,7 +76,7 @@ pacGhostCollision anop
 
 startEatPac anop
 
-    rts ; TESTING ONLY
+;    rts ; TESTING ONLY
 
         jsr stopScaredSound
         jsr stopSiren2Sound

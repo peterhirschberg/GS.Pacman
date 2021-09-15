@@ -48,7 +48,7 @@ notEaten anop
         jsr getTileYFromPixelY
         sta tileY
 
-
+        brl noDebug
 
 ; ------------ DEBUG -------------
 
@@ -140,6 +140,8 @@ noDown anop
 checkNothing anop
 
 ; ------------ DEBUG -------------
+
+noDebug anop
 
 
         jsr getPacAvailableDirections
