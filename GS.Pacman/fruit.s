@@ -7,19 +7,88 @@
 ;
 
         case on
+        mcopy global.macros
+        keep global
 
 
 fruit start
         using mazeExchangeData
         using spritesData
         using gameData
+        using pacData
         using fruitData
 
 
 runFruit entry
 
+        lda fruitTimer
+        cmp #0
+        beq timerNotRunning
+
+        dec fruitTimer
+
+; check pac to see if fruit has been eaten
+
+        lda pacY
+        shiftedToPixel
+        jsr getTileYFromPixelY
+        cmp #13
+        bne fruitNotEaten
+        lda pacX
+        shiftedToPixel
+        jsr getTileXFromPixelX
+        cmp #13
+        bne checkFruitTileNext
+        bra eatFruit
+
+checkFruitTileNext anop
+
+        cmp #14
+        bne fruitNotEaten
+
+eatFruit anop
+
+        jsr playFruitSound
+        lda #0
+        sta fruitTimer
+
+; TODO: ADD POINTS
+        lda #3*60
+        sta fruitScoreTimer
+
+fruitNotEaten anop
+timerNotRunning anop
+
+        lda fruitScoreTimer
+        cmp #0
+        beq scoreTimerNotRunning
+
+        dec fruitScoreTimer
+
+scoreTimerNotRunning anop
+
+        lda eatenDotCount
+        cmp #36
+        beq startFruit
+        cmp #36
+        beq startFruit
 
         rts
+
+startFruit anop
+
+        lda fruitTimer
+        cmp #0
+        beq doStartFruit
+        rts
+
+doStartFruit anop
+
+        lda #60*10
+        sta fruitTimer
+
+        rts
+
 
 
 drawFruit entry
@@ -28,6 +97,43 @@ drawFruit entry
         sta spriteX
         lda #$69
         sta spriteY
+
+        lda fruitScoreTimer
+        cmp #0
+        bne doDrawPoints
+
+        lda fruitTimer
+        cmp #0
+        bne doDrawFruit
+        rts
+
+doDrawPoints anop
+
+        lda #0
+        sta fruitTimer
+
+        lda fruitScoreTimer
+        cmp #1
+        beq eraseFruit
+
+        lda #SPRITE_1000R ; #SPRITE_100
+        jsr drawSpriteByIndex
+
+        rts
+
+doDrawFruit anop
+
+        lda fruitTimer
+        cmp #1
+        bne dontEraseFruit
+
+eraseFruit anop
+
+        jsr eraseSpriteRect
+
+        rts
+
+dontEraseFruit anop
 
         ldx levelNum
         asl a
@@ -44,6 +150,7 @@ drawFruitRack entry
 
 
 fruitTimer dc i2'0'
+fruitScoreTimer dc i2'0'
 
 
 fruitSprites anop
