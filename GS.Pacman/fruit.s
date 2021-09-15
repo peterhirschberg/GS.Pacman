@@ -47,31 +47,37 @@ fruitTimer dc i2'0'
 
 
 fruitSprites anop
-        dc i2'SPRITE_CHERRY'
-        dc i2'SPRITE_STRAWBERRY'
-        dc i2'SPRITE_PEACH'
-        dc i2'SPRITE_PEACH'
-        dc i2'SPRITE_APPLE'
-        dc i2'SPRITE_APPLE'
-        dc i2'SPRITE_MELON'
-        dc i2'SPRITE_MELON'
-        dc i2'SPRITE_GALAX'
-        dc i2'SPRITE_GALAX'
-        dc i2'SPRITE_BELL'
+        dc i2'SPRITE_CHERRY'        ; 0
+        dc i2'SPRITE_STRAWBERRY'    ; 1
+        dc i2'SPRITE_PEACH'         ; 2
+        dc i2'SPRITE_PEACH'         ; 3
+        dc i2'SPRITE_APPLE'         ; 4
+        dc i2'SPRITE_APPLE'         ; 5
+        dc i2'SPRITE_MELON'         ; 6
+        dc i2'SPRITE_MELON'         ; 7
+        dc i2'SPRITE_GALAX'         ; 8
+        dc i2'SPRITE_GALAX'         ; 9
+        dc i2'SPRITE_BELL'         ; 10
+        dc i2'SPRITE_BELL'         ; 11
+        dc i2'SPRITE_KEY'         ; 12
+        dc i2'SPRITE_KEY'         ; 13
 
 
 fruitPoints anop
-        dc i2'100'
-        dc i2'300'
-        dc i2'500'
-        dc i2'500'
-        dc i2'700'
-        dc i2'700'
-        dc i2'1000'
-        dc i2'1000'
-        dc i2'2000'
-        dc i2'2000'
-        dc i2'3000'
+        dc i2'100'      ; 0
+        dc i2'300'      ; 1
+        dc i2'500'      ; 2
+        dc i2'500'      ; 3
+        dc i2'700'      ; 4
+        dc i2'700'      ; 5
+        dc i2'1000'      ; 6
+        dc i2'1000'      ; 7
+        dc i2'2000'      ; 8
+        dc i2'2000'      ; 9
+        dc i2'3000'      ; 10
+        dc i2'3000'      ; 11
+        dc i2'5000'      ; 12
+        dc i2'5000'      ; 13
 
 
 
