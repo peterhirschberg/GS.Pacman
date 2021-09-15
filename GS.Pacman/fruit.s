@@ -137,6 +137,7 @@ eraseFruit anop
 dontEraseFruit anop
 
         lda levelNum
+    lda #1
         asl a
         tax
         lda fruitSprites,x

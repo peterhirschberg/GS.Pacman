@@ -99,7 +99,7 @@ normalColorTable entry
 
 ; 6
         ldx #12
-        lda #$0a5e
+        lda #$05e5
         sta >COLOR_TABLE,x
 
 ; 7
