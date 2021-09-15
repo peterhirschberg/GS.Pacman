@@ -136,8 +136,9 @@ eraseFruit anop
 
 dontEraseFruit anop
 
-        ldx levelNum
+        lda levelNum
         asl a
+        tax
         lda fruitSprites,x
         jsr drawSpriteByIndex
 
