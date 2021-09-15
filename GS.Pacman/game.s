@@ -200,8 +200,6 @@ levelNotComplete anop
         jsr eraseGhosts
         
         jsr erasePac
-        
-        
 
 ;        jsr borderStart
 
@@ -214,7 +212,7 @@ levelNotComplete anop
         bne doPacEaten
 
 
-
+        jsr drawFruit
 
         jsr drawPac
 
@@ -232,10 +230,13 @@ notEatingGhost2 anop
 
 notEatingGhost1 anop
 
+
 ;        jsr borderStart
 
 
         jsr checkControls
+
+        jsr runFruit
 
         jsr runMaze
 
@@ -263,6 +264,7 @@ eatingGhostSkipToHere anop
 
         jsr drawScore
         jsr drawHighScore
+        jsr drawFruitRack
 
 
         lda #0
