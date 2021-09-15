@@ -52,7 +52,8 @@ eatFruit anop
         lda #0
         sta fruitTimer
 
-; TODO: ADD POINTS
+; TODO: ADD POINTS TO SCORE
+
         lda #3*60
         sta fruitScoreTimer
 
@@ -70,7 +71,7 @@ scoreTimerNotRunning anop
         lda eatenDotCount
         cmp #36
         beq startFruit
-        cmp #36
+        cmp #136
         beq startFruit
 
         rts
@@ -144,6 +145,21 @@ dontEraseFruit anop
 
 
 drawFruitRack entry
+
+        rts
+
+
+killFruit entry
+
+        stz fruitTimer
+        stz fruitScoreTimer
+
+        lda #$6c
+        sta spriteX
+        lda #$69
+        sta spriteY
+
+        jsr eraseSpriteRect
 
         rts
 

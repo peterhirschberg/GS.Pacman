@@ -76,7 +76,9 @@ pacGhostCollision anop
 
 startEatPac anop
 
-;    rts ; TESTING ONLY
+;    rts ; TESTING ONLY (INVINSIBLE MODE)
+
+        jsr killFruit
 
         jsr stopScaredSound
         jsr stopSiren2Sound
