@@ -274,9 +274,10 @@ eatingGhostSkipToHere anop
 drawLives entry
 
         ldy numLives
+        tya
         cmp #1
-;        bcs doDrawLives
-;        rts
+        bcs doDrawLives
+        rts
 
 doDrawLives anop
 
