@@ -255,7 +255,6 @@ eatingGhostSkipToHere anop
 
         jsr drawScore
         jsr drawHighScore
-        jsr drawFruitRack
 
 
         lda #0
@@ -276,8 +275,8 @@ drawLives entry
 
         ldy numLives
         cmp #1
-        bcs doDrawLives
-        rts
+;        bcs doDrawLives
+;        rts
 
 doDrawLives anop
 
@@ -285,7 +284,7 @@ doDrawLives anop
 
         lda #-14
         sta spriteX
-        lda #174
+        lda #172
         sta spriteY
 
 livesLoop anop
@@ -303,7 +302,6 @@ livesLoop anop
         sec
         sbc #28
         sta spriteY
-
 
         bra livesLoop
 
