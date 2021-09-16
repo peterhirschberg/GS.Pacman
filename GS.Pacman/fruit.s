@@ -241,6 +241,57 @@ advanceFruitRack entry
         lda #1
         sta fruitRackDirty
 
+; erase the current fruit stack
+
+        lda #232
+        sta spriteX
+        ldy #174-16*0
+        sta spriteY
+        lda #SPRITE_BLANK
+        jsr drawSpriteByIndex
+
+        lda #232
+        sta spriteX
+        ldy #174-16*1
+        sta spriteY
+        lda #SPRITE_BLANK
+        jsr drawSpriteByIndex
+
+        lda #232
+        sta spriteX
+        ldy #174-16*2
+        sta spriteY
+        lda #SPRITE_BLANK
+        jsr drawSpriteByIndex
+
+        lda #232
+        sta spriteX
+        ldy #174-16*3
+        sta spriteY
+        lda #SPRITE_BLANK
+        jsr drawSpriteByIndex
+
+        lda #232
+        sta spriteX
+        ldy #174-16*4
+        sta spriteY
+        lda #SPRITE_BLANK
+        jsr drawSpriteByIndex
+
+        lda #232
+        sta spriteX
+        ldy #174-16*5
+        sta spriteY
+        lda #SPRITE_BLANK
+        jsr drawSpriteByIndex
+
+        lda #232
+        sta spriteX
+        ldy #174-16*6
+        sta spriteY
+        lda #SPRITE_BLANK
+        jsr drawSpriteByIndex
+
 ; shift the entire stack by one
 
         ldx #5*2
