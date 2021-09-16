@@ -136,9 +136,7 @@ eraseFruit anop
 
 dontEraseFruit anop
 
-        lda levelNum
-    lda #1
-        asl a
+        jsr getLevelIndex
         tax
         lda fruitSprites,x
         jsr drawSpriteByIndex
@@ -147,6 +145,62 @@ dontEraseFruit anop
 
 
 drawFruitRack entry
+
+        lda fruitRackDirty
+        cmp #0
+        bne doDrawFruitRack
+        rts
+
+doDrawFruitRack anop
+
+        stz fruitRackDirty
+
+; draw current level fruit
+
+        ldy #174
+
+        lda #232
+        sta spriteX
+        tya
+        sta spriteY
+        jsr getLevelIndex
+        tax
+        lda fruitSprites,x
+        jsr drawSpriteByIndex
+
+; draw up to the last 6 level fruits
+
+        ldx #0
+
+fruitLoops anop
+
+        lda fruitRackStack,x
+        cmp #0
+        bne drawNextFruitRackFruit
+        rts
+
+drawNextFruitRackFruit anop
+
+        tya
+        sec
+        sbc #16
+        tay
+
+
+        lda #232
+        sta spriteX
+        tya
+        sta spriteY
+        jsr getLevelIndex
+        stx savex
+        lda fruitRackStack,x
+        jsr drawSpriteByIndex
+        ldx savex
+
+        inx
+        inx
+
+        brl fruitLoops
 
         rts
 
@@ -166,10 +220,80 @@ killFruit entry
         rts
 
 
+getLevelIndex entry
+
+        lda levelNum
+        cmp #13
+        bcs limitLevelIndex
+        asl a
+        rts
+
+limitLevelIndex anop
+
+        lda #13
+        asl a
+
+        rts
+
+
+advanceFruitRack entry
+
+        lda #1
+        sta fruitRackDirty
+
+; shift the entire stack by one
+
+        ldx #5*2
+        ldy #4*2
+
+        lda fruitRackStack,y
+        sta fruitRackStack,x
+        dex
+        dex
+        dey
+        dey
+
+        lda fruitRackStack,y
+        sta fruitRackStack,x
+        dex
+        dex
+        dey
+        dey
+
+        lda fruitRackStack,y
+        sta fruitRackStack,x
+        dex
+        dex
+        dey
+        dey
+
+        lda fruitRackStack,y
+        sta fruitRackStack,x
+        dex
+        dex
+        dey
+        dey
+
+        lda fruitRackStack,y
+        sta fruitRackStack,x
+
+
+; add the new fruit to the front of the stack
+
+        jsr getLevelIndex
+        tax
+        lda fruitSprites,x
+        ldx #0
+        sta fruitRackStack,x
+
+        rts
+
+
 
 fruitTimer dc i2'0'
 fruitScoreTimer dc i2'0'
 
+maxFruitIndex gequ 13
 
 fruitSprites anop
         dc i2'SPRITE_CHERRY'        ; 0
@@ -205,11 +329,24 @@ fruitPoints anop
         dc i2'5000'      ; 13
 
 
+fruitRackStack anop
+        dc i2'SPRITE_STRAWBERRY'
+        dc i2'SPRITE_PEACH'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+
+
+savex dc i4'0'
+
 
         end
 
 
 fruitData data
+
+fruitRackDirty dc i2'1'
 
         end
 

@@ -19,6 +19,7 @@ game start
         using spritesData
         using scoreData
         using mazeExchangeData
+        using fruitData
         using gameData
 
 
@@ -50,18 +51,8 @@ gameInit entry
         jsr drawAlphaScoreTitles
         jsr drawScore
         jsr drawHighScore
-
-
-        lda #232
-        sta spriteX
-        lda #174
-        sta spriteY
-        lda #SPRITE_CHERRY
-        jsr drawSpriteByIndex
-
-
         jsr drawLives
-
+        jsr drawFruitRack
 
         jsr playIntroSound
 
@@ -402,6 +393,9 @@ startNewLevel entry
         jsr startNewLife
 
         jsr drawMaze
+
+        jsr advanceFruitRack
+        jsr drawFruitRack
 
         jsr normalColorTable
 
