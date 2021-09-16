@@ -245,49 +245,49 @@ advanceFruitRack entry
 
         lda #232
         sta spriteX
-        ldy #174-16*0
+        lda #174-16*0
         sta spriteY
         lda #SPRITE_BLANK
         jsr drawSpriteByIndex
 
         lda #232
         sta spriteX
-        ldy #174-16*1
+        lda #174-16*1
         sta spriteY
         lda #SPRITE_BLANK
         jsr drawSpriteByIndex
 
         lda #232
         sta spriteX
-        ldy #174-16*2
+        lda #174-16*2
         sta spriteY
         lda #SPRITE_BLANK
         jsr drawSpriteByIndex
 
         lda #232
         sta spriteX
-        ldy #174-16*3
+        lda #174-16*3
         sta spriteY
         lda #SPRITE_BLANK
         jsr drawSpriteByIndex
 
         lda #232
         sta spriteX
-        ldy #174-16*4
+        lda #174-16*4
         sta spriteY
         lda #SPRITE_BLANK
         jsr drawSpriteByIndex
 
         lda #232
         sta spriteX
-        ldy #174-16*5
+        lda #174-16*5
         sta spriteY
         lda #SPRITE_BLANK
         jsr drawSpriteByIndex
 
         lda #232
         sta spriteX
-        ldy #174-16*6
+        lda #174-16*6
         sta spriteY
         lda #SPRITE_BLANK
         jsr drawSpriteByIndex
