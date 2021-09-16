@@ -329,7 +329,7 @@ advanceFruitRack entry
         sta fruitRackStack,x
 
 
-; add the new fruit to the front of the stack
+; add the current fruit to the front of the stack
 
         jsr getLevelIndex
         tax
@@ -381,8 +381,8 @@ fruitPoints anop
 
 
 fruitRackStack anop
-        dc i2'SPRITE_STRAWBERRY'
-        dc i2'SPRITE_PEACH'
+        dc i2'0'
+        dc i2'0'
         dc i2'0'
         dc i2'0'
         dc i2'0'

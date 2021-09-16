@@ -385,7 +385,6 @@ startNewLevel entry
 
         jsr blackColorTable
 
-        inc levelNum
         stz eatenDotCount
 
         jsr initMaze
@@ -395,6 +394,11 @@ startNewLevel entry
         jsr drawMaze
 
         jsr advanceFruitRack
+
+        inc levelNum
+
+        lda #1
+        sta fruitRackDirty
         jsr drawFruitRack
 
         jsr normalColorTable
