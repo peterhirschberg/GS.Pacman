@@ -256,21 +256,6 @@ noDelay anop
         shiftedToPixel
         sta spriteY
 
-;        jsr doPacTurning
-
-; only allow turning if centered on tile boundry (PDHTODO - allow turning early/late)
-;
-;        jsr isSpriteCenteredInMazeTile
-;        cmp #0
-;        beq turnNotAllowed
-;        bra turnAllowed
-;
-;turnNotAllowed anop
-;
-;        bra keepMoving2
-;
-;turnAllowed anop
-
 
 ; test to see if we can go the intended direction
 
