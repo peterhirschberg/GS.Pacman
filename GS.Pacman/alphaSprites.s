@@ -109,6 +109,47 @@ readyEraseDone anop
         rts
 
 
+drawAlphaGameOver entry
+
+        lda #$33
+        sta spriteColor
+
+        jsr parseColor
+
+        lda #80
+        sta spriteX
+        lda #110
+        sta spriteY
+        jsr translateSpritePosToMazePos
+
+        ldy #0
+
+gameoverLoop anop
+
+        lda alphaStringGameOver,y
+
+        cmp #-1
+        beq gameoverDone
+
+        jsr drawAlphaSpriteByIndex
+
+        lda spriteX
+        clc
+        adc #8
+        sta spriteX
+
+        iny
+        iny
+        iny
+        iny
+        bra gameoverLoop
+
+gameoverDone anop
+
+        rts
+
+
+
 drawAlphaScoreTitles entry
 
         lda #$ff
@@ -273,6 +314,18 @@ alphaStringReady anop
         dc i4'ALPHAINDEX_EXCLAMATION'
         dc i4'-1'
 
+alphaStringGameOver anop
+        dc i4'ALPHAINDEX_G'
+        dc i4'ALPHAINDEX_A'
+        dc i4'ALPHAINDEX_M'
+        dc i4'ALPHAINDEX_E'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_O'
+        dc i4'ALPHAINDEX_V'
+        dc i4'ALPHAINDEX_E'
+        dc i4'ALPHAINDEX_R'
+        dc i4'-1'
+
 alphaEraseStringReady anop
         dc i4'ALPHAINDEX_SPACE'
         dc i4'ALPHAINDEX_SPACE'
@@ -300,6 +353,15 @@ alphaStringScoreTitle anop
         dc i4'ALPHAINDEX_O'
         dc i4'ALPHAINDEX_R'
         dc i4'ALPHAINDEX_E'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_L'
+        dc i4'ALPHAINDEX_E'
+        dc i4'ALPHAINDEX_V'
+        dc i4'ALPHAINDEX_E'
+        dc i4'ALPHAINDEX_L'
         dc i4'-1'
 
         end

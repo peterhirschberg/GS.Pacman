@@ -65,6 +65,11 @@ gameInit entry
 
 runGameTick entry
 
+gameOverLoop anop
+
+        lda numLives
+        bmi gameOverLoop
+
 gameIntro anop
 
         jsr waitForVbl
@@ -112,6 +117,10 @@ mainLoop anop
 
 postLifeTimerExpired anop
         jsr startNewLife
+
+        lda numLives
+        bmi gameOverLoop
+
         bra gameIntro
 
 notPostLife anop
@@ -274,10 +283,11 @@ eatingGhostSkipToHere anop
 drawLives entry
 
         ldy numLives
+        iny
         tya
         cmp #1
         bcs doDrawLives
-        rts
+;        rts
 
 doDrawLives anop
 
@@ -308,10 +318,34 @@ livesLoop anop
 
 livesDone anop
 
+; erase where the last sprite was
+
+;        lda #-14
+;        sta spriteX
+;        lda spriteY
+;        sec
+;        sbc #28
+;        sta spriteY
+
+        lda #SPRITE_BLANK
+        jsr drawSpriteByIndex
+
         rts
 
 
 startNewLife entry
+
+        dec numLives
+        jsr drawLives
+        lda numLives
+        bmi gameOver
+        bra resetNewLife
+
+gameOver anop
+        jsr drawAlphaGameOver
+        rts
+
+resetNewLife anop
 
 ; reset game
         lda #0
@@ -423,7 +457,7 @@ postLifeTimer dc i2'0'
 
 levelCompleteTimer dc i2'0'
 
-numLives dc i2'3'
+numLives dc i2'2'
 levelNum dc i2'0'
 
         end
