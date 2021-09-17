@@ -22,6 +22,10 @@
 
 #include "main.h"
 
+// Macro is from BuGS - copyright Jeremy Rand. https://github.com/jeremysrand/BuGS
+#define TOOLFAIL(string) \
+    if (toolerror()) SysFailMgr(toolerror(), "\p" string "\n\r    Error Code -> $");
+
 
 unsigned int userid;
 unsigned int randomSeed;
@@ -138,8 +142,8 @@ int main(void)
     CompactMem();
     
     NewHandle((LongWord)0x8000, userid, (Word)(attrLocked | attrFixed | attrAddr | attrBank), (Pointer)0x1c0000);
-//    NewHandle((LongWord)0x8000, userid, (Word)(attrLocked | attrFixed | attrAddr | attrBank), (Pointer)0x1a0000);
-//    NewHandle((LongWord)0x8000, userid, (Word)(attrLocked | attrFixed | attrAddr | attrBank), (Pointer)0x1b0000);
+    TOOLFAIL("Unable to allocate maze buffer");
+    
     InitMouse(0);
     SetMouse(transparent);
     
