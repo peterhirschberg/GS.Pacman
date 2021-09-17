@@ -17,6 +17,7 @@
 		D049B69126EA083600EBB157 /* drawAlphaSprites.s in Sources */ = {isa = PBXBuildFile; fileRef = D049B69026EA083600EBB157 /* drawAlphaSprites.s */; };
 		D049B69326EB709400EBB157 /* score.s in Sources */ = {isa = PBXBuildFile; fileRef = D049B69226EB709400EBB157 /* score.s */; };
 		D049B69526F16E1D00EBB157 /* fruit.s in Sources */ = {isa = PBXBuildFile; fileRef = D049B69426F16E1D00EBB157 /* fruit.s */; };
+		D049B69726F4AAFF00EBB157 /* levelDisplay.s in Sources */ = {isa = PBXBuildFile; fileRef = D049B69626F4AAFF00EBB157 /* levelDisplay.s */; };
 		D0865C7626CC890F00690A79 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = D0865C7526CC890F00690A79 /* main.c */; };
 		D0865C7926CC890F00690A79 /* main.rez in CopyFiles */ = {isa = PBXBuildFile; fileRef = D0865C7826CC890F00690A79 /* main.rez */; };
 		D0865C7B26CC890F00690A79 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = D0865C7A26CC890F00690A79 /* Makefile */; };
@@ -79,6 +80,7 @@
 		D049B69026EA083600EBB157 /* drawAlphaSprites.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = drawAlphaSprites.s; sourceTree = "<group>"; };
 		D049B69226EB709400EBB157 /* score.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = score.s; sourceTree = "<group>"; };
 		D049B69426F16E1D00EBB157 /* fruit.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = fruit.s; sourceTree = "<group>"; };
+		D049B69626F4AAFF00EBB157 /* levelDisplay.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = levelDisplay.s; sourceTree = "<group>"; };
 		D0865C6926CC890F00690A79 /* GS.Pacman */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GS.Pacman; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0865C6C26CC890F00690A79 /* GS.Pacman.2mg */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GS.Pacman.2mg; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0865C6E26CC890F00690A79 /* GS.Pacman.shk */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GS.Pacman.shk; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +167,7 @@
 				D049B68C26E6437800EBB157 /* collision.s */,
 				D049B69226EB709400EBB157 /* score.s */,
 				D049B69426F16E1D00EBB157 /* fruit.s */,
+				D049B69626F4AAFF00EBB157 /* levelDisplay.s */,
 			);
 			path = GS.Pacman;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				D049B69126EA083600EBB157 /* drawAlphaSprites.s in Sources */,
 				D0865CB526CF435100690A79 /* maze.s in Sources */,
 				D03234D226D38B40009E2D7E /* drawSprite.s in Sources */,
+				D049B69726F4AAFF00EBB157 /* levelDisplay.s in Sources */,
 				D0865CB326CF40A600690A79 /* hardware.s in Sources */,
 				D0865C7626CC890F00690A79 /* main.c in Sources */,
 			);

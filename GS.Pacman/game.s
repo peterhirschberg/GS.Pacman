@@ -38,6 +38,9 @@ gameInit entry
 
         jsr initGhosts
 
+        jsr incrementLevel
+        jsr drawLevel
+
         jsr normalColorTable
 
 ;        jsr borderInit
@@ -320,13 +323,6 @@ livesDone anop
 
 ; erase where the last sprite was
 
-;        lda #-14
-;        sta spriteX
-;        lda spriteY
-;        sec
-;        sbc #28
-;        sta spriteY
-
         lda #SPRITE_BLANK
         jsr drawSpriteByIndex
 
@@ -434,6 +430,9 @@ startNewLevel entry
         sta fruitRackDirty
         jsr drawFruitRack
 
+        jsr incrementLevel
+        jsr drawLevel
+
         jsr normalColorTable
 
         lda #100
@@ -458,6 +457,7 @@ postLifeTimer dc i2'0'
 levelCompleteTimer dc i2'0'
 
 numLives dc i2'2'
+
 levelNum dc i2'0'
 
         end

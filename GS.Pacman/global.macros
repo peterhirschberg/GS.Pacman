@@ -51,6 +51,36 @@ addDone_&SYSCNT anop
         mend
 
 
+        macro
+        addToLevel
+levelLoop_&SYSCNT anop
+        lda levelDigits,y
+        cmp #-1
+        bne addContinue_&SYSCNT
+        lda #0
+        sta levelDigits,y
+addContinue_&SYSCNT anop
+        txa
+        clc
+        adc levelDigits,y
+        sta levelDigits,y
+        cmp #10
+        bcs doCarry_&SYSCNT
+        bra addDone_&SYSCNT
+doCarry_&SYSCNT anop
+        sec
+        sbc #10
+        sta levelDigits,y
+        iny
+        iny
+        tya
+        cmp #10*2
+        bcs addDone_&SYSCNT
+        ldx #1
+        bra levelLoop_&SYSCNT
+addDone_&SYSCNT anop
+        mend
+
 
         macro
         spriteGetDrawAddress
