@@ -152,6 +152,16 @@ noDebug anop
         jsr checkTunnel
         jsr checkDots
 
+; If turning early, check the tile ahead for any dots to eat that would normally get skipped when turning early
+
+        lda turningEarly
+        cmp #0
+        beq dontCheckDotsAhead
+
+        jsr checkDotsAhead
+
+dontCheckDotsAhead anop
+
 animate anop
 
         lda pacMoving
@@ -613,6 +623,81 @@ erasePac entry
         rts
         
 
+checkDotsAhead entry
+
+        lda tileAheadX
+        sta tileX
+        lda tileAheadY
+        sta tileY
+
+        jsr getTileFromTileXY
+        cmp #1
+        beq eatSmallDot2
+        cmp #2
+        beq eatLargeDot2
+
+        rts
+
+eatLargeDot2 anop
+        lda #2
+        sta temp
+        lda #3
+        sta pacAteDotDelay
+        jsr add50ToScore
+        bra eatDot2
+
+eatSmallDot2 anop
+
+; keep track of how many dots have been eaten
+; when all the dots are gone, the level is complete
+
+        inc eatenDotCount
+        lda #1
+        sta temp
+        lda #1
+        sta pacAteDotDelay
+        lda #10
+        jsr add10ToScore
+
+eatDot2 anop
+
+        lda tileAheadX
+        sta tileX
+        lda tileAheadY
+        sta tileY
+
+        lda #0
+        jsr setTileFromTileXY
+
+        lda temp
+        stx savex
+        jsr pacAteDot
+        ldx savex
+
+        jsr playEatDotSound
+
+; check for level complete
+        lda eatenDotCount
+        cmp totalDotCount
+        beq levelDone2
+
+        rts
+
+levelDone2 anop
+
+; level is complete
+
+        jsr stopScaredSound
+        jsr stopSiren2Sound
+        jsr stopSiren1Sound
+
+        lda #240
+        sta levelCompleteTimer
+
+        rts
+
+
+
 checkDots entry
 
         lda pacX
@@ -623,7 +708,6 @@ checkDots entry
         shiftedToPixel
         jsr getTileYFromPixelY
         sta tileY
-
 
         jsr getTileFromTileXY
         cmp #1
@@ -860,6 +944,10 @@ getPacAvailableDirections entry
 ; get available directions for one tile ahead
 
         jsr getTileXYAhead
+        lda tileX
+        sta tileAheadX
+        lda tileY
+        sta tileAheadY
         jsr getAvailableDirectionsFromTileXY
         sta availableDirectionsAhead
 
@@ -1164,6 +1252,9 @@ turnLateY dc i2'0'
 turningOnTime dc i2'0'
 turningEarly dc i2'0'
 turningLate dc i2'0'
+
+tileAheadX dc i2'0'
+tileAheadY dc i2'0'
 
         end
 
