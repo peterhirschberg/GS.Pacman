@@ -94,15 +94,15 @@ doStartFruit anop
 
 drawFruit entry
 
-        lda #$6c
-        sta spriteX
-        lda #$69
-        sta spriteY
-
         lda fruitScoreTimer
         cmp #0
         bne doDrawPoints
 
+        lda #$6c
+        sta spriteX
+        lda #$69
+        sta spriteY
+        
         lda fruitTimer
         cmp #0
         bne doDrawFruit
@@ -117,8 +117,7 @@ doDrawPoints anop
         cmp #1
         beq eraseFruit
 
-        lda #SPRITE_1000R ; #SPRITE_100 TODO - draw correct point sprites here
-        jsr drawSpriteByIndex
+        jsr drawPoints
 
         rts
 
@@ -130,8 +129,28 @@ doDrawFruit anop
 
 eraseFruit anop
 
+        lda #$6c
+        sta spriteX
+        lda #$69
+        sta spriteY
+        
         jsr eraseSpriteRect
 
+        lda #$6c+16
+        sta spriteX
+        lda #$69
+        sta spriteY
+        
+        jsr eraseSpriteRect
+
+        lda #$6c-16
+        sta spriteX
+        lda #$69
+        sta spriteY
+        
+        jsr eraseSpriteRect
+
+        
         rts
 
 dontEraseFruit anop
@@ -338,6 +357,43 @@ advanceFruitRack entry
 
         rts
 
+        
+        
+drawPoints entry
+
+; left points sprite
+
+        jsr getLevelIndex
+        tax
+        
+;        ldx #10
+
+        lda fruitPointSpriteXPos,x
+        sta spriteX
+        lda #$69
+        sta spriteY
+
+        lda fruitPointSpritesLeft,x
+        jsr drawSpriteByIndex
+        
+; right points sprite
+
+        jsr getLevelIndex
+        tax
+
+;        ldx #10
+
+        lda fruitPointSpriteXPos,x
+        clc
+        adc #16
+        sta spriteX
+        lda #$69
+        sta spriteY
+
+        lda fruitPointSpritesRight,x
+        jsr drawSpriteByIndex
+
+        rts
 
 
 addFruitPoints entry
@@ -429,6 +485,54 @@ fruitPoints anop
         dc i2'5000'      ; 12
         dc i2'5000'      ; 13
 
+        
+fruitPointSpritesLeft anop
+        dc i2'SPRITE_100'      ; 0
+        dc i2'SPRITE_300'      ; 1
+        dc i2'SPRITE_500'      ; 2
+        dc i2'SPRITE_500'      ; 3
+        dc i2'SPRITE_700'      ; 4
+        dc i2'SPRITE_700'      ; 5
+        dc i2'SPRITE_1'      ; 6
+        dc i2'SPRITE_1'      ; 7
+        dc i2'SPRITE_2'      ; 8
+        dc i2'SPRITE_2'      ; 9
+        dc i2'SPRITE_3'      ; 10
+        dc i2'SPRITE_3'      ; 11
+        dc i2'SPRITE_5'      ; 12
+        dc i2'SPRITE_5'      ; 13
+        
+fruitPointSpritesRight anop
+        dc i2'SPRITE_NOP'      ; 0
+        dc i2'SPRITE_NOP'      ; 1
+        dc i2'SPRITE_NOP'      ; 2
+        dc i2'SPRITE_NOP'      ; 3
+        dc i2'SPRITE_NOP'      ; 4
+        dc i2'SPRITE_NOP'      ; 5
+        dc i2'SPRITE_THOUSANDS'      ; 6
+        dc i2'SPRITE_THOUSANDS'      ; 7
+        dc i2'SPRITE_THOUSANDS'      ; 8
+        dc i2'SPRITE_THOUSANDS'      ; 9
+        dc i2'SPRITE_THOUSANDS'      ; 10
+        dc i2'SPRITE_THOUSANDS'      ; 11
+        dc i2'SPRITE_THOUSANDS'      ; 12
+        dc i2'SPRITE_THOUSANDS'      ; 13
+
+fruitPointSpriteXPos anop
+        dc i2'$6c'      ; 0
+        dc i2'$6c'      ; 1
+        dc i2'$6c'      ; 2
+        dc i2'$6c'      ; 3
+        dc i2'$6c'      ; 4
+        dc i2'$6c'      ; 5
+        dc i2'$5e'      ; 6
+        dc i2'$5e'      ; 7
+        dc i2'$5e'      ; 8
+        dc i2'$5e'      ; 9
+        dc i2'$5e'      ; 10
+        dc i2'$5e'      ; 11
+        dc i2'$5e'      ; 12
+        dc i2'$5e'      ; 13
 
 fruitRackStack anop
         dc i2'0'

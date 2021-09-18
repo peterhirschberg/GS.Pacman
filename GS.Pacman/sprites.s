@@ -649,15 +649,20 @@ SPRITE_1600R            gequ 74*4
 SPRITE_PAC_FULL_3       gequ 75*4
 SPRITE_FLEEGHOST_ODD_1  gequ 76*4
 SPRITE_FLEEGHOST_ODD_2  gequ 77*4
-; SPRITE_BLANK            gequ 78*4
-SPRITE_1000L            gequ 79*4
-SPRITE_1000R            gequ 80*4
-SPRITE_100            gequ 81*4
-SPRITE_300            gequ 82*4
-SPRITE_500            gequ 83*4
-SPRITE_700            gequ 84*4
-SPRITE_BLANK            gequ 85*4
-SPRITE_NOP             gequ 86*4
+
+SPRITE_1                gequ 78*4
+SPRITE_THOUSANDS        gequ 79*4
+SPRITE_100            gequ 80*4
+SPRITE_300            gequ 81*4
+SPRITE_500            gequ 82*4
+SPRITE_700            gequ 83*4
+SPRITE_BLANK            gequ 84*4
+
+SPRITE_2            gequ 85*4
+SPRITE_3            gequ 86*4
+SPRITE_5            gequ 87*4
+
+SPRITE_NOP             gequ 88*4
 
 
 spriteX dc i2'0'
@@ -755,7 +760,11 @@ drawSpriteTable anop
         dc i4'drawSprite82'
         dc i4'drawSprite83'
         dc i4'drawSprite84'
-        dc i4'drawSprite85'
+
+        dc i4'drawSprite85' ; PDHTODO
+        dc i4'drawSprite85' ; PDHTODO
+        dc i4'drawSprite85' ; PDHTODO
+        
         dc i4'drawSpriteNop'
 
 
