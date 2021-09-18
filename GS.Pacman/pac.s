@@ -803,7 +803,7 @@ inTunnel anop
         cmp pacX
         bcs resetToRight
         lda pacX
-        cmp #1728
+        cmp #1700
         bcs resetToLeft
         rts
 
@@ -813,7 +813,7 @@ resetToLeft anop
         rts
 
 resetToRight anop
-        lda #1728
+        lda #1700
         sta pacX
         rts
 

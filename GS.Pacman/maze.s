@@ -587,7 +587,27 @@ updateMazeTile entry
         jsr drawMazeTile
 
         rts
-        
+
+
+
+zeroMazeBuffer entry
+
+        ldx #0
+
+zeroMazeBufferLoop anop
+
+        lda #0
+        sta >MAZE_BUFFER,x
+        inx
+        txa
+        cmp #$8000
+        beq zeroMazeBufferDone
+        bra zeroMazeBufferLoop
+
+zeroMazeBufferDone anop
+
+        rts
+
 
 
 drawMazeTile entry
@@ -833,6 +853,7 @@ mazeGraphicsRowOffsets anop
         dc i2'$ca8'
         dc i2'$cf0'
         dc i2'$d38'
+        dc i2'$d80'
 
 
 mazeTileRowOffsets anop

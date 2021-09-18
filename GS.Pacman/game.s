@@ -32,6 +32,8 @@ gameInit entry
         
         jsr blackColorTable
 
+        jsr zeroMazeBuffer
+
         jsr initMaze
 
         jsr drawMaze

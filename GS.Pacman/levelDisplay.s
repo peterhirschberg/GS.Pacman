@@ -21,7 +21,7 @@ incrementLevel entry
         lda levelNum
         clc
         adc #1
-        sta levelNum
+        sta displayLevelNum
 
         ldx #1
         ldy #LEVELINDEX_1
@@ -42,7 +42,7 @@ drawLevel entry
 
 doDrawLevel anop
 
-        lda levelNum
+        lda displayLevelNum
 
         lda #$ff
         sta spriteColor
@@ -103,7 +103,7 @@ levelDirty dc i2'1'
 
 digitIndex dc i2'0'
 
-
+displayLevelNum dc i2'0'
 
 
         end

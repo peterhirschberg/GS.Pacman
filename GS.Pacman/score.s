@@ -68,6 +68,24 @@ add50ToScore entry
 
         rts
 
+add100ToScore entry
+
+        lda currentScore
+        clc
+        adc #100
+        sta currentScore
+
+        ldx #1
+        ldy #SCOREINDEX_100
+        addToScore
+
+        jsr checkHighScore
+
+        lda #1
+        sta scoreDirty
+
+        rts
+
 add200ToScore entry
 
         lda currentScore
@@ -86,6 +104,25 @@ add200ToScore entry
 
         rts
 
+add300ToScore entry
+
+        lda currentScore
+        clc
+        adc #300
+        sta currentScore
+
+        ldx #3
+        ldy #SCOREINDEX_100
+        addToScore
+
+        jsr checkHighScore
+
+        lda #1
+        sta scoreDirty
+
+        rts
+
+
 add400ToScore entry
 
         lda currentScore
@@ -94,6 +131,42 @@ add400ToScore entry
         sta currentScore
 
         ldx #4
+        ldy #SCOREINDEX_100
+        addToScore
+
+        jsr checkHighScore
+
+        lda #1
+        sta scoreDirty
+
+        rts
+
+add500ToScore entry
+
+        lda currentScore
+        clc
+        adc #400
+        sta currentScore
+
+        ldx #5
+        ldy #SCOREINDEX_100
+        addToScore
+
+        jsr checkHighScore
+
+        lda #1
+        sta scoreDirty
+
+        rts
+
+add700ToScore entry
+
+        lda currentScore
+        clc
+        adc #700
+        sta currentScore
+
+        ldx #7
         ldy #SCOREINDEX_100
         addToScore
 
@@ -122,6 +195,25 @@ add800ToScore entry
 
         rts
 
+
+add1000ToScore entry
+
+        lda currentScore
+        clc
+        adc #1000
+        sta currentScore
+
+        ldx #1
+        ldy #SCOREINDEX_1000
+        addToScore
+
+        jsr checkHighScore
+
+        lda #1
+        sta scoreDirty
+
+        rts
+
 add1600ToScore entry
 
         lda currentScore
@@ -134,6 +226,60 @@ add1600ToScore entry
         addToScore
 
         ldx #1
+        ldy #SCOREINDEX_1000
+        addToScore
+
+        jsr checkHighScore
+
+        lda #1
+        sta scoreDirty
+
+        rts
+
+add2000ToScore entry
+
+        lda currentScore
+        clc
+        adc #2000
+        sta currentScore
+
+        ldx #2
+        ldy #SCOREINDEX_1000
+        addToScore
+
+        jsr checkHighScore
+
+        lda #1
+        sta scoreDirty
+
+        rts
+
+add3000ToScore entry
+
+        lda currentScore
+        clc
+        adc #3000
+        sta currentScore
+
+        ldx #3
+        ldy #SCOREINDEX_1000
+        addToScore
+
+        jsr checkHighScore
+
+        lda #1
+        sta scoreDirty
+
+        rts
+
+add5000ToScore entry
+
+        lda currentScore
+        clc
+        adc #5000
+        sta currentScore
+
+        ldx #5
         ldy #SCOREINDEX_1000
         addToScore
 

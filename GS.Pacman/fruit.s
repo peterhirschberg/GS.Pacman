@@ -52,7 +52,7 @@ eatFruit anop
         lda #0
         sta fruitTimer
 
-; TODO: ADD POINTS TO SCORE
+        jsr addFruitPoints
 
         lda #3*60
         sta fruitScoreTimer
@@ -117,7 +117,7 @@ doDrawPoints anop
         cmp #1
         beq eraseFruit
 
-        lda #SPRITE_1000R ; #SPRITE_100
+        lda #SPRITE_1000R ; #SPRITE_100 TODO - draw correct point sprites here
         jsr drawSpriteByIndex
 
         rts
@@ -328,7 +328,6 @@ advanceFruitRack entry
         lda fruitRackStack,y
         sta fruitRackStack,x
 
-
 ; add the current fruit to the front of the stack
 
         jsr getLevelIndex
@@ -337,6 +336,57 @@ advanceFruitRack entry
         ldx #0
         sta fruitRackStack,x
 
+        rts
+
+
+
+addFruitPoints entry
+
+        jsr getLevelIndex
+        tax
+        lda fruitPoints,x
+        cmp #100
+        beq add100Points
+        cmp #300
+        beq add300Points
+        cmp #500
+        beq add500Points
+        cmp #700
+        beq add700Points
+        cmp #1000
+        beq add1000Points
+        cmp #2000
+        beq add2000Points
+        cmp #3000
+        beq add3000Points
+        cmp #500
+        beq add5000Points
+
+        rts
+
+add100Points anop
+        jsr add100ToScore
+        rts
+add300Points anop
+        jsr add300ToScore
+        rts
+add500Points anop
+        jsr add500ToScore
+        rts
+add700Points anop
+        jsr add700ToScore
+        rts
+add1000Points anop
+        jsr add1000ToScore
+        rts
+add2000Points anop
+        jsr add2000ToScore
+        rts
+add3000Points anop
+        jsr add3000ToScore
+        rts
+add5000Points anop
+        jsr add5000ToScore
         rts
 
 

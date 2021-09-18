@@ -76,7 +76,7 @@ pacGhostCollision anop
 
 startEatPac anop
 
-;    rts ; TESTING ONLY (INVINSIBLE MODE)
+    rts ; TESTING ONLY (INVINSIBLE MODE)
 
         jsr killFruit
 

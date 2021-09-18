@@ -268,7 +268,7 @@ checkTunnel anop
         cmp ghostPixelX,x
         bcs resetToRight
         lda ghostPixelX,x
-        cmp #1728
+        cmp #1700
         bcs resetToLeft
         rts
         
@@ -278,7 +278,7 @@ resetToLeft anop
         rts
         
 resetToRight anop
-        lda #1728
+        lda #1700
         sta ghostPixelX,x
         rts
 
