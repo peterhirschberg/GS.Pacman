@@ -656,6 +656,7 @@ SPRITE_100            gequ 80*4
 SPRITE_300            gequ 81*4
 SPRITE_500            gequ 82*4
 SPRITE_700            gequ 83*4
+
 SPRITE_BLANK            gequ 84*4
 
 SPRITE_2            gequ 85*4
@@ -759,11 +760,11 @@ drawSpriteTable anop
         dc i4'drawSprite81'
         dc i4'drawSprite82'
         dc i4'drawSprite83'
-        dc i4'drawSprite84'
+        dc i4'drawSpriteBlank'
 
-        dc i4'drawSprite85' ; PDHTODO
-        dc i4'drawSprite85' ; PDHTODO
-        dc i4'drawSprite85' ; PDHTODO
+        dc i4'drawSprite85'
+        dc i4'drawSprite86'
+        dc i4'drawSprite87'
         
         dc i4'drawSpriteNop'
 

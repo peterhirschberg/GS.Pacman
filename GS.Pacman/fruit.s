@@ -366,8 +366,6 @@ drawPoints entry
         jsr getLevelIndex
         tax
         
-;        ldx #10
-
         lda fruitPointSpriteXPos,x
         sta spriteX
         lda #$69
@@ -380,8 +378,6 @@ drawPoints entry
 
         jsr getLevelIndex
         tax
-
-;        ldx #10
 
         lda fruitPointSpriteXPos,x
         clc
