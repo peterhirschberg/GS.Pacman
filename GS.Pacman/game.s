@@ -26,6 +26,8 @@ game start
 
 gameInit entry
 
+        jsl derefMemHandle
+
         jsr setupScreen
 
         jsr soundInitMusic1

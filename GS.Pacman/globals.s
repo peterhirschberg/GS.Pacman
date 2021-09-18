@@ -8,7 +8,6 @@
 
         case on
 
-
 globalData data
 
 BORDER_COLOR_REGISTER   gequ $e0c034

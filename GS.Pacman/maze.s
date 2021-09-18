@@ -627,7 +627,7 @@ fillVLoop anop
         lda >mazeGraphicsDataList,x
         ldx screenCounter
         sta >SCREEN_ADDR,x
-        sta >MAZE_BUFFER,x
+        sta >mazeMem,x
 
         inc dataCounter
         inc dataCounter
@@ -638,7 +638,7 @@ fillVLoop anop
         lda >mazeGraphicsDataList,x
         ldx screenCounter
         sta >SCREEN_ADDR,x
-        sta >MAZE_BUFFER,x
+        sta >mazeMem,x
 
         inc dataCounter
         inc dataCounter
@@ -649,7 +649,7 @@ fillVLoop anop
         lda >mazeGraphicsDataList,x
         ldx screenCounter
         sta >SCREEN_ADDR,x
-        sta >MAZE_BUFFER,x
+        sta >mazeMem,x
 
         inc dataCounter
         inc dataCounter
@@ -660,7 +660,7 @@ fillVLoop anop
         lda >mazeGraphicsDataList,x
         ldx screenCounter
         sta >SCREEN_ADDR,x
-        sta >MAZE_BUFFER,x
+        sta >mazeMem,x
 
         long m
 
@@ -698,28 +698,28 @@ fillVLoop2 anop
 
 
         ldx screenCounter
-        lda >MAZE_BUFFER,x
+        lda >mazeMem,x
         sta >SCREEN_ADDR,x
 
         inc screenCounter
         inc screenCounter
 
         ldx screenCounter
-        lda >MAZE_BUFFER,x
+        lda >mazeMem,x
         sta >SCREEN_ADDR,x
 
         inc screenCounter
         inc screenCounter
 
         ldx screenCounter
-        lda >MAZE_BUFFER,x
+        lda >mazeMem,x
         sta >SCREEN_ADDR,x
 
         inc screenCounter
         inc screenCounter
 
         ldx screenCounter
-        lda >MAZE_BUFFER,x
+        lda >mazeMem,x
         sta >SCREEN_ADDR,x
 
 

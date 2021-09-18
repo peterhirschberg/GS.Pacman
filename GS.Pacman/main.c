@@ -34,6 +34,15 @@ unsigned int randomSeed;
 boolean shouldQuit;
 
 
+void *mazeMem;
+Handle h;
+
+
+void derefMemHandle (void)
+{
+    mazeMem = *h;
+}
+
 void signalQuit(void)
 {
     shouldQuit = true;
@@ -141,9 +150,12 @@ int main(void)
     toolStartupRef = StartUpTools(userid, refIsResource, TOOL_STARTUP);
     CompactMem();
     
-    NewHandle((LongWord)0x8000, userid, (Word)(attrLocked | attrFixed | attrAddr | attrBank), (Pointer)0x1c0000);
-    TOOLFAIL("Unable to allocate maze buffer");
+//    h = NewHandle((LongWord)0x8000, userid, (Word)(attrLocked | attrFixed | attrAddr | attrBank), (Pointer)0x1c0000);
+  
+    h = NewHandle((LongWord)0x10000, userid, (Word)(attrLocked | attrFixed | attrNoCross | attrPage), 0);
     
+    TOOLFAIL("Unable to allocate maze buffer");
+
     InitMouse(0);
     SetMouse(transparent);
     
