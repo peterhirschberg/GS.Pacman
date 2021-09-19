@@ -29,6 +29,46 @@ parseColor entry
 
         rts
 
+
+drawAlphaPressStart entry
+
+        lda #$ff
+        sta spriteColor
+
+        jsr parseColor
+
+        lda #88
+        sta spriteX
+        lda #96
+        sta spriteY
+
+        ldy #0
+
+startLoop anop
+
+        lda alphaStringPressStart,y
+
+        cmp #-1
+        beq startDone
+
+        jsr drawAlphaSpriteByIndex
+
+        lda spriteX
+        clc
+        adc #8
+        sta spriteX
+
+        iny
+        iny
+        iny
+        iny
+        bra startLoop
+
+startDone anop
+
+        rts
+        
+        
 drawAlphaReady entry
 
         lda #$aa
@@ -304,6 +344,27 @@ drawAlphaSpriteTable anop
         dc i4'drawAlphaSprite47'
         dc i4'drawAlphaSprite48'
 
+        
+alphaStringPressStart anop
+        dc i4'ALPHAINDEX_P'
+        dc i4'ALPHAINDEX_R'
+        dc i4'ALPHAINDEX_E'
+        dc i4'ALPHAINDEX_S'
+        dc i4'ALPHAINDEX_S'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_QUOTE'
+        dc i4'ALPHAINDEX_1'
+        dc i4'ALPHAINDEX_QUOTE'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_T'
+        dc i4'ALPHAINDEX_O'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_S'
+        dc i4'ALPHAINDEX_T'
+        dc i4'ALPHAINDEX_A'
+        dc i4'ALPHAINDEX_R'
+        dc i4'ALPHAINDEX_T'
+        dc i4'-1'
 
 alphaStringReady anop
         dc i4'ALPHAINDEX_R'

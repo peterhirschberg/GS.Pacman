@@ -23,14 +23,45 @@ game start
         using gameData
 
 
+        
+baseInit entry
+
+        jsr setupScreen
+        
+        rtl
+        
+        
+        
+gameStartWait entry
+
+        jsr clearScreen
+
+        jsr normalColorTable
+
+waitLoop anop
+        
+        jsr waitForVbl
+        
+        jsr drawAlphaPressStart
+
+        lda numLives
+        bmi waitLoop
+
+        jsr gameInit
+        jsr startNewLife
+        
+        lda #240
+        sta gameIntroTimer
+        
+        rts
+        
+        
 
 gameInit entry
 
-        jsr setupScreen
+        jsr blackColorTable
 
         jsr soundInitMusic1
-        
-        jsr blackColorTable
 
         jsr zeroMazeBuffer
 
@@ -61,17 +92,31 @@ gameInit entry
 
         jsr playIntroSound
 
-        lda #235
+        lda #240
         sta gameIntroTimer
 
-        rtl
+        rts
 
 
 
 runGameTick entry
 
+waitForStart anop
+
+        jsr gameStartWait
+
+        lda numLives
+        cmp #2
+        beq gameIntro
+        
 gameOverLoop anop
 
+        jsr waitForVbl
+        
+        dec gameOverWaitTimer
+        lda gameOverWaitTimer
+        bmi waitForStart
+        
         lda numLives
         bmi gameOverLoop
 
@@ -79,7 +124,7 @@ gameIntro anop
 
         jsr waitForVbl
 
-        lda #120
+        lda #125
         cmp gameIntroTimer
         bcs drawInitialSprites
         bra dontDrawInitialSprites
@@ -122,6 +167,9 @@ mainLoop anop
 
 postLifeTimerExpired anop
         jsr startNewLife
+        
+        lda #200
+        sta gameOverWaitTimer
 
         lda numLives
         bmi gameOverLoop
@@ -279,9 +327,19 @@ eatingGhostSkipToHere anop
         
 
 ;        jsr borderDone
-        
+
+        lda shouldQuit
+        cmp #0
+        bne mainLoopExit
+
         brl mainLoop
         
+mainLoopExit anop
+
+        jsr stopScaredSound
+        jsr stopSiren2Sound
+        jsr stopSiren1Sound
+
         rtl
 
 
@@ -458,8 +516,12 @@ postLifeTimer dc i2'0'
 
 levelCompleteTimer dc i2'0'
 
-numLives dc i2'2'
+numLives dc i2'-1'
 
 levelNum dc i2'0'
+
+shouldQuit dc i2'0'
+
+gameOverWaitTimer dc i2'-1'
 
         end

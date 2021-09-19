@@ -32,6 +32,7 @@ MAZE_BUFFER             gequ $1c0000
 
 
 backupStack dc i4'0'
+backupDP dc i4'0'
 
 
 DIRECTION_RIGHT         gequ 0

@@ -14,6 +14,7 @@
 controls start
         using globalData
         using controlsData
+        using gameData
         using pacData
 
 
@@ -72,6 +73,9 @@ readKeys anop
         cmp #'K'
         beq onDisableJoystick
 
+        cmp #'1'
+        beq onStartGame
+        
 checkKeysDone anop
         long i,m
         rts
@@ -113,23 +117,34 @@ onDisableJoystick anop
 
 onQuit anop
 
-        ldx #0
-        lda pacY
-        shiftedToPixel
-        jsr getTileYFromPixelY
-        tay
-        lda pacX
-        shiftedToPixel
-        jsr getTileXFromPixelX
-        tax
-        brk
+;        ldx #0
+;        lda pacY
+;        shiftedToPixel
+;        jsr getTileYFromPixelY
+;        tay
+;        lda pacX
+;        shiftedToPixel
+;        jsr getTileXFromPixelX
+;        tax
+;        brk
 
         lda >BUTTON1
         and #$80
         cmp #0
         beq dontQuit
-        jsl signalQuit
+        
+        lda #1
+        sta shouldQuit
+        
+;        jsl signalQuit
 dontQuit anop
+        rts
+        
+onStartGame anop
+
+        lda #3
+        sta numLives
+
         rts
 
 

@@ -31,19 +31,6 @@ unsigned int userid;
 unsigned int randomSeed;
 
 
-boolean shouldQuit;
-
-
-void signalQuit(void)
-{
-    shouldQuit = true;
-}
-
-// Shifted division
-word fpDivide(word a, word b)
-{
-    return floor(((float)a / b) * 64);
-}
 
 word getRandom(range)
 {
@@ -152,15 +139,9 @@ int main(void)
         randomSeed = 1;
     srand(randomSeed);
     
-//    saveState();
+    baseInit();
     
-    gameInit();
-    
-    while (!shouldQuit) {
-        runGameTick();
-    }
-    
-//    restoreState();
+    runGameTick();
     
     ShutDownTools(refIsHandle, toolStartupRef);
     TLShutDown();

@@ -9,7 +9,7 @@
 - Bobbi Webber-Manners
 - Jason Andersen
 - Ian Schmidt
-- Kevin Sherlock
+- Kelvin Sherlock
 - Antoine Vignau
 
 

@@ -755,7 +755,26 @@ fillDone2 anop
 
         rts
         
+        
 
+clearScreen entry
+
+        ldx #0
+
+clearScreenLoop anop
+
+        lda #0
+        sta >SCREEN_ADDR,x
+        inx
+        txa
+        cmp #$8000
+        beq clearScreenDone
+        bra clearScreenLoop
+
+clearScreenDone anop
+
+        rts
+        
 
 initTileX dc i2'0'
 initTileY dc i2'0'

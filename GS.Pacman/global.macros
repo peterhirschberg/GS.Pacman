@@ -227,6 +227,10 @@ _docWait_&SYSCNT anop
 
         macro
         _spriteHeader
+
+        tdc
+        sta >backupDP
+
         sei                     ; 2
         tsc                     ; 2
         sta >backupStack        ; 5
@@ -241,8 +245,12 @@ _docWait_&SYSCNT anop
 
         macro
         _spriteFooter
-        lda #0
+;        lda #0
+;        tcd
+
+        lda >backupDP
         tcd
+
         lda >STATE_REGISTER     ; 6
         and #$ffcf              ; 3
         sta >STATE_REGISTER     ; 6
@@ -252,3 +260,4 @@ _docWait_&SYSCNT anop
         mend                    ; 24
 
 
+; tdc / sta >backupDP , lda >backupDP, tcd
