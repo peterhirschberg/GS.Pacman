@@ -13,6 +13,7 @@
 
 levelDisplay start
         using gameData
+        using levelDisplayData
         using spritesData
 
 
@@ -86,6 +87,25 @@ drawLevelDone anop
         sta levelDirty
 
         rts
+        
+        
+initLevelDisplay entry
+
+        lda #0
+        ldx #0
+        sta levelDigits,x
+        lda #-1
+        ldx #2
+        sta levelDigits,x
+        lda #-1
+        ldx #4
+        sta levelDigits,x
+
+        lda #1
+        sta levelDirty
+        
+
+        rts
 
 
 LEVELINDEX_1       gequ    2*0
@@ -98,9 +118,6 @@ levelDigits anop
         dc i2'-1'
         dc i2'-1'
 
-
-levelDirty dc i2'1'
-
 digitIndex dc i2'0'
 
 displayLevelNum dc i2'0'
@@ -108,3 +125,8 @@ displayLevelNum dc i2'0'
 
         end
 
+levelDisplayData data
+    
+levelDirty dc i2'1'
+
+        end

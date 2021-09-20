@@ -18,6 +18,7 @@ game start
         using ghostData
         using spritesData
         using scoreData
+        using levelDisplayData
         using mazeExchangeData
         using fruitData
         using gameData
@@ -34,7 +35,19 @@ baseInit entry
         
 gameStartWait entry
 
+        jsr blackColorTable
+
         jsr clearScreen
+
+        lda #1
+        sta scoreDirty
+        sta highScoreDirty
+        sta levelDirty
+        
+        jsr drawAlphaScoreTitles
+        jsr drawScore
+        jsr drawHighScore
+        jsr drawLevel
 
         jsr normalColorTable
 
@@ -46,6 +59,8 @@ waitLoop anop
 
         lda numLives
         bmi waitLoop
+
+        jsr clearScreen
 
         jsr gameInit
         jsr startNewLife
@@ -71,24 +86,23 @@ gameInit entry
 
         jsr initGhosts
 
+        lda #0
+        sta levelNum
+        jsr initLevelDisplay
         jsr incrementLevel
         jsr drawLevel
 
-        jsr normalColorTable
-
 ;        jsr borderInit
 
-
-        lda #0
-        sta currentScore
-        sta currentScore+2
-
-
+        jsr initScore
+        
         jsr drawAlphaScoreTitles
         jsr drawScore
         jsr drawHighScore
         jsr drawLives
         jsr drawFruitRack
+
+        jsr normalColorTable
 
         jsr playIntroSound
 
@@ -404,6 +418,7 @@ gameOver anop
 resetNewLife anop
 
 ; reset game
+
         lda #0
         sta pacEaten
 

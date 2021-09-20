@@ -513,6 +513,38 @@ drawHighScoreDone anop
 
         rts
 
+        
+initScore entry
+
+        lda #0
+        sta currentScore
+        sta currentScore+2
+
+        lda #1
+        sta scoreDirty
+        sta highScoreDirty
+        
+        lda #0
+        ldx #SCOREINDEX_1
+        sta scoreDigits,x
+        ldx #SCOREINDEX_10
+        sta scoreDigits,x
+        lda #-1
+        ldx #SCOREINDEX_100
+        sta scoreDigits,x
+        ldx #SCOREINDEX_1000
+        sta scoreDigits,x
+        ldx #SCOREINDEX_10000
+        sta scoreDigits,x
+        ldx #SCOREINDEX_100000
+        sta scoreDigits,x
+        ldx #SCOREINDEX_1000000
+        sta scoreDigits,x
+        ldx #SCOREINDEX_10000000
+        sta scoreDigits,x
+        
+        rts
+        
 
 
 SCOREINDEX_1       gequ    2*0
@@ -545,9 +577,6 @@ highScoreDigits anop
         dc i2'-1'
         dc i2'-1'
 
-scoreDirty dc i2'1'
-highScoreDirty dc i2'1'
-
 digitIndex dc i2'0'
 
         end
@@ -558,5 +587,8 @@ scoreData data
 
 currentScore dc i4'0'
 highScore dc i4'0'
+
+scoreDirty dc i2'1'
+highScoreDirty dc i2'1'
 
         end
