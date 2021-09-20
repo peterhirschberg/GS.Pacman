@@ -59,6 +59,8 @@ waitLoop anop
 
         lda numLives
         bmi waitLoop
+        
+        jsr blackColorTable
 
         jsr clearScreen
 
@@ -303,6 +305,8 @@ notEatingGhost1 anop
 
         jsr checkControls
 
+        jsr collisionCheckActors
+
         jsr runFruit
 
         jsr runMaze
@@ -312,8 +316,6 @@ notEatingGhost1 anop
         jsr runGhosts
 
         jsr runSound
-
-        jsr collisionCheckActors
 
 
 ;        jsr borderStart
