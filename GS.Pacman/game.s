@@ -197,6 +197,12 @@ notPostLife anop
         lda eatPacTimer
         cmp #0
         beq pacEatenTimerZero
+        
+        jsr erasePac
+        jsr eraseGhosts
+        
+        jsr drawPac
+        jsr drawGhosts
 
         dec eatPacTimer
 
@@ -301,7 +307,6 @@ notEatingGhost1 anop
 
 
 ;        jsr borderStart
-
 
         jsr checkControls
 

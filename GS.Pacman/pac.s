@@ -565,9 +565,15 @@ drawPac entry
         asl a
         tax
 
+        lda eatPacTimer
+        cmp #0
+        bne pacEatenWait
+        
         lda pacEaten
         cmp #0
         bne drawPacEaten
+
+pacEatenWait anop
         
         lda pacDirection
         cmp #DIRECTION_RIGHT

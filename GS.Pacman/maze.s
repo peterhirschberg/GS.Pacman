@@ -35,9 +35,26 @@ getTileFromTileXY entry
 
         rts
 
+saveTileX dc i2'0'
+saveTileY dc i2'0'
+        
 setTileFromTileXY entry
 
         sta newTile
+        
+        lda tileX
+        sta saveTileX
+        lda tileY
+        sta saveTileY
+
+        jsr updateMazeTile ; this erases the tile from the screen and maze buffer
+
+; this set the tile value to the new tile value
+
+        lda saveTileX
+        sta tileX
+        lda saveTileY
+        sta tileY
 
         lda tileX
         asl a
@@ -51,10 +68,8 @@ setTileFromTileXY entry
         adc temp
         tax
         lda newTile
-        lda #0
+        lda #0 ; TEMP - always set tile to 0
         sta >mazeTileList,x
-        
-        jsr updateMazeTile
 
         rts
         
@@ -545,23 +560,20 @@ drawMazeDone anop
         
 updateMazeTile entry
 
+
         lda tileY
         sta mazeRow
 
         lda tileX
         sta mazeCol
 
-        lda mazeRow
-        asl a
-        tax
-        lda mazeTileRowOffsets,x
-        tax
-        lda >mazeTileList,x
-
+        
+        jsr getTileFromTileXY
+        cmp #0
+        beq eraseMazeTileDone
         asl a
         tax
         
-    ldx #0 ; PDHTODO <<<<<<<
 
         lda >mazeGraphicsOffsetXList,x
         sta tileSrcX
@@ -584,8 +596,9 @@ updateMazeTile entry
         adc #MAZE_OFFSET_Y
         sta tileDstY
 
-        jsr drawMazeTile
+        jsr eraseMazeTileFast
 
+eraseMazeTileDone anop
         rts
 
 
@@ -696,6 +709,112 @@ fillDone anop
 
         rts
 
+        
+eraseMazeTileFast entry
+
+        lda #0
+        sta rowCounter
+
+fillVLoop1 anop
+
+; src
+        lda rowCounter
+        clc
+        adc tileSrcY
+        asl a
+        tax
+        lda mazeGraphicsRowOffsets,x
+        clc
+        adc tileSrcX
+        sta dataCounter
+
+; dst
+        lda rowCounter
+        clc
+        adc tileDstY
+        asl a
+        tax
+        lda screenRowOffsets,x
+        clc
+        adc tileDstX
+        sta screenCounter
+
+; ----------------------------------------
+
+        short m
+        
+        ldx dataCounter
+        lda >mazeGraphicsDataList,x
+        cmp #$00
+        beq skipPixel1
+        ldx screenCounter
+        lda #$00
+        sta >SCREEN_ADDR,x
+        sta >MAZE_BUFFER,x
+        
+skipPixel1 anop
+
+        inc dataCounter
+        inc dataCounter
+        inc screenCounter
+
+
+        ldx dataCounter
+        lda >mazeGraphicsDataList,x
+        cmp #$00
+        beq skipPixel2
+        ldx screenCounter
+        lda #$00
+        sta >SCREEN_ADDR,x
+        sta >MAZE_BUFFER,x
+
+skipPixel2 anop
+
+        inc dataCounter
+        inc dataCounter
+        inc screenCounter
+
+
+        ldx dataCounter
+        lda >mazeGraphicsDataList,x
+        cmp #$00
+        beq skipPixel3
+        ldx screenCounter
+        lda #$00
+        sta >SCREEN_ADDR,x
+        sta >MAZE_BUFFER,x
+
+skipPixel3 anop
+        
+        inc dataCounter
+        inc dataCounter
+        inc screenCounter
+
+
+        ldx dataCounter
+        lda >mazeGraphicsDataList,x
+        cmp #$00
+        beq skipPixel4
+        ldx screenCounter
+        lda #$00
+        sta >SCREEN_ADDR,x
+        sta >MAZE_BUFFER,x
+
+skipPixel4 anop
+        
+        long m
+
+; ----------------------------------------
+
+        inc rowCounter
+        lda rowCounter
+        cmp #8
+        beq fillDone1
+        brl fillVLoop1
+
+fillDone1 anop
+
+        rts
         
 blitBufferMazeTile entry
 
