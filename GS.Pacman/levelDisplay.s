@@ -45,7 +45,7 @@ doDrawLevel anop
 
         lda displayLevelNum
 
-        lda #$ff
+        lda #$dd
         sta spriteColor
 
         jsr parseColor

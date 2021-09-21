@@ -32,7 +32,7 @@ parseColor entry
 
 drawAlphaPressStart entry
 
-        lda #$ff
+        lda #$99
         sta spriteColor
 
         jsr parseColor
@@ -192,7 +192,7 @@ gameoverDone anop
 
 drawAlphaScoreTitles entry
 
-        lda #$ff
+        lda #$dd
         sta spriteColor
 
         jsr parseColor

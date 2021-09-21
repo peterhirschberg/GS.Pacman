@@ -305,8 +305,6 @@ notEatingGhost1 anop
 
         jsr checkControls
 
-        jsr collisionCheckActors
-
         jsr runFruit
 
         jsr runMaze
@@ -314,6 +312,8 @@ notEatingGhost1 anop
         jsr runPac
 
         jsr runGhosts
+
+        jsr collisionCheckActors
 
         jsr runSound
 

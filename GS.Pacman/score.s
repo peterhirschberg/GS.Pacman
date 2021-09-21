@@ -357,7 +357,7 @@ doDrawScore anop
         cmp #0
         bne scoreNotZero
 
-        lda #$ff
+        lda #$dd
         sta spriteColor
 
         jsr parseColor
@@ -385,7 +385,7 @@ doDrawScore anop
 
 scoreNotZero anop
 
-        lda #$ff
+        lda #$dd
         sta spriteColor
 
         jsr parseColor
@@ -442,7 +442,7 @@ doDrawHighScore anop
         cmp #0
         bne highScoreNotZero
 
-        lda #$ff
+        lda #$dd
         sta spriteColor
 
         jsr parseColor
@@ -470,7 +470,7 @@ doDrawHighScore anop
 
 highScoreNotZero anop
 
-        lda #$ff
+        lda #$dd
         sta spriteColor
 
         jsr parseColor
@@ -568,8 +568,8 @@ scoreDigits anop
         dc i2'-1'
 
 highScoreDigits anop
-        dc i2'0'
-        dc i2'0'
+        dc i2'-1'
+        dc i2'-1'
         dc i2'-1'
         dc i2'-1'
         dc i2'-1'
