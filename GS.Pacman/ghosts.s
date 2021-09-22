@@ -423,6 +423,10 @@ directionLoop anop
 
 allowReverse anop
 
+        ldx #$dead
+        ldy #$beef
+        brk
+
         jsr getRandomDirAll
         bra checkDirection
 
