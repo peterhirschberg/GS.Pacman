@@ -137,7 +137,17 @@ switchModeDone anop
 runGhost entry
 
         ldx currentGhost
+        
+        lda ghostPixelOldX
+        sta ghostOldX
+        lda ghostPixelOldY
+        sta ghostOldY
 
+        lda ghostPixelX,x
+        sta ghostPixelOldX,x
+        lda ghostPixelY,x
+        sta ghostPixelOldY,x
+        
         jsr setGhostSpeed
 
         jsr runGhostDotCounter
@@ -186,7 +196,6 @@ ghostNotPenned anop
 
 ;        jsr isSpriteCenteredInMazeTile
         jsr didGhostPassIntersection
-
         cmp #0
         beq dontPickDirection
 
@@ -214,20 +223,20 @@ ghostNotPenned anop
 
 doPickDirection anop
 
-; keep track of where the ghost changes direction and only allow changing direction again after travelling at least 1px
+; keep track of where the ghost changes direction and only allow changing direction again after travelling at least 8px
 
         lda ghostDirChangeX,x
         sec
         sbc ghostPixelX,x
         absoluteValue
-        cmp #$8
+        cmp #64
         bcs okayToChangeDirections
 
         lda ghostDirChangeY,x
         sec
         sbc ghostPixelY,x
         absoluteValue
-        cmp #$8
+        cmp #64
         bcs okayToChangeDirections
 
         bra dontPickDirection
@@ -238,21 +247,16 @@ okayToChangeDirections anop
         ldx currentGhost
         sta ghostDirection,x
 
+        jsr alignGhostWithTiles
+
 ; changing direction here so save the XY position where we changed
 
         lda ghostPixelX,x
         sta ghostDirChangeX,x
         lda ghostPixelY,x
         sta ghostDirChangeY,x
-        
-        jsr alignGhostWithTiles
 
 dontPickDirection anop
-
-        lda ghostPixelX,x
-        sta ghostPixelOldX,x
-        lda ghostPixelY,x
-        sta ghostPixelOldY,x
 
         ldx currentGhost
         jsr moveGhost
@@ -2277,14 +2281,6 @@ sirenGhostsFrightened anop
 
         rts
         
-        
-        
-pixelX dc i2'0'
-pixelY dc i2'0'
-pixelOldX dc i2'0'
-pixelOldY dc i2'0'
-tileOldX dc i2'0'
-tileOldY dc i2'0'
 
 didGhostPassIntersection entry
 
@@ -2320,7 +2316,7 @@ checkPassIntersectionUp anop
         jsr getTileYFromPixelY
         sta tileY
         
-        lda ghostPixelOldY,x
+        lda ghostOldY
         shiftedToPixel
         sta pixelOldY
         jsr getTileYFromPixelY
@@ -2339,7 +2335,7 @@ checkPassIntersectionDown anop
         jsr getTileYFromPixelY
         sta tileY
         
-        lda ghostPixelOldY,x
+        lda ghostOldY
         shiftedToPixel
         sta pixelOldY
         jsr getTileYFromPixelY
@@ -2362,7 +2358,7 @@ checkPassIntersectionLeft anop
         jsr getTileXFromPixelX
         sta tileX
         
-        lda ghostPixelOldX,x
+        lda ghostOldX
         shiftedToPixel
         sta pixelOldX
         jsr getTileXFromPixelX
@@ -2381,7 +2377,7 @@ checkPassIntersectionRight anop
         jsr getTileXFromPixelX
         sta tileX
         
-        lda ghostPixelOldX,x
+        lda ghostOldX
         shiftedToPixel
         sta pixelOldX
         jsr getTileXFromPixelX
@@ -2412,21 +2408,41 @@ alignGhostWithTiles entry
 
 alignX anop
         lda ghostPixelX,x
+        sta ghostPixelOldX,x
+        lda ghostPixelY,x
+        sta ghostPixelOldY,x
+
+        lda ghostPixelX,x
         shiftedToPixel
         and #$fff8
         pixelToShifted
         sta ghostPixelX,x
+        
+        lda ghostPixelX,x
+        sta ghostDirChangeX,x
+        lda ghostPixelY,x
+        sta ghostDirChangeY,x
         rts
 
 alignY anop
+        lda ghostPixelX,x
+        sta ghostPixelOldX,x
+        lda ghostPixelY,x
+        sta ghostPixelOldY,x
+
         lda ghostPixelY,x
         shiftedToPixel
         and #$fff8
         pixelToShifted
         sta ghostPixelY,x
+        
+        lda ghostPixelX,x
+        sta ghostDirChangeX,x
+        lda ghostPixelY,x
+        sta ghostDirChangeY,x
         rts
 
-        
+
         
       
 ghostLevelIndex entry
@@ -2524,6 +2540,15 @@ bluePacTargetX dc i2'0'
 bluePacTargetY dc i2'0'
 blueRedTargetX dc i2'0'
 blueRedTargetY dc i2'0'
+
+pixelX dc i2'0'
+pixelY dc i2'0'
+pixelOldX dc i2'0'
+pixelOldY dc i2'0'
+tileOldX dc i2'0'
+tileOldY dc i2'0'
+ghostOldX dc i2'0'
+ghostOldY dc i2'0'
 
 savex dc i2'0'
 savey dc i2'0'
