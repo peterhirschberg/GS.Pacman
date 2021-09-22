@@ -1234,7 +1234,11 @@ atePowerPelletLoop anop
 
 setStateTimer anop
 
-        lda #500 ; TODO - MAKE THIS TIMER DYNAMIC
+        stx savex
+        jsr ghostLevelIndex
+        tax
+        lda ghostFrightenedTime,x
+        ldx savex
         sta ghostStateTimer,x
 
 skipGhost anop
@@ -2270,6 +2274,22 @@ sirenGhostsFrightened anop
         jsr stopSiren1Sound
 
         rts
+        
+      
+ghostLevelIndex entry
+
+        lda levelNum
+        cmp #20
+        bcs limitLevelIndex
+        asl a
+        rts
+
+limitLevelIndex anop
+
+        lda #20
+        asl a
+
+        rts
 
 
         
@@ -2606,6 +2626,33 @@ level1GhostModes anop
 		dc i2'GHOSTSTATE_CHASE'
 		dc i2'GHOSTSTATE_SCATTER'
 		dc i2'GHOSTSTATE_CHASE'
+        
+; LEVEL-BASED VALUES
+        
+ghostFrightenedTime anop
+        dc i2'60*6' ; level 1
+        dc i2'60*5' ; level 2
+        dc i2'60*4' ; level 3
+        dc i2'60*3' ; level 4
+        dc i2'60*2' ; level 5
+        dc i2'60*5' ; level 6
+        dc i2'60*2' ; level 7
+        dc i2'60*2' ; level 8
+        dc i2'60*1' ; level 9
+        dc i2'60*5' ; level 10
+        dc i2'60*2' ; level 11
+        dc i2'60*1' ; level 12
+        dc i2'60*1' ; level 13
+        dc i2'60*3' ; level 14
+        dc i2'60*1' ; level 15
+        dc i2'60*1' ; level 16
+        dc i2'1'    ; level 17
+        dc i2'60*1' ; level 18
+        dc i2'1'    ; level 19
+        dc i2'1'    ; level 20
+        dc i2'1'    ; level 21
+
+
 
 ghostModeTimer dc i2'0'
 
