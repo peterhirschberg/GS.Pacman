@@ -138,12 +138,6 @@ runGhost entry
 
         ldx currentGhost
 
-        lda ghostPixelX,x
-        sta ghostPixelOldX,x
-        lda ghostPixelY,x
-        sta ghostPixelOldY,x
-
-
         jsr setGhostSpeed
 
         jsr runGhostDotCounter
@@ -190,7 +184,8 @@ ghostNotPenned anop
         shiftedToPixel
         sta spriteY
 
-        jsr isSpriteCenteredInMazeTile
+;        jsr isSpriteCenteredInMazeTile
+        jsr didGhostPassIntersection
 
         cmp #0
         beq dontPickDirection
@@ -249,8 +244,15 @@ okayToChangeDirections anop
         sta ghostDirChangeX,x
         lda ghostPixelY,x
         sta ghostDirChangeY,x
+        
+        jsr alignGhostWithTiles
 
 dontPickDirection anop
+
+        lda ghostPixelX,x
+        sta ghostPixelOldX,x
+        lda ghostPixelY,x
+        sta ghostPixelOldY,x
 
         ldx currentGhost
         jsr moveGhost
@@ -2066,7 +2068,7 @@ speedGhostPenned anop
         rts
 
 speedGhostNotPenned anop
-        lda #8
+        lda #12
         sta ghostSpeed,x
 		rts
 
@@ -2274,6 +2276,157 @@ sirenGhostsFrightened anop
         jsr stopSiren1Sound
 
         rts
+        
+        
+        
+pixelX dc i2'0'
+pixelY dc i2'0'
+pixelOldX dc i2'0'
+pixelOldY dc i2'0'
+tileOldX dc i2'0'
+tileOldY dc i2'0'
+
+didGhostPassIntersection entry
+
+        ldx currentGhost
+        lda ghostDirection,x
+        cmp #DIRECTION_UP
+        beq checkPassIntersectionUpShort
+        cmp #DIRECTION_DOWN
+        beq checkPassIntersectionDownShort
+        cmp #DIRECTION_LEFT
+        beq checkPassIntersectionLeftShort
+        cmp #DIRECTION_RIGHT
+        beq checkPassIntersectionRightShort
+
+        rts
+
+checkPassIntersectionUpShort anop
+        brl checkPassIntersectionUp
+
+checkPassIntersectionDownShort anop
+        brl checkPassIntersectionDown
+
+checkPassIntersectionLeftShort anop
+        brl checkPassIntersectionLeft
+
+checkPassIntersectionRightShort anop
+        brl checkPassIntersectionRight
+        
+checkPassIntersectionUp anop
+        lda ghostPixelY,x
+        shiftedToPixel
+        sta pixelY
+        jsr getTileYFromPixelY
+        sta tileY
+        
+        lda ghostPixelOldY,x
+        shiftedToPixel
+        sta pixelOldY
+        jsr getTileYFromPixelY
+        sta tileOldY
+        
+        lda tileOldY
+        cmp tileY
+        bcs crossedIntersection
+        lda #0
+        rts
+        
+checkPassIntersectionDown anop
+        lda ghostPixelY,x
+        shiftedToPixel
+        sta pixelY
+        jsr getTileYFromPixelY
+        sta tileY
+        
+        lda ghostPixelOldY,x
+        shiftedToPixel
+        sta pixelOldY
+        jsr getTileYFromPixelY
+        sta tileOldY
+        
+        lda tileY
+        cmp tileOldY
+        bcs crossedIntersection
+        lda #0
+        rts
+        
+crossedIntersection anop
+        lda #1
+        rts
+        
+checkPassIntersectionLeft anop
+        lda ghostPixelX,x
+        shiftedToPixel
+        sta pixelX
+        jsr getTileXFromPixelX
+        sta tileX
+        
+        lda ghostPixelOldX,x
+        shiftedToPixel
+        sta pixelOldX
+        jsr getTileXFromPixelX
+        sta tileOldX
+        
+        lda tileOldX
+        cmp tileX
+        bcs crossedIntersection
+        lda #0
+        rts
+        
+checkPassIntersectionRight anop
+        lda ghostPixelX,x
+        shiftedToPixel
+        sta pixelX
+        jsr getTileXFromPixelX
+        sta tileX
+        
+        lda ghostPixelOldX,x
+        shiftedToPixel
+        sta pixelOldX
+        jsr getTileXFromPixelX
+        sta tileOldX
+        
+        lda tileX
+        cmp tileOldX
+        bcs crossedIntersection
+        lda #0
+        rts
+        
+
+
+alignGhostWithTiles entry
+
+        ldx currentGhost
+        lda ghostDirection,x
+        cmp #DIRECTION_UP
+        beq alignX
+        cmp #DIRECTION_DOWN
+        beq alignX
+        cmp #DIRECTION_LEFT
+        beq alignY
+        cmp #DIRECTION_RIGHT
+        beq alignY
+
+        rts
+
+alignX anop
+        lda ghostPixelX,x
+        shiftedToPixel
+        and #$fff8
+        pixelToShifted
+        sta ghostPixelX,x
+        rts
+
+alignY anop
+        lda ghostPixelY,x
+        shiftedToPixel
+        and #$fff8
+        pixelToShifted
+        sta ghostPixelY,x
+        rts
+
+        
         
       
 ghostLevelIndex entry
