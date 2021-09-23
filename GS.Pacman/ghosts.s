@@ -2322,11 +2322,11 @@ getXDistanceLeft anop
         cmp #0
         beq getXDistanceAligned
         
-        lda #10
+        lda #6
         sec
         sbc alignmentY
-        clc
-        adc #8
+;        clc
+;        adc #8
         sta moveRemainder,x
         rts
 
@@ -2338,16 +2338,16 @@ getXDistanceRight anop
         cmp #0
         beq getXDistanceAligned
         
-        lda #10
+        lda #6
         sec
         sbc alignmentY
-        clc
-        adc #8
+;        clc
+;        adc #8
         sta moveRemainder,x
         rts
 
 getXDistanceAligned anop
-        lda #10
+        lda #6
         sta moveRemainder,x
         rts
 
@@ -2360,11 +2360,11 @@ getYDistanceUp anop
         cmp #0
         beq getYDistanceAligned
         
-        lda #10
+        lda #6
         sec
         sbc alignmentX
-        clc
-        adc #8
+;        clc
+;        adc #8
         sta moveRemainder,x
         rts
         
@@ -2376,16 +2376,16 @@ getYDistanceDown anop
         cmp #0
         beq getYDistanceAligned
         
-        lda #10
+        lda #6
         sec
         sbc alignmentX
-        clc
-        adc #8
+;        clc
+;        adc #8
         sta moveRemainder,x
         rts
         
 getYDistanceAligned anop
-        lda #10
+        lda #6
         sta moveRemainder,x
         rts
         
