@@ -137,13 +137,18 @@ switchModeDone anop
 runGhost entry
 
         ldx currentGhost
+        
+        lda ghostPixelOldX
+        sta ghostOldX
+        lda ghostPixelOldY
+        sta ghostOldY
 
         lda ghostPixelX,x
         sta ghostPixelOldX,x
         lda ghostPixelY,x
         sta ghostPixelOldY,x
 
-
+        jsr calcMovementRemainders
         jsr setGhostSpeed
 
         jsr runGhostDotCounter
@@ -2066,7 +2071,7 @@ speedGhostPenned anop
         rts
 
 speedGhostNotPenned anop
-        lda #8
+        lda moveRemainder,x
         sta ghostSpeed,x
 		rts
 
@@ -2291,6 +2296,100 @@ limitLevelIndex anop
 
         rts
 
+alignmentX dc i2'0'
+alignmentY dc i2'0'
+        
+calcMovementRemainders entry
+
+        ldx currentGhost
+        lda ghostDirection,x
+        cmp #DIRECTION_UP
+        beq getYDistanceUp
+        cmp #DIRECTION_DOWN
+        beq getYDistanceDown
+        cmp #DIRECTION_LEFT
+        beq getXDistanceLeft
+        cmp #DIRECTION_RIGHT
+        beq getXDistanceRight
+
+        rts
+
+getXDistanceLeft anop
+        lda ghostPixelX,x
+        shiftedToPixel
+        and #$7
+        sta alignmentY
+        cmp #0
+        beq getXDistanceAligned
+        
+        lda #10
+        sec
+        sbc alignmentY
+        clc
+        adc #8
+        sta moveRemainder,x
+        rts
+
+getXDistanceRight anop
+        lda ghostPixelX,x
+        shiftedToPixel
+        and #$7
+        sta alignmentY
+        cmp #0
+        beq getXDistanceAligned
+        
+        lda #10
+        sec
+        sbc alignmentY
+        clc
+        adc #8
+        sta moveRemainder,x
+        rts
+
+getXDistanceAligned anop
+        lda #10
+        sta moveRemainder,x
+        rts
+
+
+getYDistanceUp anop
+        lda ghostPixelY,x
+        shiftedToPixel
+        and #$7
+        sta alignmentX
+        cmp #0
+        beq getYDistanceAligned
+        
+        lda #10
+        sec
+        sbc alignmentX
+        clc
+        adc #8
+        sta moveRemainder,x
+        rts
+        
+getYDistanceDown anop
+        lda ghostPixelY,x
+        shiftedToPixel
+        and #$7
+        sta alignmentX
+        cmp #0
+        beq getYDistanceAligned
+        
+        lda #10
+        sec
+        sbc alignmentX
+        clc
+        adc #8
+        sta moveRemainder,x
+        rts
+        
+getYDistanceAligned anop
+        lda #10
+        sta moveRemainder,x
+        rts
+        
+
 
         
 currentGhost dc i2'0'
@@ -2357,6 +2456,12 @@ testTargetDistance anop
         dc i2'0'
         dc i2'0'
         dc i2'0'
+        
+moveRemainder anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
 
 smallestDistance dc i2'0'
 smallestDistanceIndex dc i2'0'
@@ -2371,6 +2476,9 @@ bluePacTargetX dc i2'0'
 bluePacTargetY dc i2'0'
 blueRedTargetX dc i2'0'
 blueRedTargetY dc i2'0'
+
+ghostOldX dc i2'0'
+ghostOldY dc i2'0'
 
 savex dc i2'0'
 savey dc i2'0'
