@@ -193,14 +193,17 @@ isNewTile anop
         sta ghostTileOldY,x
 
 ; pick upcoming direction
+; PDH
+        jsr computeNextDirection
 
 ; get distance to turn
 
 
 
-isSameTile anop
-        
         jsr setGhostSpeed
+
+
+isSameTile anop
 
         jsr runGhostDotCounter
         
@@ -235,78 +238,8 @@ ghostPenned anop
         jsr pickDirection
         ldx currentGhost
         sta ghostDirection,x
-        brl dontPickDirection
 
 ghostNotPenned anop
-
-        lda ghostPixelX,x
-        shiftedToPixel
-        sta spriteX
-        lda ghostPixelY,x
-        shiftedToPixel
-        sta spriteY
-
-        jsr isSpriteCenteredInMazeTile
-
-        cmp #0
-        beq dontPickDirection
-
-        jsr isGhostInTunnel
-        cmp #0
-        bne dontPickDirection
-
-        lda ghostPixelX,x
-        shiftedToPixel
-        jsr getTileXFromPixelX
-        sta tileX
-        lda ghostPixelY,x
-        shiftedToPixel
-        jsr getTileYFromPixelY
-        sta tileY
-
-        jsr getAvailableDirectionsFromTileXY
-        sta availableDirections
-        jsr excludeForbiddenUpTurns
-
-        jsr countNumAvailableDirections
-        cmp #1
-        bcs doPickDirection
-        bra dontPickDirection
-
-doPickDirection anop
-
-; keep track of where the ghost changes direction and only allow changing direction again after travelling at least 1px
-
-        lda ghostDirChangeX,x
-        sec
-        sbc ghostPixelX,x
-        absoluteValue
-        cmp #$8
-        bcs okayToChangeDirections
-
-        lda ghostDirChangeY,x
-        sec
-        sbc ghostPixelY,x
-        absoluteValue
-        cmp #$8
-        bcs okayToChangeDirections
-
-        bra dontPickDirection
-
-okayToChangeDirections anop
-
-        jsr pickDirection
-        ldx currentGhost
-        sta ghostDirection,x
-
-; changing direction here so save the XY position where we changed
-
-        lda ghostPixelX,x
-        sta ghostDirChangeX,x
-        lda ghostPixelY,x
-        sta ghostDirChangeY,x
-
-dontPickDirection anop
 
         ldx currentGhost
         jsr moveGhost
@@ -547,6 +480,103 @@ runDotCounterLeavePen anop
         sta ghostState,x
         rts
 
+        
+; PDH
+computeNextDirection entry
+        
+        lda ghostPixelX,x
+        shiftedToPixel
+        sta spriteX
+        lda ghostPixelY,x
+        shiftedToPixel
+        sta spriteY
+
+;        jsr isSpriteCenteredInMazeTile
+
+;        cmp #0
+;        beq dontPickDirection
+
+        lda #0
+        sta ghostWillTurn,x
+
+        jsr isGhostInTunnel
+        cmp #0
+        bne dontPickDirection
+
+        lda ghostTileX,x
+        sta tileX
+        lda ghostTileY,x
+        sta tileY
+        
+        jsr getTileAheadFromTileXY
+
+        jsr getAvailableDirectionsFromTileXY
+        sta availableDirections
+        jsr excludeForbiddenUpTurns
+
+        jsr countNumAvailableDirections
+        cmp #1
+        bcs doPickDirection
+        bra dontPickDirection
+
+doPickDirection anop
+
+        lda #1
+        sta ghostWillTurn,x
+
+; keep track of where the ghost changes direction and only allow changing direction again after travelling at least 8px
+
+;        lda ghostDirChangeX,x
+;        sec
+;        sbc ghostPixelX,x
+;        absoluteValue
+;        cmp #$8
+;        bcs okayToChangeDirections
+
+;        lda ghostDirChangeY,x
+;        sec
+;        sbc ghostPixelY,x
+;        absoluteValue
+;        cmp #$8
+;        bcs okayToChangeDirections
+
+;        bra dontPickDirection
+
+;okayToChangeDirections anop
+
+; pick the direction we will turn when we reach the turn point
+        jsr pickDirection
+        ldx currentGhost
+        sta ghostUpcomingDirection,x
+        
+        jsr calcDistanceToTurnPoint
+        
+        lda ghostDistanceToTurn,x
+        bmi doTurnNow
+        cmp #0
+        beq doTurnNow
+        bra dontPickDirection
+ 
+ 
+doTurnNow anop
+
+; TURN NOW
+
+        lda ghostUpcomingDirection,x
+        sta ghostDirection,x
+
+; changing direction here so save the XY position where we changed
+
+;        lda ghostPixelX,x
+;        sta ghostDirChangeX,x
+;        lda ghostPixelY,x
+;        sta ghostDirChangeY,x
+
+dontPickDirection anop
+        
+        rts
+        
+        
 
 moveGhost entry
 
@@ -2122,6 +2152,17 @@ speedGhostPenned anop
         rts
 
 speedGhostNotPenned anop
+
+        lda ghostWillTurn,x
+        cmp #0
+        beq notTurning
+
+        lda ghostDistanceToTurn,x
+        sta ghostSpeed,x
+        rts
+        
+notTurning anop
+
         lda #8
         sta ghostSpeed,x
 		rts
@@ -2346,8 +2387,142 @@ limitLevelIndex anop
         asl a
 
         rts
+        
+        
+        
+getTileAheadFromTileXY entry
 
+        ldx currentGhost
+        lda ghostDirection,x
+        cmp #DIRECTION_DOWN
+        beq tileAheadDown
+        cmp #DIRECTION_LEFT
+        beq tileAheadLeft
+        cmp #DIRECTION_RIGHT
+        beq tileAheadRight
+        cmp #DIRECTION_UP
+        beq tileAheadUp
+        rts
+        
+tileAheadDown anop
+        inc tileY
+        
+        lda tileX
+        sta ghostUpcomingTileX,x
+        lda tileY
+        sta ghostUpcomingTileY,x
+        rts
 
+tileAheadLeft anop
+        dec tileX
+        
+        lda tileX
+        sta ghostUpcomingTileX,x
+        lda tileY
+        sta ghostUpcomingTileY,x
+        rts
+
+tileAheadRight anop
+        inc tileX
+        
+        lda tileX
+        sta ghostUpcomingTileX,x
+        lda tileY
+        sta ghostUpcomingTileY,x
+        rts
+
+tileAheadUp anop
+        dec tileY
+        
+        lda tileX
+        sta ghostUpcomingTileX,x
+        lda tileY
+        sta ghostUpcomingTileY,x
+        rts
+
+        
+        
+calcDistanceToTurnPoint entry
+
+        ldx currentGhost
+        lda ghostDirection,x
+        cmp #DIRECTION_DOWN
+        beq tileAheadDistanceDown
+        cmp #DIRECTION_LEFT
+        beq tileAheadDistanceLeft
+        cmp #DIRECTION_RIGHT
+        beq tileAheadDistanceRight
+        cmp #DIRECTION_UP
+        beq tileAheadDistanceUp
+        rts
+        
+tileAheadDistanceDown anop
+
+        lda ghostPixelY,x
+        shiftedToPixel
+        sta temp
+        
+        lda ghostUpcomingTileY,x
+        jsr getPixelYFromTileY
+        sec
+        sbc temp
+        
+        sta ghostDistanceToTurn,x
+
+        rts
+
+tileAheadDistanceLeft anop
+
+        lda ghostUpcomingTileX,x
+        jsr getPixelXFromTileX
+        sta temp
+
+        lda ghostPixelX,x
+        shiftedToPixel
+        sec
+        sbc temp
+        
+        sta ghostDistanceToTurn,x
+
+        rts
+
+tileAheadDistanceRight anop
+
+        lda ghostPixelX,x
+        shiftedToPixel
+        sta temp
+
+        lda ghostUpcomingTileX,x
+        jsr getPixelXFromTileX
+        sec
+        sbc temp
+
+        sta ghostDistanceToTurn,x
+
+        rts
+
+tileAheadDistanceUp anop
+
+        lda ghostUpcomingTileX,x
+        jsr getPixelXFromTileX
+        sta temp
+
+        lda ghostPixelY,x
+        shiftedToPixel
+        sec
+        sbc temp
+
+        sta ghostDistanceToTurn,x
+
+        rts
+
+        
+        
+        
+        
+        
+        
+        
         
 currentGhost dc i2'0'
 
@@ -2432,6 +2607,8 @@ savex dc i2'0'
 savey dc i2'0'
 
 counter dc i2'0'
+
+temp dc i2'0'
 
         end
 
@@ -2564,6 +2741,12 @@ ghostUpcomingDirection anop
         dc i2'0'
         
 ghostDistanceToTurn anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        
+ghostWillTurn anop
         dc i2'0'
         dc i2'0'
         dc i2'0'
