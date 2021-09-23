@@ -41,22 +41,47 @@ runGhosts entry
         jsr runGhostStateTimers
         jsr checkEatenGhosts
 
+        
+        ldx #GHOSTINDEX_RED
+        lda ghostPixelX,x
+        sta ghostPixelOldX,x
+        lda ghostPixelY,x
+        sta ghostPixelOldY,x
         lda #GHOSTINDEX_RED
         sta currentGhost
         jsr runGhost
-        
+        jsr runGhost
+
+        ldx #GHOSTINDEX_PINK
+        lda ghostPixelX,x
+        sta ghostPixelOldX,x
+        lda ghostPixelY,x
+        sta ghostPixelOldY,x
         lda #GHOSTINDEX_PINK
         sta currentGhost
         jsr runGhost
+        jsr runGhost
 
+        ldx #GHOSTINDEX_BLUE
+        lda ghostPixelX,x
+        sta ghostPixelOldX,x
+        lda ghostPixelY,x
+        sta ghostPixelOldY,x
         lda #GHOSTINDEX_BLUE
         sta currentGhost
         jsr runGhost
+        jsr runGhost
 
+        ldx #GHOSTINDEX_ORANGE
+        lda ghostPixelX,x
+        sta ghostPixelOldX,x
+        lda ghostPixelY,x
+        sta ghostPixelOldY,x
         lda #GHOSTINDEX_ORANGE
         sta currentGhost
         jsr runGhost
-        
+        jsr runGhost
+
         rts
 
 
@@ -137,12 +162,6 @@ switchModeDone anop
 runGhost entry
 
         ldx currentGhost
-
-        lda ghostPixelX,x
-        sta ghostPixelOldX,x
-        lda ghostPixelY,x
-        sta ghostPixelOldY,x
-
 
         jsr setGhostSpeed
 
@@ -2472,6 +2491,30 @@ ghostTargetX anop
         dc i2'0'
 
 ghostTargetY anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        
+ghostUpcomingTileX anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+
+ghostUpcomingTileY anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        
+ghostUpcomingDirection anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        
+ghostDistanceToTurn anop
         dc i2'0'
         dc i2'0'
         dc i2'0'
