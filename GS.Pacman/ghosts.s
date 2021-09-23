@@ -159,10 +159,47 @@ switchModeDone anop
         rts
 
         
+        
 runGhost entry
 
         ldx currentGhost
+        
+; is ghost in a new tile?
 
+        lda ghostPixelX,x
+        shiftedToPixel
+        jsr getTileXFromPixelX
+        sta ghostTileX,x
+        
+        lda ghostPixelY,x
+        shiftedToPixel
+        jsr getTileYFromPixelY
+        sta ghostTileY,x
+
+        lda ghostTileX,x
+        cmp ghostTileOldX,x
+        bne isNewTile
+        
+        lda ghostTileY,x
+        cmp ghostTileOldY,x
+        bne isNewTile
+
+        
+isNewTile anop
+
+        lda ghostTileX,x
+        sta ghostTileOldX,x
+        lda ghostTileY,x
+        sta ghostTileOldY,x
+
+; pick upcoming direction
+
+; get distance to turn
+
+
+
+isSameTile anop
+        
         jsr setGhostSpeed
 
         jsr runGhostDotCounter
@@ -2484,6 +2521,18 @@ ghostTileY anop
         dc i2'0'
         dc i2'0'
         
+ghostTileOldX anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        
+ghostTileOldY anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        
 ghostTargetX anop
         dc i2'0'
         dc i2'0'
@@ -2551,10 +2600,10 @@ ghostInitialDirection anop
         dc i2'DIRECTION_UP'
 
 ghostSpeed anop
-        dc i2'8'
-        dc i2'8'
-        dc i2'8'
-        dc i2'8'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
 
 ghostDotCounter anop
         dc i2'0'
