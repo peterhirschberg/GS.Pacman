@@ -41,22 +41,78 @@ runGhosts entry
         jsr runGhostStateTimers
         jsr checkEatenGhosts
 
+        ldx #GHOSTINDEX_RED
+        lda ghostPixelX,x
+        sta ghostPixelOldX,x
+        lda ghostPixelY,x
+        sta ghostPixelOldY,x
         lda #GHOSTINDEX_RED
         sta currentGhost
-        jsr runGhost
         
+        ldx #GHOSTINDEX_RED
+        lda ghostSpeed,x
+        sta runCounter
+redRunLoop anop
+        jsr runGhost
+        dec runCounter
+        lda runCounter
+        cmp #0
+        bne redRunLoop
+
+        ldx #GHOSTINDEX_PINK
+        lda ghostPixelX,x
+        sta ghostPixelOldX,x
+        lda ghostPixelY,x
+        sta ghostPixelOldY,x
         lda #GHOSTINDEX_PINK
         sta currentGhost
+        
+        ldx #GHOSTINDEX_PINK
+        lda ghostSpeed,x
+        sta runCounter
+pinkRunLoop anop
         jsr runGhost
+        dec runCounter
+        lda runCounter
+        cmp #0
+        bne pinkRunLoop
 
+        ldx #GHOSTINDEX_BLUE
+        lda ghostPixelX,x
+        sta ghostPixelOldX,x
+        lda ghostPixelY,x
+        sta ghostPixelOldY,x
         lda #GHOSTINDEX_BLUE
         sta currentGhost
-        jsr runGhost
 
+        ldx #GHOSTINDEX_BLUE
+        lda ghostSpeed,x
+        sta runCounter
+blueRunLoop anop
+        jsr runGhost
+        dec runCounter
+        lda runCounter
+        cmp #0
+        bne blueRunLoop
+
+        ldx #GHOSTINDEX_ORANGE
+        lda ghostPixelX,x
+        sta ghostPixelOldX,x
+        lda ghostPixelY,x
+        sta ghostPixelOldY,x
         lda #GHOSTINDEX_ORANGE
         sta currentGhost
+
+        ldx #GHOSTINDEX_ORANGE
+        lda ghostSpeed,x
+        sta runCounter
+orangeRunLoop anop
         jsr runGhost
-        
+        dec runCounter
+        lda runCounter
+        cmp #0
+        bne orangeRunLoop
+
         rts
 
 
@@ -138,12 +194,6 @@ runGhost entry
 
         ldx currentGhost
 
-        lda ghostPixelX,x
-        sta ghostPixelOldX,x
-        lda ghostPixelY,x
-        sta ghostPixelOldY,x
-
-
         jsr setGhostSpeed
 
         jsr runGhostDotCounter
@@ -219,7 +269,7 @@ ghostNotPenned anop
 
 doPickDirection anop
 
-; keep track of where the ghost changes direction and only allow changing direction again after travelling at least 1px
+; keep track of where the ghost changes direction and only allow changing direction again after travelling at least 8 units
 
         lda ghostDirChangeX,x
         sec
@@ -370,11 +420,11 @@ pennedGoLeft anop
 pennedStartPickMode anop
 
         lda ghostPixelX,x
-        and #$fff0
+        and #$fff8
         sta ghostPixelX,x
 
         lda ghostPixelY,x
-        and #$fff0
+        and #$fff8
         sta ghostPixelY,x
 
         lda newMode
@@ -511,28 +561,28 @@ moveGhost entry
 moveGhostUp anop
         lda ghostPixelY,x
         sec
-        sbc ghostSpeed,x
+        sbc #2
         sta ghostPixelY,x
         rts
 
 moveGhostDown anop
         lda ghostPixelY,x
         clc
-        adc ghostSpeed,x
+        adc #2
         sta ghostPixelY,x
         rts
 
 moveGhostLeft anop
         lda ghostPixelX,x
         sec
-        sbc ghostSpeed,x
+        sbc #2
         sta ghostPixelX,x
         rts
 
 moveGhostRight anop
         lda ghostPixelX,x
         clc
-        adc ghostSpeed,x
+        adc #2
         sta ghostPixelX,x
         rts
 
@@ -2376,6 +2426,8 @@ savex dc i2'0'
 savey dc i2'0'
 
 counter dc i2'0'
+
+runCounter dc i2'0'
 
         end
 
