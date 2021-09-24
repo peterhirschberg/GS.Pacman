@@ -136,7 +136,7 @@ switchMode anop
         asl a
         tax
         lda level1GhostModes,x
-        sta newMode
+        sta globalGhostState
         lda level1GhostModeTimes,x
         sta ghostModeTimer
 
@@ -155,7 +155,7 @@ switchModeContinue anop
 
 ; set the new mode
 
-        lda newMode
+        lda globalGhostState
         sta ghostState,x
 
 ; reverse directions
@@ -420,14 +420,19 @@ pennedGoLeft anop
 pennedStartPickMode anop
 
         lda ghostPixelX,x
-        and #$fff8
+        and #$fff0
         sta ghostPixelX,x
 
         lda ghostPixelY,x
-        and #$fff8
+        and #$fff0
         sta ghostPixelY,x
+        
+        lda ghostPixelX,x
+        sta ghostDirChangeX,x
+        lda ghostPixelY,x
+        sta ghostDirChangeY,x
 
-        lda newMode
+        lda globalGhostState
         sta ghostState,x
 
         lda #DIRECTION_LEFT
@@ -636,7 +641,7 @@ timerGhostLoop anop
 
 ; no longer frightened
 
-        lda newMode
+        lda globalGhostState
         sta ghostState,x
 
 nextGhost anop
@@ -2710,7 +2715,7 @@ ghostModeTimer dc i2'0'
 
 ghostMode dc i2'0'
 
-newMode dc i2'GHOSTSTATE_SCATTER'
+globalGhostState dc i2'GHOSTSTATE_SCATTER'
 
 fakeTargetTimer dc i2'20'
         

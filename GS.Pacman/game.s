@@ -435,7 +435,7 @@ resetNewLife anop
 ; reset the ghosts
 
         lda #GHOSTSTATE_SCATTER
-        sta newMode
+        sta globalGhostState
 
         lda #20
         sta fakeTargetTimer
