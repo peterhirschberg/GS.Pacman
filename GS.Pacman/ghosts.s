@@ -30,6 +30,8 @@ initGhosts entry
 
         rts
 
+redSurge dc i2'0'
+redSurgeCounter dc i2'0'
         
 runGhosts entry
 
@@ -52,6 +54,7 @@ runGhosts entry
         ldx #GHOSTINDEX_RED
         lda ghostSpeed,x
         lsr a
+        lsr a
         sta runCounter
 redRunLoop anop
         jsr runGhost
@@ -59,6 +62,36 @@ redRunLoop anop
         lda runCounter
         cmp #0
         bne redRunLoop
+
+        lda redSurge
+        cmp #0
+        beq doRedSurge
+        bra dontRedSurge
+
+doRedSurge anop
+        
+        jsr runGhost
+        lda #1
+        sta redSurge
+        bra redSurgeDone
+        
+dontRedSurge anop
+
+        lda redSurgeCounter
+        cmp #0
+        beq setRedSurge
+
+        dec redSurgeCounter
+        bra redSurgeDone
+
+setRedSurge anop
+        
+        lda #0
+        sta redSurge
+        lda #1
+        sta redSurgeCounter
+
+redSurgeDone anop
 
         ldx #GHOSTINDEX_PINK
         lda ghostPixelX,x
@@ -70,6 +103,7 @@ redRunLoop anop
         
         ldx #GHOSTINDEX_PINK
         lda ghostSpeed,x
+        lsr a
         lsr a
         sta runCounter
 pinkRunLoop anop
@@ -90,6 +124,7 @@ pinkRunLoop anop
         ldx #GHOSTINDEX_BLUE
         lda ghostSpeed,x
         lsr a
+        lsr a
         sta runCounter
 blueRunLoop anop
         jsr runGhost
@@ -108,6 +143,7 @@ blueRunLoop anop
 
         ldx #GHOSTINDEX_ORANGE
         lda ghostSpeed,x
+        lsr a
         lsr a
         sta runCounter
 orangeRunLoop anop
