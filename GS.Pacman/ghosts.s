@@ -160,9 +160,14 @@ switchModeDone anop
 
         
         
+ghostIsNewTile dc i2'0'
+        
 runGhost entry
 
         ldx currentGhost
+        
+        lda #0
+        sta ghostIsNewTile
         
 ; is ghost in a new tile?
 
@@ -184,8 +189,12 @@ runGhost entry
         cmp ghostTileOldY,x
         bne isNewTile
 
+        bra isSameTile
         
 isNewTile anop
+
+        lda #1
+        sta ghostIsNewTile
 
         lda ghostTileX,x
         sta ghostTileOldX,x
@@ -198,12 +207,9 @@ isNewTile anop
 
 ; get distance to turn
 
-
+isSameTile anop
 
         jsr setGhostSpeed
-
-
-isSameTile anop
 
         jsr runGhostDotCounter
         
@@ -551,12 +557,21 @@ doPickDirection anop
         
         jsr calcDistanceToTurnPoint
         
-        lda ghostDistanceToTurn,x
-        bmi doTurnNow
-        cmp #0
-        beq doTurnNow
-        bra dontPickDirection
- 
+; PDH FIX ME ****
+;        lda ghostDistanceToTurn,x
+;        bmi doTurnNow
+;        cmp #0
+;        beq doTurnNow
+;        bra dontPickDirection
+
+;        lda ghostTileX,x
+;        cmp ghostUpcomingTileX,x
+;        bne dontPickDirection
+
+;        lda ghostTileY,x
+;       cmp ghostUpcomingTileY,x
+;       bne dontPickDirection
+
  
 doTurnNow anop
 
@@ -2118,12 +2133,12 @@ setGhostSpeed entry
         jsr isGhostInTunnel
         cmp #0
         beq speedNotInTunnel
-        lda #4
+        lda #2
         sta ghostSpeed,x
         rts
 
 speedEaten anop
-        lda #16
+        lda #8
         sta ghostSpeed,x
         rts
 
@@ -2132,7 +2147,7 @@ speedNotInTunnel anop
 		lda ghostState,x
 		cmp #GHOSTSTATE_FRIGHTENED
 		bne speedNotFrightened
-		lda #4
+		lda #2
         sta ghostSpeed,x
 		rts
 
@@ -2147,7 +2162,7 @@ speedNotFrightened anop
 
 speedGhostPenned anop
 
-        lda #4
+        lda #2
         sta ghostSpeed,x
         rts
 
@@ -2158,6 +2173,15 @@ speedGhostNotPenned anop
         beq notTurning
 
         lda ghostDistanceToTurn,x
+        cmp #8
+        bcs limitSpeed
+        
+        lda ghostDistanceToTurn,x
+        sta ghostSpeed,x
+        rts
+        
+limitSpeed anop
+        lda #6
         sta ghostSpeed,x
         rts
         
