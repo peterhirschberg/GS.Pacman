@@ -51,6 +51,7 @@ runGhosts entry
         
         ldx #GHOSTINDEX_RED
         lda ghostSpeed,x
+        lsr a
         sta runCounter
 redRunLoop anop
         jsr runGhost
@@ -69,6 +70,7 @@ redRunLoop anop
         
         ldx #GHOSTINDEX_PINK
         lda ghostSpeed,x
+        lsr a
         sta runCounter
 pinkRunLoop anop
         jsr runGhost
@@ -87,6 +89,7 @@ pinkRunLoop anop
 
         ldx #GHOSTINDEX_BLUE
         lda ghostSpeed,x
+        lsr a
         sta runCounter
 blueRunLoop anop
         jsr runGhost
@@ -105,6 +108,7 @@ blueRunLoop anop
 
         ldx #GHOSTINDEX_ORANGE
         lda ghostSpeed,x
+        lsr a
         sta runCounter
 orangeRunLoop anop
         jsr runGhost
@@ -229,6 +233,15 @@ ghostPenned anop
         jsr pickDirection
         ldx currentGhost
         sta ghostDirection,x
+        
+        lda ghostState,x
+        cmp globalGhostState
+        bne stillPenned
+        
+        rts
+        
+stillPenned anop
+        
         brl dontPickDirection
 
 ghostNotPenned anop
@@ -427,6 +440,9 @@ pennedStartPickMode anop
         and #$fff0
         sta ghostPixelY,x
         
+        lda #$200
+        sta ghostPixelY,x
+        
         lda ghostPixelX,x
         sta ghostDirChangeX,x
         lda ghostPixelY,x
@@ -566,28 +582,28 @@ moveGhost entry
 moveGhostUp anop
         lda ghostPixelY,x
         sec
-        sbc #2
+        sbc #4
         sta ghostPixelY,x
         rts
 
 moveGhostDown anop
         lda ghostPixelY,x
         clc
-        adc #2
+        adc #4
         sta ghostPixelY,x
         rts
 
 moveGhostLeft anop
         lda ghostPixelX,x
         sec
-        sbc #2
+        sbc #4
         sta ghostPixelX,x
         rts
 
 moveGhostRight anop
         lda ghostPixelX,x
         clc
-        adc #2
+        adc #4
         sta ghostPixelX,x
         rts
 
