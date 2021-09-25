@@ -70,8 +70,9 @@ ghostSpeedStepIndex anop
 getGhostSpeedSteps entry
 
         ldx currentGhost
-        inc ghostSpeedStepIndex,x
         lda ghostSpeedStepIndex,x
+        inc a
+        sta ghostSpeedStepIndex,x
         cmp #8
         bne dontResetSpeedStepIndex
         
@@ -108,7 +109,7 @@ getSteps50 anop
         tay
         lda speedSteps50,y
         rts
-
+        
 getSteps75 anop
         lda ghostSpeedStepIndex,x
         asl a
@@ -184,6 +185,7 @@ runGhosts entry
         sta ghostPixelOldY,x
         lda #GHOSTINDEX_RED
         sta currentGhost
+        jsr setGhostSpeed
 
         jsr getGhostSpeedSteps
         sta runCounter
@@ -201,7 +203,8 @@ redRunLoop anop
         sta ghostPixelOldY,x
         lda #GHOSTINDEX_PINK
         sta currentGhost
-        
+        jsr setGhostSpeed
+
         jsr getGhostSpeedSteps
         sta runCounter
 pinkRunLoop anop
@@ -218,6 +221,7 @@ pinkRunLoop anop
         sta ghostPixelOldY,x
         lda #GHOSTINDEX_BLUE
         sta currentGhost
+        jsr setGhostSpeed
 
         jsr getGhostSpeedSteps
         sta runCounter
@@ -235,6 +239,7 @@ blueRunLoop anop
         sta ghostPixelOldY,x
         lda #GHOSTINDEX_ORANGE
         sta currentGhost
+        jsr setGhostSpeed
 
         jsr getGhostSpeedSteps
         sta runCounter
@@ -325,8 +330,6 @@ switchModeDone anop
 runGhost entry
 
         ldx currentGhost
-
-        jsr setGhostSpeed
 
         jsr runGhostDotCounter
         
