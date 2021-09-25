@@ -32,14 +32,123 @@ initGhosts entry
 
         
         
-redSpeedSteps anop
-        dc i2'2,2,1,2,2,1,2,2,1'
-
-redElroySpeedSteps anop
-        dc i2'2,2,3,2,2,3,2,2,3'
-
-redSpeedStepIndex dc i2'0'
         
+speedSteps200 anop
+        dc i2’4,4,4,4,4,4,4,4,4’ ; 32
+
+speedSteps105
+        dc i2’2,3,4,3,3,4,3,3,4’ ; 29
+        
+speedSteps100 anop
+        dc i2'2,3,4,2,3,4,3,3,4' ; 28
+
+speedSteps95 anop
+        dc i2’2,3,4,2,3,4,2,3,3’ ; 26
+
+speedSteps90 anop
+        dc i2’2,3,3,2,3,4,2,3,3’ ; 25
+
+speedSteps85 anop
+        dc i2'2,2,4,2,2,4,2,2,4' ; 24
+
+speedSteps80 anop
+        dc i2’2,2,3,2,2,4,2,2,3’ ; 22
+
+speedSteps75 anop
+        dc i2’2,2,3,2,2,3,2,2,3’ ; 21
+
+speedSteps50 anop
+        dc i2’2,2,2,2,2,2,2,2,2’ ; 16
+
+ghostSpeedStepIndex anop
+        dc i2''0'
+        dc i2''0'
+        dc i2''0'
+        dc i2''0'
+
+
+getGhostSpeedSteps entry
+
+        ldx currentGhost
+        inc ghostSpeedStepIndex,x
+        lda ghostSpeedStepIndex,x
+        cmp #8
+        bne dontResetSpeedStepIndex
+        
+        lda #0
+        sta ghostSpeedStepIndex,x
+        
+dontResetSpeedStepIndex anop
+
+        lda ghostSpeed,x
+        cmp #50
+        beq getSteps50
+        cmp #75
+        beq getSteps75
+        cmp #80
+        beq getSteps80
+        cmp #85
+        beq getSteps85
+        cmp #90
+        beq getSteps90
+        cmp #95
+        beq getSteps95
+        cmp #100
+        beq getSteps100
+        cmp #105
+        beq getSteps105
+        cmp #200
+        beq getSteps200
+
+        rts
+        
+getSteps50 anop
+        ldy ghostSpeedStepIndex,x
+        lda speedSteps50
+        rts
+
+getSteps75 anop
+        ldy ghostSpeedStepIndex,x
+        lda speedSteps75
+        rts
+
+getSteps80 anop
+        ldy ghostSpeedStepIndex,x
+        lda speedSteps80
+        rts
+  
+getSteps85 anop
+        ldy ghostSpeedStepIndex,x
+        lda speedSteps85
+        rts
+
+getSteps90 anop
+        ldy ghostSpeedStepIndex,x
+        lda speedSteps90
+        rts
+        
+getSteps95 anop
+        ldy ghostSpeedStepIndex,x
+        lda speedSteps95
+        rts
+        
+getSteps100 anop
+        ldy ghostSpeedStepIndex,x
+        lda speedSteps100
+        rts
+
+getSteps105 anop
+        ldy ghostSpeedStepIndex,x
+        lda speedSteps105
+        rts
+
+getSteps200 anop
+        ldy ghostSpeedStepIndex,x
+        lda speedSteps200
+        rts
+        
+
+
 runGhosts entry
 
         jsr runSirenSounds
@@ -50,9 +159,6 @@ runGhosts entry
         jsr runGhostStateTimers
         jsr checkEatenGhosts
 
-; red (elroy)
-; 2,2,3,2,2,3,2,2,3
-
         ldx #GHOSTINDEX_RED
         lda ghostPixelX,x
         sta ghostPixelOldX,x
@@ -61,10 +167,7 @@ runGhosts entry
         lda #GHOSTINDEX_RED
         sta currentGhost
 
-        lda redSpeedStepIndex
-        asl a
-        tay
-        lda redSpeedSteps,y
+        jsr getGhostSpeedSteps
         sta runCounter
 redRunLoop anop
         jsr runGhost
@@ -72,16 +175,6 @@ redRunLoop anop
         lda runCounter
         cmp #0
         bne redRunLoop
-
-        inc redSpeedStepIndex
-        lda redSpeedStepIndex
-        cmp #8
-        bne runNextGhost
-        
-        lda #0
-        sta redSpeedStepIndex
-        
-runNextGhost anop
 
         ldx #GHOSTINDEX_PINK
         lda ghostPixelX,x
@@ -91,10 +184,7 @@ runNextGhost anop
         lda #GHOSTINDEX_PINK
         sta currentGhost
         
-        ldx #GHOSTINDEX_PINK
-        lda ghostSpeed,x
-        lsr a
-        lsr a
+        jsr getGhostSpeedSteps
         sta runCounter
 pinkRunLoop anop
         jsr runGhost
@@ -111,10 +201,7 @@ pinkRunLoop anop
         lda #GHOSTINDEX_BLUE
         sta currentGhost
 
-        ldx #GHOSTINDEX_BLUE
-        lda ghostSpeed,x
-        lsr a
-        lsr a
+        jsr getGhostSpeedSteps
         sta runCounter
 blueRunLoop anop
         jsr runGhost
@@ -131,10 +218,7 @@ blueRunLoop anop
         lda #GHOSTINDEX_ORANGE
         sta currentGhost
 
-        ldx #GHOSTINDEX_ORANGE
-        lda ghostSpeed,x
-        lsr a
-        lsr a
+        jsr getGhostSpeedSteps
         sta runCounter
 orangeRunLoop anop
         jsr runGhost
@@ -2129,12 +2213,12 @@ setGhostSpeed entry
         jsr isGhostInTunnel
         cmp #0
         beq speedNotInTunnel
-        lda #4
+        lda #50
         sta ghostSpeed,x
         rts
 
 speedEaten anop
-        lda #16
+        lda #200
         sta ghostSpeed,x
         rts
 
@@ -2143,7 +2227,7 @@ speedNotInTunnel anop
 		lda ghostState,x
 		cmp #GHOSTSTATE_FRIGHTENED
 		bne speedNotFrightened
-		lda #4
+		lda #50
         sta ghostSpeed,x
 		rts
 
@@ -2158,12 +2242,12 @@ speedNotFrightened anop
 
 speedGhostPenned anop
 
-        lda #4
+        lda #50
         sta ghostSpeed,x
         rts
 
 speedGhostNotPenned anop
-        lda #8
+        lda #75
         sta ghostSpeed,x
 		rts
 
