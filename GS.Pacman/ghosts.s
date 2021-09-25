@@ -30,8 +30,15 @@ initGhosts entry
 
         rts
 
-redSurge dc i2'0'
-redSurgeCounter dc i2'0'
+        
+        
+redSpeedSteps anop
+        dc i2'2,2,1,2,2,1,2,2,1'
+
+redElroySpeedSteps anop
+        dc i2'2,2,3,2,2,3,2,2,3'
+
+redSpeedStepIndex dc i2'0'
         
 runGhosts entry
 
@@ -43,6 +50,9 @@ runGhosts entry
         jsr runGhostStateTimers
         jsr checkEatenGhosts
 
+; red (elroy)
+; 2,2,3,2,2,3,2,2,3
+
         ldx #GHOSTINDEX_RED
         lda ghostPixelX,x
         sta ghostPixelOldX,x
@@ -50,11 +60,11 @@ runGhosts entry
         sta ghostPixelOldY,x
         lda #GHOSTINDEX_RED
         sta currentGhost
-        
-        ldx #GHOSTINDEX_RED
-        lda ghostSpeed,x
-        lsr a
-        lsr a
+
+        lda redSpeedStepIndex
+        asl a
+        tay
+        lda redSpeedSteps,y
         sta runCounter
 redRunLoop anop
         jsr runGhost
@@ -63,35 +73,15 @@ redRunLoop anop
         cmp #0
         bne redRunLoop
 
-        lda redSurge
-        cmp #0
-        beq doRedSurge
-        bra dontRedSurge
-
-doRedSurge anop
-        
-        jsr runGhost
-        lda #1
-        sta redSurge
-        bra redSurgeDone
-        
-dontRedSurge anop
-
-        lda redSurgeCounter
-        cmp #0
-        beq setRedSurge
-
-        dec redSurgeCounter
-        bra redSurgeDone
-
-setRedSurge anop
+        inc redSpeedStepIndex
+        lda redSpeedStepIndex
+        cmp #8
+        bne runNextGhost
         
         lda #0
-        sta redSurge
-        lda #1
-        sta redSurgeCounter
-
-redSurgeDone anop
+        sta redSpeedStepIndex
+        
+runNextGhost anop
 
         ldx #GHOSTINDEX_PINK
         lda ghostPixelX,x
@@ -277,7 +267,7 @@ ghostPenned anop
         rts
         
 stillPenned anop
-        
+
         brl dontPickDirection
 
 ghostNotPenned anop
