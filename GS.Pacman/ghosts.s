@@ -34,37 +34,37 @@ initGhosts entry
         
         
 speedSteps200 anop
-        dc i2’4,4,4,4,4,4,4,4,4’ ; 32
+        dc i2'4,4,4,4,4,4,4,4,4' ; 32
 
-speedSteps105
-        dc i2’2,3,4,3,3,4,3,3,4’ ; 29
+speedSteps105 anop
+        dc i2'2,3,4,3,3,4,3,3,4' ; 29
         
 speedSteps100 anop
         dc i2'2,3,4,2,3,4,3,3,4' ; 28
 
 speedSteps95 anop
-        dc i2’2,3,4,2,3,4,2,3,3’ ; 26
+        dc i2'2,3,4,2,3,4,2,3,3' ; 26
 
 speedSteps90 anop
-        dc i2’2,3,3,2,3,4,2,3,3’ ; 25
+        dc i2'2,3,3,2,3,4,2,3,3' ; 25
 
 speedSteps85 anop
         dc i2'2,2,4,2,2,4,2,2,4' ; 24
 
 speedSteps80 anop
-        dc i2’2,2,3,2,2,4,2,2,3’ ; 22
+        dc i2'2,2,3,2,2,4,2,2,3' ; 22
 
 speedSteps75 anop
-        dc i2’2,2,3,2,2,3,2,2,3’ ; 21
+        dc i2'2,2,3,2,2,3,2,2,3' ; 21
 
 speedSteps50 anop
-        dc i2’2,2,2,2,2,2,2,2,2’ ; 16
+        dc i2'2,2,2,2,2,2,2,2,2' ; 16
 
 ghostSpeedStepIndex anop
-        dc i2''0'
-        dc i2''0'
-        dc i2''0'
-        dc i2''0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
 
 
 getGhostSpeedSteps entry
@@ -103,48 +103,66 @@ dontResetSpeedStepIndex anop
         rts
         
 getSteps50 anop
-        ldy ghostSpeedStepIndex,x
-        lda speedSteps50
+        lda ghostSpeedStepIndex,x
+        asl a
+        tay
+        lda speedSteps50,y
         rts
 
 getSteps75 anop
-        ldy ghostSpeedStepIndex,x
-        lda speedSteps75
+        lda ghostSpeedStepIndex,x
+        asl a
+        tay
+        lda speedSteps75,y
         rts
 
 getSteps80 anop
-        ldy ghostSpeedStepIndex,x
-        lda speedSteps80
+        lda ghostSpeedStepIndex,x
+        asl a
+        tay
+        lda speedSteps80,y
         rts
   
 getSteps85 anop
-        ldy ghostSpeedStepIndex,x
-        lda speedSteps85
+        lda ghostSpeedStepIndex,x
+        asl a
+        tay
+        lda speedSteps85,y
         rts
 
 getSteps90 anop
-        ldy ghostSpeedStepIndex,x
-        lda speedSteps90
+        lda ghostSpeedStepIndex,x
+        asl a
+        tay
+        lda speedSteps90,y
         rts
         
 getSteps95 anop
-        ldy ghostSpeedStepIndex,x
-        lda speedSteps95
+        lda ghostSpeedStepIndex,x
+        asl a
+        tay
+        lda speedSteps95,y
         rts
         
 getSteps100 anop
-        ldy ghostSpeedStepIndex,x
-        lda speedSteps100
+        lda ghostSpeedStepIndex,x
+        asl a
+        tay
+        lda speedSteps100,y
         rts
 
 getSteps105 anop
-        ldy ghostSpeedStepIndex,x
-        lda speedSteps105
+        lda ghostSpeedStepIndex,x
+        asl a
+        tay
+        lda speedSteps105,y
         rts
 
 getSteps200 anop
-        ldy ghostSpeedStepIndex,x
-        lda speedSteps200
+        lda ghostSpeedStepIndex,x
+        asl a
+        tay
+        lda speedSteps200,y
         rts
         
 
