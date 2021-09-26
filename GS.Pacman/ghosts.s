@@ -2369,13 +2369,13 @@ getRedGhostLevelSpeed anop
 getElroy1Speed anop
         jsr ghostLevelIndex
         tay
-        lda getElroy1Speed,y
+        lda ghostElroy1Speed,y
         rts
 
 getElroy2Speed anop
         jsr ghostLevelIndex
         tay
-        lda getElroy2Speed,y
+        lda ghostElroy2Speed,y
         rts
 
 getGhostLevelSpeedFrightened entry
