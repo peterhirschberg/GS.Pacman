@@ -75,6 +75,9 @@ readKeys anop
 
         cmp #'1'
         beq onStartGame
+
+        cmp #'9'
+        beq onRackAdvance
         
 checkKeysDone anop
         long i,m
@@ -136,7 +139,6 @@ onQuit anop
         lda #1
         sta shouldQuit
         
-;        jsl signalQuit
 dontQuit anop
         rts
         
@@ -147,6 +149,16 @@ onStartGame anop
 
         rts
 
+onRackAdvance anop
+
+        inc numLives
+
+        lda #240-100
+        sta levelCompleteTimer
+
+        jsr doLevelComplete
+        
+        rts
 
 
 readJoystick anop

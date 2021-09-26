@@ -266,9 +266,10 @@ startNextLevel anop
         jsr startNewLevel
         brl gameIntro
 
+        
 levelNotComplete anop
 
-        
+       
         jsr borderStart
 
 

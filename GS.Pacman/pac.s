@@ -693,17 +693,23 @@ levelDone2 anop
 
 ; level is complete
 
-        jsr stopScaredSound
-        jsr stopSiren2Sound
-        jsr stopSiren1Sound
-
         lda #240
         sta levelCompleteTimer
+        jsr doLevelComplete
 
         rts
 
 
+doLevelComplete entry
 
+        jsr stopScaredSound
+        jsr stopSiren2Sound
+        jsr stopSiren1Sound
+
+        rts
+
+
+        
 checkDots entry
 
         lda pacX

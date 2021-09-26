@@ -22,7 +22,7 @@ ghosts start
 
 initGhosts entry
 
-; TODO: Assume level 1
+; TODO: Assume level 1 <<<<< FIX THIS!!!!
 
         ldx #0
         lda level1GhostModeTimes,x
