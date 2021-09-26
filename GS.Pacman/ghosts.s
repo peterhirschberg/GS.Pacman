@@ -55,16 +55,22 @@ speedSteps80 anop
         dc i2'2,2,3,2,2,4,2,2,3' ; 22
 
 speedSteps75 anop
-        dc i2'2,2,3,2,2,3,2,2,3' ; 21
+        dc i2'2,2,2,2,2,2,2,2,2' ; 16
 
+speedSteps60 anop
+        dc i2'1,2,1,2,1,2,1,2,2' ; 14
+
+speedSteps55 anop
+        dc i2'1,2,1,2,1,2,1,2,1' ; 13
+        
 speedSteps50 anop
-        dc i2'1,1,1,1,1,1,1,1,1' ; 8
+        dc i2'1,2,1,2,1,2,1,2,1' ; 12
 
 speedSteps45 anop
-        dc i2'1,1,0,1,1,1,0,1,1' ; 6
+        dc i2'1,2,1,1,1,2,1,1,1' ; 10
 
 speedSteps40 anop
-        dc i2'1,0,1,0,1,0,1,0,1' ; 4
+        dc i2'1,1,1,1,1,1,1,1,1' ; 8
 
         
 ghostSpeedStepIndex anop
@@ -95,6 +101,10 @@ dontResetSpeedStepIndex anop
         beq getSteps45
         cmp #50
         beq getSteps50
+        cmp #55
+        beq getSteps55
+        cmp #60
+        beq getSteps60
         cmp #75
         beq getSteps75
         cmp #80
@@ -133,6 +143,20 @@ getSteps50 anop
         asl a
         tay
         lda speedSteps50,y
+        rts
+
+getSteps55 anop
+        lda ghostSpeedStepIndex,x
+        asl a
+        tay
+        lda speedSteps55,y
+        rts
+        
+getSteps60 anop
+        lda ghostSpeedStepIndex,x
+        asl a
+        tay
+        lda speedSteps60,y
         rts
         
 getSteps75 anop
@@ -2285,7 +2309,7 @@ speedNotInTunnel anop
 		lda ghostState,x
 		cmp #GHOSTSTATE_FRIGHTENED
 		bne speedNotFrightened
-		lda #50 ; <------------ set based on level
+		lda #40 ; <------------ set based on level
         sta ghostSpeed,x
 		rts
 
