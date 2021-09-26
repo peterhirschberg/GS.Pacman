@@ -2295,7 +2295,7 @@ setGhostSpeed entry
         jsr isGhostInTunnel
         cmp #0
         beq speedNotInTunnel
-        jsr ghostTunnelSpeed
+        jsr getGhostLevelSpeedTunnel
         sta ghostSpeed,x
         rts
 
