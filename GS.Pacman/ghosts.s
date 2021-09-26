@@ -2336,21 +2336,54 @@ speedGhostNotPenned anop
 
 ; TODO - Elroy1 and 2
 getGhostLevelSpeed entry
+        lda currentGhost
+        cmp #GHOSTINDEX_RED
+        beq getRedGhostLevelSpeed
         jsr ghostLevelIndex
-        tax
-        lda ghostNormalSpeed,x
+        tay
+        lda ghostNormalSpeed,y
+        rts
+
+getRedGhostLevelSpeed anop
+
+        lda totalDotCount
+        clc
+        sbc eatenDotCount
+        sta remainingDots
+        
+        jsr ghostLevelIndex
+        tay
+        lda elroy2LevelDotCount,y
+        cmp remainingDots
+        bcs getElroy2Speed
+        lda elroy1LevelDotCount,y
+        cmp remainingDots
+        bcs getElroy1Speed
+
+        jsr ghostLevelIndex
+        tay
+        lda ghostNormalSpeed,y
+
+        rts
+        
+getElroy1Speed anop
+        lda getElroy1Speed,y
+        rts
+
+getElroy2Speed anop
+        lda getElroy2Speed,y
         rts
 
 getGhostLevelSpeedFrightened entry
         jsr ghostLevelIndex
-        tax
-        lda ghostFrightenedSpeed,x
+        tay
+        lda ghostFrightenedSpeed,y
         rts
 
 getGhostLevelSpeedTunnel entry
         jsr ghostLevelIndex
-        tax
-        lda ghostTunnelSpeed,x
+        tay
+        lda ghostTunnelSpeed,y
         rts
 
 
@@ -2662,6 +2695,8 @@ savey dc i2'0'
 counter dc i2'0'
 
 runCounter dc i2'0'
+
+remainingDots dc i2'0'
 
         end
 
@@ -3029,6 +3064,52 @@ ghostTunnelSpeed anop
         dc i2'50' ; level 19
         dc i2'50' ; level 20
         dc i2'50' ; level 21
+        
+elroy1LevelDotCount anop
+        dc i2'20' ; level 1
+        dc i2'30' ; level 2
+        dc i2'40' ; level 3
+        dc i2'40' ; level 4
+        dc i2'40' ; level 5
+        dc i2'50' ; level 6
+        dc i2'50' ; level 7
+        dc i2'50' ; level 8
+        dc i2'60' ; level 9
+        dc i2'60' ; level 10
+        dc i2'60' ; level 11
+        dc i2'80' ; level 12
+        dc i2'80' ; level 13
+        dc i2'80' ; level 14
+        dc i2'100' ; level 15
+        dc i2'100' ; level 16
+        dc i2'100' ; level 17
+        dc i2'100' ; level 18
+        dc i2'120' ; level 19
+        dc i2'120' ; level 20
+        dc i2'120' ; level 21
+        
+elroy2LevelDotCount anop
+        dc i2'10' ; level 1
+        dc i2'15' ; level 2
+        dc i2'20' ; level 3
+        dc i2'20' ; level 4
+        dc i2'20' ; level 5
+        dc i2'25' ; level 6
+        dc i2'25' ; level 7
+        dc i2'25' ; level 8
+        dc i2'30' ; level 9
+        dc i2'30' ; level 10
+        dc i2'30' ; level 11
+        dc i2'40' ; level 12
+        dc i2'40' ; level 13
+        dc i2'40' ; level 14
+        dc i2'50' ; level 15
+        dc i2'50' ; level 16
+        dc i2'50' ; level 17
+        dc i2'50' ; level 18
+        dc i2'60' ; level 19
+        dc i2'60' ; level 20
+        dc i2'60' ; level 21
 
 ghostFrightenedTime anop
         dc i2'60*6' ; level 1
