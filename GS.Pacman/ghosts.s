@@ -80,6 +80,19 @@ ghostSpeedStepIndex anop
         dc i2'0'
 
 
+resetGhostSpeedStepIndexes entry
+        lda #0
+        ldy #0
+        sta ghostSpeedStepIndex,y
+        ldy #2
+        sta ghostSpeedStepIndex,y
+        ldy #4
+        sta ghostSpeedStepIndex,y
+        ldy #6
+        sta ghostSpeedStepIndex,y
+        rts
+        
+
 getGhostSpeedSteps entry
 
         ldx currentGhost
@@ -355,6 +368,9 @@ switchModeContinue anop
 
         lda globalGhostState
         sta ghostState,x
+        
+        lda #0
+        sta ghostSpeedStepIndex,x
 
 ; reverse directions
 
@@ -848,6 +864,9 @@ timerGhostLoop anop
         beq nextGhost
 
 ; no longer frightened
+
+        lda #0
+        sta ghostSpeedStepIndex,x
 
         lda globalGhostState
         sta ghostState,x
