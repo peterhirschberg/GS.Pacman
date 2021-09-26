@@ -22,11 +22,55 @@ ghosts start
 
 initGhosts entry
 
-; TODO: Assume level 1 <<<<< FIX THIS!!!!
+; decrement the mode timer every frame
+
+        lda #60
+        sta levelModeSecondsDivisor
+
+; set the initial mode timer
 
         ldx #0
         lda level1GhostModeTimes,x
         sta ghostModeTimer
+
+; init the timer table for this level
+
+ghostModeTimesLoop anop
+
+        lda levelNum
+        cmp #5
+        bcs level5AndAbove
+        cmp #2
+        bcs level2To4
+
+; level 1
+
+        lda level1GhostModeTimes,x
+        sta ghostModeTimes,x
+        bra nextTime
+
+level5AndAbove anop
+
+        lda level5plusGhostModeTimes,x
+        sta ghostModeTimes,x
+        bra nextTime
+
+level2To4 anop
+
+        lda level2to4GhostModeTimes,x
+        sta ghostModeTimes,x
+        bra nextTime
+        
+nextTime anop
+
+        inx
+        inx
+        txa
+        cmp #18
+        beq ghostModeTimesDone
+        bra ghostModeTimesLoop
+        
+ghostModeTimesDone anop
 
         rts
 
@@ -329,6 +373,17 @@ orangeRunLoop anop
 
 runModeTimer entry
 
+        dec levelModeSecondsDivisor
+        lda levelModeSecondsDivisor
+        cmp #0
+        beq doRunModeTimer
+        rts
+        
+doRunModeTimer anop
+
+        lda #60
+        sta levelModeSecondsDivisor
+
         lda ghostModeTimer
         cmp #0
         beq switchMode
@@ -346,9 +401,9 @@ switchMode anop
         lda ghostMode
         asl a
         tax
-        lda level1GhostModes,x
+        lda levelGhostModes,x
         sta globalGhostState
-        lda level1GhostModeTimes,x
+        lda ghostModeTimes,x
         sta ghostModeTimer
 
         ldx #0
@@ -2951,17 +3006,47 @@ ghostFrightenedBlinkAnimationSprites anop
         dc i2'SPRITE_FLEEBLINKGHOST_2'
 
 
-level1GhostModeTimes anop
-		dc i2'420' ; scatter
-		dc i2'1200' ; chase
-		dc i2'420' ; scatter
-		dc i2'1200' ; chase
-		dc i2'500' ; scatter
-		dc i2'1200' ; chase
-		dc i2'500' ; scatter
-		dc i2'-1' ; chase
+ghostModeTimes anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
 
-level1GhostModes anop
+level1GhostModeTimes anop
+		dc i2'7' ; scatter
+		dc i2'20' ; chase
+		dc i2'7' ; scatter
+		dc i2'20' ; chase
+		dc i2'5' ; scatter
+		dc i2'20' ; chase
+		dc i2'5' ; scatter
+		dc i2'-1' ; chase
+        
+level2to4GhostModeTimes anop
+        dc i2'7' ; scatter
+        dc i2'20' ; chase
+        dc i2'7' ; scatter
+        dc i2'20' ; chase
+        dc i2'5' ; scatter
+        dc i2'1033' ; chase
+        dc i2'0' ; scatter
+        dc i2'-1' ; chase
+
+level5plusGhostModeTimes anop
+        dc i2'7' ; scatter
+        dc i2'20' ; chase
+        dc i2'7' ; scatter
+        dc i2'20' ; chase
+        dc i2'5' ; scatter
+        dc i2'1037' ; chase
+        dc i2'0' ; scatter
+        dc i2'-1' ; chase
+        
+levelGhostModes anop
 		dc i2'GHOSTSTATE_SCATTER'
 		dc i2'GHOSTSTATE_CHASE'
 		dc i2'GHOSTSTATE_SCATTER'
@@ -3160,6 +3245,8 @@ ghostFrightenedTime anop
 
 
 ghostModeTimer dc i2'0'
+levelModeSecondsDivisor dc i2'0'
+
 
 ghostMode dc i2'0'
 
