@@ -58,8 +58,15 @@ speedSteps75 anop
         dc i2'2,2,3,2,2,3,2,2,3' ; 21
 
 speedSteps50 anop
-        dc i2'2,2,2,2,2,2,2,2,2' ; 16
+        dc i2'1,1,1,1,1,1,1,1,1' ; 8
 
+speedSteps45 anop
+        dc i2'1,1,0,1,1,1,0,1,1' ; 6
+
+speedSteps40 anop
+        dc i2'1,0,1,0,1,0,1,0,1' ; 4
+
+        
 ghostSpeedStepIndex anop
         dc i2'0'
         dc i2'0'
@@ -82,6 +89,10 @@ getGhostSpeedSteps entry
 dontResetSpeedStepIndex anop
 
         lda ghostSpeed,x
+        cmp #40
+        beq getSteps40
+        cmp #45
+        beq getSteps45
         cmp #50
         beq getSteps50
         cmp #75
@@ -102,7 +113,21 @@ dontResetSpeedStepIndex anop
         beq getSteps200
 
         rts
-        
+
+getSteps40 anop
+        lda ghostSpeedStepIndex,x
+        asl a
+        tay
+        lda speedSteps40,y
+        rts
+
+getSteps45 anop
+        lda ghostSpeedStepIndex,x
+        asl a
+        tay
+        lda speedSteps45,y
+        rts
+
 getSteps50 anop
         lda ghostSpeedStepIndex,x
         asl a
@@ -188,6 +213,8 @@ runGhosts entry
         jsr setGhostSpeed
 
         jsr getGhostSpeedSteps
+        cmp #0
+        beq doPinkRun
         sta runCounter
 redRunLoop anop
         jsr runGhost
@@ -195,6 +222,8 @@ redRunLoop anop
         lda runCounter
         cmp #0
         bne redRunLoop
+
+doPinkRun anop
 
         ldx #GHOSTINDEX_PINK
         lda ghostPixelX,x
@@ -206,6 +235,8 @@ redRunLoop anop
         jsr setGhostSpeed
 
         jsr getGhostSpeedSteps
+        cmp #0
+        beq doBlueRun
         sta runCounter
 pinkRunLoop anop
         jsr runGhost
@@ -213,6 +244,8 @@ pinkRunLoop anop
         lda runCounter
         cmp #0
         bne pinkRunLoop
+
+doBlueRun anop
 
         ldx #GHOSTINDEX_BLUE
         lda ghostPixelX,x
@@ -224,6 +257,8 @@ pinkRunLoop anop
         jsr setGhostSpeed
 
         jsr getGhostSpeedSteps
+        cmp #0
+        beq doOrangeRun
         sta runCounter
 blueRunLoop anop
         jsr runGhost
@@ -231,6 +266,8 @@ blueRunLoop anop
         lda runCounter
         cmp #0
         bne blueRunLoop
+        
+doOrangeRun anop
 
         ldx #GHOSTINDEX_ORANGE
         lda ghostPixelX,x
@@ -2234,7 +2271,7 @@ setGhostSpeed entry
         jsr isGhostInTunnel
         cmp #0
         beq speedNotInTunnel
-        lda #50
+        lda #40 ; <------------ set based on level
         sta ghostSpeed,x
         rts
 
@@ -2248,7 +2285,7 @@ speedNotInTunnel anop
 		lda ghostState,x
 		cmp #GHOSTSTATE_FRIGHTENED
 		bne speedNotFrightened
-		lda #50
+		lda #50 ; <------------ set based on level
         sta ghostSpeed,x
 		rts
 
@@ -2268,7 +2305,7 @@ speedGhostPenned anop
         rts
 
 speedGhostNotPenned anop
-        lda #75
+        lda #75 ; <------------ set based on level
         sta ghostSpeed,x
 		rts
 
