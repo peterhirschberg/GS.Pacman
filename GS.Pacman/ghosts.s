@@ -2295,7 +2295,7 @@ setGhostSpeed entry
         jsr isGhostInTunnel
         cmp #0
         beq speedNotInTunnel
-        lda #40 ; <------------ set based on level
+        jsr ghostTunnelSpeed
         sta ghostSpeed,x
         rts
 
@@ -2309,7 +2309,7 @@ speedNotInTunnel anop
 		lda ghostState,x
 		cmp #GHOSTSTATE_FRIGHTENED
 		bne speedNotFrightened
-		lda #40 ; <------------ set based on level
+		jsr getGhostLevelSpeedFrightened
         sta ghostSpeed,x
 		rts
 
@@ -2329,9 +2329,30 @@ speedGhostPenned anop
         rts
 
 speedGhostNotPenned anop
-        lda #75 ; <------------ set based on level
+        jsr getGhostLevelSpeed
         sta ghostSpeed,x
 		rts
+        
+
+; TODO - Elroy1 and 2
+getGhostLevelSpeed entry
+        jsr ghostLevelIndex
+        tax
+        lda ghostNormalSpeed,x
+        rts
+
+getGhostLevelSpeedFrightened entry
+        jsr ghostLevelIndex
+        tax
+        lda ghostFrightenedSpeed,x
+        rts
+
+getGhostLevelSpeedTunnel entry
+        jsr ghostLevelIndex
+        tax
+        lda ghostTunnelSpeed,x
+        rts
+
 
 
 excludeForbiddenUpTurns entry
@@ -2893,7 +2914,122 @@ level1GhostModes anop
 		dc i2'GHOSTSTATE_CHASE'
         
 ; LEVEL-BASED VALUES
+
+ghostNormalSpeed anop
+        dc i2'75' ; level 1
+        dc i2'85' ; level 2
+        dc i2'85' ; level 3
+        dc i2'85' ; level 4
+        dc i2'95' ; level 5
+        dc i2'95' ; level 6
+        dc i2'95' ; level 7
+        dc i2'95' ; level 8
+        dc i2'95' ; level 9
+        dc i2'95' ; level 10
+        dc i2'95' ; level 11
+        dc i2'95' ; level 12
+        dc i2'95' ; level 13
+        dc i2'95' ; level 14
+        dc i2'95' ; level 15
+        dc i2'95' ; level 16
+        dc i2'95' ; level 17
+        dc i2'95' ; level 18
+        dc i2'95' ; level 19
+        dc i2'95' ; level 20
+        dc i2'95' ; level 21
+
+ghostElroy1Speed anop
+        dc i2'80' ; level 1
+        dc i2'90' ; level 2
+        dc i2'90' ; level 3
+        dc i2'90' ; level 4
+        dc i2'100' ; level 5
+        dc i2'100' ; level 6
+        dc i2'100' ; level 7
+        dc i2'100' ; level 8
+        dc i2'100' ; level 9
+        dc i2'100' ; level 10
+        dc i2'100' ; level 11
+        dc i2'100' ; level 12
+        dc i2'100' ; level 13
+        dc i2'100' ; level 14
+        dc i2'100' ; level 15
+        dc i2'100' ; level 16
+        dc i2'100' ; level 17
+        dc i2'100' ; level 18
+        dc i2'100' ; level 19
+        dc i2'100' ; level 20
+        dc i2'100' ; level 21
+
+ghostElroy2Speed anop
+        dc i2'85' ; level 1
+        dc i2'95' ; level 2
+        dc i2'95' ; level 3
+        dc i2'95' ; level 4
+        dc i2'105' ; level 5
+        dc i2'105' ; level 6
+        dc i2'105' ; level 7
+        dc i2'105' ; level 8
+        dc i2'105' ; level 9
+        dc i2'105' ; level 10
+        dc i2'105' ; level 11
+        dc i2'105' ; level 12
+        dc i2'105' ; level 13
+        dc i2'105' ; level 14
+        dc i2'105' ; level 15
+        dc i2'105' ; level 16
+        dc i2'105' ; level 17
+        dc i2'105' ; level 18
+        dc i2'105' ; level 19
+        dc i2'105' ; level 20
+        dc i2'105' ; level 21
+
+ghostFrightenedSpeed anop
+        dc i2'50' ; level 1
+        dc i2'55' ; level 2
+        dc i2'55' ; level 3
+        dc i2'55' ; level 4
+        dc i2'60' ; level 5
+        dc i2'60' ; level 6
+        dc i2'60' ; level 7
+        dc i2'60' ; level 8
+        dc i2'60' ; level 9
+        dc i2'60' ; level 10
+        dc i2'60' ; level 11
+        dc i2'60' ; level 12
+        dc i2'60' ; level 13
+        dc i2'60' ; level 14
+        dc i2'60' ; level 15
+        dc i2'60' ; level 16
+        dc i2'60' ; level 17
+        dc i2'60' ; level 18
+        dc i2'60' ; level 19
+        dc i2'60' ; level 20
+        dc i2'60' ; level 21
         
+ghostTunnelSpeed anop
+        dc i2'40' ; level 1
+        dc i2'45' ; level 2
+        dc i2'45' ; level 3
+        dc i2'45' ; level 4
+        dc i2'50' ; level 5
+        dc i2'50' ; level 6
+        dc i2'50' ; level 7
+        dc i2'50' ; level 8
+        dc i2'50' ; level 9
+        dc i2'50' ; level 10
+        dc i2'50' ; level 11
+        dc i2'50' ; level 12
+        dc i2'50' ; level 13
+        dc i2'50' ; level 14
+        dc i2'50' ; level 15
+        dc i2'50' ; level 16
+        dc i2'50' ; level 17
+        dc i2'50' ; level 18
+        dc i2'50' ; level 19
+        dc i2'50' ; level 20
+        dc i2'50' ; level 21
+
 ghostFrightenedTime anop
         dc i2'60*6' ; level 1
         dc i2'60*5' ; level 2
