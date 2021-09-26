@@ -2353,10 +2353,10 @@ getRedGhostLevelSpeed anop
         
         jsr ghostLevelIndex
         tay
-        lda elroy2LevelDotCount,y
+        lda elroy1LevelDotCount,y
         cmp remainingDots
         bcs getElroy2Speed
-        lda elroy1LevelDotCount,y
+        lda elroy2LevelDotCount,y
         cmp remainingDots
         bcs getElroy1Speed
 
@@ -2367,10 +2367,14 @@ getRedGhostLevelSpeed anop
         rts
         
 getElroy1Speed anop
+        jsr ghostLevelIndex
+        tay
         lda getElroy1Speed,y
         rts
 
 getElroy2Speed anop
+        jsr ghostLevelIndex
+        tay
         lda getElroy2Speed,y
         rts
 
