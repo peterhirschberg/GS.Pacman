@@ -74,55 +74,6 @@ ghostModeTimesDone anop
 
         rts
 
-        
-        
-        
-speedSteps200 anop
-        dc i2'4,4,4,4,4,4,4,4,4' ; 32
-
-speedSteps105 anop
-        dc i2'2,3,4,3,3,4,3,3,4' ; 29
-        
-speedSteps100 anop
-        dc i2'2,3,4,2,3,4,3,3,4' ; 28
-
-speedSteps95 anop
-        dc i2'2,3,4,2,3,4,2,3,3' ; 26
-
-speedSteps90 anop
-        dc i2'2,3,3,2,3,4,2,3,3' ; 25
-
-speedSteps85 anop
-        dc i2'2,2,4,2,2,4,2,2,4' ; 24
-
-speedSteps80 anop
-        dc i2'2,2,3,2,2,4,2,2,3' ; 22
-
-speedSteps75 anop
-        dc i2'2,2,2,2,2,2,2,2,2' ; 16
-
-speedSteps60 anop
-        dc i2'1,2,1,2,1,2,1,2,2' ; 14
-
-speedSteps55 anop
-        dc i2'1,2,1,2,1,2,1,2,1' ; 13
-        
-speedSteps50 anop
-        dc i2'1,2,1,2,1,2,1,2,1' ; 12
-
-speedSteps45 anop
-        dc i2'1,2,1,1,1,2,1,1,1' ; 10
-
-speedSteps40 anop
-        dc i2'1,1,1,1,1,1,1,1,1' ; 8
-
-        
-ghostSpeedStepIndex anop
-        dc i2'0'
-        dc i2'0'
-        dc i2'0'
-        dc i2'0'
-
 
 resetGhostSpeedStepIndexes entry
         lda #0
@@ -135,8 +86,8 @@ resetGhostSpeedStepIndexes entry
         ldy #6
         sta ghostSpeedStepIndex,y
         rts
-        
 
+        
 getGhostSpeedSteps entry
 
         ldx currentGhost
@@ -406,10 +357,11 @@ switchMode anop
         lda ghostModeTimes,x
         sta ghostModeTimer
 
-; if the value is 0, make it 1/60 of a second
+; if the timer value is 0, make it 1/60 of a second (1 frame)
         cmp #0
         bne timerNotZero
         lda #1
+        sta ghostModeTimer
         sta levelModeSecondsDivisor
         
 timerNotZero anop
@@ -2932,6 +2884,12 @@ ghostInitialDotCounter anop
         dc i2'20'
         dc i2'40'
 
+ghostSpeedStepIndex anop
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        dc i2'0'
+        
         
 redGhostLeftAnimationSprites anop
         dc i2'SPRITE_REDGHOST_LEFT_1'

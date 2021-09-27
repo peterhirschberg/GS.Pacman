@@ -501,6 +501,8 @@ startNewLevel entry
 
         jsr initMaze
 
+        jsr initPac
+        
         jsr startNewLife
 
         jsr drawMaze

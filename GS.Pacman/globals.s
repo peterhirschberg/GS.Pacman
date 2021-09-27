@@ -49,6 +49,49 @@ reverseDirections anop
                     dc i2'DIRECTION_DOWN'
                     dc i2'DIRECTION_NONE'
 
+                    
+; global speed tables
+                    
+speedSteps200 anop
+        dc i2'4,4,4,4,4,4,4,4,4' ; 32
+
+speedSteps105 anop
+        dc i2'2,3,4,3,3,4,3,3,4' ; 29
+        
+speedSteps100 anop
+        dc i2'2,3,4,2,3,4,3,3,4' ; 28
+
+speedSteps95 anop
+        dc i2'2,3,4,2,3,4,2,3,3' ; 26
+
+speedSteps90 anop
+        dc i2'2,3,3,2,3,4,2,3,3' ; 25
+
+speedSteps85 anop
+        dc i2'2,2,4,2,2,4,2,2,4' ; 24
+
+speedSteps80 anop
+        dc i2'2,2,3,2,2,4,2,2,3' ; 22
+
+speedSteps75 anop
+        dc i2'2,2,2,2,2,2,2,2,2' ; 16
+
+speedSteps60 anop
+        dc i2'1,2,1,2,1,2,1,2,2' ; 14
+
+speedSteps55 anop
+        dc i2'1,2,1,2,1,2,1,2,1' ; 13
+        
+speedSteps50 anop
+        dc i2'1,2,1,2,1,2,1,2,1' ; 12
+
+speedSteps45 anop
+        dc i2'1,2,1,1,1,2,1,1,1' ; 10
+
+speedSteps40 anop
+        dc i2'1,1,1,1,1,1,1,1,1' ; 8
+        
+                    
 
 ; table of precomputed screen row offsets
 

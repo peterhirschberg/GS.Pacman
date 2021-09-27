@@ -21,6 +21,67 @@ pac start
     
     
     
+initPac entry
+        lda #0
+        sta pacSpeedStepIndex
+        
+        jsr pacLevelIndex
+        tax
+        lda pacLevelSpeeds,x
+        cmp #80
+        beq loadPacSpeed80
+        cmp #90
+        beq loadPacSpeed90
+        cmp #100
+        beq loadPacSpeed100
+        
+        rts
+
+        
+loadPacSpeed80 anop
+        ldx #0
+load80Loop anop
+        lda speedSteps80,x
+        sta pacSteps,x
+        inx
+        inx
+        txa
+        cmp #16
+        beq load80Done
+        bra load80Loop
+load80Done anop
+        rts
+        
+loadPacSpeed90 anop
+        ldx #0
+load90Loop anop
+        lda speedSteps90,x
+        sta pacSteps,x
+        inx
+        inx
+        txa
+        cmp #16
+        beq load90Done
+        bra load90Loop
+load90Done anop
+        rts
+        
+loadPacSpeed100 anop
+        ldx #0
+load100Loop anop
+        lda speedSteps100,x
+        sta pacSteps,x
+        inx
+        inx
+        txa
+        cmp #16
+        beq load100Done
+        bra load100Loop
+load100Done anop
+        rts
+        
+        
+    
 runPac entry
 
         lda pacEaten
@@ -38,8 +99,17 @@ notEaten anop
         lda pacY
         sta pacOldY
         
+        
+        jsr getPacSpeedSteps
+        sta runCounter
+pacRunLoop anop
         jsr runPacFrame
-        jsr runPacFrame
+        dec runCounter
+        lda runCounter
+        cmp #0
+        bne pacRunLoop
+        
+pacRunDone anop
 
         rts
         
@@ -1242,15 +1312,91 @@ getTileXYBehindDown anop
 
         rts
 
+        
+pacLevelIndex entry
 
+        lda levelNum
+        cmp #20
+        bcs limitLevelIndex
+        asl a
+        rts
 
+limitLevelIndex anop
 
+        lda #20
+        asl a
 
-
-
-
+        rts
 
         
+getPacSpeedSteps entry
+
+        jsr pacLevelIndex
+        tax
+        lda pacLevelSpeeds
+        cmp #80
+        beq pacSpeed80
+        cmp #90
+        beq pacSpeed80
+        cmp #100
+        beq pacSpeed80
+
+        rts
+        
+pacSpeed80 anop
+        lda pacSpeedStepIndex,x
+        asl a
+        tay
+        lda speedSteps80,y
+        rts
+       
+pacSpeed90 anop
+       lda pacSpeedStepIndex,x
+       asl a
+       tay
+       lda speedSteps90,y
+       rts
+       
+pacSpeed100 anop
+       lda pacSpeedStepIndex,x
+       asl a
+       tay
+       lda speedSteps100,y
+       rts
+       
+        
+        
+pacSteps anop
+        dc i2'0,0,0,0,0,0,0,0'
+        
+pacLevelSpeeds anop
+        dc i2'80'   ; 1
+        dc i2'90'   ; 2
+        dc i2'90'   ; 3
+        dc i2'90'   ; 4
+        dc i2'100'   ; 5
+        dc i2'100'   ; 6
+        dc i2'100'   ; 7
+        dc i2'100'   ; 8
+        dc i2'100'   ; 9
+        dc i2'100'   ; 10
+        dc i2'100'   ; 11
+        dc i2'100'   ; 12
+        dc i2'100'   ; 13
+        dc i2'100'   ; 14
+        dc i2'100'   ; 15
+        dc i2'100'   ; 16
+        dc i2'100'   ; 17
+        dc i2'100'   ; 18
+        dc i2'100'   ; 19
+        dc i2'100'   ; 20
+        dc i2'90'   ; 21
+
+pacSpeedStepIndex dc i2'0'
+
+runCounter dc i2'0'
+
+
         
 availableDirections dc i2'0'
 availableDirectionsAhead dc i2'0'
@@ -1328,6 +1474,8 @@ pacDieAnimationSprites anop
         dc i2'SPRITE_NOP'
 
 
+        
+        
 
 ; Initial position in maze is $6c,$88 x 8
 pacX dc i2'$360'
