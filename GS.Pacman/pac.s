@@ -38,6 +38,13 @@ notEaten anop
         lda pacY
         sta pacOldY
         
+        jsr runPacFrame
+        jsr runPacFrame
+
+        rts
+        
+runPacFrame anop
+        
         lda pacX
         shiftedToPixel
         jsr getTileXFromPixelX
@@ -317,7 +324,7 @@ moveUp entry
 
         lda pacY
         sec
-        sbc #8
+        sbc #4
         sta pacY
 
         rts
@@ -326,7 +333,7 @@ moveDown entry
 
         lda pacY
         clc
-        adc #8
+        adc #4
         sta pacY
 
         rts
@@ -335,7 +342,7 @@ moveLeft entry
 
         lda pacX
         sec
-        sbc #8
+        sbc #4
         sta pacX
 
         rts
@@ -344,7 +351,7 @@ moveRight entry
 
         lda pacX
         clc
-        adc #8
+        adc #4
         sta pacX
 
         rts
