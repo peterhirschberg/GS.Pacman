@@ -406,6 +406,14 @@ switchMode anop
         lda ghostModeTimes,x
         sta ghostModeTimer
 
+; if the value is 0, make it 1/60 of a second
+        cmp #0
+        bne timerNotZero
+        lda #1
+        sta levelModeSecondsDivisor
+        
+timerNotZero anop
+
         ldx #0
 
 switchModeLoop anop
