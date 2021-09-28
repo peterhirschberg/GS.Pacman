@@ -121,10 +121,6 @@ onDisableJoystick anop
 
 onQuit anop
 
-        lda ghostModeTimer
-        tax
-        brk
-
 ;        ldx #0
 ;        lda pacY
 ;        shiftedToPixel

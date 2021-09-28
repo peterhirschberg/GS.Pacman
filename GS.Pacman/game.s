@@ -503,6 +503,7 @@ startNewLevel entry
 
         jsr initPac
         
+        inc numLives
         jsr startNewLife
 
         jsr drawMaze
