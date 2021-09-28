@@ -2736,14 +2736,13 @@ counter dc i2'0'
 
 runCounter dc i2'0'
 
-remainingDots dc i2'0'
-
         end
 
 
 
 ghostData data
 
+remainingDots dc i2'0'
 
 ghostsFrightened dc i2'0'
 ghostsEaten dc i2'0'

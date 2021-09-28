@@ -500,6 +500,8 @@ startNewLevel entry
         stz eatenDotCount
 
         jsr initMaze
+        lda totalDotCount
+        sta remainingDots
 
         jsr initPac
         
