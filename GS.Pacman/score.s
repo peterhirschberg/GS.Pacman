@@ -32,6 +32,31 @@ score start
 ; Key = 5000 Pts
 
 
+checkExtraLife entry
+
+        lda #9999
+        cmp oldScore
+        bcs lowPasses
+        bra checkExtraLifeDone
+        
+lowPasses anop
+
+        lda currentScore
+        cmp #10000
+        bcs highPasses
+        bra checkExtraLifeDone
+
+highPasses anop
+
+        jsr triggerExtraLifeSound
+        
+checkExtraLifeDone anop
+
+        lda currentScore
+        sta oldScore
+        
+        rts
+
 add10ToScore entry
 
         lda currentScore
@@ -47,6 +72,8 @@ add10ToScore entry
 
         lda #1
         sta scoreDirty
+        
+        jsr checkExtraLife
 
         rts
 
@@ -66,6 +93,8 @@ add50ToScore entry
         lda #1
         sta scoreDirty
 
+        jsr checkExtraLife
+
         rts
 
 add100ToScore entry
@@ -83,6 +112,8 @@ add100ToScore entry
 
         lda #1
         sta scoreDirty
+
+        jsr checkExtraLife
 
         rts
 
@@ -102,6 +133,8 @@ add200ToScore entry
         lda #1
         sta scoreDirty
 
+        jsr checkExtraLife
+
         rts
 
 add300ToScore entry
@@ -119,6 +152,8 @@ add300ToScore entry
 
         lda #1
         sta scoreDirty
+
+        jsr checkExtraLife
 
         rts
 
@@ -139,6 +174,8 @@ add400ToScore entry
         lda #1
         sta scoreDirty
 
+        jsr checkExtraLife
+
         rts
 
 add500ToScore entry
@@ -156,6 +193,8 @@ add500ToScore entry
 
         lda #1
         sta scoreDirty
+
+        jsr checkExtraLife
 
         rts
 
@@ -175,6 +214,8 @@ add700ToScore entry
         lda #1
         sta scoreDirty
 
+        jsr checkExtraLife
+
         rts
 
 add800ToScore entry
@@ -192,6 +233,8 @@ add800ToScore entry
 
         lda #1
         sta scoreDirty
+        
+        jsr checkExtraLife
 
         rts
 
@@ -211,6 +254,8 @@ add1000ToScore entry
 
         lda #1
         sta scoreDirty
+
+        jsr checkExtraLife
 
         rts
 
@@ -234,6 +279,8 @@ add1600ToScore entry
         lda #1
         sta scoreDirty
 
+        jsr checkExtraLife
+
         rts
 
 add2000ToScore entry
@@ -251,6 +298,8 @@ add2000ToScore entry
 
         lda #1
         sta scoreDirty
+
+        jsr checkExtraLife
 
         rts
 
@@ -270,6 +319,8 @@ add3000ToScore entry
         lda #1
         sta scoreDirty
 
+        jsr checkExtraLife
+
         rts
 
 add5000ToScore entry
@@ -287,6 +338,8 @@ add5000ToScore entry
 
         lda #1
         sta scoreDirty
+
+        jsr checkExtraLife
 
         rts
 
@@ -586,6 +639,8 @@ digitIndex dc i2'0'
 scoreData data
 
 currentScore dc i4'0'
+oldScore dc i4'0'
+
 highScore dc i4'0'
 
 scoreDirty dc i2'1'

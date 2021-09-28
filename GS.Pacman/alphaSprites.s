@@ -418,11 +418,11 @@ alphaStringScoreTitle anop
         dc i4'ALPHAINDEX_SPACE'
         dc i4'ALPHAINDEX_SPACE'
         dc i4'ALPHAINDEX_SPACE'
-        dc i4'ALPHAINDEX_L'
-        dc i4'ALPHAINDEX_E'
-        dc i4'ALPHAINDEX_V'
-        dc i4'ALPHAINDEX_E'
-        dc i4'ALPHAINDEX_L'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_R'
+        dc i4'ALPHAINDEX_A'
+        dc i4'ALPHAINDEX_C'
+        dc i4'ALPHAINDEX_K'
         dc i4'-1'
 
         end

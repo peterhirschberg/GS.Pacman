@@ -94,7 +94,7 @@ gameInit entry
         jsr incrementLevel
         jsr drawLevel
 
-        jsr borderInit
+;        jsr borderInit
 
         jsr initScore
         
@@ -270,14 +270,14 @@ startNextLevel anop
 levelNotComplete anop
 
        
-        jsr borderStart
+;        jsr borderStart
 
 
         jsr eraseGhosts
         
         jsr erasePac
 
-        jsr borderStart
+;        jsr borderStart
 
         lda eatGhostTimer
         cmp #0
@@ -307,7 +307,7 @@ notEatingGhost2 anop
 notEatingGhost1 anop
 
 
-        jsr borderStart
+;        jsr borderStart
 
         jsr checkControls
 
@@ -321,10 +321,8 @@ notEatingGhost1 anop
 
         jsr collisionCheckActors
 
-        jsr runSound
-
-
-        jsr borderStart
+        
+;        jsr borderStart
 
 
         bra eatingGhostSkipToHere
@@ -337,6 +335,8 @@ doPacEaten anop
 
 eatingGhostSkipToHere anop
 
+        jsr runSound
+
         jsr drawScore
         jsr drawHighScore
 
@@ -348,7 +348,7 @@ eatingGhostSkipToHere anop
         sta joystickRight
         
 
-        jsr borderDone
+;        jsr borderDone
 
         lda shouldQuit
         cmp #0

@@ -163,6 +163,19 @@ runSound entry
 
 eatDotTimerNeg anop
 
+        lda lifeTimer
+        bmi lifeTimerNeg
+        dec lifeTimer
+
+lifeTimerNeg anop
+
+        lda extraLifeSoundTimer
+        bmi runSoundDone
+        dec extraLifeSoundTimer
+        jsr playExtraLifeSound
+        
+runSoundDone anop
+
         rts
         
 
@@ -559,7 +572,21 @@ doStopSiren2Sound anop
 
         rts
 
+triggerExtraLifeSound entry
+        lda #2*60
+        sta extraLifeSoundTimer
+        rts
+        
 playExtraLifeSound entry
+
+        lda lifeTimer
+        bmi doPlayLifeSound
+        rts
+        
+doPlayLifeSound anop
+
+        lda #12
+        sta lifeTimer
 
         short m
 		_docWait
@@ -971,12 +998,12 @@ soundRegDefaults anop
         dc i1'SOUND_REG_POINTER+DEATH_OSC_NUM+1',i1'DEATH_SOUND_ADDR/256'
         dc i1'SOUND_REG_CONTROL+DEATH_OSC_NUM',i1'DEATH_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER'
         dc i1'SOUND_REG_CONTROL+DEATH_OSC_NUM+1',i1'DEATH_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER'
-        
-
 
 soundRegDefaultsEnd anop
 
 
 eatDotTimer dc i2'0'
+lifeTimer dc i2'0'
+extraLifeSoundTimer dc i2'-1'
 
         end
