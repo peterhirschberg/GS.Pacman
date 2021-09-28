@@ -17,6 +17,7 @@ pac start
         using spritesData
         using controlsData
         using mazeExchangeData
+        using ghostData
         using pacData
     
     
@@ -24,6 +25,30 @@ pac start
 initPac entry
         lda #0
         sta pacSpeedStepIndex
+        
+        jsr setPacSpeed
+        rts
+        
+        
+setPacSpeed entry
+
+        lda ghostsFrightened
+        cmp #0
+        beq ghostsNotFrightened
+
+        jsr pacLevelIndex
+        tax
+        lda pacLevelSpeedsFrightened,x
+        cmp #90
+        beq loadPacSpeed90
+        cmp #95
+        beq loadPacSpeed95
+        cmp #100
+        beq loadPacSpeed100
+
+        rts
+        
+ghostsNotFrightened anop
         
         jsr pacLevelIndex
         tax
@@ -65,6 +90,20 @@ load90Loop anop
         bra load90Loop
 load90Done anop
         rts
+
+loadPacSpeed95 anop
+        ldx #0
+load95Loop anop
+        lda speedSteps95,x
+        sta pacSteps,x
+        inx
+        inx
+        txa
+        cmp #16
+        beq load95Done
+        bra load95Loop
+load95Done anop
+        rts
         
 loadPacSpeed100 anop
         ldx #0
@@ -98,7 +137,8 @@ notEaten anop
         sta pacOldX
         lda pacY
         sta pacOldY
-        
+
+        jsr setPacSpeed
         
         jsr getPacSpeedSteps
         sta runCounter
@@ -610,7 +650,7 @@ animatePac entry
         rts
 
 incrementAnimationIndex anop
-        lda #2 ; animation timer duration
+        lda #4 ; animation timer duration
         sta pacAnimationTimer
 
         inc pacAnimationIndex
@@ -1331,39 +1371,23 @@ limitLevelIndex anop
         
 getPacSpeedSteps entry
 
-        jsr pacLevelIndex
-        tax
-        lda pacLevelSpeeds
-        cmp #80
-        beq pacSpeed80
-        cmp #90
-        beq pacSpeed80
-        cmp #100
-        beq pacSpeed80
+        inc pacSpeedStepIndex
+        lda pacSpeedStepIndex
+        cmp #8
+        bne getPacSteps
+        
+        lda #0
+        sta pacSpeedStepIndex
+        
+getPacSteps anop
+
+        lda pacSpeedStepIndex
+        asl a
+        tay
+        lda pacSteps,y
 
         rts
         
-pacSpeed80 anop
-        lda pacSpeedStepIndex,x
-        asl a
-        tay
-        lda speedSteps80,y
-        rts
-       
-pacSpeed90 anop
-       lda pacSpeedStepIndex,x
-       asl a
-       tay
-       lda speedSteps90,y
-       rts
-       
-pacSpeed100 anop
-       lda pacSpeedStepIndex,x
-       asl a
-       tay
-       lda speedSteps100,y
-       rts
-       
         
         
 pacSteps anop
@@ -1392,6 +1416,30 @@ pacLevelSpeeds anop
         dc i2'100'   ; 20
         dc i2'90'   ; 21
 
+pacLevelSpeedsFrightened anop
+        dc i2'90'   ; 1
+        dc i2'95'   ; 2
+        dc i2'95'   ; 3
+        dc i2'95'   ; 4
+        dc i2'100'   ; 5
+        dc i2'100'   ; 6
+        dc i2'100'   ; 7
+        dc i2'100'   ; 8
+        dc i2'100'   ; 9
+        dc i2'100'   ; 10
+        dc i2'100'   ; 11
+        dc i2'100'   ; 12
+        dc i2'100'   ; 13
+        dc i2'100'   ; 14
+        dc i2'100'   ; 15
+        dc i2'100'   ; 16
+        dc i2'100'   ; 17
+        dc i2'100'   ; 18
+        dc i2'100'   ; 19
+        dc i2'100'   ; 20
+        dc i2'90'   ; 21
+        
+        
 pacSpeedStepIndex dc i2'0'
 
 runCounter dc i2'0'

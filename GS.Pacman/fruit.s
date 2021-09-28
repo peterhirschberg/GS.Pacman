@@ -531,12 +531,13 @@ fruitPointSpriteXPos anop
         dc i2'$5e'      ; 13
 
 fruitRackStack anop
-        dc i2'0'
-        dc i2'0'
-        dc i2'0'
-        dc i2'0'
-        dc i2'0'
-        dc i2'0'
+        dc i2'0' ; 1
+        dc i2'0' ; 2
+        dc i2'0' ; 3
+        dc i2'0' ; 4
+        dc i2'0' ; 5
+        dc i2'0' ; 6
+        dc i2'0' ; terminator - always 0
 
 
 savex dc i4'0'
