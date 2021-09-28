@@ -207,7 +207,7 @@ notPostLife anop
         dec eatPacTimer
 
         lda eatPacTimer
-        cmp #1
+        cmp #0
         beq startPacEatenSound
         bra dontStartPacEatenSound
 
