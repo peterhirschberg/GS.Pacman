@@ -80,6 +80,8 @@ readKeys anop
         cmp #'9'
         beq onRackAdvance
         
+        jsr readNumpad
+        
 checkKeysDone anop
         long i,m
         rts
@@ -121,17 +123,6 @@ onDisableJoystick anop
 
 onQuit anop
 
-;        ldx #0
-;        lda pacY
-;        shiftedToPixel
-;        jsr getTileYFromPixelY
-;        tay
-;        lda pacX
-;        shiftedToPixel
-;        jsr getTileXFromPixelX
-;        tax
-;        brk
-
         lda >BUTTON1
         and #$80
         cmp #0
@@ -169,7 +160,7 @@ onRackAdvance anop
         rts
 
 
-readJoystick anop
+readJoystick entry
 
         lda >BUTTON1
         and #$80
@@ -257,6 +248,42 @@ joyDone anop
 
         rts
 
+        
+readNumpad entry
+
+        cmp #$0B
+        bra numpadUp
+        cmp #$08
+        bra numpadLeft
+        cmp #$0A
+        bra numpadDown
+        cmp #$15
+        bra numpadRight
+
+        rts
+
+numpadUp anop
+        lda #1
+        sta joystickUp
+        rts
+
+numpadLeft anop
+        lda #1
+        sta joystickLeft
+        rts
+
+numpadDown anop
+        lda #1
+        sta joystickDown
+        rts
+
+numpadRight anop
+        lda #1
+        sta joystickRight
+        rts
+
+        
+        
 
 
 BUTTON1 gequ $c061

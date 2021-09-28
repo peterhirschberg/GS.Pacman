@@ -53,8 +53,10 @@ gameStartWait entry
 
 waitLoop anop
 
-        jsr waitForVbl
+        jsr checkControls
 
+        jsr waitForVbl
+        
         lda #1
         sta waitingForGameStart
         
