@@ -52,14 +52,20 @@ gameStartWait entry
         jsr normalColorTable
 
 waitLoop anop
-        
+
         jsr waitForVbl
+
+        lda #1
+        sta waitingForGameStart
         
         jsr drawAlphaPressStart
 
         lda numLives
         bmi waitLoop
-        
+
+        lda #0
+        sta waitingForGameStart
+
         jsr blackColorTable
 
         jsr clearScreen
@@ -198,6 +204,19 @@ notPostLife anop
         cmp #0
         beq pacEatenTimerZero
         
+        ldx #0
+        lda ghostPixelOldX,x
+        sta ghostPixelX,x
+        ldx #2
+        lda ghostPixelOldX,x
+        sta ghostPixelX,x
+        ldx #4
+        lda ghostPixelOldX,x
+        sta ghostPixelX,x
+        ldx #6
+        lda ghostPixelOldX,x
+        sta ghostPixelX,x
+        
         jsr erasePac
         jsr eraseGhosts
         
@@ -221,7 +240,7 @@ startPacEatenSound anop
 
 dontStartPacEatenSound anop
 
-        bra mainLoop
+        brl mainLoop
 
 pacEatenTimerZero anop
 
@@ -554,5 +573,7 @@ levelNum dc i2'0'
 shouldQuit dc i2'0'
 
 gameOverWaitTimer dc i2'-1'
+
+waitingForGameStart dc i2'0'
 
         end

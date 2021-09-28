@@ -145,6 +145,13 @@ dontQuit anop
         
 onStartGame anop
 
+        lda waitingForGameStart
+        cmp #0
+        bne doStartGame
+        rts
+        
+doStartGame anop
+
         lda #3
         sta numLives
 
