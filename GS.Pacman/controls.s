@@ -15,6 +15,7 @@ controls start
         using globalData
         using controlsData
         using gameData
+        using ghostData
         using pacData
 
 
@@ -119,6 +120,10 @@ onDisableJoystick anop
         rts
 
 onQuit anop
+
+        lda ghostModeTimer
+        tax
+        brk
 
 ;        ldx #0
 ;        lda pacY

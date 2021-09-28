@@ -49,15 +49,15 @@ ghostModeTimesLoop anop
         sta ghostModeTimes,x
         bra nextTime
 
-level5AndAbove anop
-
-        lda level5plusGhostModeTimes,x
+level2To4 anop
+        
+        lda level2to4GhostModeTimes,x
         sta ghostModeTimes,x
         bra nextTime
 
-level2To4 anop
+level5AndAbove anop
 
-        lda level2to4GhostModeTimes,x
+        lda level5plusGhostModeTimes,x
         sta ghostModeTimes,x
         bra nextTime
         
@@ -326,6 +326,7 @@ runModeTimer entry
 
         dec levelModeSecondsDivisor
         lda levelModeSecondsDivisor
+        bmi doRunModeTimer
         cmp #0
         beq doRunModeTimer
         rts
@@ -336,6 +337,7 @@ doRunModeTimer anop
         sta levelModeSecondsDivisor
 
         lda ghostModeTimer
+        bmi switchMode
         cmp #0
         beq switchMode
         dec ghostModeTimer
@@ -3212,7 +3214,6 @@ ghostFrightenedTime anop
 
 ghostModeTimer dc i2'0'
 levelModeSecondsDivisor dc i2'0'
-
 
 ghostMode dc i2'0'
 

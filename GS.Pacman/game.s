@@ -522,6 +522,9 @@ startNewLevel entry
 
         lda #100
         sta gameIntroTimer
+        
+        lda #0
+        sta ghostMode
 
         rts
 
