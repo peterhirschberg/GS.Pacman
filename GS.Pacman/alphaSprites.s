@@ -67,6 +67,45 @@ startLoop anop
 startDone anop
 
         rts
+
+        
+drawAlphaCopyright entry
+
+        lda #$ff
+        sta spriteColor
+
+        jsr parseColor
+
+        lda #68
+        sta spriteX
+        lda #184
+        sta spriteY
+
+        ldy #0
+
+copyLoop anop
+
+        lda alphaStringCopyright,y
+
+        cmp #-1
+        beq copyDone
+
+        jsr drawAlphaSpriteByIndex
+
+        lda spriteX
+        clc
+        adc #8
+        sta spriteX
+
+        iny
+        iny
+        iny
+        iny
+        bra copyLoop
+
+copyDone anop
+
+        rts
         
         
 drawAlphaReady entry
@@ -76,7 +115,7 @@ drawAlphaReady entry
 
         jsr parseColor
 
-        lda #94
+        lda #92
         sta spriteX
         lda #110
         sta spriteY
@@ -116,7 +155,7 @@ eraseAlphaReady entry
 
         jsr parseColor
 
-        lda #94
+        lda #92
         sta spriteX
         lda #110
         sta spriteY
@@ -424,5 +463,32 @@ alphaStringScoreTitle anop
         dc i4'ALPHAINDEX_C'
         dc i4'ALPHAINDEX_K'
         dc i4'-1'
+        
+alphaStringCopyright anop
+        dc i4'ALPHAINDEX_COPY'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_2'
+        dc i4'ALPHAINDEX_0'
+        dc i4'ALPHAINDEX_2'
+        dc i4'ALPHAINDEX_1'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_P'
+        dc i4'ALPHAINDEX_E'
+        dc i4'ALPHAINDEX_T'
+        dc i4'ALPHAINDEX_E'
+        dc i4'ALPHAINDEX_R'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_H'
+        dc i4'ALPHAINDEX_I'
+        dc i4'ALPHAINDEX_R'
+        dc i4'ALPHAINDEX_S'
+        dc i4'ALPHAINDEX_C'
+        dc i4'ALPHAINDEX_H'
+        dc i4'ALPHAINDEX_B'
+        dc i4'ALPHAINDEX_E'
+        dc i4'ALPHAINDEX_R'
+        dc i4'ALPHAINDEX_G'
+        dc i4'-1'
 
+        
         end

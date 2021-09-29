@@ -61,6 +61,7 @@ waitLoop anop
         sta waitingForGameStart
         
         jsr drawAlphaPressStart
+        jsr drawAlphaCopyright
 
         lda numLives
         bmi waitLoop
