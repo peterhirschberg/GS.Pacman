@@ -837,6 +837,38 @@ checkDots entry
         shiftedToPixel
         jsr getTileYFromPixelY
         sta tileY
+        
+; when going left or up we wait until we are centered on the tile with the dot
+        
+        lda pacDirection
+;        cmp #DIRECTION_LEFT
+;        beq eatDirectionLeft
+        cmp #DIRECTION_UP
+        beq eatDirectionUp
+        bra eatNormal
+        
+eatDirectionLeft anop
+
+        lda pacX
+        shiftedToPixel
+        and #7
+        cmp #7
+        bcs justReturnMan
+        bra eatNormal
+        
+eatDirectionUp anop
+        
+        lda pacY
+        shiftedToPixel
+        and #7
+        cmp #4
+        bcs justReturnMan
+        bra eatNormal
+        
+justReturnMan anop
+        rts
+        
+eatNormal anop
 
         jsr getTileFromTileXY
         cmp #1

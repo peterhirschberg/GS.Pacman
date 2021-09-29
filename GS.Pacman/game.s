@@ -90,8 +90,12 @@ gameInit entry
         jsr soundInitMusic1
 
         jsr zeroMazeBuffer
-
+        
+        stz eatenDotCount
+        
         jsr initMaze
+        lda totalDotCount
+        sta remainingDots
 
         jsr drawMaze
 

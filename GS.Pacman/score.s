@@ -13,6 +13,7 @@
 
 score start
         using spritesData
+        using gameData
         using scoreData
 
 
@@ -34,28 +35,24 @@ score start
 
 checkExtraLife entry
 
-        lda #9999
-        cmp oldScore
-        bcs lowPasses
-        bra checkExtraLifeDone
+        ldx #SCOREINDEX_10000
+        lda scoreDigits,x
+        cmp scoreDigitOldExtraLife
+        bne addExtraLife
+        rts
         
-lowPasses anop
+addExtraLife anop
+        sta scoreDigitOldExtraLife
 
-        lda currentScore
-        cmp #10000
-        bcs highPasses
-        bra checkExtraLifeDone
-
-highPasses anop
-
+; extra life!
+        
+        inc numLives
+        jsr drawLives
+        
         jsr triggerExtraLifeSound
         
-checkExtraLifeDone anop
-
-        lda currentScore
-        sta oldScore
-        
         rts
+        
 
 add10ToScore entry
 
@@ -596,6 +593,8 @@ initScore entry
         ldx #SCOREINDEX_10000000
         sta scoreDigits,x
         
+        sta scoreDigitOldExtraLife
+        
         rts
         
 
@@ -631,6 +630,8 @@ highScoreDigits anop
         dc i2'-1'
 
 digitIndex dc i2'0'
+
+scoreDigitOldExtraLife dc i2'-1'
 
         end
 
