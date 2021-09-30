@@ -22,6 +22,9 @@ ghosts start
 
 initGhosts entry
 
+        lda #0
+        sta ghostMode
+
 ; decrement the mode timer every frame
 
         lda #60
