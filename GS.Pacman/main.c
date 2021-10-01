@@ -126,10 +126,10 @@ int main(void)
     userid = MMStartUp();
     TLStartUp();
     toolStartupRef = StartUpTools(userid, refIsResource, TOOL_STARTUP);
-    CompactMem();
+//    CompactMem();
     
-    NewHandle((LongWord)0x8000, userid, (Word)(attrLocked | attrFixed | attrAddr | attrBank), (Pointer)0x1c0000);
-    TOOLFAIL("Unable to allocate maze buffer");
+//    NewHandle((LongWord)0x8000, userid, (Word)(attrLocked | attrFixed | attrAddr | attrBank), (Pointer)0x1c0000);
+//    TOOLFAIL("Unable to allocate maze buffer");
     
     InitMouse(0);
     SetMouse(transparent);

@@ -1201,3 +1201,10 @@ mazeGraphicsOffsetYList anop
         dc i2'$28,$28,$28,$28,$28,$28,$28,$28,$28'
 
         end
+
+
+; Huge thanks to Kelvin Sherlock for this trick to allocate memory for the maze buffer
+        align $10000
+MAZE_BUFFER start MAZE_BUFFER
+        ds 65536
+        end

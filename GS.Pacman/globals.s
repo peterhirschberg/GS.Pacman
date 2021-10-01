@@ -28,7 +28,7 @@ READ_VBL                gequ $e0c019
 MAZE_OFFSET_X           gequ 24
 MAZE_OFFSET_Y           gequ 16
 
-MAZE_BUFFER             gequ $1c0000
+;MAZE_BUFFER             gequ $1c0000
 
 
 backupStack dc i4'0'
