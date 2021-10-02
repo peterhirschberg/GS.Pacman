@@ -35,7 +35,7 @@ readKeys anop
         sta >KEYBOARD_STROBE
         long i,m
         and #$007f
-
+        
         cmp #'w'
         beq onJoystickUp
         cmp #'W'
@@ -79,7 +79,10 @@ readKeys anop
 
         cmp #'9'
         beq onRackAdvance
-        
+
+        cmp #'8'
+        beq onCheat
+
         jsr readNumpad
         
 checkKeysDone anop
@@ -150,14 +153,21 @@ doStartGame anop
 
 onRackAdvance anop
 
-        inc numLives
-
         lda #240-100
         sta levelCompleteTimer
 
         jsr doLevelComplete
         
         rts
+        
+onCheat anop
+
+        jsr playExtraLifeSound
+
+        lda #1
+        sta cheatMode
+        rts
+        
 
 
 readJoystick entry
@@ -252,14 +262,14 @@ joyDone anop
 readNumpad entry
 
         cmp #$0B
-        bra numpadUp
+        beq numpadUp
         cmp #$08
-        bra numpadLeft
+        beq numpadLeft
         cmp #$0A
-        bra numpadDown
+        beq numpadDown
         cmp #$15
-        bra numpadRight
-
+        beq numpadRight
+        
         rts
 
 numpadUp anop

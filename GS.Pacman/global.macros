@@ -22,6 +22,9 @@ isPositive_&SYSCNT anop
 
         macro
         addToScore
+        lda cheatMode
+        cmp #0
+        bne addDone_&SYSCNT
 scoreLoop_&SYSCNT anop
         lda scoreDigits,y
         cmp #-1

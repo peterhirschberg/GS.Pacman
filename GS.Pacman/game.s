@@ -583,4 +583,6 @@ gameOverWaitTimer dc i2'-1'
 
 waitingForGameStart dc i2'0'
 
+cheatMode dc i2'0'
+
         end

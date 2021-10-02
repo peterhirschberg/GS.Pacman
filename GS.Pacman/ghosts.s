@@ -452,7 +452,7 @@ ghostReviving anop
 ghostRevived anop
         lda #0
         sta ghostDotCounter,x
-        lda #GHOSTSTATE_PENNED
+        lda #GHOSTSTATE_LEAVINGPEN
         sta ghostState,x
         rts
 
@@ -786,6 +786,15 @@ runDotCounterContinue anop
         rts
 
 runDotCounterLeavePen anop
+
+; don't leave pen while any ghost is frightened
+        lda ghostsFrightened
+        cmp #0
+        beq leavePen
+        rts
+        
+leavePen anop
+
         lda #GHOSTSTATE_LEAVINGPEN
         sta ghostState,x
         rts
@@ -1076,7 +1085,17 @@ drawGhost entry
         lda ghostPixelY,x
         shiftedToPixel
         sta spriteY
+        
+; if ghost is penned and any other ghosts are frightened display them as frightened as well
+        lda ghostState,x
+        cmp #GHOSTSTATE_PENNED
+        bne notPenned
+        lda ghostsFrightened
+        cmp #0
+        bne drawFrightened
 
+notPenned anop
+        
         lda ghostState,x
         cmp #GHOSTSTATE_FRIGHTENED
         beq drawFrightened
@@ -1505,6 +1524,10 @@ pacAteDot entry
         bne ateSmallDot
 
 ; ate large dot / power pellet
+
+; reset ghost point value
+        lda #0
+        sta ghostPointValue
 
         ldx #0
 atePowerPelletLoop anop

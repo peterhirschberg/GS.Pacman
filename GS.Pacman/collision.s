@@ -76,7 +76,12 @@ pacGhostCollision anop
 
 startEatPac anop
 
-;    rts ; TESTING ONLY (INVINSIBLE MODE)
+        lda cheatMode
+        cmp #0
+        beq notCheating
+        rts
+
+notCheating anop
 
         jsr killFruit
 

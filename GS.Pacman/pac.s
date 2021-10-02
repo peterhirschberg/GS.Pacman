@@ -141,6 +141,8 @@ notEaten anop
         jsr setPacSpeed
         
         jsr getPacSpeedSteps
+        cmp #0
+        beq pacRunDone
         sta runCounter
 pacRunLoop anop
         jsr runPacFrame
