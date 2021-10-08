@@ -83,8 +83,6 @@ readKeys anop
         cmp #'8'
         beq onCheat
 
-        jsr readNumpad
-        
 checkKeysDone anop
         long i,m
         rts
@@ -161,9 +159,6 @@ onRackAdvance anop
         rts
         
 onCheat anop
-
-        jsr playExtraLifeSound
-
         lda #1
         sta cheatMode
         rts
@@ -258,41 +253,6 @@ joyDone anop
 
         rts
 
-        
-readNumpad entry
-
-        cmp #$0B
-        beq numpadUp
-        cmp #$08
-        beq numpadLeft
-        cmp #$0A
-        beq numpadDown
-        cmp #$15
-        beq numpadRight
-        
-        rts
-
-numpadUp anop
-        lda #1
-        sta joystickUp
-        rts
-
-numpadLeft anop
-        lda #1
-        sta joystickLeft
-        rts
-
-numpadDown anop
-        lda #1
-        sta joystickDown
-        rts
-
-numpadRight anop
-        lda #1
-        sta joystickRight
-        rts
-
-        
         
 
 

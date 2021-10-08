@@ -139,6 +139,8 @@ int main(void)
         randomSeed = 1;
     srand(randomSeed);
     
+    preloadSound();
+    
     baseInit();
     
     runGameTick();

@@ -191,7 +191,7 @@ soundInitMusic1 entry
 		and #$0f
 		sta >SOUND_CONTROL_REG
 
-		ldx #soundRegDefaults
+		ldx #soundRegDefaultsIntro
 soundInitMusic1_loop anop
 		lda |$0,x
 		tay
@@ -199,7 +199,7 @@ soundInitMusic1_loop anop
 		jsr writeRegNoRead
 		inx
 		inx
-		cpx #soundRegDefaultsEnd
+		cpx #soundRegDefaultsEndIntro
 		blt soundInitMusic1_loop
         long m
 
@@ -217,7 +217,7 @@ soundInitMusic2 entry
 		and #$0f
 		sta >SOUND_CONTROL_REG
 
-		ldx #soundRegDefaults
+		ldx #soundRegDefaultsInter
 soundInitMusic2_loop anop
 		lda |$0,x
 		tay
@@ -225,7 +225,7 @@ soundInitMusic2_loop anop
 		jsr writeRegNoRead
 		inx
 		inx
-		cpx #soundRegDefaultsEnd
+		cpx #soundRegDefaultsEndInter
 		blt soundInitMusic2_loop
         long m
 
@@ -265,7 +265,7 @@ soundInitGameSounds entry
 		and #$0f
 		sta >SOUND_CONTROL_REG
 
-		ldx #soundRegDefaults
+		ldx #soundRegDefaultsGame
 soundInitGameSounds_loop anop
 		lda |$0,x
 		tay
@@ -273,7 +273,7 @@ soundInitGameSounds_loop anop
 		jsr writeRegNoRead
 		inx
 		inx
-		cpx #soundRegDefaultsEnd
+		cpx #soundRegDefaultsEndGame
 		blt soundInitGameSounds_loop
         long m
 
@@ -292,7 +292,7 @@ soundInitDeathSound entry
 		and #$0f
 		sta >SOUND_CONTROL_REG
 
-		ldx #soundRegDefaults
+		ldx #soundRegDefaultsDeath
 soundInitDeathSound_loop anop
 		lda |$0,x
 		tay
@@ -300,7 +300,7 @@ soundInitDeathSound_loop anop
 		jsr writeRegNoRead
 		inx
 		inx
-		cpx #soundRegDefaultsEnd
+		cpx #soundRegDefaultsEndDeath
 		blt soundInitDeathSound_loop
         long m
 
@@ -858,9 +858,9 @@ siren2SoundPlaying dc i2'0'
 scaredSoundPlaying dc i2'0'
 
 
-soundRegDefaults anop
-
 ; Intro
+
+soundRegDefaultsIntro anop
 
 		dc i1'SOUND_REG_FREQ_LOW+INTRO_OSC_NUM',i1'INTRO_FREQ_LOW'
 		dc i1'SOUND_REG_FREQ_LOW+INTRO_OSC_NUM+1',i1'INTRO_FREQ_LOW'
@@ -873,9 +873,11 @@ soundRegDefaults anop
 		dc i1'SOUND_REG_CONTROL+INTRO_OSC_NUM',i1'INTRO_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER'
 		dc i1'SOUND_REG_CONTROL+INTRO_OSC_NUM+1',i1'INTRO_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER'
 
+soundRegDefaultsEndIntro anop
 
 ; Intermission
-        
+soundRegDefaultsInter anop
+
         dc i1'SOUND_REG_FREQ_LOW+INTER_OSC_NUM',i1'INTER_FREQ_LOW'
         dc i1'SOUND_REG_FREQ_LOW+INTER_OSC_NUM+1',i1'INTER_FREQ_LOW'
         dc i1'SOUND_REG_FREQ_HIGH+INTER_OSC_NUM',i1'INTER_FREQ_HIGH'
@@ -887,6 +889,9 @@ soundRegDefaults anop
         dc i1'SOUND_REG_CONTROL+INTER_OSC_NUM',i1'INTER_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER'
         dc i1'SOUND_REG_CONTROL+INTER_OSC_NUM+1',i1'INTER_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER'
         
+soundRegDefaultsEndInter anop
+
+soundRegDefaultsGame anop
 
 ; Siren1
         
@@ -985,9 +990,11 @@ soundRegDefaults anop
         dc i1'SOUND_REG_CONTROL+EATGHOST_OSC_NUM',i1'EATGHOST_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER'
         dc i1'SOUND_REG_CONTROL+EATGHOST_OSC_NUM+1',i1'EATGHOST_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER'
         
+soundRegDefaultsEndGame anop
 
 ; Death
-        
+soundRegDefaultsDeath anop
+
         dc i1'SOUND_REG_FREQ_LOW+DEATH_OSC_NUM',i1'DEATH_FREQ_LOW'
         dc i1'SOUND_REG_FREQ_LOW+DEATH_OSC_NUM+1',i1'DEATH_FREQ_LOW'
         dc i1'SOUND_REG_FREQ_HIGH+DEATH_OSC_NUM',i1'DEATH_FREQ_HIGH'
@@ -999,7 +1006,7 @@ soundRegDefaults anop
         dc i1'SOUND_REG_CONTROL+DEATH_OSC_NUM',i1'DEATH_CONTROL+SOUND_HALTED+SOUND_RIGHT_SPEAKER'
         dc i1'SOUND_REG_CONTROL+DEATH_OSC_NUM+1',i1'DEATH_CONTROL+SOUND_HALTED+SOUND_LEFT_SPEAKER'
 
-soundRegDefaultsEnd anop
+soundRegDefaultsEndDeath anop
 
 
 eatDotTimer dc i2'0'

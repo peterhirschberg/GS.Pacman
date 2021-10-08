@@ -76,7 +76,7 @@ waitLoop anop
         jsr gameInit
         jsr startNewLife
         
-        lda #240
+        lda #280
         sta gameIntroTimer
         
         rts
