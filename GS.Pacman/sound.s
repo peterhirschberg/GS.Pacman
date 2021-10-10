@@ -154,6 +154,7 @@ writeRegNoRead entry
         
        
 runSound entry
+    rts
 
         jsr updateSounds
 
@@ -180,6 +181,8 @@ runSoundDone anop
         
 
 soundInitMusic1 entry
+    rts
+
 		pea INTRO_SOUND_ADDR
 		jsl loadIntroSound
 
@@ -206,6 +209,9 @@ soundInitMusic1_loop anop
 		rts
 
 soundInitMusic2 entry
+
+    rts
+
         pea INTER_SOUND_ADDR
         jsl loadInterSound
 
@@ -232,6 +238,8 @@ soundInitMusic2_loop anop
 		rts
 
 soundInitGameSounds entry
+
+    rts
  
         pea SIREN1_SOUND_ADDR
         jsl loadSiren1Sound
@@ -281,6 +289,8 @@ soundInitGameSounds_loop anop
 
 soundInitDeathSound entry
 
+    rts
+
         pea DEATH_SOUND_ADDR
         jsl loadDeathSound
 
@@ -310,6 +320,8 @@ soundInitDeathSound_loop anop
 
 playIntroSound entry
 
+    rts
+
         short m
 		_docWait
 
@@ -334,6 +346,8 @@ playIntroSound entry
 		rts
 
 playInterSound entry
+
+    rts
 
         short m
 		_docWait
@@ -361,6 +375,8 @@ playInterSound entry
 ; GAME SOUNDS
         
 playEatDotSound entry
+
+    rts
 
         lda eatDotTimer
         bmi doPlayEatDotSound
@@ -395,6 +411,9 @@ doPlayEatDotSound anop
 		rts
 
 startSiren1Sound entry
+
+    rts
+
 
         lda siren1SoundPlaying
         cmp #1
@@ -445,6 +464,8 @@ doStartSiren1Sound anop
 
 stopSiren1Sound entry
 
+    rts
+
         lda siren1SoundPlaying
         cmp #0
         beq siren1SoundNotPlaying
@@ -454,6 +475,8 @@ siren1SoundNotPlaying anop
         rts
 
 doStopSiren1Sound anop
+
+    rts
   
         lda #0
         sta siren1SoundPlaying
@@ -484,6 +507,8 @@ doStopSiren1Sound anop
         rts
 
 startSiren2Sound entry
+
+    rts
 
         lda siren2SoundPlaying
         cmp #1
@@ -534,6 +559,8 @@ doStartSiren2Sound anop
 
 stopSiren2Sound entry
 
+    rts
+
         lda siren2SoundPlaying
         cmp #0
         beq siren2SoundNotPlaying
@@ -573,11 +600,16 @@ doStopSiren2Sound anop
         rts
 
 triggerExtraLifeSound entry
+
+    rts
+
         lda #2*60
         sta extraLifeSoundTimer
         rts
         
 playExtraLifeSound entry
+
+    rts
 
         lda lifeTimer
         bmi doPlayLifeSound
@@ -613,6 +645,8 @@ doPlayLifeSound anop
 
 playFruitSound entry
 
+    rts
+    
         short m
 		_docWait
 
@@ -637,6 +671,8 @@ playFruitSound entry
 		rts
 
 startScaredSound entry
+
+    rts
 
         lda scaredSoundPlaying
         cmp #1
@@ -687,6 +723,9 @@ doStartScaredSound anop
 
 stopScaredSound entry
 
+    rts
+
+
         lda scaredSoundPlaying
         cmp #0
         beq scaredSoundNotPlaying
@@ -727,6 +766,8 @@ doStopScaredSound anop
 
 playEatGhostSound entry
 
+    rts
+
         short m
 		_docWait
 
@@ -751,6 +792,8 @@ playEatGhostSound entry
 		rts
 
 playDeathSound entry
+
+    rts
 
         short m
 		_docWait
@@ -777,6 +820,8 @@ playDeathSound entry
 
 
 updateSounds entry
+
+    rts
 
 ; The pitch increases at the following eaten dot counts
 ; 82
