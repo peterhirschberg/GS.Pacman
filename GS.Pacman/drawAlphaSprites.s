@@ -21,7 +21,7 @@ drawAlphaSprite0 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -37,7 +37,7 @@ drawAlphaSprite0 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -53,7 +53,7 @@ drawAlphaSprite0 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -69,7 +69,7 @@ drawAlphaSprite0 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -85,7 +85,7 @@ drawAlphaSprite0 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -101,7 +101,7 @@ drawAlphaSprite0 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -117,7 +117,7 @@ drawAlphaSprite0 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -133,7 +133,7 @@ drawAlphaSprite0 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -157,7 +157,7 @@ drawAlphaSprite1 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -172,7 +172,7 @@ drawAlphaSprite1 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -188,7 +188,7 @@ drawAlphaSprite1 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -203,7 +203,7 @@ drawAlphaSprite1 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -218,7 +218,7 @@ drawAlphaSprite1 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -233,7 +233,7 @@ drawAlphaSprite1 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -248,7 +248,7 @@ drawAlphaSprite1 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -262,7 +262,7 @@ drawAlphaSprite1 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -286,7 +286,7 @@ drawAlphaSprite2 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -301,7 +301,7 @@ drawAlphaSprite2 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -317,7 +317,7 @@ drawAlphaSprite2 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -332,7 +332,7 @@ drawAlphaSprite2 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -348,7 +348,7 @@ drawAlphaSprite2 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -363,7 +363,7 @@ drawAlphaSprite2 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -378,7 +378,7 @@ drawAlphaSprite2 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -392,7 +392,7 @@ drawAlphaSprite2 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -416,7 +416,7 @@ drawAlphaSprite3 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -430,7 +430,7 @@ drawAlphaSprite3 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -445,7 +445,7 @@ drawAlphaSprite3 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -460,7 +460,7 @@ drawAlphaSprite3 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -476,7 +476,7 @@ drawAlphaSprite3 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -490,7 +490,7 @@ drawAlphaSprite3 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -506,7 +506,7 @@ drawAlphaSprite3 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -521,7 +521,7 @@ drawAlphaSprite3 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -545,7 +545,7 @@ drawAlphaSprite4 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -560,7 +560,7 @@ drawAlphaSprite4 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -576,7 +576,7 @@ drawAlphaSprite4 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -592,7 +592,7 @@ drawAlphaSprite4 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -608,7 +608,7 @@ drawAlphaSprite4 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -622,7 +622,7 @@ drawAlphaSprite4 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -637,7 +637,7 @@ drawAlphaSprite4 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -652,7 +652,7 @@ drawAlphaSprite4 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -676,7 +676,7 @@ drawAlphaSprite5 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -691,7 +691,7 @@ drawAlphaSprite5 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -706,7 +706,7 @@ drawAlphaSprite5 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -721,7 +721,7 @@ drawAlphaSprite5 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -735,7 +735,7 @@ drawAlphaSprite5 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -749,7 +749,7 @@ drawAlphaSprite5 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -765,7 +765,7 @@ drawAlphaSprite5 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -780,7 +780,7 @@ drawAlphaSprite5 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -804,7 +804,7 @@ drawAlphaSprite6 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -820,7 +820,7 @@ drawAlphaSprite6 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -835,7 +835,7 @@ drawAlphaSprite6 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -850,7 +850,7 @@ drawAlphaSprite6 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -865,7 +865,7 @@ drawAlphaSprite6 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -881,7 +881,7 @@ drawAlphaSprite6 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -897,7 +897,7 @@ drawAlphaSprite6 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -912,7 +912,7 @@ drawAlphaSprite6 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -936,7 +936,7 @@ drawAlphaSprite7 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -950,7 +950,7 @@ drawAlphaSprite7 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -966,7 +966,7 @@ drawAlphaSprite7 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -981,7 +981,7 @@ drawAlphaSprite7 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -996,7 +996,7 @@ drawAlphaSprite7 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -1012,7 +1012,7 @@ drawAlphaSprite7 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -1028,7 +1028,7 @@ drawAlphaSprite7 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -1044,7 +1044,7 @@ drawAlphaSprite7 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -1068,7 +1068,7 @@ drawAlphaSprite8 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -1083,7 +1083,7 @@ drawAlphaSprite8 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -1099,7 +1099,7 @@ drawAlphaSprite8 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -1115,7 +1115,7 @@ drawAlphaSprite8 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -1130,7 +1130,7 @@ drawAlphaSprite8 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -1145,7 +1145,7 @@ drawAlphaSprite8 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -1160,7 +1160,7 @@ drawAlphaSprite8 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -1175,7 +1175,7 @@ drawAlphaSprite8 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -1199,7 +1199,7 @@ drawAlphaSprite9 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -1214,7 +1214,7 @@ drawAlphaSprite9 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -1230,7 +1230,7 @@ drawAlphaSprite9 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -1246,7 +1246,7 @@ drawAlphaSprite9 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -1260,7 +1260,7 @@ drawAlphaSprite9 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -1274,7 +1274,7 @@ drawAlphaSprite9 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -1289,7 +1289,7 @@ drawAlphaSprite9 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -1304,7 +1304,7 @@ drawAlphaSprite9 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -1328,7 +1328,7 @@ drawAlphaSprite10 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -1344,7 +1344,7 @@ drawAlphaSprite10 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -1360,7 +1360,7 @@ drawAlphaSprite10 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -1376,7 +1376,7 @@ drawAlphaSprite10 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -1392,7 +1392,7 @@ drawAlphaSprite10 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -1406,7 +1406,7 @@ drawAlphaSprite10 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -1422,7 +1422,7 @@ drawAlphaSprite10 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -1438,7 +1438,7 @@ drawAlphaSprite10 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -1462,7 +1462,7 @@ drawAlphaSprite11 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -1477,7 +1477,7 @@ drawAlphaSprite11 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -1493,7 +1493,7 @@ drawAlphaSprite11 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -1509,7 +1509,7 @@ drawAlphaSprite11 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -1524,7 +1524,7 @@ drawAlphaSprite11 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -1540,7 +1540,7 @@ drawAlphaSprite11 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -1556,7 +1556,7 @@ drawAlphaSprite11 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -1571,7 +1571,7 @@ drawAlphaSprite11 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -1595,7 +1595,7 @@ drawAlphaSprite12 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -1611,7 +1611,7 @@ drawAlphaSprite12 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -1627,7 +1627,7 @@ drawAlphaSprite12 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -1642,7 +1642,7 @@ drawAlphaSprite12 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -1657,7 +1657,7 @@ drawAlphaSprite12 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -1672,7 +1672,7 @@ drawAlphaSprite12 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -1688,7 +1688,7 @@ drawAlphaSprite12 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -1704,7 +1704,7 @@ drawAlphaSprite12 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -1728,7 +1728,7 @@ drawAlphaSprite13 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -1743,7 +1743,7 @@ drawAlphaSprite13 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -1759,7 +1759,7 @@ drawAlphaSprite13 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -1775,7 +1775,7 @@ drawAlphaSprite13 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -1791,7 +1791,7 @@ drawAlphaSprite13 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -1807,7 +1807,7 @@ drawAlphaSprite13 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -1823,7 +1823,7 @@ drawAlphaSprite13 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -1838,7 +1838,7 @@ drawAlphaSprite13 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -1862,7 +1862,7 @@ drawAlphaSprite14 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -1876,7 +1876,7 @@ drawAlphaSprite14 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -1891,7 +1891,7 @@ drawAlphaSprite14 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -1906,7 +1906,7 @@ drawAlphaSprite14 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -1921,7 +1921,7 @@ drawAlphaSprite14 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -1936,7 +1936,7 @@ drawAlphaSprite14 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -1951,7 +1951,7 @@ drawAlphaSprite14 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -1965,7 +1965,7 @@ drawAlphaSprite14 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -1989,7 +1989,7 @@ drawAlphaSprite15 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -2003,7 +2003,7 @@ drawAlphaSprite15 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -2018,7 +2018,7 @@ drawAlphaSprite15 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -2033,7 +2033,7 @@ drawAlphaSprite15 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -2048,7 +2048,7 @@ drawAlphaSprite15 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -2063,7 +2063,7 @@ drawAlphaSprite15 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -2078,7 +2078,7 @@ drawAlphaSprite15 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -2093,7 +2093,7 @@ drawAlphaSprite15 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -2117,7 +2117,7 @@ drawAlphaSprite16 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -2132,7 +2132,7 @@ drawAlphaSprite16 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -2147,7 +2147,7 @@ drawAlphaSprite16 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -2162,7 +2162,7 @@ drawAlphaSprite16 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -2178,7 +2178,7 @@ drawAlphaSprite16 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -2194,7 +2194,7 @@ drawAlphaSprite16 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -2210,7 +2210,7 @@ drawAlphaSprite16 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -2225,7 +2225,7 @@ drawAlphaSprite16 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -2249,7 +2249,7 @@ drawAlphaSprite17 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -2265,7 +2265,7 @@ drawAlphaSprite17 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -2281,7 +2281,7 @@ drawAlphaSprite17 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -2297,7 +2297,7 @@ drawAlphaSprite17 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -2311,7 +2311,7 @@ drawAlphaSprite17 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -2327,7 +2327,7 @@ drawAlphaSprite17 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -2343,7 +2343,7 @@ drawAlphaSprite17 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -2359,7 +2359,7 @@ drawAlphaSprite17 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -2383,7 +2383,7 @@ drawAlphaSprite18 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -2397,7 +2397,7 @@ drawAlphaSprite18 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -2412,7 +2412,7 @@ drawAlphaSprite18 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -2427,7 +2427,7 @@ drawAlphaSprite18 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -2442,7 +2442,7 @@ drawAlphaSprite18 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -2457,7 +2457,7 @@ drawAlphaSprite18 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -2472,7 +2472,7 @@ drawAlphaSprite18 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -2486,7 +2486,7 @@ drawAlphaSprite18 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -2510,7 +2510,7 @@ drawAlphaSprite19 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -2524,7 +2524,7 @@ drawAlphaSprite19 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -2538,7 +2538,7 @@ drawAlphaSprite19 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -2552,7 +2552,7 @@ drawAlphaSprite19 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -2566,7 +2566,7 @@ drawAlphaSprite19 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -2580,7 +2580,7 @@ drawAlphaSprite19 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -2596,7 +2596,7 @@ drawAlphaSprite19 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -2611,7 +2611,7 @@ drawAlphaSprite19 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -2635,7 +2635,7 @@ drawAlphaSprite20 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -2651,7 +2651,7 @@ drawAlphaSprite20 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -2667,7 +2667,7 @@ drawAlphaSprite20 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -2683,7 +2683,7 @@ drawAlphaSprite20 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -2699,7 +2699,7 @@ drawAlphaSprite20 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -2714,7 +2714,7 @@ drawAlphaSprite20 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -2730,7 +2730,7 @@ drawAlphaSprite20 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -2746,7 +2746,7 @@ drawAlphaSprite20 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -2770,7 +2770,7 @@ drawAlphaSprite21 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -2785,7 +2785,7 @@ drawAlphaSprite21 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -2800,7 +2800,7 @@ drawAlphaSprite21 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -2815,7 +2815,7 @@ drawAlphaSprite21 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -2830,7 +2830,7 @@ drawAlphaSprite21 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -2845,7 +2845,7 @@ drawAlphaSprite21 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -2860,7 +2860,7 @@ drawAlphaSprite21 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -2875,7 +2875,7 @@ drawAlphaSprite21 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -2899,7 +2899,7 @@ drawAlphaSprite22 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -2915,7 +2915,7 @@ drawAlphaSprite22 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -2931,7 +2931,7 @@ drawAlphaSprite22 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -2945,7 +2945,7 @@ drawAlphaSprite22 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -2959,7 +2959,7 @@ drawAlphaSprite22 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -2974,7 +2974,7 @@ drawAlphaSprite22 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -2990,7 +2990,7 @@ drawAlphaSprite22 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -3006,7 +3006,7 @@ drawAlphaSprite22 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -3030,7 +3030,7 @@ drawAlphaSprite23 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -3046,7 +3046,7 @@ drawAlphaSprite23 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -3062,7 +3062,7 @@ drawAlphaSprite23 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -3078,7 +3078,7 @@ drawAlphaSprite23 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -3092,7 +3092,7 @@ drawAlphaSprite23 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -3107,7 +3107,7 @@ drawAlphaSprite23 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -3123,7 +3123,7 @@ drawAlphaSprite23 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -3139,7 +3139,7 @@ drawAlphaSprite23 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -3163,7 +3163,7 @@ drawAlphaSprite24 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -3178,7 +3178,7 @@ drawAlphaSprite24 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -3194,7 +3194,7 @@ drawAlphaSprite24 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -3210,7 +3210,7 @@ drawAlphaSprite24 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -3226,7 +3226,7 @@ drawAlphaSprite24 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -3242,7 +3242,7 @@ drawAlphaSprite24 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -3258,7 +3258,7 @@ drawAlphaSprite24 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -3273,7 +3273,7 @@ drawAlphaSprite24 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -3297,7 +3297,7 @@ drawAlphaSprite25 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -3312,7 +3312,7 @@ drawAlphaSprite25 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -3328,7 +3328,7 @@ drawAlphaSprite25 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -3344,7 +3344,7 @@ drawAlphaSprite25 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -3360,7 +3360,7 @@ drawAlphaSprite25 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -3375,7 +3375,7 @@ drawAlphaSprite25 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -3390,7 +3390,7 @@ drawAlphaSprite25 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -3405,7 +3405,7 @@ drawAlphaSprite25 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -3429,7 +3429,7 @@ drawAlphaSprite26 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -3444,7 +3444,7 @@ drawAlphaSprite26 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -3460,7 +3460,7 @@ drawAlphaSprite26 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -3476,7 +3476,7 @@ drawAlphaSprite26 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -3492,7 +3492,7 @@ drawAlphaSprite26 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -3507,7 +3507,7 @@ drawAlphaSprite26 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -3523,7 +3523,7 @@ drawAlphaSprite26 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -3538,7 +3538,7 @@ drawAlphaSprite26 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -3562,7 +3562,7 @@ drawAlphaSprite27 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -3577,7 +3577,7 @@ drawAlphaSprite27 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -3593,7 +3593,7 @@ drawAlphaSprite27 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -3609,7 +3609,7 @@ drawAlphaSprite27 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -3625,7 +3625,7 @@ drawAlphaSprite27 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -3640,7 +3640,7 @@ drawAlphaSprite27 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -3656,7 +3656,7 @@ drawAlphaSprite27 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -3672,7 +3672,7 @@ drawAlphaSprite27 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -3696,7 +3696,7 @@ drawAlphaSprite28 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -3711,7 +3711,7 @@ drawAlphaSprite28 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -3727,7 +3727,7 @@ drawAlphaSprite28 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -3742,7 +3742,7 @@ drawAlphaSprite28 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -3757,7 +3757,7 @@ drawAlphaSprite28 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -3771,7 +3771,7 @@ drawAlphaSprite28 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -3787,7 +3787,7 @@ drawAlphaSprite28 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -3802,7 +3802,7 @@ drawAlphaSprite28 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -3826,7 +3826,7 @@ drawAlphaSprite29 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -3840,7 +3840,7 @@ drawAlphaSprite29 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -3855,7 +3855,7 @@ drawAlphaSprite29 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -3870,7 +3870,7 @@ drawAlphaSprite29 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -3885,7 +3885,7 @@ drawAlphaSprite29 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -3900,7 +3900,7 @@ drawAlphaSprite29 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -3915,7 +3915,7 @@ drawAlphaSprite29 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -3930,7 +3930,7 @@ drawAlphaSprite29 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -3954,7 +3954,7 @@ drawAlphaSprite30 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -3970,7 +3970,7 @@ drawAlphaSprite30 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -3986,7 +3986,7 @@ drawAlphaSprite30 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -4002,7 +4002,7 @@ drawAlphaSprite30 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -4018,7 +4018,7 @@ drawAlphaSprite30 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -4034,7 +4034,7 @@ drawAlphaSprite30 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -4050,7 +4050,7 @@ drawAlphaSprite30 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -4065,7 +4065,7 @@ drawAlphaSprite30 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -4089,7 +4089,7 @@ drawAlphaSprite31 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -4105,7 +4105,7 @@ drawAlphaSprite31 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -4121,7 +4121,7 @@ drawAlphaSprite31 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -4137,7 +4137,7 @@ drawAlphaSprite31 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -4153,7 +4153,7 @@ drawAlphaSprite31 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -4168,7 +4168,7 @@ drawAlphaSprite31 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -4184,7 +4184,7 @@ drawAlphaSprite31 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -4199,7 +4199,7 @@ drawAlphaSprite31 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -4223,7 +4223,7 @@ drawAlphaSprite32 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -4239,7 +4239,7 @@ drawAlphaSprite32 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -4255,7 +4255,7 @@ drawAlphaSprite32 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -4270,7 +4270,7 @@ drawAlphaSprite32 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -4284,7 +4284,7 @@ drawAlphaSprite32 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -4298,7 +4298,7 @@ drawAlphaSprite32 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -4314,7 +4314,7 @@ drawAlphaSprite32 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -4330,7 +4330,7 @@ drawAlphaSprite32 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -4354,7 +4354,7 @@ drawAlphaSprite33 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -4370,7 +4370,7 @@ drawAlphaSprite33 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -4386,7 +4386,7 @@ drawAlphaSprite33 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -4401,7 +4401,7 @@ drawAlphaSprite33 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -4417,7 +4417,7 @@ drawAlphaSprite33 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -4432,7 +4432,7 @@ drawAlphaSprite33 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -4448,7 +4448,7 @@ drawAlphaSprite33 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -4464,7 +4464,7 @@ drawAlphaSprite33 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -4488,7 +4488,7 @@ drawAlphaSprite34 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -4504,7 +4504,7 @@ drawAlphaSprite34 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -4520,7 +4520,7 @@ drawAlphaSprite34 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -4536,7 +4536,7 @@ drawAlphaSprite34 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -4552,7 +4552,7 @@ drawAlphaSprite34 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -4567,7 +4567,7 @@ drawAlphaSprite34 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -4582,7 +4582,7 @@ drawAlphaSprite34 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -4597,7 +4597,7 @@ drawAlphaSprite34 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -4621,7 +4621,7 @@ drawAlphaSprite35 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -4635,7 +4635,7 @@ drawAlphaSprite35 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -4650,7 +4650,7 @@ drawAlphaSprite35 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -4665,7 +4665,7 @@ drawAlphaSprite35 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -4681,7 +4681,7 @@ drawAlphaSprite35 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -4697,7 +4697,7 @@ drawAlphaSprite35 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -4712,7 +4712,7 @@ drawAlphaSprite35 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -4726,7 +4726,7 @@ drawAlphaSprite35 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -4750,7 +4750,7 @@ drawAlphaSprite36 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -4765,7 +4765,7 @@ drawAlphaSprite36 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -4780,7 +4780,7 @@ drawAlphaSprite36 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -4796,7 +4796,7 @@ drawAlphaSprite36 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -4812,7 +4812,7 @@ drawAlphaSprite36 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -4827,7 +4827,7 @@ drawAlphaSprite36 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -4840,7 +4840,7 @@ drawAlphaSprite36 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -4855,7 +4855,7 @@ drawAlphaSprite36 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -4879,7 +4879,7 @@ drawAlphaSprite37 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -4894,7 +4894,7 @@ drawAlphaSprite37 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -4909,7 +4909,7 @@ drawAlphaSprite37 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -4925,7 +4925,7 @@ drawAlphaSprite37 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -4940,7 +4940,7 @@ drawAlphaSprite37 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -4955,7 +4955,7 @@ drawAlphaSprite37 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -4971,7 +4971,7 @@ drawAlphaSprite37 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -4986,7 +4986,7 @@ drawAlphaSprite37 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -5012,7 +5012,7 @@ drawAlphaSprite38 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -5025,7 +5025,7 @@ drawAlphaSprite38 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -5038,7 +5038,7 @@ drawAlphaSprite38 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -5053,7 +5053,7 @@ drawAlphaSprite38 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -5069,7 +5069,7 @@ drawAlphaSprite38 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -5083,7 +5083,7 @@ drawAlphaSprite38 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -5097,7 +5097,7 @@ drawAlphaSprite38 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -5111,7 +5111,7 @@ drawAlphaSprite38 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -5135,7 +5135,7 @@ drawAlphaSprite39 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -5148,7 +5148,7 @@ drawAlphaSprite39 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -5161,7 +5161,7 @@ drawAlphaSprite39 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -5177,7 +5177,7 @@ drawAlphaSprite39 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -5193,7 +5193,7 @@ drawAlphaSprite39 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -5209,7 +5209,7 @@ drawAlphaSprite39 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -5223,7 +5223,7 @@ drawAlphaSprite39 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -5238,7 +5238,7 @@ drawAlphaSprite39 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -5262,7 +5262,7 @@ drawAlphaSprite40 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -5275,7 +5275,7 @@ drawAlphaSprite40 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -5288,7 +5288,7 @@ drawAlphaSprite40 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -5302,7 +5302,7 @@ drawAlphaSprite40 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -5315,7 +5315,7 @@ drawAlphaSprite40 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -5328,7 +5328,7 @@ drawAlphaSprite40 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -5342,7 +5342,7 @@ drawAlphaSprite40 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -5355,7 +5355,7 @@ drawAlphaSprite40 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -5379,7 +5379,7 @@ drawAlphaSprite41 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -5393,7 +5393,7 @@ drawAlphaSprite41 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -5407,7 +5407,7 @@ drawAlphaSprite41 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -5422,7 +5422,7 @@ drawAlphaSprite41 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -5437,7 +5437,7 @@ drawAlphaSprite41 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -5452,7 +5452,7 @@ drawAlphaSprite41 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -5467,7 +5467,7 @@ drawAlphaSprite41 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -5481,7 +5481,7 @@ drawAlphaSprite41 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -5505,7 +5505,7 @@ drawAlphaSprite42 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -5518,7 +5518,7 @@ drawAlphaSprite42 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -5531,7 +5531,7 @@ drawAlphaSprite42 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -5544,7 +5544,7 @@ drawAlphaSprite42 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -5560,7 +5560,7 @@ drawAlphaSprite42 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -5573,7 +5573,7 @@ drawAlphaSprite42 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -5586,7 +5586,7 @@ drawAlphaSprite42 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -5599,7 +5599,7 @@ drawAlphaSprite42 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -5623,7 +5623,7 @@ drawAlphaSprite43 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -5636,7 +5636,7 @@ drawAlphaSprite43 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -5650,7 +5650,7 @@ drawAlphaSprite43 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -5664,7 +5664,7 @@ drawAlphaSprite43 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -5678,7 +5678,7 @@ drawAlphaSprite43 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -5692,7 +5692,7 @@ drawAlphaSprite43 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -5706,7 +5706,7 @@ drawAlphaSprite43 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -5720,7 +5720,7 @@ drawAlphaSprite43 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -5745,7 +5745,7 @@ drawAlphaSprite44 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -5759,7 +5759,7 @@ drawAlphaSprite44 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -5773,7 +5773,7 @@ drawAlphaSprite44 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -5787,7 +5787,7 @@ drawAlphaSprite44 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -5801,7 +5801,7 @@ drawAlphaSprite44 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -5815,7 +5815,7 @@ drawAlphaSprite44 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -5829,7 +5829,7 @@ drawAlphaSprite44 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -5843,7 +5843,7 @@ drawAlphaSprite44 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -5867,7 +5867,7 @@ drawAlphaSprite45 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -5880,7 +5880,7 @@ drawAlphaSprite45 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -5894,7 +5894,7 @@ drawAlphaSprite45 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -5908,7 +5908,7 @@ drawAlphaSprite45 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -5922,7 +5922,7 @@ drawAlphaSprite45 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -5936,7 +5936,7 @@ drawAlphaSprite45 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -5950,7 +5950,7 @@ drawAlphaSprite45 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -5964,7 +5964,7 @@ drawAlphaSprite45 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -5989,7 +5989,7 @@ drawAlphaSprite46 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -6003,7 +6003,7 @@ drawAlphaSprite46 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -6017,7 +6017,7 @@ drawAlphaSprite46 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -6031,7 +6031,7 @@ drawAlphaSprite46 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -6045,7 +6045,7 @@ drawAlphaSprite46 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -6059,7 +6059,7 @@ drawAlphaSprite46 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -6073,7 +6073,7 @@ drawAlphaSprite46 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -6087,7 +6087,7 @@ drawAlphaSprite46 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -6111,7 +6111,7 @@ drawAlphaSprite47 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -6127,7 +6127,7 @@ drawAlphaSprite47 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -6143,7 +6143,7 @@ drawAlphaSprite47 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -6159,7 +6159,7 @@ drawAlphaSprite47 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -6175,7 +6175,7 @@ drawAlphaSprite47 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -6188,7 +6188,7 @@ drawAlphaSprite47 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -6201,7 +6201,7 @@ drawAlphaSprite47 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -6214,7 +6214,7 @@ drawAlphaSprite47 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -6238,7 +6238,7 @@ drawAlphaSprite48 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -6251,7 +6251,7 @@ drawAlphaSprite48 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -6264,7 +6264,7 @@ drawAlphaSprite48 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -6277,7 +6277,7 @@ drawAlphaSprite48 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -6290,7 +6290,7 @@ drawAlphaSprite48 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -6303,7 +6303,7 @@ drawAlphaSprite48 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -6316,7 +6316,7 @@ drawAlphaSprite48 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -6329,7 +6329,7 @@ drawAlphaSprite48 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd
@@ -6353,7 +6353,7 @@ drawAlphaSprite49 entry
         _spriteHeader
 
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #0
         tcd
@@ -6366,7 +6366,7 @@ drawAlphaSprite49 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #160
         tcd
@@ -6379,7 +6379,7 @@ drawAlphaSprite49 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #320
         tcd
@@ -6392,7 +6392,7 @@ drawAlphaSprite49 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #480
         tcd
@@ -6405,7 +6405,7 @@ drawAlphaSprite49 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #640
         tcd
@@ -6418,7 +6418,7 @@ drawAlphaSprite49 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #800
         tcd
@@ -6431,7 +6431,7 @@ drawAlphaSprite49 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #960
         tcd
@@ -6444,7 +6444,7 @@ drawAlphaSprite49 entry
         sta 3
         long m
 
-        lda drawAddress
+        lda >drawAddress
         clc
         adc #1120
         tcd

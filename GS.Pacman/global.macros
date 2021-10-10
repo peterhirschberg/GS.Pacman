@@ -91,14 +91,14 @@ addDone_&SYSCNT anop
         asl a
         tax
         lda >screenRowOffsets,x
-        sta drawAddress
+        sta >drawAddress
         lda >spriteX
         lsr a
         clc
-        adc drawAddress
+        adc >drawAddress
         clc
         adc #$2000
-        sta drawAddress
+        sta >drawAddress
         mend
 
 
