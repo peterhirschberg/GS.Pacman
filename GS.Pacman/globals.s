@@ -50,46 +50,90 @@ reverseDirections anop
                     
 ; global speed tables
                     
-speedSteps200 anop
+speedSteps200Fast anop
         dc i2'4,4,4,4,4,4,4,4,4' ; 32
 
-speedSteps105 anop
+speedSteps105Fast anop
         dc i2'2,3,4,3,3,4,3,3,4' ; 29
         
-speedSteps100 anop
+speedSteps100Fast anop
         dc i2'2,3,4,2,3,4,3,3,4' ; 28
 
-speedSteps95 anop
+speedSteps95Fast anop
         dc i2'2,3,4,2,3,4,2,3,3' ; 26
 
-speedSteps90 anop
+speedSteps90Fast anop
         dc i2'2,3,3,2,3,4,2,3,3' ; 25
 
-speedSteps85 anop
+speedSteps85Fast anop
         dc i2'2,2,4,2,2,4,2,2,4' ; 24
 
-speedSteps80 anop
+speedSteps80Fast anop
         dc i2'2,2,3,2,2,4,2,2,3' ; 22
 
-speedSteps75 anop
+speedSteps75Fast anop
         dc i2'2,2,2,2,2,2,2,2,2' ; 16
 
-speedSteps60 anop
+speedSteps60Fast anop
         dc i2'1,2,1,2,1,2,1,2,2' ; 14
 
-speedSteps55 anop
+speedSteps55Fast anop
         dc i2'1,2,1,2,1,2,1,2,1' ; 13
         
-speedSteps50 anop
+speedSteps50Fast anop
         dc i2'1,2,1,2,1,2,1,2,1' ; 12
 
-speedSteps45 anop
+speedSteps45Fast anop
         dc i2'1,2,1,1,1,2,1,1,1' ; 10
 
-speedSteps40 anop
+speedSteps40Fast anop
         dc i2'1,1,1,1,1,1,1,1,1' ; 8
         
-                    
+        
+; -------------------------------------
+
+
+speedSteps200Arcade anop
+        dc i2'4,4,4,4,4,4,4,4,4'
+
+speedSteps105Arcade anop
+        dc i2'2,3,3,3,3,4,3,3,4'
+        
+speedSteps100Arcade anop
+        dc i2'2,3,3,2,3,3,3,3,3'
+
+speedSteps95Arcade anop
+        dc i2'2,3,3,2,3,3,2,2,3'
+
+speedSteps90Arcade anop
+        dc i2'2,3,2,2,3,2,2,2,3'
+
+speedSteps85Arcade anop
+        dc i2'2,2,3,2,2,2,2,2,3'
+
+speedSteps80Arcade anop
+        dc i2'2,2,2,2,2,3,2,2,2'
+
+speedSteps75Arcade anop
+        dc i2'2,1,2,2,1,2,2,2,1'
+
+speedSteps60Arcade anop
+        dc i2'1,2,1,2,1,1,1,2,1'
+
+speedSteps55Arcade anop
+        dc i2'1,1,1,1,1,1,1,2,1'
+        
+speedSteps50Arcade anop
+        dc i2'1,1,1,1,1,1,1,2,1'
+
+speedSteps45Arcade anop
+        dc i2'1,1,1,1,1,1,1,1,1'
+
+speedSteps40Arcade anop
+        dc i2'1,1,1,1,1,1,1,1,1'
+
+       
+        
 
 ; table of precomputed screen row offsets
 

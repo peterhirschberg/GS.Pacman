@@ -66,7 +66,16 @@ ghostsNotFrightened anop
 loadPacSpeed80 anop
         ldx #0
 load80Loop anop
-        lda speedSteps80,x
+
+        lda arcadeSpeed
+        cmp #0
+        beq arcadeSpeed80
+        lda speedSteps80Fast,x
+        bra arcadeSpeed80Done
+arcadeSpeed80 anop
+        lda speedSteps80Arcade,x
+arcadeSpeed80Done anop
+        
         sta pacSteps,x
         inx
         inx
@@ -80,7 +89,16 @@ load80Done anop
 loadPacSpeed90 anop
         ldx #0
 load90Loop anop
-        lda speedSteps90,x
+
+        lda arcadeSpeed
+        cmp #0
+        beq arcadeSpeed90
+        lda speedSteps90Fast,x
+        bra arcadeSpeed90Done
+arcadeSpeed90 anop
+        lda speedSteps90Arcade,x
+arcadeSpeed90Done anop
+
         sta pacSteps,x
         inx
         inx
@@ -94,7 +112,16 @@ load90Done anop
 loadPacSpeed95 anop
         ldx #0
 load95Loop anop
-        lda speedSteps95,x
+
+        lda arcadeSpeed
+        cmp #0
+        beq arcadeSpeed95
+        lda speedSteps95Fast,x
+        bra arcadeSpeed95Done
+arcadeSpeed95 anop
+        lda speedSteps95Arcade,x
+arcadeSpeed95Done anop
+
         sta pacSteps,x
         inx
         inx
@@ -108,7 +135,16 @@ load95Done anop
 loadPacSpeed100 anop
         ldx #0
 load100Loop anop
-        lda speedSteps100,x
+
+        lda arcadeSpeed
+        cmp #0
+        beq arcadeSpeed100
+        lda speedSteps100Fast,x
+        bra arcadeSpeed100Done
+arcadeSpeed100 anop
+        lda speedSteps100Arcade,x
+arcadeSpeed100Done anop
+
         sta pacSteps,x
         inx
         inx

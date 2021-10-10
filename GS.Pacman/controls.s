@@ -82,6 +82,9 @@ readKeys anop
 
         cmp #'8'
         beq onCheat
+        
+        cmp #'7'
+        beq onSpeed
 
 checkKeysDone anop
         long i,m
@@ -163,7 +166,19 @@ onCheat anop
         sta cheatMode
         rts
         
-
+onSpeed anop
+        lda arcadeSpeed
+        cmp #0
+        beq setArcadeSpeed
+        lda #0
+        sta arcadeSpeed
+        rts
+setArcadeSpeed anop
+        lda #1
+        sta arcadeSpeed
+        rts
+        
+        
 
 readJoystick entry
 

@@ -107,123 +107,227 @@ dontResetSpeedStepIndex anop
 
         lda ghostSpeed,x
         cmp #40
-        beq getSteps40
+        beq getSteps40Short
         cmp #45
-        beq getSteps45
+        beq getSteps45Short
         cmp #50
-        beq getSteps50
+        beq getSteps50Short
         cmp #55
-        beq getSteps55
+        beq getSteps55Short
         cmp #60
-        beq getSteps60
+        beq getSteps60Short
         cmp #75
-        beq getSteps75
+        beq getSteps75Short
         cmp #80
-        beq getSteps80
+        beq getSteps80Short
         cmp #85
-        beq getSteps85
+        beq getSteps85Short
         cmp #90
-        beq getSteps90
+        beq getSteps90Short
         cmp #95
-        beq getSteps95
+        beq getSteps95Short
         cmp #100
-        beq getSteps100
+        beq getSteps100Short
         cmp #105
-        beq getSteps105
+        beq getSteps105Short
         cmp #200
-        beq getSteps200
+        beq getSteps200Short
 
         rts
+
+getSteps40Short anop
+        brl getSteps40
+getSteps45Short anop
+        brl getSteps45
+getSteps50Short anop
+        brl getSteps50
+getSteps55Short anop
+        brl getSteps55
+getSteps60Short anop
+        brl getSteps60
+getSteps75Short anop
+        brl getSteps75
+getSteps80Short anop
+        brl getSteps80
+getSteps85Short anop
+        brl getSteps85
+getSteps90Short anop
+        brl getSteps90
+getSteps95Short anop
+        brl getSteps95
+getSteps100Short anop
+        brl getSteps100
+getSteps105Short anop
+        brl getSteps105
+getSteps200Short anop
+        brl getSteps200
 
 getSteps40 anop
         lda ghostSpeedStepIndex,x
         asl a
         tay
-        lda speedSteps40,y
+        lda arcadeSpeed
+        cmp #0
+        beq arcadeSpeed40
+        lda speedSteps40Fast,y
+        rts
+arcadeSpeed40 anop
+        lda speedSteps40Arcade,y
         rts
 
 getSteps45 anop
         lda ghostSpeedStepIndex,x
         asl a
         tay
-        lda speedSteps45,y
+        lda arcadeSpeed
+        cmp #0
+        beq arcadeSpeed45
+        lda speedSteps45Fast,y
+        rts
+arcadeSpeed45 anop
+        lda speedSteps45Arcade,y
         rts
 
 getSteps50 anop
         lda ghostSpeedStepIndex,x
         asl a
         tay
-        lda speedSteps50,y
+        lda arcadeSpeed
+        cmp #0
+        beq arcadeSpeed50
+        lda speedSteps50Fast,y
+        rts
+arcadeSpeed50 anop
+        lda speedSteps50Arcade,y
         rts
 
 getSteps55 anop
         lda ghostSpeedStepIndex,x
         asl a
         tay
-        lda speedSteps55,y
+        lda arcadeSpeed
+        cmp #0
+        beq arcadeSpeed55
+        lda speedSteps55Fast,y
+        rts
+arcadeSpeed55 anop
+        lda speedSteps55Arcade,y
         rts
         
 getSteps60 anop
         lda ghostSpeedStepIndex,x
         asl a
         tay
-        lda speedSteps60,y
+        lda arcadeSpeed
+        cmp #0
+        beq arcadeSpeed60
+        lda speedSteps60Fast,y
+        rts
+arcadeSpeed60 anop
+        lda speedSteps60Arcade,y
         rts
         
 getSteps75 anop
         lda ghostSpeedStepIndex,x
         asl a
         tay
-        lda speedSteps75,y
+        lda arcadeSpeed
+        cmp #0
+        beq arcadeSpeed75
+        lda speedSteps75Fast,y
+        rts
+arcadeSpeed75 anop
+        lda speedSteps75Arcade,y
         rts
 
 getSteps80 anop
         lda ghostSpeedStepIndex,x
         asl a
         tay
-        lda speedSteps80,y
+        lda arcadeSpeed
+        cmp #0
+        beq arcadeSpeed80
+        lda speedSteps80Fast,y
+        rts
+arcadeSpeed80 anop
+        lda speedSteps80Arcade,y
         rts
   
 getSteps85 anop
         lda ghostSpeedStepIndex,x
         asl a
         tay
-        lda speedSteps85,y
+        lda arcadeSpeed
+        cmp #0
+        beq arcadeSpeed85
+        lda speedSteps85Fast,y
+        rts
+arcadeSpeed85 anop
+        lda speedSteps85Arcade,y
         rts
 
 getSteps90 anop
         lda ghostSpeedStepIndex,x
         asl a
         tay
-        lda speedSteps90,y
+        lda arcadeSpeed
+        cmp #0
+        beq arcadeSpeed90
+        lda speedSteps90Fast,y
+        rts
+arcadeSpeed90 anop
+        lda speedSteps90Arcade,y
         rts
         
 getSteps95 anop
         lda ghostSpeedStepIndex,x
         asl a
         tay
-        lda speedSteps95,y
+        lda arcadeSpeed
+        cmp #0
+        beq arcadeSpeed95
+        lda speedSteps95Fast,y
+arcadeSpeed95 anop
+        lda speedSteps95Arcade,y
         rts
         
 getSteps100 anop
         lda ghostSpeedStepIndex,x
         asl a
         tay
-        lda speedSteps100,y
+        lda arcadeSpeed
+        cmp #0
+        beq arcadeSpeed100
+        lda speedSteps100Fast,y
+        rts
+arcadeSpeed100 anop
+        lda speedSteps100Arcade,y
         rts
 
 getSteps105 anop
         lda ghostSpeedStepIndex,x
         asl a
         tay
-        lda speedSteps105,y
+        lda arcadeSpeed
+        cmp #0
+        beq arcadeSpeed105
+        lda speedSteps105Fast,y
+        rts
+arcadeSpeed105 anop
+        lda speedSteps105Arcade,y
         rts
 
 getSteps200 anop
         lda ghostSpeedStepIndex,x
         asl a
         tay
-        lda speedSteps200,y
+        lda arcadeSpeed
+        cmp #0
+        beq arcadeSpeed200
+        lda speedSteps200Fast,y
+        rts
+arcadeSpeed200 anop
+        lda speedSteps200Arcade,y
         rts
         
 

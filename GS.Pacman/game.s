@@ -181,6 +181,23 @@ startGame anop
 mainLoop anop
 
         jsr waitForVbl
+        
+;        lda arcadeSpeed
+;        cmp #0
+;        beq doneSkipFrame
+        
+;        dec frameSkipCounter
+;        lda frameSkipCounter
+;        bmi skipThisFrame
+;        bra doneSkipFrame
+;
+;skipThisFrame anop
+
+;        lda #6
+;        sta frameSkipCounter
+;        jsr waitForVbl
+
+;doneSkipFrame anop
 
         lda postLifeTimer
         cmp #0
@@ -584,5 +601,8 @@ gameOverWaitTimer dc i2'-1'
 waitingForGameStart dc i2'0'
 
 cheatMode dc i2'0'
+
+arcadeSpeed dc i2'0'
+frameSkipCounter dc i2'0'
 
         end
