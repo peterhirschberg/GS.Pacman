@@ -48,6 +48,8 @@ gameStartWait entry
         jsr drawScore
         jsr drawHighScore
         jsr drawLevel
+        
+        jsr drawAttract
 
         jsr normalColorTable
 
@@ -63,6 +65,8 @@ waitLoop anop
 waitLoopDontQuit anop
 
         jsr waitForVbl
+        
+        jsr runMaze
         
         lda #1
         sta waitingForGameStart
@@ -86,6 +90,16 @@ waitLoopDontQuit anop
         lda #280
         sta gameIntroTimer
         
+        rts
+        
+        
+        
+drawAttract entry
+
+        jsr drawCharacterNicknames
+        jsr drawAttractDots
+        jsr drawDotPoints
+
         rts
         
         

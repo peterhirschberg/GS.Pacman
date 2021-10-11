@@ -39,7 +39,7 @@ drawAlphaPressStart entry
 
         lda #88
         sta spriteX
-        lda #96
+        lda #166
         sta spriteY
 
         ldy #0
@@ -266,6 +266,286 @@ scoreTitleLoop anop
 scoreTitleDone anop
 
         rts
+        
+        
+drawCharacterNicknames entry
+
+        lda #$dd
+        sta spriteColor
+
+        jsr parseColor
+
+        lda #100
+        sta spriteX
+        lda #32
+        sta spriteY
+
+        ldy #0
+
+nicknamesTitleLoop anop
+
+        lda alphaStringCharacterNicknameTitle,y
+
+        cmp #-1
+        beq nicknamesTitleDone
+
+        jsr drawAlphaSpriteByIndex
+
+        lda spriteX
+        clc
+        adc #8
+        sta spriteX
+
+        iny
+        iny
+        iny
+        iny
+        bra nicknamesTitleLoop
+
+nicknamesTitleDone anop
+
+
+        lda #$33
+        sta spriteColor
+
+        jsr parseColor
+
+        lda #100
+        sta spriteX
+        lda #32+16
+        sta spriteY
+
+        ldy #0
+
+blinkyLoop anop
+
+        lda alphaStringBlinky,y
+
+        cmp #-1
+        beq blinkyDone
+
+        jsr drawAlphaSpriteByIndex
+
+        lda spriteX
+        clc
+        adc #8
+        sta spriteX
+
+        iny
+        iny
+        iny
+        iny
+        bra blinkyLoop
+
+blinkyDone anop
+
+
+        lda #$bb
+        sta spriteColor
+
+        jsr parseColor
+
+        lda #100
+        sta spriteX
+        lda #32+32
+        sta spriteY
+
+        ldy #0
+
+pinkyLoop anop
+
+        lda alphaStringPinky,y
+
+        cmp #-1
+        beq pinkyDone
+
+        jsr drawAlphaSpriteByIndex
+
+        lda spriteX
+        clc
+        adc #8
+        sta spriteX
+
+        iny
+        iny
+        iny
+        iny
+        bra pinkyLoop
+
+pinkyDone anop
+
+        lda #$88
+        sta spriteColor
+
+        jsr parseColor
+
+        lda #100
+        sta spriteX
+        lda #32+48
+        sta spriteY
+
+        ldy #0
+
+inkyLoop anop
+
+        lda alphaStringInky,y
+
+        cmp #-1
+        beq inkyDone
+
+        jsr drawAlphaSpriteByIndex
+
+        lda spriteX
+        clc
+        adc #8
+        sta spriteX
+
+        iny
+        iny
+        iny
+        iny
+        bra inkyLoop
+
+inkyDone anop
+
+
+        lda #$99
+        sta spriteColor
+
+        jsr parseColor
+
+        lda #100
+        sta spriteX
+        lda #32+64
+        sta spriteY
+
+        ldy #0
+
+clydeLoop anop
+
+        lda alphaStringCloyd,y
+
+        cmp #-1
+        beq clydeDone
+
+        jsr drawAlphaSpriteByIndex
+
+        lda spriteX
+        clc
+        adc #8
+        sta spriteX
+
+        iny
+        iny
+        iny
+        iny
+        bra clydeLoop
+
+clydeDone anop
+
+        lda #30
+        sta spriteX
+        lda #30
+        sta spriteY
+        lda #SPRITE_REDGHOST_RIGHT_1
+        jsr drawSpriteByIndex
+
+        lda #30
+        sta spriteX
+        lda #30+16
+        sta spriteY
+        lda #SPRITE_PINKGHOST_RIGHT_1
+        jsr drawSpriteByIndex
+
+        lda #30
+        sta spriteX
+        lda #30+32
+        sta spriteY
+        lda #SPRITE_BLUEGHOST_RIGHT_1
+        jsr drawSpriteByIndex
+
+        lda #30
+        sta spriteX
+        lda #30+48
+        sta spriteY
+        lda #SPRITE_ORANGEGHOST_RIGHT_1
+        jsr drawSpriteByIndex
+
+        rts
+        
+drawDotPoints entry
+
+        lda #$dd
+        sta spriteColor
+
+        jsr parseColor
+
+        lda #135
+        sta spriteX
+        lda #120
+        sta spriteY
+
+        ldy #0
+
+a10PTSLoop anop
+
+        lda alphaString10pts,y
+
+        cmp #-1
+        beq a10PTSDone
+
+        jsr drawAlphaSpriteByIndex
+
+        lda spriteX
+        clc
+        adc #8
+        sta spriteX
+
+        iny
+        iny
+        iny
+        iny
+        bra a10PTSLoop
+        
+a10PTSDone anop
+
+        lda #$dd
+        sta spriteColor
+
+        jsr parseColor
+
+        lda #135
+        sta spriteX
+        lda #120+16
+        sta spriteY
+
+        ldy #0
+
+a50PTSLoop anop
+
+        lda alphaString50pts,y
+
+        cmp #-1
+        beq a50PTSDone
+
+        jsr drawAlphaSpriteByIndex
+
+        lda spriteX
+        clc
+        adc #8
+        sta spriteX
+
+        iny
+        iny
+        iny
+        iny
+        bra a50PTSLoop
+        
+a50PTSDone anop
+
+
+        rts
+        
 
 
 ; Thanks to Ian Brumby and John Brooks for this lookup routine
@@ -490,5 +770,130 @@ alphaStringCopyright anop
         dc i4'ALPHAINDEX_G'
         dc i4'-1'
 
+alphaStringCharacterNicknameTitle anop
+        dc i4'ALPHAINDEX_C'
+        dc i4'ALPHAINDEX_H'
+        dc i4'ALPHAINDEX_A'
+        dc i4'ALPHAINDEX_R'
+        dc i4'ALPHAINDEX_A'
+        dc i4'ALPHAINDEX_C'
+        dc i4'ALPHAINDEX_T'
+        dc i4'ALPHAINDEX_E'
+        dc i4'ALPHAINDEX_R'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_SLASH'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_N'
+        dc i4'ALPHAINDEX_I'
+        dc i4'ALPHAINDEX_C'
+        dc i4'ALPHAINDEX_K'
+        dc i4'ALPHAINDEX_N'
+        dc i4'ALPHAINDEX_A'
+        dc i4'ALPHAINDEX_M'
+        dc i4'ALPHAINDEX_E'
+        dc i4'-1'
+        
+        
+alphaStringBlinky anop
+        dc i4'ALPHAINDEX_DASH'
+        dc i4'ALPHAINDEX_S'
+        dc i4'ALPHAINDEX_H'
+        dc i4'ALPHAINDEX_A'
+        dc i4'ALPHAINDEX_D'
+        dc i4'ALPHAINDEX_O'
+        dc i4'ALPHAINDEX_W'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_QUOTE'
+        dc i4'ALPHAINDEX_B'
+        dc i4'ALPHAINDEX_L'
+        dc i4'ALPHAINDEX_I'
+        dc i4'ALPHAINDEX_N'
+        dc i4'ALPHAINDEX_K'
+        dc i4'ALPHAINDEX_Y'
+        dc i4'ALPHAINDEX_QUOTE'
+        dc i4'-1'
+        
+alphaStringPinky anop
+        dc i4'ALPHAINDEX_DASH'
+        dc i4'ALPHAINDEX_S'
+        dc i4'ALPHAINDEX_P'
+        dc i4'ALPHAINDEX_E'
+        dc i4'ALPHAINDEX_E'
+        dc i4'ALPHAINDEX_D'
+        dc i4'ALPHAINDEX_Y'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_QUOTE'
+        dc i4'ALPHAINDEX_P'
+        dc i4'ALPHAINDEX_I'
+        dc i4'ALPHAINDEX_N'
+        dc i4'ALPHAINDEX_K'
+        dc i4'ALPHAINDEX_Y'
+        dc i4'ALPHAINDEX_QUOTE'
+        dc i4'-1'
+        
+alphaStringInky anop
+        dc i4'ALPHAINDEX_DASH'
+        dc i4'ALPHAINDEX_B'
+        dc i4'ALPHAINDEX_A'
+        dc i4'ALPHAINDEX_S'
+        dc i4'ALPHAINDEX_H'
+        dc i4'ALPHAINDEX_F'
+        dc i4'ALPHAINDEX_U'
+        dc i4'ALPHAINDEX_L'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_QUOTE'
+        dc i4'ALPHAINDEX_I'
+        dc i4'ALPHAINDEX_N'
+        dc i4'ALPHAINDEX_K'
+        dc i4'ALPHAINDEX_Y'
+        dc i4'ALPHAINDEX_QUOTE'
+        dc i4'-1'
+        
+alphaStringCloyd anop
+        dc i4'ALPHAINDEX_DASH'
+        dc i4'ALPHAINDEX_P'
+        dc i4'ALPHAINDEX_O'
+        dc i4'ALPHAINDEX_K'
+        dc i4'ALPHAINDEX_E'
+        dc i4'ALPHAINDEX_Y'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_QUOTE'
+        dc i4'ALPHAINDEX_C'
+        dc i4'ALPHAINDEX_L'
+        dc i4'ALPHAINDEX_Y'
+        dc i4'ALPHAINDEX_D'
+        dc i4'ALPHAINDEX_E'
+        dc i4'ALPHAINDEX_QUOTE'
+        dc i4'-1'
+        
+alphaString10pts anop
+        dc i4'ALPHAINDEX_1'
+        dc i4'ALPHAINDEX_0'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_PTS1'
+        dc i4'ALPHAINDEX_PTS2'
+        dc i4'ALPHAINDEX_PTS3'
+        dc i4'-1'
+        
+alphaString50pts anop
+        dc i4'ALPHAINDEX_5'
+        dc i4'ALPHAINDEX_0'
+        dc i4'ALPHAINDEX_SPACE'
+        dc i4'ALPHAINDEX_PTS1'
+        dc i4'ALPHAINDEX_PTS2'
+        dc i4'ALPHAINDEX_PTS3'
+        dc i4'-1'
         
         end

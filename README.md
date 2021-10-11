@@ -9,6 +9,8 @@ GO [HERE](https://github.com/peterhirschberg/GS.Pacman/releases) TO DOWNLOAD
 
 ## Screenshots
 
+![screenshot](screenshot3.png)
+
 ![screenshot](screenshot1.png)
 
 ![screenshot](screenshot2.png)

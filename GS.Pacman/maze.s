@@ -894,6 +894,53 @@ clearScreenDone anop
 
         rts
         
+; ---------------------------------------
+
+drawAttractDots entry
+
+        lda #$01
+
+        asl a
+        tax
+
+        lda >mazeGraphicsOffsetXList,x
+        sta tileSrcX
+
+        lda >mazeGraphicsOffsetYList,x
+        sta tileSrcY
+
+        lda #60
+        sta tileDstX
+
+        lda #120
+        sta tileDstY
+
+        jsr drawMazeTile
+
+        
+        lda #$02
+        
+        asl a
+        tax
+        
+        lda >mazeGraphicsOffsetXList,x
+        sta tileSrcX
+        
+        lda >mazeGraphicsOffsetYList,x
+        sta tileSrcY
+        
+        lda #60
+        sta tileDstX
+        
+        lda #120+16
+        sta tileDstY
+        
+        jsr drawMazeTile
+        
+        rts
+        
+        
+        
 
 initTileX dc i2'0'
 initTileY dc i2'0'
