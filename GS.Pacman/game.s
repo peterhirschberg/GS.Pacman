@@ -54,6 +54,13 @@ gameStartWait entry
 waitLoop anop
 
         jsr checkControls
+        
+        lda shouldQuit
+        cmp #0
+        beq waitLoopDontQuit
+        rts
+        
+waitLoopDontQuit anop
 
         jsr waitForVbl
         
@@ -62,7 +69,7 @@ waitLoop anop
         
         jsr drawAlphaPressStart
         jsr drawAlphaCopyright
-
+        
         lda numLives
         bmi waitLoop
 
@@ -133,6 +140,13 @@ runGameTick entry
 waitForStart anop
 
         jsr gameStartWait
+        
+        lda shouldQuit
+        cmp #0
+        beq waitForStartContinue
+        brl mainLoopExit
+        
+waitForStartContinue anop
 
         lda numLives
         cmp #2

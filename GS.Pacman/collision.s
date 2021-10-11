@@ -72,14 +72,14 @@ pacGhostCollision anop
         lda pacEaten
         cmp #0
         beq startEatPac
-        rts
+        brl nextGhost
 
 startEatPac anop
 
         lda cheatMode
         cmp #0
         beq notCheating
-        rts
+        brl nextGhost
 
 notCheating anop
 
@@ -101,7 +101,7 @@ eatGhost anop
         lda ghostState,x
         cmp #GHOSTSTATE_FRIGHTENED
         beq ghostIsEdible
-        rts
+        brl nextGhost
 
 ghostIsEdible anop
 

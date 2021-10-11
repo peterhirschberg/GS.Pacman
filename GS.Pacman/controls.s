@@ -21,6 +21,14 @@ controls start
 
 checkControls entry
 
+        lda >BUTTON1
+        and #$80
+        cmp #0
+        beq notButton1
+        jsr onStartGame
+
+notButton1 anop
+
         lda enableJoystick
         cmp #1
         bne readKeys
