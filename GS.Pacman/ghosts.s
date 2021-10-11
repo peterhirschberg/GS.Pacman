@@ -22,6 +22,12 @@ ghosts start
 
 initGhosts entry
 
+; init the global release timer
+        lda #400
+        sta ghostReleaseTimer
+
+; init the global ghost mode
+
         lda #0
         sta ghostMode
 
@@ -35,6 +41,7 @@ initGhosts entry
         ldx #0
         lda level1GhostModeTimes,x
         sta ghostModeTimer
+
 
 ; init the timer table for this level
 
@@ -232,6 +239,8 @@ runGhosts entry
 
         jsr runSirenSounds
 
+        jsr runReleaseTimer
+        
         jsr runModeTimer
 
         jsr animateGhosts
@@ -324,6 +333,44 @@ orangeRunLoop anop
 
         rts
 
+        
+runReleaseTimer entry
+
+        dec ghostReleaseTimer
+        lda ghostReleaseTimer
+        bmi releaseGhost
+        rts
+        
+releaseGhost anop
+
+; pick a ghost to release
+
+; first release the blue ghost
+        ldy #GHOSTINDEX_BLUE
+        lda ghostState,y
+        cmp #GHOSTSTATE_PENNED
+        beq releaseGhostY
+
+; next release the orange ghost
+
+        ldy #GHOSTINDEX_ORANGE
+        lda ghostState,y
+        cmp #GHOSTSTATE_PENNED
+        beq releaseGhostY
+
+        rts
+        
+releaseGhostY anop
+
+        lda #GHOSTSTATE_LEAVINGPEN
+        sta ghostState,y
+        
+; reset the release timer
+        lda #400
+        sta ghostReleaseTimer
+        
+        rts
+        
 
 runModeTimer entry
 
@@ -1587,6 +1634,9 @@ ateSmallDot anop
         cmp #GHOSTSTATE_PENNED
         beq decDotCounter
 
+        lda #400
+        sta ghostReleaseTimer
+        
         rts
 
 decDotCounter anop
@@ -2767,7 +2817,9 @@ runCounter dc i2'0'
 
 
 ghostData data
-
+    
+ghostReleaseTimer dc i2'0'
+    
 remainingDots dc i2'0'
 
 ghostsFrightened dc i2'0'
