@@ -312,7 +312,6 @@ gotpdl1	xba		; 3c
 chkpdl0	lda	pdl0	; 4c. Read pdl0. 10c until pdl1 read
 	bpl	gotpdl0	; 2/3c taken if pdl0 is done
 	inx		; 2c
-;	inx		; 2c
 	lda	pdl1	; 4c. Read pdl1. 12c until pdl0 read
 	bmi	nogots	; 2/3c
 	bpl	gotpdl1	; 3c always taken
